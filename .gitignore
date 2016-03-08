@@ -30,3 +30,9 @@ proguard/
 
 # Android Studio captures folder
 captures/
+# Eclipse 
+.settings/
+.classpath
+.classpath
+build.xml
+*.iml
