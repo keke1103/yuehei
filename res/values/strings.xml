@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+   <!-- 首页 -->
     <string name="app_name">YoHey</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="tuijiankaihei">推荐开黑</string>
+    <string name="onclickformore">点击更多</string>
+    <string name="server">服务器</string>
+    <string name="grade">段位</string>
+    <string name="aiouniya">艾欧尼亚--求一名队友一起组队开黑</string>
+    <string name="zhao">赵日天不服</string>
+    <string name="heisemeigui">黑色玫瑰--求大腿带我飞</string>
+    <string name="nuokesashi">诺克萨斯--来几个开黑的，现在差上单跟打野，5黑完爆对面</string>
+    <string name="pig_love">猪哥我爱你</string>
+    <string name="bojin">铂金</string>
+    <string name="zhuanshi">钻石</string>
+    <!-- 首页底部按钮 -->
+      <string name="homepage">首页</string>
+    <string name="friends">好友</string>
+    <string name="lufriends">LU友圈</string>
+    <string name="me">我</string>
+    <!-- 登录页面 -->
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="remember_pw">记住密码</string>
+    <string name="forget_pw">忘记密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="QQ_login">QQ登录</string>
+    <string name="weibo_login">微博登录</string>
+    <!-- 好友 -->
+    <string name="msg">消息</string>
+    <string name="add">添加</string>
+    <string name="serache">搜索</string>
+    <string name="yueheifriends">约黑好友</string>
+    <string name="gamefriends">游戏好友</string>
+    <string name="myfriends">我的好友</string>
+    <string name="game_online">游戏在线</string>
+    <string name="offline">离线</string>
+    <string name="playing">游戏中</string>
+    <string name="online">在线</string>
+    <!-- LU友圈 -->
+    <string name="dynamic">动态</string>
+    <string name="anybody">十连胜，就问还有谁</string>
+    <string name="duola">多拉不爱梦</string>
+    <string name="carry_me_fly">黑色玫瑰铂金3妹纸，求大神带我飞</string>
+    <!-- 我 -->
+    <string name="my_msg">我的资料</string>
+    <string name="my_post">我的帖子</string>
+    <string name="score">积分商城</string>
+    <string name="system_set">系统设置</string>
+    <string name="sign_in">签到</string>
 </resources>
