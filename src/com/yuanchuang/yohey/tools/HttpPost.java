@@ -14,7 +14,6 @@ import java.net.URL;
 import java.util.Map;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 /**
  * post请求方式封装类，通过 HttpPost(URL url)获得实例！
@@ -24,13 +23,12 @@ import android.util.Log;
  * </p>
  * 通过putString(k,v)或putMap(map)来添加发送数据
  * </p>
- * 通过putFile();执行文件发送
+ * 通过putFile();添加要文件发送
  * </p>
- * 数据设置结束过后记得调用send()方法,
+ * 数据设置结束过后记得调用send()方法,开始网络post传输,在发送之前可设置OnSendListener监听，实现ui的更新。
+ * 
  * </p>
- * 可设置OnSendListener监听，实现ui的更新。
- * </p>
- * 亦可主动调用sendInBack(),主动在支线程请求！
+ * 亦可主动调用sendInBack(),手动开支线程，完成请求！
  * 
  * @author kk0927
  *
@@ -45,11 +43,24 @@ public class HttpPost {
 	private String fileName;// 文件名
 	private String fileType;// 声明文件的类型
 
+	/**
+	 * 通过 url 直接获得HttpPost对象
+	 * 
+	 * @param url
+	 */
 	public HttpPost(URL url) {
 		mUrl = url;
 
 	};
 
+	/**
+	 * 通过 解析url地址获得一个HttpPost对象;
+	 * 
+	 * @param url
+	 * @return HttpPost
+	 * @throws MalformedURLException
+	 *             url 不规范抛出
+	 */
 	public static HttpPost parseUrl(String url) throws MalformedURLException {
 		URL u = new URL(url);
 		return new HttpPost(u);
@@ -125,7 +136,10 @@ public class HttpPost {
 	}
 
 	/**
-	 * 开始执行post请求,不需开支线程请求！
+	 * 开始执行post请求,注意：不需开支线程请求！
+	 * </p>
+	 * 在发送之前可设置OnSendListener监听，在监听的end(String result)方法里实现ui的更新。
+	 * 
 	 */
 	public void send() {
 		if (mListener != null)
@@ -150,7 +164,6 @@ public class HttpPost {
 						"Content-Disposition: form-data; name=\"" + fileKey + "\"; filename=\"" + fileName + "\"\r\n");
 				mBuilder.append("Content-Type: " + fileType + "\r\n\r\n");
 				dataLength += sendFile.length();
-				Log.i("SEND", mBuilder.toString());
 				end = ("\r\n--" + BOUNDARY + "--\r\n").getBytes("UTF-8");
 			}
 
@@ -206,9 +219,9 @@ public class HttpPost {
 	/**
 	 * 设置请求监听
 	 * </p>
-	 * 重写start() end()两个方法
+	 * 重写start() end()两个方法 实现ui更新
 	 * 
-	 * @param mListener
+	 * @param OnSendListener
 	 */
 	public void setOnSendListener(OnSendListener mListener) {
 		this.mListener = mListener;
