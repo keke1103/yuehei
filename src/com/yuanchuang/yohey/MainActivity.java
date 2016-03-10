@@ -1,67 +1,105 @@
 package com.yuanchuang.yohey;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+import com.yuanchuang.yohey.fragment.DynamicFragment;
+import com.yuanchuang.yohey.fragment.MEFragment;
+import com.yuanchuang.yohey.fragment.MainFragment;
+import com.yuanchuang.yohey.fragment.Main_FragmentAdapter;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
+
+public class MainActivity extends FragmentActivity {
 	RelativeLayout includeTitle;
-	View user1;
-	View user2;
-	View user3;
-	TextView clickMore;
 	RelativeLayout inLayoutSelect;
-	RadioButton main;
-	RadioButton friends;
-	RadioButton circleOfFriends;
-	RadioButton me;
+	Main_FragmentAdapter pagerAdapter;
+	RadioButton[] radioButton;
+	ArrayList<Fragment> fragmentList;
+	MainFragment mainFragment;
+	Friends_Activity friends_Activity;
+	FragmentManager mfFragmentManager;
+	DynamicFragment dynamicFragment;
+	MEFragment meFragment;
+	RadioGroup mRadio;
+	ViewPager mPager;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_yue_lu_main);
+		setContentView(R.layout.fragment_text);
+		mfFragmentManager = getSupportFragmentManager();
 		findView();
-		main.setOnClickListener(clickListener);
-		friends.setOnClickListener(clickListener);
-		circleOfFriends.setOnClickListener(clickListener);
-		me.setOnClickListener(clickListener);
+
 	}
 
-	OnClickListener clickListener = new OnClickListener() {
+	OnCheckedChangeListener listener = new OnCheckedChangeListener() {
 
 		@Override
-		public void onClick(View v) {
-			Intent intent;
-			switch (v.getId()) {
-			case R.id.selection_bar_main:
-				
-				break;
+		public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-			case R.id.selection_bar_friends:
-				intent=new Intent(MainActivity.this,Friends_Activity.class);
-				startActivity(intent);
-				break;
-			case R.id.selection_bar_circle_of_friends:
+			redioButton();
+		}
 
-				break;
-			case R.id.selection_bar_personal:
+		private void redioButton() {
 
-				break;
-			default:
-				break;
+			for (int i = 0; i < radioButton.length; i++) {
+				if (radioButton[i].isChecked()) {
+					mPager.setCurrentItem(i);
+				} else {
+
+				}
 			}
 		}
 	};
 
+	@SuppressWarnings("deprecation")
 	private void findView() {
-		inLayoutSelect = (RelativeLayout) findViewById(R.id.mian_selection_bar);
-		main = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_main);
-		friends = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_friends);
-		circleOfFriends = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_circle_of_friends);
-		me = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_personal);
+		inLayoutSelect = (RelativeLayout) findViewById(R.id.fragment_main_selection_bar);
+		mRadio = (RadioGroup) inLayoutSelect.findViewById(R.id.selection_bar_radio_group);
+		mRadio.setOnCheckedChangeListener(listener);
+		mPager = (ViewPager) findViewById(R.id.layou_main);
+		radioButton = new RadioButton[4];
+		radioButton[0] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_main);
+		radioButton[1] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_friends);
+		radioButton[2] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_circle_of_friends);
+		radioButton[3] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_personal);
+		mainFragment = new MainFragment();
+		dynamicFragment = new DynamicFragment();
+		meFragment = new MEFragment();
+		friends_Activity = new Friends_Activity();
+		fragmentList = new ArrayList<Fragment>();
+		fragmentList.add(mainFragment);
+		fragmentList.add(friends_Activity);
+		fragmentList.add(dynamicFragment);
+		fragmentList.add(meFragment);
+		pagerAdapter = new Main_FragmentAdapter(mfFragmentManager, fragmentList);
+		mPager.setAdapter(pagerAdapter);
+		mPager.setOnPageChangeListener(pageChange);
 	}
+
+	private OnPageChangeListener pageChange = new OnPageChangeListener() {
+
+		@Override
+		public void onPageSelected(int arg0) {
+			radioButton[arg0].setChecked(true);
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+		}
+
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+
+		}
+	};
 }

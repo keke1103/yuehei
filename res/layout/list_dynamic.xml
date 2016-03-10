@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/write"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -10,14 +11,14 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
-
+<!-- 用户头像 -->
         <ImageView
             android:id="@+id/list_dynamic_image_head_portrait"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@color/gray"
             android:contentDescription="@drawable/ic_launcher" />
-
+<!-- 用户昵称与发送时间 -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,18 +27,20 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/list_dynamic_text_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="3dp"
                 android:text="@string/zhao" />
 
             <TextView
+                android:id="@+id/list_dynamic_text_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="3dp" />
         </LinearLayout>
     </LinearLayout>
-
+<!-- 用户发送内容 -->
     <LinearLayout
         android:id="@+id/list_dynamic_layout_context"
         android:layout_width="wrap_content"
@@ -51,7 +54,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp" >
-
+<!-- 转发 -->
         <ImageView
             android:id="@+id/list_dynamic_image_share_it"
             android:layout_width="wrap_content"
@@ -61,7 +64,7 @@
             android:layout_centerVertical="true"
             android:contentDescription="@drawable/ic_launcher"
             android:src="@drawable/ic_launcher" />
-
+<!-- 留言 -->
         <ImageView
             android:id="@+id/list_dynamic_image_leave_a_message"
             android:layout_width="wrap_content"
@@ -69,7 +72,7 @@
             android:layout_centerInParent="true"
             android:contentDescription="@drawable/ic_launcher"
             android:src="@drawable/ic_launcher" />
-
+<!-- 分享 -->
         <ImageView
             android:id="@+id/list_dynamic_image_like"
             android:layout_width="wrap_content"
