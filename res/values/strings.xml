@@ -50,4 +50,6 @@
     <string name="score">积分商城</string>
     <string name="system_set">系统设置</string>
     <string name="sign_in">签到</string>
+    <string name="msg_time">08:12</string>
+    <string name="num">1</string>
 </resources>

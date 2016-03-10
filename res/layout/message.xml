@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+     >
+          <ImageView
+              android:layout_width="50dp"
+              android:layout_height="50dp"
+             
+              android:background="@drawable/mm"/>
+              <RadioGroup 
+                  android:id="@+id/radiogroup"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_centerInParent="true">
+                  <RadioButton 
+                      android:id="@+id/radiobn_msg"
+                      android:layout_width="80dp"
+                      android:layout_height="30dp"
+                     android:layout_marginLeft="10dp"
+                      android:text="@string/msg"
+                       android:textColor="@drawable/selector_friends_textcolor"
+                      android:button="@null"
+                      android:gravity="center"
+                      android:background="@drawable/selector_friends"/>
+                  <RadioButton 
+                      android:id="@+id/radiobtn_friends"
+                      android:layout_width="80dp"
+                      android:layout_height="30dp"
+                      android:layout_marginLeft="10dp"
+                      android:text="@string/friends"
+                      android:textColor="@drawable/selector_friends_textcolor"
+                       android:button="@null"
+                       android:gravity="center"
+                       android:background="@drawable/selector_friends"/>
+              </RadioGroup>
+            
+              <TextView 
+                  android:layout_width="50dp"
+                  android:layout_height="50dp"
+                  android:text="@string/add"
+                  android:gravity="center"
+                 android:layout_centerVertical="true"
+                 android:layout_alignParentRight="true"/>
+     </RelativeLayout>
+     <!-- 搜索框的图片位置 -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        
+      </LinearLayout>
+
+</LinearLayout>
