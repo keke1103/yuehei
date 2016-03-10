@@ -60,14 +60,17 @@
     <!-- 注册 -->
     <string name="china">中国+86</string>
     <string name="fill_in_your_phone_number">填写手机号码</string>
-	<string name="enter_your_phone_number">请输入手机号码</string>
-	<string name="next">下一步</string>
-	<string name="terms_of_use">我已阅读并同意使用条款和隐私政策</string>
-	<string name="another_one">换一张</string>
-	<string name="safety_verification">安全验证</string>
-	<string name="enter_confirmation_code">请输入验证码</string>
-	<string name="submit">提交</string>
-	<string name="resend">重新发送</string>
-	<string name="message_verification_code">请输入短信验证码</string>
-	<string name="binding">将此手机号与QQ号绑定，提高账号安全性</string>
-</resources>
+    <string name="enter_your_phone_number">请输入手机号码</string>
+    <string name="next">下一步</string>
+    <string name="terms_of_use">我已阅读并同意使用条款和隐私政策</string>
+    <string name="another_one">换一张</string>
+    <string name="safety_verification">安全验证</string>
+    <string name="enter_confirmation_code">请输入验证码</string>
+    <string name="submit">提交</string>
+    <string name="resend">重新发送</string>
+    <string name="message_verification_code">请输入短信验证码</string>
+    <string name="binding">将此手机号与QQ号绑定，提高账号安全性</string>
+    <string name="msg_time">08:12</string>
+    <string name="num">1</string>
+
+</resources>
