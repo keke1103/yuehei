@@ -72,5 +72,11 @@
     <string name="binding">将此手机号与QQ号绑定，提高账号安全性</string>
     <string name="msg_time">08:12</string>
     <string name="num">1</string>
-
+	<string name="idea">這一刻你的想法</string>
+	<string name="position">所在位置</string>
+	<string name="who_can_see">谁可以看</string>
+	<string name="see_who_remind">提醒誰看</string>
+	<string name="cancel">取消</string>
+	<string name="share">分享</string>
+	<string name="send">發送</string>
 </resources>
