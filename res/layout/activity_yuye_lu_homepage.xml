@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/homepage_title_bar"
+        layout="@layout/title_navigation_bar" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/homepage_text_my_msg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/text_stroke"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/ic_launcher"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:text="@string/my_msg" />
+
+        <TextView
+            android:id="@+id/homepage_text_my_post"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/text_stroke"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/ic_launcher"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:text="@string/my_post" />
+
+        <TextView
+            android:id="@+id/homepage_text_score"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/text_stroke"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/ic_launcher"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:text="@string/score" />
+
+        <TextView
+            android:id="@+id/homepage_text_system_set"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/text_stroke"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/ic_launcher"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:text="@string/system_set" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/homepage_selection_bar"
+        layout="@layout/bottom_of_the_selection_bar" />
+
+</LinearLayout>
