@@ -5,5 +5,11 @@
     <color name="black">#000000</color>
     <color name="gray">#999999</color>
     <color name="light_gray">#cccccc</color>
+    <color name="white">#ffffff</color>
+    <color name="main_yellow">#fa7122</color>
+    <color name="yellow">#E49C38</color>
+    <color name="background">#EEEEEE</color>
+    <color name="beizhu">#9B9B9B</color>
+    <color name="blue">#0000ff</color>
 
 </resources>
