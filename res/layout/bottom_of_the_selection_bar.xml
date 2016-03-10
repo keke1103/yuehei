@@ -17,19 +17,20 @@
         android:id="@+id/selection_bar_radio_group"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <RadioButton
             android:id="@+id/selection_bar_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/ic_launcher"
-            android:gravity="center_horizontal"
             android:text="@string/homepage" />
 
         <RadioButton
@@ -44,10 +45,10 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:contentDescription="@drawable/ic_launcher"
+            android:gravity="center_horizontal"
             android:src="@drawable/ic_launcher" />
 
         <RadioButton
