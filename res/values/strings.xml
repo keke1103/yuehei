@@ -79,4 +79,7 @@
 	<string name="cancel">取消</string>
 	<string name="share">分享</string>
 	<string name="send">發送</string>
+	
+	<!-- 阿里雲引用 -->
+	<string name="iconfont">&#13804;</string>
 </resources>
