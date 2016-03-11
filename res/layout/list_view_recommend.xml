@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="horizontal" >
+   <!-- 玩家头像 -->
+    <ImageView 
+        android:id="@+id/recommend_image_user_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@drawable/ic_launcher"
+        />
+    
+	<LinearLayout 
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:orientation="vertical"
+	    android:padding="10dp"
+	    android:layout_gravity="center_vertical">
+	    <!-- 玩家昵称 -->
+	    <TextView 
+	         android:id="@+id/recommend_text_user_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="14sp"
+	        android:textStyle="bold"
+	        />
+	  <!-- 玩家大区 段位 -->
+	    <TextView 
+	         android:id="@+id/recommend_text_user_area"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="12sp"
+	        android:textStyle="bold"
+	        />
+	   <!-- 玩家发帖 -->
+	    <TextView 
+	         android:id="@+id/recommend_text_user_message"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="12sp"
+	        android:textStyle="bold"
+	        />
+	</LinearLayout>
+	<!-- 留言图标 -->
+	<ImageView 
+	    android:id="@+id/recommend_image_message_icon"
+	    android:layout_width="wrap_content"
+	    android:padding="10dp"
+	    android:layout_marginRight="20dp"
+	    android:layout_marginEnd="20dp"
+	    android:layout_height="wrap_content"
+	    android:contentDescription="@drawable/ic_launcher"
+	    />
+</LinearLayout>

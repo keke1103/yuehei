@@ -12,11 +12,8 @@
         android:id="@+id/dynamic_list_view"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:padding="10dp" >
     </ListView>
-
-    <include
-        android:id="@+id/dynamic_selection_bar"
-        layout="@layout/bottom_of_the_selection_bar" />
 
 </LinearLayout>

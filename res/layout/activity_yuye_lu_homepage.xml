@@ -72,8 +72,4 @@
             android:text="@string/system_set" />
     </LinearLayout>
 
-    <include
-        android:id="@+id/homepage_selection_bar"
-        layout="@layout/bottom_of_the_selection_bar" />
-
 </LinearLayout>

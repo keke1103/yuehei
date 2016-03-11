@@ -1,11 +1,15 @@
-package com.yuanchuang.yohey;
+package com.yuanchuang.yohey.fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.yuanchuang.yohey.Message_Fragment.Adapter;
+import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.R.drawable;
+import com.yuanchuang.yohey.R.id;
+import com.yuanchuang.yohey.R.layout;
+import com.yuanchuang.yohey.fragment.Message_Fragment.Adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

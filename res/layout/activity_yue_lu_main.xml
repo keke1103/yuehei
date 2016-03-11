@@ -6,10 +6,9 @@
     android:orientation="vertical" >
 
     <include
-        android:id="@+id/main_title_bar"
+        android:id="@+id/main_title"
         layout="@layout/title_navigation_bar" />
-
-    <ScrollView
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1" >
@@ -130,8 +129,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <include layout="@layout/bottom_of_the_selection_bar" 
-        android:id="@+id/mian_selection_bar"/>
 
 </LinearLayout>
