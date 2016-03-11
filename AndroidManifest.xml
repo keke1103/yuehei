@@ -19,7 +19,7 @@
             android:name=".Friends_Activity"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="com.yuanchuang.yohey.LoginAndRegistered" >
+        <activity android:name="com.yuanchuang.yohey.IntegralExchangeCommodityActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

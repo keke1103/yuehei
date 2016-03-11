@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/integral_exchange_commodity_linear1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <!-- 积分兑换商品界面 -->
+    <include 
+        android:id="@+id/integral_exchange_commodity_include"
+        layout="@layout/title_navigation_bar"/>
+
+</LinearLayout>

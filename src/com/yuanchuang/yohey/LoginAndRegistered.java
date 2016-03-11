@@ -1,14 +1,24 @@
 package com.yuanchuang.yohey;
 
+import java.net.MalformedURLException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.yuanchuang.yohey.tools.HttpPost;
+import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 登录页面
@@ -25,7 +35,8 @@ public class LoginAndRegistered extends Activity {
 	Button registered;// 注册按钮
 	TextView qqLogin;// qq登录
 	TextView webLogin;// 微博登录
-
+	String userID;//游戏ID
+    String userPassword;//游戏密码
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,8 +57,11 @@ public class LoginAndRegistered extends Activity {
 			Intent intent;
 			switch (v.getId()) {
 			case R.id.login_registered_button_login:
-				intent = new Intent(LoginAndRegistered.this, MainActivity.class);
-				startActivity(intent);
+				userID=account.getText().toString();
+				userPassword=password.getText().toString();
+				loginService(userID,userPassword);
+				//intent = new Intent(LoginAndRegistered.this, MainActivity.class);
+				//startActivity(intent);
 				break;
 
 			case R.id.login_registered_button_registered:
@@ -72,6 +86,55 @@ public class LoginAndRegistered extends Activity {
 		registered = (Button) findViewById(R.id.login_registered_button_registered);
 		qqLogin = (TextView) findViewById(R.id.login_register_text_qq_login);
 		webLogin = (TextView) findViewById(R.id.login_register_text_web_login);
-
 	}
+	/**
+	 * 向服务器传送数据，验证登录是否成功
+	 * @param userID 用户登录的ID
+	 * @param userPassword 用户登录的密码
+	 */
+	public void loginService(String userID,String userPassword){
+		String httpPost="http://192.168.11.240/index.php/home/api/login";
+		try {
+			HttpPost post=HttpPost.parseUrl(httpPost);
+			post.putString("username",userID);
+			post.putString("password",userPassword);
+			post.setOnSendListener(listener);//监听事件
+			post.send();//发送数据
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
+	/**
+	 * 验证是否上传数据成功
+	 */
+	OnSendListener listener=new OnSendListener() {
+		
+		@Override
+		public void start() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void end(String result) {
+			// TODO Auto-generated method stub
+			Log.i(">>>>>>>>>>>>>>>",result);
+			try {
+				JSONObject jsonObject=new JSONObject(result);//解析result这个json数据
+				int status=jsonObject.getInt("status");//获得登录是否成功的数字，1为成功，其他为失败
+				Log.i(">>>>>>>>>>>>>>>",""+status);
+				if(status==1){
+					Intent intent = new Intent(LoginAndRegistered.this, MainActivity.class);
+					startActivity(intent);
+				}else{
+					Toast.makeText(getApplication(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	};	
 }
