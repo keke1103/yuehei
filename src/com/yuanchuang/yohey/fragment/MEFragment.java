@@ -1,7 +1,10 @@
 package com.yuanchuang.yohey.fragment;
 
+import com.yuanchuang.yohey.IntegralStoreActivity;
+import com.yuanchuang.yohey.MyIntegralActivity;
 import com.yuanchuang.yohey.R;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -31,6 +34,7 @@ public class MEFragment extends Fragment {
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		mView = inflater.inflate(R.layout.activity_yuye_lu_homepage, lay);
 		findView();
+		integral.setOnClickListener(onClickListener);
 		return mView;
 	}
 
@@ -45,10 +49,8 @@ public class MEFragment extends Fragment {
 		settings = (TextView) mView.findViewById(R.id.homepage_text_system_set);
 		title.setText(R.string.me);
 		Resources resources = getContext().getResources();
-		@SuppressWarnings("deprecation")
 		Drawable drawable = resources.getDrawable(R.drawable.button_rounded_corners_and_solid);
 		signIn.setVisibility(View.VISIBLE);
-
 		signIn.setBackgroundDrawable(drawable);
 		signIn.setText(R.string.sign_in);
 	}
@@ -59,16 +61,17 @@ public class MEFragment extends Fragment {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
-			case R.id.homepage_text_my_msg:
+			case R.id.homepage_text_my_msg://
 
 				break;
-			case R.id.homepage_text_my_post:
+			case R.id.homepage_text_my_post://
 
 				break;
-			case R.id.homepage_text_score:
-
+			case R.id.homepage_text_score://点击事件，跳转到我的积分界面
+                Intent intent=new Intent(getActivity(),IntegralStoreActivity.class);
+                startActivity(intent);
 				break;
-			case R.id.homepage_text_system_set:
+			case R.id.homepage_text_system_set://
 
 				break;
 			default:
