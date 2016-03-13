@@ -4,8 +4,9 @@
     android:layout_height="match_parent"
     android:background="@color/write"
     android:padding="10dp" >
-<!-- 动态页面 -->
-   
+
+    <!-- 动态页面 -->
+
     <LinearLayout
         android:id="@+id/list_dynamic_layout_head_portrait"
         android:layout_width="match_parent"
@@ -98,8 +99,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/ic_launcher" />
+            android:contentDescription="@drawable/iconfont_zhuanfa"
+            android:src="@drawable/iconfont_zhuanfa" />
         <!-- 留言 -->
 
         <ImageView
@@ -107,8 +108,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/ic_launcher" />
+            android:contentDescription="@drawable/iconfont_xinxi"
+            android:src="@drawable/iconfont_xinxi" />
         <!-- 分享 -->
 
         <ImageView
@@ -118,8 +119,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/ic_launcher" />
+            android:contentDescription="@drawable/iconfont_dianzan"
+            android:src="@drawable/iconfont_dianzan" />
     </RelativeLayout>
 
 </RelativeLayout>

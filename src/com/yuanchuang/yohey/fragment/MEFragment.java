@@ -1,7 +1,9 @@
 package com.yuanchuang.yohey.fragment;
 
+import com.yuanchuang.yohey.MyPostsActivity;
 import com.yuanchuang.yohey.R;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ public class MEFragment extends Fragment {
 
 	@SuppressWarnings("deprecation")
 	private void findView() {
+		//Typeface iconfont = Typeface.createFromAsset(getAssets(), "iconfont/iconfont.ttf");
 		layouttitle = (RelativeLayout) mView.findViewById(R.id.homepage_title_bar);
 		title = (TextView) layouttitle.findViewById(R.id.title_navigation_text_title);
 		signIn = (TextView) layouttitle.findViewById(R.id.title_navigation_text_right_title);
@@ -45,7 +48,7 @@ public class MEFragment extends Fragment {
 		settings = (TextView) mView.findViewById(R.id.homepage_text_system_set);
 		title.setText(R.string.me);
 		Resources resources = getContext().getResources();
-		@SuppressWarnings("deprecation")
+		
 		Drawable drawable = resources.getDrawable(R.drawable.button_rounded_corners_and_solid);
 		signIn.setVisibility(View.VISIBLE);
 
@@ -57,13 +60,14 @@ public class MEFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
+			Intent intent;
 			switch (v.getId()) {
 			case R.id.homepage_text_my_msg:
 
 				break;
 			case R.id.homepage_text_my_post:
-
+				intent=new Intent(getActivity(),MyPostsActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.homepage_text_score:
 

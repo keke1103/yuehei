@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:focusable="true"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/personal_post_include_title"
+        layout="@layout/title_navigation_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:orientation="horizontal"
+        android:paddingBottom="3dp" >
+
+        <!-- 头像 -->
+
+        <ImageView
+            android:id="@+id/personal_post_image_head"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@drawable/ic_launcher"
+            android:src="@drawable/ic_launcher" />
+
+        <!-- 昵称 -->
+
+        <TextView
+            android:id="@+id/personal_post_nick_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/personal_post_image_head"
+            android:layout_toRightOf="@id/personal_post_image_head"
+            android:text="@string/zhao"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personal_post_nick_text_name"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/personal_post_image_head"
+            android:layout_toRightOf="@id/personal_post_image_head"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp" >
+
+            <!-- 时间 -->
+
+            <TextView
+                android:id="@+id/personal_post_text_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="18:55"
+                android:textSize="11sp" />
+
+            <!-- 眼睛图片 -->
+
+            <TextView
+                android:id="@+id/personal_post_text_yang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/yang" />
+
+            <!-- 浏览量 -->
+
+            <TextView
+                android:id="@+id/personal_post_text_rowse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="43浏览"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+    <!-- 发表内容 -->
+
+    <LinearLayout
+        android:id="@+id/personal_post_cotext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <!-- 添加 -->
+
+        <TextView
+            android:id="@+id/personal_post_text_addd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/addd" />
+
+        <!-- 留言图标 -->
+
+        <TextView
+            android:id="@+id/personal_post_text_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/message" />
+
+        <!-- 点赞图标 -->
+
+        <TextView
+            android:id="@+id/personal_post_text_appreciate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/appreciate" />
+
+        <!-- 更多图标 -->
+
+        <TextView
+            android:id="@+id/personal_post_text_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_stroke"
+        
+        android:orientation="horizontal" >
+
+        <!-- 说一句 -->
+
+        <EditText
+            android:id="@+id/personal_post_edit_say"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:hint="@string/say"
+            android:padding="5dp"
+           
+            android:paddingEnd="5dp"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

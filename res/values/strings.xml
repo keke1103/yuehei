@@ -72,14 +72,46 @@
     <string name="binding">将此手机号与QQ号绑定，提高账号安全性</string>
     <string name="msg_time">08:12</string>
     <string name="num">1</string>
-	<string name="idea">這一刻你的想法</string>
-	<string name="position">所在位置</string>
-	<string name="who_can_see">谁可以看</string>
-	<string name="see_who_remind">提醒誰看</string>
-	<string name="cancel">取消</string>
-	<string name="share">分享</string>
-	<string name="send">發送</string>
-	
-	<!-- 阿里雲引用 -->
-	<string name="iconfont">&#13804;</string>
-</resources>
+    <string name="idea">這一刻你的想法</string>
+    <string name="position">所在位置</string>
+    <string name="who_can_see">谁可以看</string>
+    <string name="see_who_remind">提醒誰看</string>
+    <string name="cancel">取消</string>
+    <string name="share">分享</string>
+    <string name="send">發送</string>
+    <string name="say">我也说一句</string>
+    <string name="personal_post">个人发帖</string>
+    <string name="posts">帖子内容。。。</string>
+    <string name="permission_settings">权限设置</string>
+    <string name="osts">发帖</string>
+    <string name="publication">发表</string>
+    <string name="qq">QQ号/游戏ID</string>
+    <string name="new_frieds">新的朋友</string>
+    <string name="favorite">喜爱最多</string>
+    <string name="xinlang">新浪微博</string>
+    <string name="qqweb">QQ微博</string>
+    <string name="posted_messages">我发过的帖子</string>
+    <string name="post_added">我加入的帖子</string>
+    <string name="more_more">更多....</string>
+    <string name="my_posted_messages">发过帖子</string>
+    <string name="participation_posts">加入帖子</string>
+
+    <!-- 阿里雲引用 -->
+    <string name="iconfont">&#13804;</string>
+    <string name="gt">&#xe624;</string>
+    <string name="amp">&#xe611;</string>
+    <string name="ltigt">&#xe607;</string>
+    <string name="yang">&#xe612;</string>
+    <string name="addd">&#xe603;</string>
+    <string name="message">&#xe689;</string>
+    <string name="appreciate">&#xe644;</string>
+    <string name="more">&#xe6ad;</string>
+    <string name="search">&#xe699;</string>
+    <string name="QQ">&#xe607;</string>
+    <string name="xin_lang_web">&#xe635;</string>
+    <string name="personal">&#xe7b6;</string>
+    <string name="my_posts">&#xe68b;</string>
+    <string name="integral">&#xe601;</string>
+    <string name="setting">&#xe604;</string>
+
+</resources>

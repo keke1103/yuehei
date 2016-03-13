@@ -7,6 +7,7 @@ import com.yuanchuang.yohey.fragment.MEFragment;
 import com.yuanchuang.yohey.fragment.MainFragment;
 import com.yuanchuang.yohey.fragment.Main_FragmentAdapter;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -62,6 +63,7 @@ public class MainActivity extends FragmentActivity {
 
 	@SuppressWarnings("deprecation")
 	private void findView() {
+		//Typeface iconfont = Typeface.createFromAsset(getAssets(), "iconfont/iconfont.ttf");
 		inLayoutSelect = (RelativeLayout) findViewById(R.id.fragment_main_selection_bar);
 		mRadio = (RadioGroup) inLayoutSelect.findViewById(R.id.selection_bar_radio_group);
 		mRadio.setOnCheckedChangeListener(listener);
@@ -71,6 +73,7 @@ public class MainActivity extends FragmentActivity {
 		radioButton[1] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_friends);
 		radioButton[2] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_circle_of_friends);
 		radioButton[3] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_personal);
+
 		mainFragment = new MainFragment();
 		dynamicFragment = new DynamicFragment();
 		meFragment = new MEFragment();

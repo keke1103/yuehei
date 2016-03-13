@@ -15,61 +15,109 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/homepage_text_my_msg"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/text_stroke"
-            android:drawableLeft="@drawable/ic_launcher"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/ic_launcher"
             android:gravity="center_vertical"
-            android:padding="3dp"
-            android:text="@string/my_msg" />
+            android:orientation="horizontal"
+            android:padding="6dp" >
 
-        <TextView
-            android:id="@+id/homepage_text_my_post"
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/iconfont_geren"
+                android:src="@drawable/iconfont_geren" />
+
+            <TextView
+                android:id="@+id/homepage_text_my_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_msg"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/text_stroke"
-            android:drawableLeft="@drawable/ic_launcher"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/ic_launcher"
             android:gravity="center_vertical"
-            android:padding="3dp"
-            android:text="@string/my_post" />
+            android:orientation="horizontal"
+            android:padding="6dp" >
 
-        <TextView
-            android:id="@+id/homepage_text_score"
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/iconfont_geren"
+                android:src="@drawable/iconfont_biaoqian" />
+
+            <TextView
+                android:id="@+id/homepage_text_my_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_post"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/text_stroke"
-            android:drawableLeft="@drawable/ic_launcher"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/ic_launcher"
             android:gravity="center_vertical"
-            android:padding="3dp"
-            android:text="@string/score" />
+            android:orientation="horizontal"
+            android:padding="6dp" >
 
-        <TextView
-            android:id="@+id/homepage_text_system_set"
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/iconfont_geren"
+                android:src="@drawable/iconfont_icon" />
+
+            <TextView
+                android:id="@+id/homepage_text_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/text_stroke"
-            android:drawableLeft="@drawable/ic_launcher"
-            android:drawablePadding="10dp"
-            android:drawableStart="@drawable/ic_launcher"
             android:gravity="center_vertical"
-            android:padding="3dp"
-            android:text="@string/system_set" />
+            android:orientation="horizontal"
+            android:padding="6dp" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/iconfont_geren"
+                android:src="@drawable/iconfont_shezhi" />
+
+            <TextView
+                android:id="@+id/homepage_text_system_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/system_set"
+                android:textSize="13sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
