@@ -5,18 +5,10 @@
     android:layout_gravity="center"
     android:background="@color/write" >
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/gray" />
-
     <RadioGroup
         android:id="@+id/selection_bar_radio_group"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -27,12 +19,12 @@
             android:id="@+id/selection_bar_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/iconfont_623"
             android:gravity="center_horizontal"
-            android:text="@string/homepage" />
+            android:text="@string/homepage"
+            android:textSize="13sp" />
 
         <RadioButton
             android:id="@+id/selection_bar_friends"
@@ -42,15 +34,18 @@
             android:button="@null"
             android:drawableTop="@drawable/iconfont_621"
             android:gravity="center_horizontal"
-            android:text="@string/friends" />
+            android:text="@string/friends"
+            android:textSize="13sp" />
 
         <ImageView
+            android:id="@+id/selection_bar_image"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:contentDescription="@drawable/ic_launcher"
-            android:gravity="center_horizontal"
-            android:src="@drawable/ic_launcher" />
+            android:contentDescription="@drawable/iconfont_plus"
+            android:gravity="center"
+            android:src="@drawable/iconfont_plus" />
 
         <RadioButton
             android:id="@+id/selection_bar_circle_of_friends"
@@ -60,7 +55,8 @@
             android:button="@null"
             android:drawableTop="@drawable/iconfont_622"
             android:gravity="center_horizontal"
-            android:text="@string/lufriends" />
+            android:text="@string/lufriends"
+            android:textSize="13sp" />
 
         <RadioButton
             android:id="@+id/selection_bar_personal"
@@ -70,7 +66,16 @@
             android:button="@null"
             android:drawableTop="@drawable/iconfont_geren11"
             android:gravity="center_horizontal"
-            android:text="@string/me" />
+            android:text="@string/me"
+            android:textSize="13sp" />
     </RadioGroup>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/gray" />
 
 </RelativeLayout>

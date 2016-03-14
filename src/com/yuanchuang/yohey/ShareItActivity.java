@@ -7,7 +7,11 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/**
+ * 分享页面
+ * @author Administrator
+ *
+ */
 public class ShareItActivity extends Activity {
 	RelativeLayout includeTitle;//标题栏
 	EditText editider;//分享内容

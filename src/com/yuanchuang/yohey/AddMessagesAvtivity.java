@@ -9,7 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
-
+/**
+ * 添加消息界面
+ * 
+ * @author Administrator
+ *
+ */
 public class AddMessagesAvtivity extends Activity {
 	RelativeLayout includeTitle;// 导入
 	TextView tltle;// 标题

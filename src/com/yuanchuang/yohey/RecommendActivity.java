@@ -1,11 +1,10 @@
 package com.yuanchuang.yohey;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.adapter.RecommendAdapter;
+import com.yuanchuang.yohey.myData.AdapterData;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,24 +13,27 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 /**
  * 推荐开黑的界面
+ * 
  * @author Administrator
  *
  */
 public class RecommendActivity extends Activity {
-	List<Map<String, Object>> list;// listView的填充
+	List<AdapterData> list;// listView的填充
 	ListView listView;
 	RelativeLayout layout;
 	TextView title;
 	View toReturn;
 	RecommendAdapter recommendAdapter;
+	AdapterData data;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_recommend);
-		list = new ArrayList<Map<String, Object>>();
+		list = new ArrayList<AdapterData>();
 		findView();
 		getData();
 		recommendAdapter = new RecommendAdapter(list, this);
@@ -40,12 +42,13 @@ public class RecommendActivity extends Activity {
 
 	private void getData() {
 		for (int i = 0; i < 5; i++) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("head", R.drawable.ic_launcher);
-			map.put("name", R.string.zhao);
-			map.put("bojin", "艾欧尼亚" + R.string.bojin);
-			map.put("aiouniya", R.string.aiouniya);
-			list.add(map);
+			data = new AdapterData();
+			data.setReco_area(R.string.ao_virginia + "");
+			data.setReco_dan(R.string.bojin + "");
+			data.setReco_head(R.drawable.ic_launcher + "");
+			data.setReco_message(R.string.aiouniya + "");
+			data.setReco_name(R.string.zhao + "");
+			list.add(data);
 		}
 
 	}

@@ -8,7 +8,11 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/**
+ * 发表帖子页面
+ * @author Administrator
+ *
+ */
 public class PostingInterfaceActivity extends Activity {
 	RelativeLayout include;// 导入头文件
 	TextView title;// 标题
