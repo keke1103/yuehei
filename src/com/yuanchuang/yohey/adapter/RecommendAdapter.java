@@ -1,12 +1,12 @@
 package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.myData.AdapterData;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.location.SettingInjectorService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RecommendAdapter extends BaseAdapter {
-	List<Map<String, Object>> list;
+	List<AdapterData> list;
 	Context context;
 	LayoutInflater inflater;
+	AdapterData data;
 
 	public RecommendAdapter() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RecommendAdapter(List<Map<String, Object>> list, Context context) {
+	public RecommendAdapter(List<AdapterData> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -47,6 +48,7 @@ public class RecommendAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
@@ -55,6 +57,8 @@ public class RecommendAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.list_view_recommend, null);
 			holder.head = (ImageView) convertView.findViewById(R.id.recommend_image_user_head);
 			holder.name = (TextView) convertView.findViewById(R.id.recommend_text_user_name);
+			holder.area = (TextView) convertView.findViewById(R.id.recommend_text_user_area);
+			holder.dan = (TextView) convertView.findViewById(R.id.recommend_text_user_dan);
 			holder.message = (TextView) convertView.findViewById(R.id.recommend_text_user_message);
 			holder.messageIcon = (ImageView) convertView.findViewById(R.id.recommend_image_message_icon);
 			convertView.setTag(holder);
@@ -63,19 +67,20 @@ public class RecommendAdapter extends BaseAdapter {
 		}
 
 		holder.head.setBackgroundResource(R.drawable.ic_launcher);
-		holder.name.setText((CharSequence) list.get(position).get("name"));
-
-		holder.area.setText((CharSequence) list.get(position).get("bojin"));
-		holder.message.setText((CharSequence) list.get(position).get("aiouniya"));
+		holder.name.setText((CharSequence) list.get(position).getReco_name());
+		holder.dan.setText(list.get(position).getReco_dan());
+		holder.area.setText(list.get(position).getReco_area());
+		holder.message.setText((CharSequence) list.get(position).getReco_message());
 		holder.messageIcon.setBackgroundResource(R.drawable.ic_launcher);
 		return convertView;
 	}
 
 	class ViewHolder {
-		ImageView head;
-		TextView name;
-		TextView area;
-		TextView message;
-		ImageView messageIcon;
+		ImageView head;// 头像
+		TextView name;// 昵称
+		TextView area;// 大区
+		TextView dan;// 段位
+		TextView message;// 玩家发帖
+		ImageView messageIcon;//
 	}
 }

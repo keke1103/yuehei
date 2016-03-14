@@ -1,11 +1,10 @@
 package com.yuanchuang.yohey;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.adapter.PostSAdater;
+import com.yuanchuang.yohey.myData.AdapterData;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,21 +17,25 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/**
+ * 帖子消息界面
+ * @author Administrator
+ *
+ */
 public class PostedMessagesActivity extends Activity {
-	List<Map<String, String>> list;
-	RelativeLayout includeTitle;
-	TextView title;
-	ImageView toReturn;
+	List<AdapterData> list;
+	RelativeLayout includeTitle;//导入头文件
+	TextView title;//标题
+	ImageView toReturn;//返回按钮
 	ListView listView;
-	PostSAdater postAdapter;
-
+	PostSAdater postAdapter;//自定义adapter
+	AdapterData data;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_post_details);
-		list = new ArrayList<Map<String, String>>();
+		list = new ArrayList<AdapterData>();
 
 		findView();
 		getData();
@@ -71,15 +74,16 @@ public class PostedMessagesActivity extends Activity {
 	};
 
 	private void getData() {
-		Map<String, String> map;
+		
 		for (int i = 0; i < 5; i++) {
-			map = new HashMap<String, String>();
-			map.put("browse", ((int) (Math.random() * 10)) + "");
-			map.put("message", ((int) (Math.random() * 10)) + "");
-			map.put("nickName", "多啦不爱梦");
-			map.put("time", "2015.8.12");
-			map.put("con", "求大神带我飞");
-			list.add(map);
+			data=new AdapterData();
+			data.setPost_name("多啦不爱梦");
+			data.setPost_head("");
+			data.setPost_browse(((int) (Math.random() * 10)));
+			data.setPost_message(((int) (Math.random() * 10)));;
+			data.setPost_time("2015.8.12");
+			data.setPost_con("求大神带我飞");
+			list.add(data);
 			Log.i("getData", list.size() + "");
 		}
 	}

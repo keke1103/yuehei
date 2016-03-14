@@ -35,6 +35,7 @@ public class MEFragment extends Fragment {
 		mView = inflater.inflate(R.layout.activity_yuye_lu_homepage, lay);
 		findView();
 		integral.setOnClickListener(onClickListener);
+		myPosts.setOnClickListener(onClickListener);
 		return mView;
 	}
 

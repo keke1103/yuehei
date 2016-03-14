@@ -6,36 +6,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/text_stroke"
+        android:layout_height="80dp"
         android:baselineAligned="false"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:background="@drawable/click_the_list_to_change_the_background"
+   >
 
         <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="-20dp"
-            android:layout_marginEnd="-20dp"
-            android:layout_marginLeft="-20dp"
-            android:layout_marginRight="-20dp"
-            android:layout_marginStart="-20dp"
-            android:layout_marginTop="-20dp"
+            android:layout_width="90dp"         
+            android:layout_height="90dp"  
+         	android:layout_marginTop="-10dp"
+         	android:layout_marginBottom="-10dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginRight="-10dp"
             android:gravity="center" >
 
             <ImageView
                 android:id="@+id/list_post_details_image_head_portrait"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@drawable/head_shape_round_stroke"
-                android:padding="15dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+               
+                android:layout_centerInParent="true"
+                android:contentDescription="@drawable/click_the_list_to_change_the_background_shape"
                 android:src="@drawable/ic_launcher" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/head_shape_round_stroke" />
+                android:background="@drawable/click_the_list_to_change_the_background_shape" />
         </RelativeLayout>
 
         <LinearLayout
@@ -53,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="5dp" >
+              >
 
                 <TextView
                     android:id="@+id/list_post_details_text_user_name"
@@ -63,11 +62,11 @@
                     android:textSize="13sp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
+                    
                     android:contentDescription="@drawable/iconfont_liulan"
                     android:src="@drawable/iconfont_liulan" />
 
@@ -100,20 +99,15 @@
                 android:id="@+id/list_post_details_text_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                
                 android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/list_post_details_text_context"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+           
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="20dp" />
-
 </LinearLayout>

@@ -1,12 +1,12 @@
 package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.myData.AdapterData;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PostSAdater extends BaseAdapter {
-	List<Map<String, String>> list;
+	List<AdapterData> list;
 	Context context;
 	LayoutInflater inflater;
 
@@ -23,7 +23,7 @@ public class PostSAdater extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostSAdater(List<Map<String, String>> list, Context context) {
+	public PostSAdater(List<AdapterData> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -66,11 +66,11 @@ public class PostSAdater extends BaseAdapter {
 		{
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.name.setText((CharSequence) list.get(position).get("nickName"));
-		holder.time.setText((CharSequence) list.get(position).get("time"));
-		holder.browse.setText((CharSequence) list.get(position).get("browse"));
-		holder.message.setText((CharSequence) list.get(position).get("message"));
-		holder.con.setText((CharSequence) list.get(position).get("con"));
+		holder.name.setText((CharSequence) list.get(position).getPost_name());
+		holder.time.setText((CharSequence) list.get(position).getPost_time());
+		holder.browse.setText(list.get(position).getPost_browse()+"");
+		holder.message.setText(list.get(position).getPost_message()+"");
+		holder.con.setText(list.get(position).getPost_con());
 		return convertView;
 	}
 

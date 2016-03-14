@@ -1,12 +1,11 @@
 package com.yuanchuang.yohey.fragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.DynamicAdapter;
+import com.yuanchuang.yohey.myData.AdapterData;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,13 +20,20 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+/**
+ * 动态页面
+ * 
+ * @author Administrator
+ *
+ */
 public class DynamicFragment extends Fragment {
 	ListView listView;
 	RelativeLayout layoutTitle;// 标题布局
 	View mView;
-	List<Map<String, Object>> list;
+	List<AdapterData> list;
 	DynamicAdapter mAdapter;
 	TextView title;
+	AdapterData data;// 数据类
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +50,7 @@ public class DynamicFragment extends Fragment {
 		layoutTitle = (RelativeLayout) mView.findViewById(R.id.dynamic_title);
 		title = (TextView) layoutTitle.findViewById(R.id.title_navigation_text_title);
 		title.setText(R.string.dynamic);
-		list = new ArrayList<Map<String, Object>>();
+		list = new ArrayList<AdapterData>();
 		getData();
 		Log.i("DynamicFragment", "DynamicFragment");
 		mAdapter = new DynamicAdapter(getActivity(), list);
@@ -57,17 +63,15 @@ public class DynamicFragment extends Fragment {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	private void getData() {
 
-		Map<String, Object> map;
 		for (int i = 0; i < 5; i++) {
-			map = new HashMap<String, Object>();
-			map.put("head", getResources().getDrawable(R.drawable.ic_launcher));
-			map.put("nickName", "多啦不爱梦");
-			map.put("time", "1分钟");
-			map.put("cotext", "求大神带我飞");
-			list.add(map);
+			data = new AdapterData();
+			data.setDy_head(R.drawable.ic_launcher + "");
+			data.setDy_name("多啦不爱梦");
+			data.setDy_nmae("1分钟");
+			data.setDy_context("求大神带我飞");
+			list.add(data);
 			Log.i("getData", list.size() + "");
 		}
 	}

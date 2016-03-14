@@ -10,7 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
-
+/**
+ * 我的帖子页面
+ * @author Administrator
+ *
+ */
 public class MyPostsActivity extends Activity {
 	RelativeLayout include;// 导入标题栏
 	LinearLayout toRetrn;// 我的帖子

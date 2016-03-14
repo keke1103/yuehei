@@ -1,10 +1,11 @@
 package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.myData.AdapterData;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +14,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DynamicAdapter extends BaseAdapter {
-	List<Map<String, Object>> list;
+	List<AdapterData> list;
 	Context context;
 	LayoutInflater inflater;
 
@@ -25,7 +25,7 @@ public class DynamicAdapter extends BaseAdapter {
 
 	}
 
-	public DynamicAdapter(Context context, List<Map<String, Object>> list) {
+	public DynamicAdapter(Context context, List<AdapterData> list) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -46,6 +46,7 @@ public class DynamicAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
@@ -66,13 +67,15 @@ public class DynamicAdapter extends BaseAdapter {
 		}
 		Log.i("position", position + "");
 
-			holder.headPortrait.setImageResource(R.drawable.ic_launcher);
-			holder.nickNmae.setText((CharSequence) list.get(position).get("nickName"));
-			holder.time.setText((CharSequence) list.get(position).get("time"));
-			holder.line.removeAllViews();
-			TextView tv = new TextView(context);
-			tv.setText((CharSequence) list.get(position).get("cotext"));
-			holder.line.addView(tv);
+		holder.headPortrait.setImageResource(R.drawable.ic_launcher);
+		holder.nickNmae.setText((CharSequence) list.get(position).getDy_name());
+		holder.time.setText((CharSequence) list.get(position).getDy_time());
+		holder.line.removeAllViews();
+		TextView tv = new TextView(context);
+		tv.setPadding(5, 5, 0, 0);
+		tv.setTextSize(12);
+		tv.setText((CharSequence) list.get(position).getDy_context());
+		holder.line.addView(tv);
 		return convertView;
 	}
 

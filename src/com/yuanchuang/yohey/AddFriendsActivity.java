@@ -9,6 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+/**
+ * 添加朋友页面
+ * 
+ * @author Administrator
+ *
+ */
 
 public class AddFriendsActivity extends Activity {
 	RelativeLayout includeTitle;// 导入
