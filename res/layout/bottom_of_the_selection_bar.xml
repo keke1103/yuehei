@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:checked="true"
             android:drawableTop="@drawable/iconfont_623"
             android:gravity="center_horizontal"
             android:text="@string/homepage"
@@ -38,14 +39,12 @@
             android:textSize="13sp" />
 
         <ImageView
-            android:id="@+id/selection_bar_image"
+            android:id="@+id/selection_bar_post_share"
             android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:contentDescription="@drawable/iconfont_plus"
-            android:gravity="center"
-            android:src="@drawable/iconfont_plus" />
+            android:src="@drawable/ic_launcher"
+            android:contentDescription="@drawable/ic_launcher" />
 
         <RadioButton
             android:id="@+id/selection_bar_circle_of_friends"

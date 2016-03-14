@@ -109,4 +109,24 @@
             android:gravity="center"
             android:text="中单      adc"/>
     </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        <TextView 
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="发语音"/>
+         <TextView 
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="发消息"/>
+    </LinearLayout>
 </LinearLayout>

@@ -65,11 +65,6 @@
         <activity android:name="com.yuanchuang.yohey.IntegralStoreActivity" >
         </activity>
         <activity android:name="set.Set_Activity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="set.About_us_Activity" >
         </activity>
@@ -82,6 +77,12 @@
         <activity android:name="set.Safety_Actitity" >
         </activity>
         <activity android:name="set.Usual_set_Activity" >
+        </activity>
+        <activity android:name="com.yuanchuang.yohey.PersonalInformationActivity" >
+        </activity>
+        <activity android:name="com.yuanchuang.yohey.FriendMessageActivity" >
+        </activity>
+        <activity android:name="com.yuanchuang.yohey.FriendMaterialActivity" >
         </activity>
     </application>
 

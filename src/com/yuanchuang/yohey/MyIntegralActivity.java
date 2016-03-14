@@ -3,6 +3,7 @@ package com.yuanchuang.yohey;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,9 +27,25 @@ public class MyIntegralActivity extends Activity {
 		setContentView(R.layout.my_integral_main);
 		findView();
 		backImage.setVisibility(View.VISIBLE);
-		backImage.setImageResource(R.drawable.ic_launcher);
+		backImage.setImageResource(R.drawable.rub_course_back_icon);
 		title.setText("我的积分");
+		backImage.setOnClickListener(clickListener);
 	}
+	OnClickListener clickListener=new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch (v.getId()) {
+			case R.id.title_navigation_back_icon:
+				finish();
+				break;
+
+			default:
+				break;
+			}
+		}
+	};
 	/**
 	 * 控件的ID
 	 */

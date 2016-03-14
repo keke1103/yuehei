@@ -3,43 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <!--好友聊天框  -->
-    <RelativeLayout 
+
+    <!-- 好友聊天框 -->
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <ImageView 
+        android:layout_height="50dp" >
+
+        <ImageView
             android:id="@+id/friend_message_frame_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_launcher"
-            android:contentDescription="@drawable/ic_launcher"/>
-        <TextView 
+            android:contentDescription="@drawable/ic_launcher"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/friend_message_frame_back"
-            android:layout_marginLeft="3dp"
             android:layout_centerVertical="true"
-            android:text="好友"/>
-        <TextView 
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/friend_message_frame_back"
+            android:text="好友" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="赵日天"/>
-        <ImageView 
+            android:text="赵日天" />
+
+        <ImageView
             android:id="@+id/friend_message_frame_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:src="@drawable/ic_launcher"/>
-        <ImageView 
+            android:src="@drawable/ic_launcher" />
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/friend_message_frame_person"          
             android:layout_marginRight="5dp"
-            android:src="@drawable/ic_launcher"/>
+            android:layout_toLeftOf="@+id/friend_message_frame_person"
+            android:src="@drawable/ic_launcher" />
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="1px"
@@ -48,12 +56,35 @@
             android:layout_alignStart="@+id/title_navigation_back_icon"
             android:background="@color/gray" />
     </RelativeLayout>
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/friend_message_frame_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        
+        android:layout_weight="1"
+        android:orientation="vertical" >
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" 
+        android:orientation="horizontal">
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"/>
+        <EditText 
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="发送"/>
+    </LinearLayout>
 </LinearLayout>
