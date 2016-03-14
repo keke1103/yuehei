@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 导入头文件 -->
+
+    <include
+        android:id="@+id/posting_include_itle"
+        layout="@layout/title_navigation_bar" />
+
+    <!-- 输入内容 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_stroke"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/posting_include_edit_context"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="@string/posts"
+            android:paddingTop="10dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:background="#F0F0F0" />
+    <!-- 权限设置 -->
+
+    <LinearLayout
+        android:id="@+id/posting_include_linear_settings"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_stroke"
+        android:gravity="center"
+        android:padding="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+           
+            android:text="@string/permission_settings"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@drawable/rub_course_go_to_next_right"
+            android:padding="5dp"
+            android:src="@drawable/rub_course_go_to_next_right" />
+    </LinearLayout>
+
+</LinearLayout>

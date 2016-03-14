@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DynamicAdapter extends BaseAdapter {
@@ -56,7 +57,6 @@ public class DynamicAdapter extends BaseAdapter {
 			holder.nickNmae = (TextView) convertView.findViewById(R.id.list_dynamic_text_nickname);
 			holder.time = (TextView) convertView.findViewById(R.id.list_dynamic_text_time);
 			holder.line = (LinearLayout) convertView.findViewById(R.id.list_dynamic_layout_context);
-			
 			holder.forwarding = convertView.findViewById(R.id.list_dynamic_image_share_it);
 			holder.leaveMessage = convertView.findViewById(R.id.list_dynamic_image_leave_a_message);
 			holder.thumbUp = convertView.findViewById(R.id.list_dynamic_image_like);
@@ -66,14 +66,13 @@ public class DynamicAdapter extends BaseAdapter {
 		}
 		Log.i("position", position + "");
 
-		holder.headPortrait.setBackgroundResource(R.drawable.ic_launcher);
-		holder.nickNmae.setText((CharSequence) list.get(position).get("nickName"));
-		holder.time.setText((CharSequence) list.get(position).get("time"));
-		holder.line.removeAllViews();
-		TextView tv = new TextView(context);
-		tv.setText((CharSequence) list.get(position).get("cotext"));
-		holder.line.addView(tv);
-
+			holder.headPortrait.setImageResource(R.drawable.ic_launcher);
+			holder.nickNmae.setText((CharSequence) list.get(position).get("nickName"));
+			holder.time.setText((CharSequence) list.get(position).get("time"));
+			holder.line.removeAllViews();
+			TextView tv = new TextView(context);
+			tv.setText((CharSequence) list.get(position).get("cotext"));
+			holder.line.addView(tv);
 		return convertView;
 	}
 
@@ -84,7 +83,6 @@ public class DynamicAdapter extends BaseAdapter {
 		LinearLayout line;// 输入内容
 		View forwarding;// 转发
 		View leaveMessage;// 留言
-		View thumbUp;// 点赞
-
+		View thumbUp;// 点赞RelativeLayout relative;// 整体布局
 	}
 }

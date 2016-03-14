@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical" >
-
+    <!-- 输入验证码的界面 -->
     <include
         android:id="@+id/sasafety_verification_title_bar"
         layout="@layout/title_navigation_bar" />

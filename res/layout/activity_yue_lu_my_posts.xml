@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/my_posts_include_title"
+        layout="@layout/title_navigation_bar" />
+    <!-- 我发过的帖子 -->
+
+    <LinearLayout
+        android:id="@+id/my_posts_linear_message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/text_stroke" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:padding="5dp"
+            android:text="@string/posted_messages"
+            android:textSize="13sp" />
+    </LinearLayout>
+    <!-- 我加入的帖子 -->
+
+    <LinearLayout
+        android:id="@+id/my_posts_linear_added"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/text_stroke" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:padding="5dp"
+            android:text="@string/post_added"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</LinearLayout>

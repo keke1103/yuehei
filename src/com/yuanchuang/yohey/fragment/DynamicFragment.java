@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -33,7 +34,7 @@ public class DynamicFragment extends Fragment {
 		LinearLayout lay = new LinearLayout(getActivity());
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		mView = inflater.inflate(R.layout.activity_yue_lu_dynamic, lay);
-	
+
 		findView();
 		return mView;
 	}
@@ -47,7 +48,13 @@ public class DynamicFragment extends Fragment {
 		getData();
 		Log.i("DynamicFragment", "DynamicFragment");
 		mAdapter = new DynamicAdapter(getActivity(), list);
+
+		ImageView image = new ImageView(getActivity());
+
+		image.setImageResource(R.drawable.ic_launcher);
+		listView.addHeaderView(image);
 		listView.setAdapter(mAdapter);
+
 	}
 
 	@SuppressWarnings("deprecation")

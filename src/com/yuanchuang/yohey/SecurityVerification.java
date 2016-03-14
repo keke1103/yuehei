@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/**
+ * 输入验证码
+ * @author Administrator
+ *
+ */
 public class SecurityVerification extends Activity {
 	RelativeLayout include;//导入头文件
 	View verify;//验证图片

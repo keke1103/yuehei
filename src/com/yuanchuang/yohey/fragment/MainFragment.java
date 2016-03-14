@@ -40,4 +40,8 @@ public class MainFragment extends Fragment {
 		title = (TextView) myView.findViewById(R.id.title_navigation_text_title);
 		title.setText(R.string.homepage);
 	}
+	/**
+	 * 发送帖子
+	 */
+	public void sendPost(){}
 }

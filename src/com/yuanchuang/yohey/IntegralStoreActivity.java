@@ -8,7 +8,11 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/**
+ * 对换积分的界面
+ * @author Administrator
+ *
+ */
 public class IntegralStoreActivity extends Activity {
 	RelativeLayout include;// 导入的标题
 	TextView title;// 标题

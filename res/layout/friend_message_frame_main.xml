@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <!--好友聊天框  -->
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView 
+            android:id="@+id/friend_message_frame_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_launcher"
+            android:contentDescription="@drawable/ic_launcher"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/friend_message_frame_back"
+            android:layout_marginLeft="3dp"
+            android:layout_centerVertical="true"
+            android:text="好友"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="赵日天"/>
+        <ImageView 
+            android:id="@+id/friend_message_frame_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_launcher"/>
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/friend_message_frame_person"          
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_launcher"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_alignLeft="@+id/title_navigation_back_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/title_navigation_back_icon"
+            android:background="@color/gray" />
+    </RelativeLayout>
+    <LinearLayout 
+        android:id="@+id/friend_message_frame_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+    </LinearLayout>
+
+</LinearLayout>

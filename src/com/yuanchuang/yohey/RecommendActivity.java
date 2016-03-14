@@ -14,7 +14,11 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+/**
+ * 推荐开黑的界面
+ * @author Administrator
+ *
+ */
 public class RecommendActivity extends Activity {
 	List<Map<String, Object>> list;// listView的填充
 	ListView listView;

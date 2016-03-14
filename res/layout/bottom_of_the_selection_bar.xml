@@ -18,8 +18,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-       android:layout_marginLeft="10dp"
-       android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:gravity="center"
         android:orientation="horizontal" >
 
@@ -30,7 +30,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_launcher"
+            android:drawableTop="@drawable/iconfont_623"
+            android:gravity="center_horizontal"
             android:text="@string/homepage" />
 
         <RadioButton
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_launcher"
+            android:drawableTop="@drawable/iconfont_621"
             android:gravity="center_horizontal"
             android:text="@string/friends" />
 
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_launcher"
+            android:drawableTop="@drawable/iconfont_622"
             android:gravity="center_horizontal"
             android:text="@string/lufriends" />
 
@@ -67,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_launcher"
+            android:drawableTop="@drawable/iconfont_geren11"
             android:gravity="center_horizontal"
             android:text="@string/me" />
     </RadioGroup>
