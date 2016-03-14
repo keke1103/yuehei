@@ -113,5 +113,37 @@
     <string name="my_posts">&#xe68b;</string>
     <string name="integral">&#xe601;</string>
     <string name="setting">&#xe604;</string>
+    <string name="account_manager">账号管理</string>
+    <string name="account_safety">账号安全</string>
+    <string name="usual_set">通用设置</string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="private_set">隐私设置</string>
+    <string name="question_back">问题反馈</string>
+    <string name="about_us">关于我们</string>
+    <string name="exit_account">退出账号</string>
+    <string name="add_account">添加账号</string>
+    <string name="login_name">登录名</string>
+    <string name="email_addr">邮箱地址</string>
+    <string name="unbind">未绑定</string>
+    <string name="tel">手机号</string>
+    <string name="change_pw">修改密码</string>
+    <string name="safety_center">安全中心</string>
+    <string name="textsize_set">字号设置</string>
+    <string name="small">小</string>
+    <string name="sound_vibrate">声音与振动</string>
+    <string name="display_beizhu">显示备注信息</string>
+    <string name="start_fast_move">开启快速拖动</string>
+    <string name="portrait_landscape">横竖屏自动切换</string>
+     <string name="add_need">加我时需要验证</string>
+     <string name="qq_friend">向我推荐QQ好友</string>
+     <string name="search_by_tel">可通过手机号搜索到我</string>
+     <string name="blacklist">黑名单</string>
+     <string name="do_let_them_see">不让他（她）看到我的lu友圈</string>
+     <string name="say_something">说点什么吧...</string>
+     <string name="display_location">显示位置</string>
+     <string name="str_public">公开</string>
+     <string name="score_to_me">给我们评分</string>
+     <string name="function">功能介绍</string>
+     <string name="check_new_version">检查新版本</string>
 
 </resources>

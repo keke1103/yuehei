@@ -5,11 +5,10 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
 
 public class AddFriendsActivity extends Activity {
 	RelativeLayout includeTitle;// 导入
@@ -24,10 +23,7 @@ public class AddFriendsActivity extends Activity {
 	LinearLayout QQWeb;// qq微博
 	TextView xin;// 新浪图标
 	TextView qq;// qq图标
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+        protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_add);
 		findView();
