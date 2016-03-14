@@ -30,6 +30,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:button="@null"
+            android:checked="true"
             android:drawableTop="@drawable/iconfont_623"
             android:gravity="center_horizontal"
             android:text="@string/homepage" />
@@ -45,12 +46,11 @@
             android:text="@string/friends" />
 
         <ImageView
+            android:id="@+id/selection_bar_post_share"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:contentDescription="@drawable/ic_launcher"
-            android:gravity="center_horizontal"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_launcher"/>
 
         <RadioButton
             android:id="@+id/selection_bar_circle_of_friends"

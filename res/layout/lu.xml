@@ -3,57 +3,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <RelativeLayout 
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <ImageView 
+        android:layout_height="50dp" >
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rub_course_back_icon"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"/>
-        <RadioGroup 
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/rub_course_back_icon" />
+
+        <RadioGroup
             android:id="@+id/radiogroup"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_centerInParent="true">
-            <RadioButton 
+            android:layout_centerInParent="true"
+            android:orientation="horizontal" >
+
+            <RadioButton
                 android:id="@+id/rb_msg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/selector_lu"
                 android:button="@null"
-                android:text="消息"
-                android:textColor="@drawable/selector_textcolor"
                 android:gravity="center"
-                android:background="@drawable/selector_lu"/>
-              <RadioButton 
-                  android:id="@+id/rb_friends"
+                android:text="消息"
+                android:textColor="@drawable/selector_textcolor" />
+
+            <RadioButton
+                android:id="@+id/rb_friends"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:text="好友"
-                android:textColor="@drawable/selector_textcolor"
-                android:gravity="center"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/selector_lu"/>
+                android:layout_weight="1"
+                android:background="@drawable/selector_lu"
+                android:button="@null"
+                android:gravity="center"
+                android:text="好友"
+                android:textColor="@drawable/selector_textcolor" />
         </RadioGroup>
-        <TextView 
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="发布"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="添加" />
     </RelativeLayout>
-<LinearLayout 
-    android:layout_marginLeft="30dp"
-    android:id="@+id/linearlayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical" >
+    </LinearLayout>
+
 </LinearLayout>

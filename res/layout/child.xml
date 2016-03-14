@@ -3,45 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
-    <ImageView 
-        android:gravity="center"
+
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
         android:layout_weight="1"
-        android:src="@drawable/icon"
-        android:layout_marginLeft="15dp"/>
-    <RelativeLayout 
+        android:gravity="center"
+        android:src="@drawable/icon" />
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_weight="4">
-        <TextView 
+        android:layout_weight="4" >
+
+        <TextView
             android:id="@+id/tv_childname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="赵日天"
-           android:layout_marginLeft="10dp"
-           android:padding="2dp"
-            />
-        <TextView 
-            android:id="@+id/tv_sign"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="每把超神服不服"
             android:layout_marginLeft="10dp"
             android:padding="2dp"
-            />
-        <TextView 
-            android:id="@+id/tv_status"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:text="赵日天" />
+
+        <TextView
+            android:id="@+id/tv_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="在线"
-            android:layout_marginRight="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
             android:padding="2dp"
-            />
+            android:text="每把超神服不服" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="在线" />
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import com.yuanchuang.yohey.fragment.MEFragment;
 import com.yuanchuang.yohey.fragment.MainFragment;
 import com.yuanchuang.yohey.fragment.Main_FragmentAdapter;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,12 +15,20 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
+import lu.Lu_Activity;
 
 public class MainActivity extends FragmentActivity {
+	RelativeLayout postShare;// 发帖与分享
+	ImageView postShareImage;
+	ImageView post;//发帖
+	ImageView share;//分享
 	RelativeLayout includeTitle;
 	RelativeLayout inLayoutSelect;
 	Main_FragmentAdapter pagerAdapter;
@@ -29,6 +38,7 @@ public class MainActivity extends FragmentActivity {
 	FragmentManager mfFragmentManager;
 	DynamicFragment dynamicFragment;
 	MEFragment meFragment;
+	Lu_Activity LuFragment;
 	RadioGroup mRadio;
 	ViewPager mPager;
 
@@ -37,34 +47,73 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.fragment_text);
 		mfFragmentManager = getSupportFragmentManager();
 		findView();
+		redioButton();
 
 	}
-
+	/**
+	 * View的点击事件
+	 */
+    OnClickListener clickListener=new OnClickListener() {
+		boolean postshare=true;
+		Intent intent;
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch (v.getId()) {
+			case R.id.selection_bar_post_share:
+				if(postshare){
+					postShare.setVisibility(View.VISIBLE);
+					postshare=false;
+				}else{
+					postShare.setVisibility(View.GONE);
+					postshare=true;
+				}	
+				break;
+			case R.id.fragment_text_post:
+				intent=new Intent();
+				startActivity(intent);
+				break;
+			case R.id.fragment_text_share:
+				intent=new Intent();
+				startActivity(intent);
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	
+	/**
+	 * RadioGroup的点击事件
+	 */
 	OnCheckedChangeListener listener = new OnCheckedChangeListener() {
 
 		@Override
 		public void onCheckedChanged(RadioGroup group, int checkedId) {
-
 			redioButton();
-		}
-
-		private void redioButton() {
-
-			for (int i = 0; i < radioButton.length; i++) {
-				if (radioButton[i].isChecked()) {
-					mPager.setCurrentItem(i);
-				} else {
-
-				}
-			}
 		}
 	};
 
+	private void redioButton() {
+
+		for (int i = 0; i < radioButton.length; i++) {
+			if (radioButton[i].isChecked()) {
+				mPager.setCurrentItem(i);
+				postShare.setVisibility(View.GONE);
+			} else {
+			}
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	private void findView() {
-		//Typeface iconfont = Typeface.createFromAsset(getAssets(), "iconfont/iconfont.ttf");
+		// Typeface iconfont = Typeface.createFromAsset(getAssets(),
+		// "iconfont/iconfont.ttf");
+		post=(ImageView)findViewById(R.id.fragment_text_post);
+		share=(ImageView)findViewById(R.id.fragment_text_share);
 		inLayoutSelect = (RelativeLayout) findViewById(R.id.fragment_main_selection_bar);
 		mRadio = (RadioGroup) inLayoutSelect.findViewById(R.id.selection_bar_radio_group);
+		postShare = (RelativeLayout) findViewById(R.id.fragment_text_post_share);
 		mRadio.setOnCheckedChangeListener(listener);
 		mPager = (ViewPager) findViewById(R.id.layou_main);
 		radioButton = new RadioButton[4];
@@ -72,13 +121,16 @@ public class MainActivity extends FragmentActivity {
 		radioButton[1] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_friends);
 		radioButton[2] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_circle_of_friends);
 		radioButton[3] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_personal);
-
+		postShareImage = (ImageView) inLayoutSelect.findViewById(R.id.selection_bar_post_share);
+		postShareImage.setOnClickListener(clickListener);
 		mainFragment = new MainFragment();
+		LuFragment = new Lu_Activity();
 		dynamicFragment = new DynamicFragment();
 		meFragment = new MEFragment();
-	    fragmentList = new ArrayList<Fragment>();
+		fragmentList = new ArrayList<Fragment>();
 		fragmentList.add(mainFragment);
-        fragmentList.add(dynamicFragment);
+		fragmentList.add(LuFragment);
+		fragmentList.add(dynamicFragment);
 		fragmentList.add(meFragment);
 		pagerAdapter = new Main_FragmentAdapter(mfFragmentManager, fragmentList);
 		mPager.setAdapter(pagerAdapter);

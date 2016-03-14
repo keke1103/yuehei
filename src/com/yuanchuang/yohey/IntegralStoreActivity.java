@@ -47,7 +47,7 @@ public class IntegralStoreActivity extends Activity {
 		sendGift = (TextView) findViewById(R.id.integral_store_send);
 		
 		backImage.setVisibility(View.VISIBLE);
-		backImage.setImageResource(R.drawable.ic_launcher);
+		backImage.setImageResource(R.drawable.rub_course_back_icon);
 		title.setText("积分商城");
 		
 		myIntegral.setText("我的积分");
@@ -61,7 +61,7 @@ public class IntegralStoreActivity extends Activity {
 		buyGift.setOnClickListener(clickListener);
 		receiveGift.setOnClickListener(clickListener);
 		sendGift.setOnClickListener(clickListener);
-
+        backImage.setOnClickListener(clickListener);
 	}
 
 	/**
@@ -92,6 +92,9 @@ public class IntegralStoreActivity extends Activity {
 			case R.id.integral_store_send://送出礼品点击事件
 				intent=new Intent(IntegralStoreActivity.this,SendGiftActivity.class);
                 startActivity(intent);
+				break;
+			case R.id.title_navigation_back_icon://关掉该页面
+				finish();
 				break;
 			default:
 				break;

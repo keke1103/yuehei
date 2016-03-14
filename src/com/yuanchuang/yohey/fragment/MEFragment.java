@@ -2,6 +2,7 @@ package com.yuanchuang.yohey.fragment;
 
 import com.yuanchuang.yohey.IntegralStoreActivity;
 import com.yuanchuang.yohey.MyPostsActivity;
+import com.yuanchuang.yohey.PersonalInformationActivity;
 import com.yuanchuang.yohey.R;
 
 import android.content.Intent;
@@ -35,6 +36,9 @@ public class MEFragment extends Fragment {
 		mView = inflater.inflate(R.layout.activity_yuye_lu_homepage, lay);
 		findView();
 		integral.setOnClickListener(onClickListener);
+		myPosts.setOnClickListener(onClickListener);
+		myProfile.setOnClickListener(onClickListener);
+		settings.setOnClickListener(onClickListener);
 		return mView;
 	}
 
@@ -62,10 +66,11 @@ public class MEFragment extends Fragment {
 		public void onClick(View v) {
 			Intent intent;
 			switch (v.getId()) {
-			case R.id.homepage_text_my_msg://
-
+			case R.id.homepage_text_my_msg://跳转到我的资料
+			    intent=new Intent(getActivity(),PersonalInformationActivity.class);
+			    startActivity(intent);
 				break;
-			case R.id.homepage_text_my_post:
+			case R.id.homepage_text_my_post://跳转到我的帖子
 				intent=new Intent(getActivity(),MyPostsActivity.class);
 				startActivity(intent);
 				break;
@@ -73,7 +78,7 @@ public class MEFragment extends Fragment {
                 intent=new Intent(getActivity(),IntegralStoreActivity.class);
                 startActivity(intent);
 				break;
-			case R.id.homepage_text_system_set://
+			case R.id.homepage_text_system_set://跳到系统设置
 
 				break;
 			default:

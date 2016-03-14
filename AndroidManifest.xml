@@ -62,6 +62,9 @@
         <activity android:name="com.yuanchuang.yohey.SendGiftActivity"></activity>
         <activity android:name="com.yuanchuang.yohey.ShareItActivity"></activity>
         <activity android:name="com.yuanchuang.yohey.IntegralStoreActivity"></activity>
+        <activity android:name="com.yuanchuang.yohey.PersonalInformationActivity"></activity>
+        <activity android:name="com.yuanchuang.yohey.FriendMessageActivity"></activity>
+        <activity android:name="com.yuanchuang.yohey.FriendMaterialActivity"></activity>
 
     </application>
 
