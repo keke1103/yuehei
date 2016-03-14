@@ -84,8 +84,7 @@ public class MainActivity extends FragmentActivity {
 		mPager.setAdapter(pagerAdapter);
 		mPager.setOnPageChangeListener(pageChange);
 	}
-
-	private OnPageChangeListener pageChange = new OnPageChangeListener() {
+       private OnPageChangeListener pageChange = new OnPageChangeListener() {
 
 		@Override
 		public void onPageSelected(int arg0) {

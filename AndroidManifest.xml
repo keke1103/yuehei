@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,11 +30,7 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.MainActivity" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+         
         </activity>
 
         <activity android:name="com.yuanchuang.yohey.RecommendActivity" >
@@ -62,7 +58,19 @@
         <activity android:name="com.yuanchuang.yohey.SendGiftActivity"></activity>
         <activity android:name="com.yuanchuang.yohey.ShareItActivity"></activity>
         <activity android:name="com.yuanchuang.yohey.IntegralStoreActivity"></activity>
+       <activity android:name="set.Set_Activity">
+              <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    </application>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+       </activity>
+       <activity android:name="set.About_us_Activity"></activity>
+       <activity android:name="set.Manager_Activity"></activity>
+       <activity android:name="set.Private_set_Activity"></activity>
+       <activity android:name="set.Question_back_Activity"></activity>
+       <activity android:name="set.Safety_Actitity"></activity>   
+       <activity android:name="set.Usual_set_Activity"></activity>
+       </application>
 
 </manifest>
