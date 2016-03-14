@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+    <ImageView 
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon"
+        android:layout_marginLeft="15dp"/>
+    <RelativeLayout 
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="4">
+        <TextView 
+            android:id="@+id/tv_childname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赵日天"
+           android:layout_marginLeft="10dp"
+           android:padding="2dp"
+            />
+        <TextView 
+            android:id="@+id/tv_sign"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="每把超神服不服"
+            android:layout_marginLeft="10dp"
+            android:padding="2dp"
+            />
+        <TextView 
+            android:id="@+id/tv_status"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在线"
+            android:layout_marginRight="30dp"
+            android:padding="2dp"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -10,5 +10,8 @@
     <color name="background">#EEEEEE</color>
     <color name="beizhu">#9B9B9B</color>
     <color name="blue">#0000ff</color>
+    <color name="white">#ffffff</color>
+    <color name="assist">#ff8417</color>
+    <color name="red">#dd0000</color>
 
 </resources>

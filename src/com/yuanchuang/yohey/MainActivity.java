@@ -26,7 +26,6 @@ public class MainActivity extends FragmentActivity {
 	RadioButton[] radioButton;
 	ArrayList<Fragment> fragmentList;
 	MainFragment mainFragment;
-	Friends_Activity friends_Activity;
 	FragmentManager mfFragmentManager;
 	DynamicFragment dynamicFragment;
 	MEFragment meFragment;
@@ -77,11 +76,9 @@ public class MainActivity extends FragmentActivity {
 		mainFragment = new MainFragment();
 		dynamicFragment = new DynamicFragment();
 		meFragment = new MEFragment();
-		friends_Activity = new Friends_Activity();
-		fragmentList = new ArrayList<Fragment>();
+	    fragmentList = new ArrayList<Fragment>();
 		fragmentList.add(mainFragment);
-		fragmentList.add(friends_Activity);
-		fragmentList.add(dynamicFragment);
+        fragmentList.add(dynamicFragment);
 		fragmentList.add(meFragment);
 		pagerAdapter = new Main_FragmentAdapter(mfFragmentManager, fragmentList);
 		mPager.setAdapter(pagerAdapter);
