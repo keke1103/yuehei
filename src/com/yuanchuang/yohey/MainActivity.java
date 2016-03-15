@@ -79,11 +79,11 @@ public class MainActivity extends FragmentActivity {
 				}
 				break;
 			case R.id.fragment_text_post:
-				intent = new Intent();
+				intent = new Intent(MainActivity.this,PostingInterfaceActivity.class);
 				startActivity(intent);
 				break;
 			case R.id.fragment_text_share:
-				intent = new Intent();
+				intent = new Intent(MainActivity.this,ShareItActivity.class);
 				startActivity(intent);
 				break;
 			default:
@@ -132,6 +132,8 @@ public class MainActivity extends FragmentActivity {
 		radioButton[3] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_personal);
 		postShareImage = (ImageView) inLayoutSelect.findViewById(R.id.selection_bar_post_share);
 		postShareImage.setOnClickListener(clickListener);
+		post.setOnClickListener(clickListener);
+		share.setOnClickListener(clickListener);
 		mainFragment = new MainFragment();
 		LuFragment = new Lu_Activity();
 		dynamicFragment = new DynamicFragment();

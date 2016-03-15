@@ -52,7 +52,8 @@ OnClickListener onClickListener=new OnClickListener() {
 		remind=(TextView) findViewById(R.id.share_it_text_remind);
 		send=(TextView) includeTitle.findViewById(R.id.title_navigation_text_right_title);
 		title=(TextView) includeTitle.findViewById(R.id.title_navigation_text_title);
-		toReturn=(TextView) includeTitle.findViewById(R.id.title_navigation_back_icon);
+		toReturn=(TextView) includeTitle.findViewById(R.id.title_navigation_back_text);
+		toReturn.setVisibility(View.VISIBLE);
 		toReturn.setText(R.string.cancel);
 		title.setText(R.string.share);
 		send.setText(R.string.send);

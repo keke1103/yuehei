@@ -18,6 +18,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import set.Set_Activity;
 
 public class MEFragment extends Fragment {
 	RelativeLayout layouttitle;// 标题布局
@@ -81,7 +82,8 @@ public class MEFragment extends Fragment {
 				startActivity(intent);
 				break;
 			case R.id.homepage_text_system_set:// 跳到系统设置
-
+                intent = new Intent(getActivity(),Set_Activity.class);
+                startActivity(intent);
 				break;
 			default:
 				break;
