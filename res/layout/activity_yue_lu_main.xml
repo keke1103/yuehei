@@ -7,158 +7,58 @@
 
     <!-- 引入标题 -->
 
-    <include
-        android:id="@+id/main_title"
-        layout="@layout/title_navigation_bar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#282c2b"
+        android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-      
-        android:orientation="vertical" >
-
-        <View
-            android:id="@+id/main_view_announcement"
-            android:layout_width="fill_parent"
-            android:layout_height="80dp" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/main_text_recommended"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="@string/tuijiankaihei"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:id="@+id/main_image_recommended_user1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/head_shape_round_stroke"
-                    android:contentDescription="@drawable/ic_launcher"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:src="@drawable/ic_launcher" />
-
-                <ImageView
-                    android:id="@+id/main_image_recommended_user2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/head_shape_round_stroke"
-                    android:contentDescription="@drawable/ic_launcher"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:src="@drawable/ic_launcher" />
-
-                <ImageView
-                    android:id="@+id/main_image_recommended_user3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/head_shape_round_stroke"
-                    android:contentDescription="@drawable/ic_launcher"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:src="@drawable/ic_launcher" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/main_text_click_for_more"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@string/onclickformore"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/title_navigation_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:baselineAligned="false"
-            android:orientation="horizontal" >
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:drawableEnd="@drawable/title_ledt_bar"
+            android:drawablePadding="6dp"
+            android:drawableRight="@drawable/title_ledt_bar"
+            android:text="@string/area"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_rounded_corners_and_solid"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+        <!-- 标题 -->
 
-                <TextView
-                    android:id="@+id/main_text_sever"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="@string/server" />
+        <TextView
+            android:id="@+id/title_navigation_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/activity_navigation_bar_paddingtop"
+            android:text="@string/main_title_wi"
+            android:textColor="#FFFFFF"
+            android:textSize="17.3sp"
+            android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@drawable/ic_launcher"
-                    android:src="@drawable/ic_launcher" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_rounded_corners_and_solid"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/main_text_grade"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="@string/grade" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@drawable/ic_launcher"
-                    android:src="@drawable/ic_launcher" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp" />
+        <ImageView
+            android:id="@+id/title_navigation_text_right_title"
+            android:layout_width="18dp"
+            android:layout_height="11.3dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@drawable/title_right_ba"
+            android:src="@drawable/title_right_ba" />
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/main_list_posts"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
         android:orientation="horizontal" >
     </ListView>
 
