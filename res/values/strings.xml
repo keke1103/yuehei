@@ -15,6 +15,20 @@
     <string name="pig_love">猪哥我爱你</string>
     <string name="bojin">铂金</string>
     <string name="zhuanshi">钻石</string>
+    <string name="new_situation">撸友新动态</string>
+    <string name="not_afarid_freads">不错过每分信息</string>
+    <string name="video_highlights">精彩视频集锦</string>
+    <string name="compilation">各种精彩搞笑合辑</string>
+    <string name="not_afarid">不错过每分信息</string>
+    <string name="not_afarid_official">官方新动态</string>
+    <string name="latest_news">时刻了解最新资讯</string>
+    <string name="win_points">转转赢积分</string>
+    <string name="quadruple">积分翻倍好机会</string>
+    <string name="new_posts">新发帖</string>
+    <string name="meng_mei">本萌妹超厉害</string>
+    <string name="list_time">3分钟前</string>
+    <string name="area">大区</string>
+    <string name="main_title_wi">主页</string>
     <!-- 首页底部按钮 -->
     <string name="homepage">首页</string>
     <string name="friends">好友</string>
@@ -97,7 +111,7 @@
     <string name="participation_posts">加入帖子</string>
     <string name="hide">隐藏</string>
     <string name="report">举报</string>
-    
+
     <!-- 阿里雲引用 -->
     <string name="iconfont">&#13804;</string>
     <string name="gt">&#xe624;</string>
@@ -115,6 +129,8 @@
     <string name="my_posts">&#xe68b;</string>
     <string name="integral">&#xe601;</string>
     <string name="setting">&#xe604;</string>
+
+    <!-- 设置 -->
     <string name="account_manager">账号管理</string>
     <string name="account_safety">账号安全</string>
     <string name="usual_set">通用设置</string>
@@ -136,16 +152,16 @@
     <string name="display_beizhu">显示备注信息</string>
     <string name="start_fast_move">开启快速拖动</string>
     <string name="portrait_landscape">横竖屏自动切换</string>
-     <string name="add_need">加我时需要验证</string>
-     <string name="qq_friend">向我推荐QQ好友</string>
-     <string name="search_by_tel">可通过手机号搜索到我</string>
-     <string name="blacklist">黑名单</string>
-     <string name="do_let_them_see">不让他（她）看到我的lu友圈</string>
-     <string name="say_something">说点什么吧...</string>
-     <string name="display_location">显示位置</string>
-     <string name="str_public">公开</string>
-     <string name="score_to_me">给我们评分</string>
-     <string name="function">功能介绍</string>
-     <string name="check_new_version">检查新版本</string>
+    <string name="add_need">加我时需要验证</string>
+    <string name="qq_friend">向我推荐QQ好友</string>
+    <string name="search_by_tel">可通过手机号搜索到我</string>
+    <string name="blacklist">黑名单</string>
+    <string name="do_let_them_see">不让他（她）看到我的lu友圈</string>
+    <string name="say_something">说点什么吧...</string>
+    <string name="display_location">显示位置</string>
+    <string name="str_public">公开</string>
+    <string name="score_to_me">给我们评分</string>
+    <string name="function">功能介绍</string>
+    <string name="check_new_version">检查新版本</string>
 
 </resources>
