@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical" >
-
+    <!-- 填写验证码 -->
     <include
         android:id="@+id/mobile_number_title_bar"
         layout="@layout/title_navigation_bar" />

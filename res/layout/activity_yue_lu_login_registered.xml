@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#f2f4f5"
     android:orientation="vertical" >
-
+    <!-- 登陆注册界面 -->
     <ImageView
         android:id="@+id/login_registered_image_head_portrait"
         android:layout_width="80dp"
@@ -80,6 +80,7 @@
             android:background="@null"
             android:cursorVisible="false"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -178,8 +179,9 @@
             android:layout_marginStart="7dp"
             android:gravity="center"
             android:text="@string/QQ_login"
-            android:textSize="15sp" 
-            android:textColor="#696969"/>
+            android:textColor="#696969"
+            android:textSize="15sp" />
+
         <ImageView
             android:layout_width="33dp"
             android:layout_height="33dp"
@@ -189,6 +191,7 @@
             android:contentDescription="@drawable/yo_hey_weibo"
             android:padding="7dp"
             android:src="@drawable/yo_hey_weibo" />
+
         <TextView
             android:id="@+id/login_register_text_web_login"
             android:layout_width="wrap_content"
@@ -197,8 +200,8 @@
             android:layout_marginStart="7dp"
             android:gravity="center"
             android:text="@string/weibo_login"
-            android:textSize="15sp" 
-            android:textColor="#696969"/>
+            android:textColor="#696969"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

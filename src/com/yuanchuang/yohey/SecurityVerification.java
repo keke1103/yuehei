@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 /**
@@ -20,7 +21,7 @@ public class SecurityVerification extends Activity {
 	TextView another;//换一张 点击事件
 	EditText code;//输入验证码
 	Button submit;//提交按钮
-	View toReturn;//返回按钮
+	ImageView toReturn;//返回按钮
 	TextView title;//标题
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +61,19 @@ public class SecurityVerification extends Activity {
 	/**
 	 * 查找ID
 	 */
+	@SuppressWarnings("deprecation")
 	private void findView() {
 		include=(RelativeLayout) findViewById(R.id.sasafety_verification_title_bar);
 		verify=findViewById(R.id.safety_verification_image_another_one);
 		another=(TextView) findViewById(R.id.safety_verificatio_text_another_one);
 		code=(EditText) findViewById(R.id.safety_verification_edit_cofirmation_code);
 		submit=(Button) findViewById(R.id.safety_verification_button_submit);
-		toReturn=include.findViewById(R.id.title_navigation_back_icon);
+		toReturn=(ImageView)include.findViewById(R.id.title_navigation_back_icon);
 		title=(TextView) include.findViewById(R.id.title_navigation_text_title);
+		include.setBackgroundColor(getResources().getColor(R.color.black));
+		toReturn.setVisibility(View.VISIBLE);
+		toReturn.setImageResource(R.drawable.yo_hey_back_image);
+		title.setText("填写手机号");
+		title.setTextColor(getResources().getColor(R.color.white));
 	}
 }

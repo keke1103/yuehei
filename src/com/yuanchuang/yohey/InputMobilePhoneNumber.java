@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,8 +22,8 @@ public class InputMobilePhoneNumber extends Activity {
 	RelativeLayout include;// 导入头文件
 	EditText phongNumber;// 输入手机号
 	Button next;// 下一步事件
-	CheckBox read;// 隐私政策是否勾选
-	View toReturn;// 返回
+	ImageView read;// 隐私政策是否勾选
+	ImageView toReturn;// 返回
 	TextView title;// 标题
 
 	@Override
@@ -54,13 +55,18 @@ public class InputMobilePhoneNumber extends Activity {
 		}
 	};
 
+	@SuppressWarnings("deprecation")
 	private void findView() {
 		include = (RelativeLayout) findViewById(R.id.mobile_number_title_bar);
 		phongNumber = (EditText) findViewById(R.id.mobile_number_edit_phone_number);
 		next = (Button) findViewById(R.id.mobile_number_button_next);
-		read = (CheckBox) findViewById(R.id.mobile_number_chack);
-		toReturn = include.findViewById(R.id.title_navigation_back_icon);
+		read = (ImageView) findViewById(R.id.mobile_number_chack);
+		toReturn =(ImageView) include.findViewById(R.id.title_navigation_back_icon);
 		title = (TextView) include.findViewById(R.id.title_navigation_text_title);
-
+		include.setBackgroundColor(getResources().getColor(R.color.black));
+		toReturn.setVisibility(View.VISIBLE);
+		toReturn.setImageResource(R.drawable.yo_hey_back_image);
+		title.setText("填写手机号");
+		title.setTextColor(getResources().getColor(R.color.white));
 	}
 }
