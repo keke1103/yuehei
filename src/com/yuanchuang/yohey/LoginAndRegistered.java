@@ -33,7 +33,6 @@ public class LoginAndRegistered extends Activity {
 
 	EditText account;// 账号输入框
 	EditText password;// 密码输入框
-	CheckBox remeberPassword;// 记住密码勾选框
 	TextView dorget_password;// 忘记密码
 	Button login;// 登录按钮
 	Button registered;// 注册按钮
@@ -66,9 +65,6 @@ public class LoginAndRegistered extends Activity {
 				userID = account.getText().toString();
 				userPassword = password.getText().toString();
 				loginService(userID, userPassword);
-				// intent = new Intent(LoginAndRegistered.this,
-				// MainActivity.class);
-				// startActivity(intent);
 				break;
 
 			case R.id.login_registered_button_registered:
@@ -87,7 +83,6 @@ public class LoginAndRegistered extends Activity {
 	private void findView() {
 		account = (EditText) findViewById(R.id.login_registered_edit_account);
 		password = (EditText) findViewById(R.id.login_registered_edit_password);
-		remeberPassword = (CheckBox) findViewById(R.id.login_register_check_password);
 		dorget_password = (TextView) findViewById(R.id.login_register_text_forget);
 		login = (Button) findViewById(R.id.login_registered_button_login);
 		registered = (Button) findViewById(R.id.login_registered_button_registered);
