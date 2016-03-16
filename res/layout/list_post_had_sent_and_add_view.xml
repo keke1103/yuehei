@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/click_the_list_to_change_the_background"
+   >
+
+        <RelativeLayout
+            android:layout_width="90dp"         
+            android:layout_height="90dp"  
+         	android:layout_marginTop="-10dp"
+         	android:layout_marginBottom="-10dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginRight="-10dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/list_post_details_image_head_portrait"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+               
+                android:layout_centerInParent="true"
+                android:contentDescription="@drawable/click_the_list_to_change_the_background_shape"
+                android:src="@drawable/ic_launcher" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/click_the_list_to_change_the_background_shape" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+              >
+
+                <TextView
+                    android:id="@+id/list_post_details_text_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    
+                    android:contentDescription="@drawable/iconfont_liulan"
+                    android:src="@drawable/iconfont_liulan" />
+
+                <TextView
+                    android:id="@+id/list_post_details_text_yan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@drawable/rub_course_grey_comment"
+                    android:src="@drawable/rub_course_grey_comment" />
+
+                <TextView
+                    android:id="@+id/list_post_details_text_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/list_post_details_text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/list_post_details_text_context"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+           
+                android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
