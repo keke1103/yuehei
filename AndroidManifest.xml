@@ -112,6 +112,10 @@
         </activity>
         <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^ -->
 
+        <activity android:name="com.yuanchuang.yohey.VerificationCodeActivity" >
+        </activity>
+        <activity android:name="com.yuanchuang.yohey.QQRegisterActivity" >
+        </activity>
     </application>
 
 </manifest>

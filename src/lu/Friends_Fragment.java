@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.FriendMaterialActivity;
-import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
 
 import android.content.Intent;

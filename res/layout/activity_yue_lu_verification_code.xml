@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="#f2f4f5"
     android:orientation="vertical" >
+
     <!-- 填写验证码 -->
+
     <include
         android:id="@+id/mobile_number_title_bar"
         layout="@layout/title_navigation_bar" />
@@ -13,72 +15,79 @@
         android:id="@+id/verification_code_text_phong_number"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/nuokesashi"
-        android:textSize="13sp" />
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="13dp"
+        android:text="我们已给你的手机号码+86-18883296256发送了一条验证短信"
+        android:textColor="#888888"
+        android:textSize="12sp" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/text_stroke"
-        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginTop="14dp"
+        android:background="#ffffff"
         android:orientation="horizontal" >
 
         <EditText
             android:id="@+id/verification_code_edit_message_code"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_weight="2"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:background="@null"
+            android:cursorVisible="false"
             android:hint="@string/message_verification_code"
-            android:inputType="phone"
-            android:paddingLeft="5dp"
-            android:paddingStart="5dp" />
+            android:paddingLeft="11dp"
+            android:textColor="#888888"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/verification_code_text_resend"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/text_stroke"
+            android:layout_width="83dp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/resend" />
+            android:text="@string/resend"
+            android:textColor="#888888"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/verification_code_text_next"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="11dp"
         android:background="@drawable/button_rounded_corners_and_solid"
-        android:padding="5dp"
-        android:text="@string/next" />
+        android:text="@string/next"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
         android:orientation="horizontal" >
 
-        <CheckBox
+        <ImageView
             android:id="@+id/verification_code_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="0.5"
-            android:scaleY="0.5" />
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@drawable/yo_hey_xuanzhong"
+            android:src="@drawable/yo_hey_xuanzhong" />
 
         <TextView
             android:id="@+id/verification_code_text_binding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="14dp"
             android:text="@string/binding"
-            android:textSize="12sp" />
+            android:textColor="#888888"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>
