@@ -3,20 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/et_bg"
-        android:hint="搜索"
-        android:gravity="center"/>
-
+    <!-- 消息界面 -->
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="17dp"
         android:divider="@null"
         android:dividerHeight="5dp" />
 

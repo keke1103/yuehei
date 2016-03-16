@@ -50,8 +50,9 @@ public class SecurityVerification extends Activity {
 			case R.id.safety_verificatio_text_another_one:
 				
 				break;
-			case R.id.safety_verification_button_submit:
-				
+			case R.id.safety_verification_button_submit://跳转到输入手机验证码的页面
+				intent=new Intent(SecurityVerification.this,VerificationCodeActivity.class);
+				startActivity(intent);
 				break;
 			default:
 				break;

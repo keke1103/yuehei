@@ -2,131 +2,234 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f2f4f5"
     android:orientation="vertical" >
     <!-- 好友的资料界面 -->
     <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="wrap_content">
         <ImageView 
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#eeeeee"/>
-        <RelativeLayout 
+            android:layout_height="wrap_content"
+            android:src="@drawable/yo_hey_material_background"
+            android:contentDescription="@drawable/yo_hey_material_background"/>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <ImageView 
                 android:id="@+id/friend_message_frame_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_launcher"
-                android:contentDescription="@drawable/ic_launcher"/>
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:src="@drawable/yo_hey_back_image"
+                android:contentDescription="@drawable/yo_hey_back_image"/>
             <TextView 
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_toRightOf="@+id/friend_message_frame_back"
-               android:layout_marginLeft="3dp"
+               android:layout_toEndOf="@+id/friend_message_frame_back"
+               android:layout_marginLeft="7dp"
+               android:layout_marginStart="7dp"
                android:layout_centerVertical="true"
-               android:text="返回"/>
+               android:text="返回"
+               android:textSize="15sp"
+               android:textColor="#ffffff"/>
         </RelativeLayout>
+        <ImageView 
+            android:id="@+id/friend_message_head_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/yo_hey_head_portrait"
+            android:contentDescription="@drawable/yo_hey_head_portrait"/>
+        <TextView 
+            android:id="@+id/friend_message_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="145dp"
+            android:layout_centerHorizontal="true"
+            android:text="赵日天"
+            android:textColor="#e9f83c"
+            android:textSize="15sp"/>
     </RelativeLayout>
-    <ImageView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        android:src="@drawable/ic_launcher"/>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="13dp"/>
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:background="#ffffff"
+        android:orientation="vertical">
+        <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
         android:orientation="horizontal">
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="个性签名"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:gravity="center_vertical"
+            android:text="个性签名"
+            android:textColor="#333333"
+            android:textSize="14sp"/>
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="超神到超鬼的挫败感"/>
+            android:id="@+id/friend_material_signature"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:gravity="center_vertical"
+            android:text="超神到超鬼的挫败感"
+            android:textColor="#888888"
+            android:textSize="12sp"/>
     </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:background="#f2f4f5"/>
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:layout_height="37dp"
         android:orientation="horizontal">
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="出生日期"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:gravity="center_vertical"
+            android:text="出生日期"
+            android:textColor="#333333"
+            android:textSize="14sp"/>
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="1994-11-11"/>
+            android:id="@+id/friend_material_date_of_birth"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:gravity="center_vertical"
+            android:text="2001-11-11"
+            android:textColor="#888888"
+            android:textSize="12sp"/>
     </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:background="#f2f4f5"/>
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:layout_height="37dp"
         android:orientation="horizontal">
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="兴趣爱好"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:gravity="center_vertical"
+            android:text="兴趣爱好"
+            android:textColor="#333333"
+            android:textSize="14sp"/>
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="玩游戏，打篮球，唱歌"/>
+            android:id="@+id/friend_material_love"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:gravity="center_vertical"
+            android:text="玩游戏、打篮球、睡觉"
+            android:textColor="#888888"
+            android:textSize="12sp"/>
     </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:background="#f2f4f5"/>
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:layout_height="37dp"
         android:orientation="horizontal">
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="擅长位置"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:gravity="center_vertical"
+            android:text="擅长位置"
+            android:textColor="#333333"
+            android:textSize="14sp"/>
         <TextView 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="中单      adc"/>
+            android:id="@+id/friend_material_good"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:gravity="center_vertical"
+            android:text="ADC、中单"
+            android:textColor="#888888"
+            android:textSize="12sp"/>
     </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:background="#f2f4f5"/>
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
+        android:layout_height="37dp"
         android:orientation="horizontal">
         <TextView 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="bottom|center_horizontal"
-            android:text="发语音"/>
-         <TextView 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="bottom|center_horizontal"
-            android:text="发消息"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:gravity="center_vertical"
+            android:text="标签"
+            android:textColor="#333333"
+            android:textSize="14sp"/>
+        <TextView 
+            android:id="@+id/friend_material_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="64dp"
+            android:layout_marginStart="64dp"
+            android:gravity="center_vertical"
+            android:text="游戏大腿、土豪、技术宅、文艺青年、00后"
+            android:textColor="#888888"
+            android:textSize="12sp"/>
     </LinearLayout>
+    </LinearLayout> 
+    <TextView 
+        android:id="@+id/friend_material_send_message"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="31dp"
+        android:background="@drawable/button_rounded_corners_and_solid"
+        android:gravity="center"
+        android:text="发消息"
+        android:textColor="#ffffff"
+        android:textSize="15sp"/>
+    <TextView 
+        android:id="@+id/friend_material_send_voice"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_rounded_corners_and_solid"
+        android:gravity="center"
+        android:text="发语音"
+        android:textColor="#ffffff"
+        android:textSize="15sp"/>
 </LinearLayout>
