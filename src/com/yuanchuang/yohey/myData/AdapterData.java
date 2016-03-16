@@ -21,6 +21,90 @@ public class AdapterData {
 	String reco_message;
 	String reco_messageIcon;
 	String reco_area;
+	//主页数据
+	String main_head;
+	String main_name;
+	String main_time;
+	String main_context;
+	String main_area;
+	String main_dan;
+	int main_add;
+	int main_message;
+	int main_up;//点赞
+	public String getMain_head() {
+		return main_head;
+	}
+
+	public void setMain_head(String main_head) {
+		this.main_head = main_head;
+	}
+
+	public String getMain_name() {
+		return main_name;
+	}
+
+	public void setMain_name(String main_name) {
+		this.main_name = main_name;
+	}
+
+	public String getMain_time() {
+		return main_time;
+	}
+
+	public void setMain_time(String main_time) {
+		this.main_time = main_time;
+	}
+
+	public String getMain_context() {
+		return main_context;
+	}
+
+	public void setMain_context(String main_context) {
+		this.main_context = main_context;
+	}
+
+	public String getMain_area() {
+		return main_area;
+	}
+
+	public void setMain_area(String main_area) {
+		this.main_area = main_area;
+	}
+
+	public String getMain_dan() {
+		return main_dan;
+	}
+
+	public void setMain_dan(String main_dan) {
+		this.main_dan = main_dan;
+	}
+
+	
+
+	public int getMain_add() {
+		return main_add;
+	}
+
+	public void setMain_add(int main_add) {
+		this.main_add = main_add;
+	}
+
+	public int getMain_message() {
+		return main_message;
+	}
+
+	public void setMain_message(int main_message) {
+		this.main_message = main_message;
+	}
+
+	public int getMain_up() {
+		return main_up;
+	}
+
+	public void setMain_up(int main_up) {
+		this.main_up = main_up;
+	}
+
 	public String getDy_head() {
 		return dy_head;
 	}

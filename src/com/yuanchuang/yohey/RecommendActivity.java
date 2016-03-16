@@ -36,7 +36,7 @@ public class RecommendActivity extends Activity {
 		list = new ArrayList<AdapterData>();
 		findView();
 		getData();
-		recommendAdapter = new RecommendAdapter(list, this);
+		//recommendAdapter = new RecommendAdapter(list, this);
 		listView.setAdapter(recommendAdapter);
 	}
 

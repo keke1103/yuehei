@@ -53,7 +53,7 @@ public class PostSAdater extends BaseAdapter {
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.list_post_details_view, null);
+			convertView = inflater.inflate(R.layout.list_post_had_sent_and_add_view, null);
 			holder.head = (ImageView) convertView.findViewById(R.id.list_post_details_image_head_portrait);
 			holder.name = (TextView) convertView.findViewById(R.id.list_post_details_text_user_name);
 			holder.browse = (TextView) convertView.findViewById(R.id.list_post_details_text_yan);

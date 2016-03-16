@@ -5,10 +5,12 @@
     android:orientation="horizontal" >
 
     <ImageView
+        android:id="@+id/tv_image"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginLeft="15dp"
         android:layout_weight="1"
+        android:contentDescription="@drawable/icon"
         android:gravity="center"
         android:src="@drawable/icon" />
 
@@ -22,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:padding="2dp"
             android:text="赵日天" />
 
