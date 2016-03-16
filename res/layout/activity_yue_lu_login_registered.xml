@@ -160,26 +160,33 @@
         android:layout_marginTop="51dp"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_marginLeft="53dp"
-            android:layout_marginStart="53dp"
-            android:background="@drawable/yo_hey_round"
-            android:contentDescription="@drawable/yo_hey_qq"
-            android:padding="7dp"
-            android:src="@drawable/yo_hey_qq" />
-
-        <TextView
+        <LinearLayout
             android:id="@+id/login_register_text_qq_login"
             android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
-            android:gravity="center"
-            android:text="@string/QQ_login"
-            android:textSize="15sp" 
-            android:textColor="#696969"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="53dp"
+                android:layout_marginStart="53dp"
+                android:background="@drawable/yo_hey_round"
+                android:contentDescription="@drawable/yo_hey_qq"
+                android:padding="7dp"
+                android:src="@drawable/yo_hey_qq" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginStart="7dp"
+                android:gravity="center"
+                android:text="@string/QQ_login"
+                android:textColor="#696969"
+                android:textSize="15sp" />
+        </LinearLayout>
+
         <ImageView
             android:layout_width="33dp"
             android:layout_height="33dp"
@@ -189,6 +196,7 @@
             android:contentDescription="@drawable/yo_hey_weibo"
             android:padding="7dp"
             android:src="@drawable/yo_hey_weibo" />
+
         <TextView
             android:id="@+id/login_register_text_web_login"
             android:layout_width="wrap_content"
@@ -197,8 +205,8 @@
             android:layout_marginStart="7dp"
             android:gravity="center"
             android:text="@string/weibo_login"
-            android:textSize="15sp" 
-            android:textColor="#696969"/>
+            android:textColor="#696969"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

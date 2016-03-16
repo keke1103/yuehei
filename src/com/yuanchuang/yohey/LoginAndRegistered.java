@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.Tencent;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.myData.User;
 import com.yuanchuang.yohey.tools.HttpPost;
@@ -17,8 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,19 +38,27 @@ public class LoginAndRegistered extends Activity {
 	TextView dorget_password;// 忘记密码
 	Button login;// 登录按钮
 	Button registered;// 注册按钮
-	TextView qqLogin;// qq登录
+	View qqLogin;// qq登录
 	TextView webLogin;// 微博登录
 	String userID;// 游戏ID
 	String userPassword;// 游戏密码
+	ImageView headicon;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_login_registered);
 		application = (YoheyApplication) getApplication();
+		application.mTencent = Tencent.createInstance(application.APP_ID, this);
 		findView();
+		initView();
+
+	}
+
+	private void initView() {
 		login.setOnClickListener(onClickListener);
 		registered.setOnClickListener(onClickListener);
+		qqLogin.setOnClickListener(onClickListener);
 	}
 
 	/**
@@ -71,6 +81,9 @@ public class LoginAndRegistered extends Activity {
 				intent = new Intent(LoginAndRegistered.this, InputMobilePhoneNumber.class);
 				startActivity(intent);
 				break;
+			case R.id.login_register_text_qq_login:
+				onClickQQLogin();
+				break;
 			default:
 				break;
 			}
@@ -86,8 +99,9 @@ public class LoginAndRegistered extends Activity {
 		dorget_password = (TextView) findViewById(R.id.login_register_text_forget);
 		login = (Button) findViewById(R.id.login_registered_button_login);
 		registered = (Button) findViewById(R.id.login_registered_button_registered);
-		qqLogin = (TextView) findViewById(R.id.login_register_text_qq_login);
+		qqLogin = findViewById(R.id.login_register_text_qq_login);
 		webLogin = (TextView) findViewById(R.id.login_register_text_web_login);
+		headicon = (ImageView) findViewById(R.id.login_registered_image_head_portrait);
 	}
 
 	/**
@@ -147,4 +161,21 @@ public class LoginAndRegistered extends Activity {
 			}
 		}
 	};
+
+	protected void onClickQQLogin() {
+		Log.i("LoginActivity", "do qq login");
+		application.loginByQq(this);
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.i("LoginActivity", "-->onActivityResult " + requestCode + " resultCode=" + resultCode);
+		Log.i("LoginActivity", data.toString());
+
+		if (requestCode == Constants.REQUEST_LOGIN || requestCode == Constants.REQUEST_APPBAR) {
+			Log.i("LoginActivity", "is doing qq");
+			Tencent.onActivityResultData(requestCode, resultCode, data, application.loginListener);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
 }
