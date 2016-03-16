@@ -42,7 +42,7 @@ public class YoheyApplication extends Application {
 			return;
 		}
 		loginActivity = coActivity;
-		mTencent.login(coActivity, "get_user_info", loginListener);
+		mTencent.login(coActivity, "all", loginListener);
 		isServerSideLogin = false;
 		Log.i("YoheyApplication", "do login");
 		Log.d("SDKQQAgentPref", "FirstLaunch_SDK:" + SystemClock.elapsedRealtime());
