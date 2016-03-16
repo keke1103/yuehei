@@ -18,7 +18,8 @@
         android:paddingTop="@dimen/activity_navigation_bar_paddingtop"
         android:src="@drawable/rub_course_back_icon"
         android:visibility="gone" />
-    <TextView 
+
+    <TextView
         android:id="@+id/title_navigation_back_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,17 +27,18 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_navigation_bar_paddingtop"
-        android:visibility="gone"
-        android:text="取消"/>
+        android:text="取消"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/title_navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/activity_navigation_bar_paddingtop"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal"
         android:paddingTop="@dimen/activity_navigation_bar_paddingtop"
         android:visibility="gone" />
     <!-- 标题 -->
@@ -47,8 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/activity_navigation_bar_paddingtop"
-        android:textSize="@dimen/activity_navigation_bar_title_sise"
-        android:textStyle="bold" />
+        android:textSize="@dimen/activity_navigation_bar_title_sise" />
 
     <!-- 右标题 -->
 

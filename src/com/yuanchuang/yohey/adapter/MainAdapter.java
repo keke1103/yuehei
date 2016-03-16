@@ -14,7 +14,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+/**
+ * 主页面的adapter
+ * @author Administrator
+ *
+ */
 public class MainAdapter extends BaseAdapter {
 	List<AdapterData> list;
 	Context context;

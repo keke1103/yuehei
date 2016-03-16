@@ -3,10 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
     <!-- 推荐开黑界面 -->
+	<!-- 官方资讯共用 -->
     <include
         android:id="@+id/recommend_include_title"
         layout="@layout/title_navigation_bar" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:background="@color/light_gray" />
 
     <ListView
         android:id="@+id/recommened_list"

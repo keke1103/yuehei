@@ -15,7 +15,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+/**
+ * 动态BaseAdapter
+ * @author Administrator
+ *
+ */
 public class DynamicAdapter extends BaseAdapter {
 	List<AdapterData> list;
 	Context context;

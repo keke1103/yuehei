@@ -21,7 +21,7 @@ public class AdapterData {
 	String reco_message;
 	String reco_messageIcon;
 	String reco_area;
-	//主页数据
+	// 主页数据
 	String main_head;
 	String main_name;
 	String main_time;
@@ -30,7 +30,82 @@ public class AdapterData {
 	String main_dan;
 	int main_add;
 	int main_message;
-	int main_up;//点赞
+	int main_up;// 点赞
+	// 帖子详情
+	int post_details_head;
+	String post_details_name;
+	String post_details_time;
+	String post_details_context;
+	// 官方资讯
+	int official_image_brief;// 官方资讯图片
+	String official_announcement;// 官方资讯标题
+	String official_context;// 官方资讯内容
+	String official_time;// 官方资讯已发布多长时间时间
+
+	public int getOfficial_image_brief() {
+		return official_image_brief;
+	}
+
+	public void setOfficial_image_brief(int official_image_brief) {
+		this.official_image_brief = official_image_brief;
+	}
+
+	public String getOfficial_announcement() {
+		return official_announcement;
+	}
+
+	public void setOfficial_announcement(String official_announcement) {
+		this.official_announcement = official_announcement;
+	}
+
+	public String getOfficial_context() {
+		return official_context;
+	}
+
+	public void setOfficial_context(String official_context) {
+		this.official_context = official_context;
+	}
+
+	public String getOfficial_time() {
+		return official_time;
+	}
+
+	public void setOfficial_time(String official_time) {
+		this.official_time = official_time;
+	}
+
+	public int getPost_details_head() {
+		return post_details_head;
+	}
+
+	public void setPost_details_head(int post_details_head) {
+		this.post_details_head = post_details_head;
+	}
+
+	public String getPost_details_name() {
+		return post_details_name;
+	}
+
+	public void setPost_details_name(String post_details_name) {
+		this.post_details_name = post_details_name;
+	}
+
+	public String getPost_details_time() {
+		return post_details_time;
+	}
+
+	public void setPost_details_time(String post_details_time) {
+		this.post_details_time = post_details_time;
+	}
+
+	public String getPost_details_context() {
+		return post_details_context;
+	}
+
+	public void setPost_details_context(String post_details_context) {
+		this.post_details_context = post_details_context;
+	}
+
 	public String getMain_head() {
 		return main_head;
 	}
@@ -78,8 +153,6 @@ public class AdapterData {
 	public void setMain_dan(String main_dan) {
 		this.main_dan = main_dan;
 	}
-
-	
 
 	public int getMain_add() {
 		return main_add;
