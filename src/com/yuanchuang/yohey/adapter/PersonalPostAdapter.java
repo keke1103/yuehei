@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.myData.AdapterData;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,24 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 /**
- * 发表帖子与参与帖子
+ * 帖子详情
  * @author Administrator
  *
  */
-public class PostSAdater extends BaseAdapter {
+public class PersonalPostAdapter extends BaseAdapter {
 	List<AdapterData> list;
 	Context context;
 	LayoutInflater inflater;
 
-	public PostSAdater() {
+	public PersonalPostAdapter() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostSAdater(List<AdapterData> list, Context context) {
-		this.context = context;
+	public PersonalPostAdapter(List<AdapterData> list, Context context) {
 		this.list = list;
+		this.context = context;
 		inflater = LayoutInflater.from(context);
 	}
 
@@ -57,33 +57,28 @@ public class PostSAdater extends BaseAdapter {
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.list_post_had_sent_and_add_view, null);
-			holder.head = (ImageView) convertView.findViewById(R.id.list_post_details_image_head_portrait);
-			holder.name = (TextView) convertView.findViewById(R.id.list_post_details_text_user_name);
-			holder.browse = (TextView) convertView.findViewById(R.id.list_post_details_text_yan);
-			holder.message = (TextView) convertView.findViewById(R.id.list_post_details_text_message);
+			convertView = inflater.inflate(R.layout.list_post_details, null);
+			holder.head = (ImageView) convertView.findViewById(R.id.list_post_details_image_head);
+			holder.context = (TextView) convertView.findViewById(R.id.list_post_details_text_context);
+			holder.name = (TextView) convertView.findViewById(R.id.list_post_details_text_name);
 			holder.time = (TextView) convertView.findViewById(R.id.list_post_details_text_time);
-			holder.con = (TextView) convertView.findViewById(R.id.list_post_details_text_context);
-
 			convertView.setTag(holder);
-		}
-		{
+		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.name.setText((CharSequence) list.get(position).getPost_name());
-		holder.time.setText((CharSequence) list.get(position).getPost_time());
-		holder.browse.setText(list.get(position).getPost_browse()+"");
-		holder.message.setText(list.get(position).getPost_message()+"");
-		holder.con.setText(list.get(position).getPost_con());
+		holder.head.setImageResource(R.drawable.zhu_ge_wo_ai_ni_tu);
+		holder.name.setText(list.get(position).getPost_details_name());
+		holder.time.setText(list.get(position).getPost_details_time());
+		holder.context.setText(list.get(position).getPost_details_context());
 		return convertView;
 	}
 
 	class ViewHolder {
 		ImageView head;// 头像
-		TextView name;// 昵称
-		TextView browse;// 浏览
-		TextView message;// 留言
+		TextView name;// 姓名
 		TextView time;// 时间
-		TextView con;// 内容
+		TextView context;// 内容
+		LinearLayout line;// 可能回复
 	}
+
 }

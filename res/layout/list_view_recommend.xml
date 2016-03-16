@@ -1,54 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
+    android:layout_height="76.6dp"
     android:orientation="horizontal" >
 
     <!-- 玩家头像 -->
 
     <ImageView
         android:id="@+id/recommend_image_user_head"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@drawable/ic_launcher" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="13.3dp"
+        android:contentDescription="@drawable/zhao_ri_tian_bu_fu"
+        android:src="@drawable/zhao_ri_tian_bu_fu" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dp" >
+        android:orientation="vertical" >
 
         <!-- 玩家昵称 -->
 
-        <TextView
-            android:id="@+id/recommend_text_user_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/recommend_text_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="赵日天不服"
+                android:textColor="@color/main_title_text"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/recommend_text_user_sex"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@drawable/image_nan"
+                android:src="@drawable/image_nan" />
+        </LinearLayout>
         <!-- 玩家大区 段位 -->
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/recommend_text_user_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp" />
+                android:text="艾欧尼亚"
+                android:textColor="@color/main_text"
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/recommend_text_user_dan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:textSize="12sp" />
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:text="砖石"
+                android:textColor="@color/main_text"
+                android:textSize="11sp" />
         </LinearLayout>
         <!-- 玩家发帖 -->
 
@@ -56,7 +78,11 @@
             android:id="@+id/recommend_text_user_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/nuokesashi"
+            android:textColor="@color/main_text"
+            android:textSize="11sp" />
     </LinearLayout>
     <!-- 留言图标 -->
 
@@ -64,10 +90,10 @@
         android:id="@+id/recommend_image_message_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:contentDescription="@drawable/iconfont_621"
-        android:padding="10dp"
-        android:src="@drawable/iconfont_621" />
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="25dp"
+        android:contentDescription="@drawable/tian_jia_an_niu"
+        android:src="@drawable/tian_jia_an_niu" />
 
 </LinearLayout>

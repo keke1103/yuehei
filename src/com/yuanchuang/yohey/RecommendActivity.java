@@ -36,18 +36,18 @@ public class RecommendActivity extends Activity {
 		list = new ArrayList<AdapterData>();
 		findView();
 		getData();
-		//recommendAdapter = new RecommendAdapter(list, this);
+		recommendAdapter = new RecommendAdapter(list, this);
 		listView.setAdapter(recommendAdapter);
 	}
 
 	private void getData() {
 		for (int i = 0; i < 5; i++) {
 			data = new AdapterData();
-			data.setReco_area(R.string.ao_virginia + "");
-			data.setReco_dan(R.string.bojin + "");
-			data.setReco_head(R.drawable.ic_launcher + "");
-			data.setReco_message(R.string.aiouniya + "");
-			data.setReco_name(R.string.zhao + "");
+			data.setReco_area("艾欧尼亚");
+			data.setReco_dan("砖石");
+			data.setReco_head("");
+			data.setReco_message("黑色玫瑰--求大腿带我飞");
+			data.setReco_name("赵日天不服");
 			list.add(data);
 		}
 
@@ -76,7 +76,8 @@ public class RecommendActivity extends Activity {
 		toReturn = layout.findViewById(R.id.title_navigation_back_icon);
 		toReturn.setVisibility(View.VISIBLE);
 		toReturn.setOnClickListener(clickListener);
-		title.setText(R.string.tuijiankaihei);
+		title.setText("开黑推荐");
+	
 	}
 
 }

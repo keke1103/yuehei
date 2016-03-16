@@ -1,17 +1,26 @@
 package com.yuanchuang.yohey;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.yuanchuang.yohey.adapter.PersonalPostAdapter;
+import com.yuanchuang.yohey.myData.AdapterData;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * 个人发帖界面
+ * 发帖详情
  * 
  * @author Administrator
  *
@@ -27,14 +36,46 @@ public class PersonalPostActivity extends Activity {
 	RelativeLayout include;// 导入头文件
 	TextView title;// 标题
 	View toReturn;// 返回
+	List<AdapterData> list;
+	PersonalPostAdapter myAdapter;
+	ListView listView;
+	LayoutInflater inflater;
 
+	@SuppressLint("InflateParams")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.actvity_yue_lu_personal_post);
-
+		list = new ArrayList<AdapterData>();
 		findView();
+
+		getData();
+
+		
+		myAdapter = new PersonalPostAdapter(list, getApplication());
+		inflater=LayoutInflater.from(getApplication());
+		View headView = inflater.inflate(R.layout.list_head_personal_post, null);
+		 context = (LinearLayout)headView.findViewById(R.id.personal_post_cotext);
+		 getContext();
+		listView.addHeaderView(headView);
+		listView.setAdapter(myAdapter);
+	}
+
+	private void getData() {
+		AdapterData data = new AdapterData();
+		for (int i = 0; i < 5; i++) {
+			data = new AdapterData();
+			data.setPost_details_head(R.drawable.zhu_ge_wo_ai_ni_tu);
+			data.setPost_details_name("猪哥我爱你");
+			data.setPost_details_time("2012-2-15");
+			data.setPost_details_context("R.string.carry_me_fly");
+			list.add(data);
+			Log.i("getData", list.size() + "");
+		}
+	}
+
+	private void getContext() {
 		TextView text = new TextView(this);
 		LayoutParams params = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -61,15 +102,16 @@ public class PersonalPostActivity extends Activity {
 	};
 
 	private void findView() {
+
 		include = (RelativeLayout) findViewById(R.id.personal_post_include_title);
 		head = findViewById(R.id.personal_post_image_head);
 		nickName = (TextView) findViewById(R.id.personal_post_nick_text_name);
 		time = (TextView) findViewById(R.id.personal_post_text_time);
-		context = (LinearLayout) findViewById(R.id.personal_post_cotext);
+
 		title = (TextView) include.findViewById(R.id.title_navigation_text_title);
 		toReturn = include.findViewById(R.id.title_navigation_back_icon);
-		title.setText(R.string.personal_post);
+		title.setText("帖子详情");
 		toReturn.setVisibility(View.VISIBLE);
-
+		listView = (ListView) findViewById(R.id.personal_post_list_message);
 	}
 }
