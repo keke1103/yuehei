@@ -11,9 +11,11 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 /**
  * post请求方式封装类，通过 HttpPost(URL url)获得实例！
@@ -38,10 +40,7 @@ public class HttpPost {
 	final String BOUNDARY = "adss--ssad";
 	private final StringBuilder mBuilder = new StringBuilder();
 
-	private File sendFile;// 须传输的文件
-	private String fileKey;// 传输文件的key
-	private String fileName;// 文件名
-	private String fileType;// 声明文件的类型
+	ArrayList<FileItem> files;
 
 	/**
 	 * 通过 url 直接获得HttpPost对象
@@ -120,18 +119,27 @@ public class HttpPost {
 	 */
 	public void putFile(String key, File file, String newName, String type) {
 		if (key != null && !key.isEmpty() && file != null && file.exists()) {
-			fileKey = key;
-			sendFile = file;
+			if (files == null) {
+				files = new ArrayList<HttpPost.FileItem>();
+			}
+			FileItem item = new FileItem();
+			item.fileKey = key;
+			item.sendFile = file;
 			if (newName == null || newName.isEmpty()) {
-				fileName = file.getName();
+				item.fileName = file.getName();
 			} else {
-				fileName = newName;
+				item.fileName = newName;
 			}
 			if (type == null || type.isEmpty()) {
-				fileType = "image/jpeg";
+				item.fileType = "image/jpeg";
 			} else {
-				fileType = type;
+				item.fileType = type;
 			}
+			item.buidler.append("--" + BOUNDARY + "\r\n");
+			item.buidler.append("Content-Disposition: form-data; name=\"" + item.fileKey + "\"; filename=\""
+					+ item.fileName + "\"\r\n");
+			item.buidler.append("Content-Type: " + item.fileType + "\r\n\r\n");
+			files.add(item);
 		}
 	}
 
@@ -154,25 +162,24 @@ public class HttpPost {
 	 * @return -1》》io异常！-2》》请求异常
 	 */
 	public String sendInBack() {
-		long dataLength = 0;
+
 		try {
 			byte end[] = ("--" + BOUNDARY + "--\r\n").getBytes("UTF-8");
-			if (sendFile != null) {
-
-				mBuilder.append("--" + BOUNDARY + "\r\n");
-				mBuilder.append(
-						"Content-Disposition: form-data; name=\"" + fileKey + "\"; filename=\"" + fileName + "\"\r\n");
-				mBuilder.append("Content-Type: " + fileType + "\r\n\r\n");
-				dataLength += sendFile.length();
-				end = ("\r\n--" + BOUNDARY + "--\r\n").getBytes("UTF-8");
-			}
-
-			dataLength = mBuilder.toString().length() + end.length + dataLength;
-
+			/*
+			 * long dataLength = 0; byte end[] = ("--" + BOUNDARY +
+			 * "--\r\n").getBytes("UTF-8"); if (files != null &&
+			 * !files.isEmpty()) { for (FileItem item : files) { dataLength +=
+			 * item.buidler.toString().length(); dataLength +=
+			 * item.sendFile.length(); dataLength += "\r\n".length(); } }
+			 * 
+			 * dataLength = mBuilder.toString().length() + end.length +
+			 * dataLength;
+			 */
 			HttpURLConnection conn = (HttpURLConnection) mUrl.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
-			conn.setRequestProperty("Content-Length", String.valueOf(dataLength));
+			// conn.setRequestProperty("Content-Length",
+			// String.valueOf(dataLength));
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
 			conn.connect();
@@ -181,15 +188,21 @@ public class HttpPost {
 			bos.write(mBuilder.toString().getBytes("UTF-8"));
 			bos.flush();
 			InputStream in;
-			if (sendFile != null) {
-				in = new FileInputStream(sendFile);
-				byte[] buf = new byte[1024];
-				int len;
-				while ((len = in.read(buf)) != -1) {
-					bos.write(buf, 0, len);
+			if (files != null && !files.isEmpty()) {
+				for (FileItem item : files) {
+					Log.i("file", item.buidler.toString());
+					bos.write(item.buidler.toString().getBytes("UTF-8"));
+					bos.flush();
+					in = new FileInputStream(item.sendFile);
+					byte[] buf = new byte[1024];
+					int len;
+					while ((len = in.read(buf)) != -1) {
+						bos.write(buf, 0, len);
+					}
+					bos.flush();
+					in.close();
+					bos.write("\r\n".getBytes("UTF-8"));
 				}
-				bos.flush();
-				in.close();
 			}
 			bos.write(end);
 			bos.flush();
@@ -207,9 +220,12 @@ public class HttpPost {
 				reader.close();
 				in.close();
 				return result.toString();
+			} else {
+				Log.i("conn code", conn.getResponseCode() + "");
+				return "-2";
 			}
-			return "-2";
 		} catch (IOException e) {
+			e.printStackTrace();
 			return "-1";
 		}
 	}
@@ -259,5 +275,14 @@ public class HttpPost {
 			if (mListener != null)
 				mListener.end(result);
 		}
+	}
+
+	private class FileItem {
+		File sendFile;// 须传输的文件
+		String fileKey;// 传输文件的key
+		String fileName;// 文件名
+		String fileType;// 声明文件的类型
+		StringBuilder buidler = new StringBuilder();
+
 	}
 }
