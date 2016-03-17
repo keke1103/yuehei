@@ -87,10 +87,9 @@ public class YoheyApplication extends Application {
 				String openId = values.getString(Constants.PARAM_OPEN_ID);
 
 				if (!TextUtils.isEmpty(token) && !TextUtils.isEmpty(expires) && !TextUtils.isEmpty(openId)) {
-					Log.i("doComplete", "start intent");
+
 					mTencent.setAccessToken(token, expires);
 					mTencent.setOpenId(openId);
-
 					qqInfo = new UserInfo(loginActivity, mTencent.getQQToken());
 					qqInfo.getUserInfo(new QQBaseUIListener(loginActivity) {
 
@@ -112,6 +111,7 @@ public class YoheyApplication extends Application {
 								post.setOnSendListener(new OnSendListener() {
 									public void start() {
 									}
+
 									public void end(String result) {
 										JSONObject jsonObject;
 										try {
@@ -160,4 +160,6 @@ public class YoheyApplication extends Application {
 			}
 		}
 	}
+
+	
 }

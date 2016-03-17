@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="60dp"
-    android:layout_gravity="center"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
     android:background="@color/write" >
 
     <RadioGroup
         android:id="@+id/selection_bar_radio_group"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="47dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="#343434"
@@ -20,25 +21,29 @@
         <RadioButton
             android:id="@+id/selection_bar_main"
             android:layout_width="0dp"
-            android:layout_height="25dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
             android:drawablePadding="-20dp"
-            android:drawableTop="@drawable/main_shou_ye_zhi_ye"
-            android:gravity="center_horizontal" />
+            android:drawableTop="@drawable/main_shou_ye_zhi_ye_selector"
+            android:gravity="center_horizontal"
+            android:paddingBottom="11.5dp"
+            android:paddingTop="12dp" />
 
         <RadioButton
             android:id="@+id/selection_bar_friends"
             android:layout_width="0dp"
-            android:layout_height="25dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawablePadding="-20dp"
-            android:drawableTop="@drawable/main_shou_ye_xiao_xi"
-            android:gravity="center_horizontal" />
+            android:drawableTop="@drawable/main_shou_ye_xiao_xi_selector"
+            android:gravity="center_horizontal"
+            android:paddingBottom="11.5dp"
+            android:paddingTop="12dp" />
 
-        <ImageView
+        <View
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -48,22 +53,26 @@
         <RadioButton
             android:id="@+id/selection_bar_circle_of_friends"
             android:layout_width="0dp"
-            android:layout_height="25dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawablePadding="-20dp"
-            android:drawableTop="@drawable/main_shou_ye_lu_you_quan"
-            android:gravity="center_horizontal" />
+            android:drawableTop="@drawable/main_shou_ye_lu_you_quan_selector"
+            android:gravity="center_horizontal"
+            android:paddingBottom="11.5dp"
+            android:paddingTop="12dp" />
 
         <RadioButton
             android:id="@+id/selection_bar_personal"
             android:layout_width="0dp"
-            android:layout_height="25dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawablePadding="-20dp"
-            android:drawableTop="@drawable/main_shou_ye_wo"
-            android:gravity="center_horizontal" />
+            android:drawableTop="@drawable/main_shou_ye_wo_selector"
+            android:gravity="center_horizontal"
+            android:paddingBottom="11.5dp"
+            android:paddingTop="12dp" />
     </RadioGroup>
 
     <ImageView

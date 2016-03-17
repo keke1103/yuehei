@@ -4,8 +4,7 @@ import org.json.JSONObject;
 
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.UiError;
-
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +18,7 @@ public class QQBaseUIListener implements IUiListener {
 	private static final int ON_COMPLETE = 0;
 	private static final int ON_ERROR = 1;
 	private static final int ON_CANCEL = 2;
+	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {

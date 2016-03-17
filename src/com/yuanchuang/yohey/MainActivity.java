@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivity {
 	DynamicFragment dynamicFragment;// 动态fragment
 	MEFragment meFragment;// 我的fragment
 
-	RelativeLayout postShare;// 发帖与分享
+	View postShare;// 发帖与分享
 	ImageView postShareImage;
 	ImageView post;// 发帖
 	ImageView share;// 分享
@@ -49,7 +49,6 @@ public class MainActivity extends FragmentActivity {
 
 	RadioGroup mRadio;
 	ViewPager mPager;
-
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,11 +78,11 @@ public class MainActivity extends FragmentActivity {
 				}
 				break;
 			case R.id.fragment_text_post:
-				intent = new Intent(MainActivity.this,PostingInterfaceActivity.class);
+				intent = new Intent(MainActivity.this, PostingInterfaceActivity.class);
 				startActivity(intent);
 				break;
 			case R.id.fragment_text_share:
-				intent = new Intent(MainActivity.this,ShareItActivity.class);
+				intent = new Intent(MainActivity.this, ShareItActivity.class);
 				startActivity(intent);
 				break;
 			default:
@@ -122,7 +121,7 @@ public class MainActivity extends FragmentActivity {
 
 		inLayoutSelect = (RelativeLayout) findViewById(R.id.fragment_main_selection_bar);
 		mRadio = (RadioGroup) inLayoutSelect.findViewById(R.id.selection_bar_radio_group);
-		postShare = (RelativeLayout) findViewById(R.id.fragment_text_post_share);
+		postShare = findViewById(R.id.fragment_text_post_share);
 		mRadio.setOnCheckedChangeListener(listener);
 		mPager = (ViewPager) findViewById(R.id.layou_main);
 		radioButton = new RadioButton[4];
