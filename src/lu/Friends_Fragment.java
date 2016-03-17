@@ -8,6 +8,7 @@ import java.util.Map;
 import com.yuanchuang.yohey.FriendMaterialActivity;
 import com.yuanchuang.yohey.R;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,28 +43,29 @@ public class Friends_Fragment extends Fragment {
 			for (int j = 0; j < 10; j++) {
 				array.add("约黑" + i + j);
 			}
-
 			map.put(list.get(i), array);
 
 		}
 		LinearLayout linearlayout = new LinearLayout(getActivity());
 		linearlayout.setLayoutParams(new LayoutParams(-1, -1));
-		View view = inflater.inflate(R.layout.friends, null);
+		View view = inflater.inflate(R.layout.friends, linearlayout);
+
 		expand = (ExpandableListView) view.findViewById(R.id.expand);
 		adapter = new MyAdapter();
 		expand.setAdapter(adapter);
 		expand.setOnChildClickListener(childClickListener);
 		return view;
 	}
-    /**
-     * ExpandableListView的点击事件
-     */
+
+	/**
+	 * ExpandableListView的点击事件
+	 */
 	OnChildClickListener childClickListener = new OnChildClickListener() {
 
 		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			// TODO Auto-generated method stub
-			Intent intent=new Intent(getActivity(),FriendMaterialActivity.class);
+			Intent intent = new Intent(getActivity(), FriendMaterialActivity.class);
 			startActivity(intent);
 			return false;
 		}
@@ -85,6 +87,7 @@ public class Friends_Fragment extends Fragment {
 			return arg1;
 		}
 
+		@SuppressLint("InflateParams")
 		@Override
 		public View getChildView(int group, int child, boolean arg2, View convertview, ViewGroup arg4) {
 			// TODO Auto-generated method stub
@@ -130,6 +133,7 @@ public class Friends_Fragment extends Fragment {
 			return id;
 		}
 
+		@SuppressLint("InflateParams")
 		@Override
 		public View getGroupView(int index, boolean expand, View convertview, ViewGroup arg3) {
 			Viewholder holder;

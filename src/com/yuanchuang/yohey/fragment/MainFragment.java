@@ -19,6 +19,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Gallery;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ViewFlipper;
 
 @SuppressWarnings("deprecation")
 public class MainFragment extends Fragment {
@@ -30,6 +31,7 @@ public class MainFragment extends Fragment {
 	AdapterData data;
 	Gallery gallery;
 	GalleryAdapter galleryAdapter;
+	ViewFlipper guanggao;
 
 	@SuppressLint({ "InflateParams", "CutPasteId" })
 	@Override
@@ -49,6 +51,7 @@ public class MainFragment extends Fragment {
 		getData1();
 		galleryAdapter = new GalleryAdapter(list1, getActivity());
 		gallery.setAdapter(galleryAdapter);
+
 		listView.addHeaderView(view);
 		listView.setAdapter(adapter);
 
@@ -89,6 +92,10 @@ public class MainFragment extends Fragment {
 	private void findView() {
 
 		listView = (ListView) myView.findViewById(R.id.main_list_posts);
+		guanggao = (ViewFlipper) myView.findViewById(R.id.main_image_guang_gao);
+	}
+
+	private void addGuangGao() {
 
 	}
 
@@ -96,5 +103,12 @@ public class MainFragment extends Fragment {
 	 * 发送帖子
 	 */
 	public void sendPost() {
+	}
+
+	public static class MainGuangGao {
+
+		public MainGuangGao() {
+
+		}
 	}
 }
