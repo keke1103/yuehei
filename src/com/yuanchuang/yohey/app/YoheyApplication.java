@@ -32,10 +32,39 @@ public class YoheyApplication extends Application {
 	public String token;
 	public Tencent mTencent;
 	public UserInfo qqInfo;
-	public String APP_ID = "1105254592";
+	public final String APP_ID = "1105254592";
 	public Activity loginActivity;
 
 	boolean isServerSideLogin = false;
+
+	/**
+	 * 登陆回掉监听！
+	 */
+	public OnSendListener loginPostListener = new OnSendListener() {
+		public void start() {
+
+		}
+
+		public void end(String result) {
+			try {
+				JSONObject jsonObject = new JSONObject(result);// 解析result这个json数据
+				int status = jsonObject.getInt("status");// 获得登录是否成功的数字，1为成功，其他为失败
+				Log.d("login>status", "" + status);
+				if (status == 1) {
+					Intent intent = new Intent(loginActivity, MainActivity.class);
+					loginActivity.startActivity(intent);
+					JSONObject jo = jsonObject.getJSONObject("result");
+					token = jo.getString("token");
+					mUser = User.parseJsonObject(jo.getJSONObject("user"));
+					loginActivity.finish();
+				} else {
+					Toast.makeText(loginActivity, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	};
 
 	public void loginByQq(Activity coActivity) {
 		if (mTencent == null || mTencent.isSessionValid()) {
@@ -87,10 +116,9 @@ public class YoheyApplication extends Application {
 				String openId = values.getString(Constants.PARAM_OPEN_ID);
 
 				if (!TextUtils.isEmpty(token) && !TextUtils.isEmpty(expires) && !TextUtils.isEmpty(openId)) {
-					Log.i("doComplete", "start intent");
+
 					mTencent.setAccessToken(token, expires);
 					mTencent.setOpenId(openId);
-
 					qqInfo = new UserInfo(loginActivity, mTencent.getQQToken());
 					qqInfo.getUserInfo(new QQBaseUIListener(loginActivity) {
 
@@ -109,32 +137,7 @@ public class YoheyApplication extends Application {
 								post.putString("username", username);
 								post.putString("icon", icon);
 								post.putString("sex", sex);
-								post.setOnSendListener(new OnSendListener() {
-									public void start() {
-									}
-									public void end(String result) {
-										 
-										JSONObject jsonObject;
-										try {
-											jsonObject = new JSONObject(result);
-											if (jsonObject.getInt("status") != 1) {
-												Toast.makeText(loginActivity, jsonObject.getString("message"),
-														Toast.LENGTH_SHORT).show();
-												return;
-											}
-											Intent intent = new Intent(loginActivity, MainActivity.class);
-											loginActivity.startActivity(intent);
-											JSONObject jo = jsonObject.getJSONObject("result");
-											YoheyApplication.this.token = jo.getString("token");
-											mUser = User.parseJsonObject(jo.getJSONObject("user"));
-											loginActivity.finish();
-										} catch (JSONException e) {
-											Log.i("result", result);
-											e.printStackTrace();
-										}
-
-									}
-								});
+								post.setOnSendListener(loginPostListener);
 								post.send();
 							} catch (JSONException e) {
 							} catch (MalformedURLException e) {
@@ -161,4 +164,5 @@ public class YoheyApplication extends Application {
 			}
 		}
 	}
+
 }

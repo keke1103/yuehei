@@ -2,12 +2,12 @@ package lu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,15 +48,16 @@ public class Mes_Fragment extends Fragment {
 		listview.setOnItemClickListener(clickListener);
 		return view;
 	}
+
 	/**
 	 * listview的点击事件
 	 */
-	OnItemClickListener clickListener=new OnItemClickListener() {
+	OnItemClickListener clickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			// TODO Auto-generated method stub
-			Intent intent=new Intent(getActivity(),FriendMessageActivity.class);
+			Intent intent = new Intent(getActivity(), FriendMessageActivity.class);
 			startActivity(intent);
 		}
 	};
@@ -90,6 +91,7 @@ public class Mes_Fragment extends Fragment {
 			return id;
 		}
 
+		@SuppressLint("InflateParams")
 		@Override
 		public View getView(int arg0, View convertview, ViewGroup arg2) {
 			Viewholder holder;

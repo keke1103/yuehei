@@ -6,11 +6,11 @@
 
     <!-- 广告 -->
 
-    <View
+    <ViewFlipper
         android:id="@+id/main_image_guang_gao"
         android:layout_width="fill_parent"
         android:layout_height="143.3dp"
-        android:background="@drawable/main_guang_gao" />
+        android:background="#dfdfdf" />
 
     <View
         android:layout_width="fill_parent"
@@ -293,7 +293,8 @@
     <Gallery
         android:id="@+id/main_list_head_gallery"
         android:layout_width="fill_parent"
-        android:layout_height="130dp" />
+        android:layout_height="150dp"
+        android:spacing="5dp" />
 
     <View
         android:layout_width="fill_parent"

@@ -2,15 +2,10 @@ package com.yuanchuang.yohey;
 
 import java.net.MalformedURLException;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.tencent.connect.common.Constants;
 import com.tencent.tauth.Tencent;
 import com.yuanchuang.yohey.app.YoheyApplication;
-import com.yuanchuang.yohey.myData.User;
 import com.yuanchuang.yohey.tools.HttpPost;
-import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * 登录注册页面
@@ -68,7 +62,6 @@ public class LoginAndRegistered extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			Intent intent;
 			switch (v.getId()) {
 			case R.id.login_registered_button_login:
@@ -118,52 +111,15 @@ public class LoginAndRegistered extends Activity {
 			HttpPost post = HttpPost.parseUrl(httpPost);
 			post.putString("username", userID);
 			post.putString("password", userPassword);
-			post.setOnSendListener(listener);// 监听事件
+			post.setOnSendListener(application.loginPostListener);// 监听事件
 			post.send();// 发送数据
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
-	/**
-	 * 验证是否上传数据成功
-	 */
-	OnSendListener listener = new OnSendListener() {
-
-		@Override
-		public void start() {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void end(String result) {
-
-			try {
-				JSONObject jsonObject = new JSONObject(result);// 解析result这个json数据
-				int status = jsonObject.getInt("status");// 获得登录是否成功的数字，1为成功，其他为失败
-				Log.i(">>>>>>>>>>>>>>>", "" + status);
-				if (status == 1) {
-					Intent intent = new Intent(LoginAndRegistered.this, MainActivity.class);
-					startActivity(intent);
-					JSONObject jo = jsonObject.getJSONObject("result");
-					application.token = jo.getString("token");
-					application.mUser = User.parseJsonObject(jo.getJSONObject("user"));
-					finish();
-				} else {
-					Toast.makeText(getApplication(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	};
-
 	protected void onClickQQLogin() {
-		Log.i("LoginActivity", "do qq login");
 		application.loginByQq(this);
 	}
 
