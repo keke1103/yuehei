@@ -89,6 +89,9 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.FriendMaterialActivity" >
         </activity>
+        <activity android:name="com.yuanchuang.yohey.OfficialinformationActivity" >
+        </activity>
+
         <!-- QQ第三方登陆所需注册页面 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"

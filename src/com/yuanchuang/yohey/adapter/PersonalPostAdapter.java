@@ -6,6 +6,7 @@ import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.myData.AdapterData;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,8 +69,9 @@ public class PersonalPostAdapter extends BaseAdapter {
 		}
 		holder.head.setImageResource(R.drawable.zhu_ge_wo_ai_ni_tu);
 		holder.name.setText(list.get(position).getPost_details_name());
+		Log.i("name_name", list.get(position).getPost_details_name());
 		holder.time.setText(list.get(position).getPost_details_time());
-		holder.context.setText(list.get(position).getPost_details_context());
+		holder.context.setText(R.string.carry_me_fly);
 		return convertView;
 	}
 

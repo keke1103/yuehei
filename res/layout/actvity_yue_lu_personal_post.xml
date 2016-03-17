@@ -15,26 +15,26 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:divider="@null"
-        android:dividerHeight="20dp"
-       />
+        android:dividerHeight="10dp" />
 
     <!-- 说一句 -->
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_gray_line_on_a_white_background"
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
         <EditText
             android:id="@+id/personal_post_edit_say"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/text_stroke"
+           android:background="@null"
             android:hint="@string/say"
-            android:padding="5dp"
             android:textSize="12sp" />
     </LinearLayout>
 

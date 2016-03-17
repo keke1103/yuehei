@@ -40,8 +40,8 @@ public class PersonalPostActivity extends Activity {
 	PersonalPostAdapter myAdapter;
 	ListView listView;
 	LayoutInflater inflater;
+	View headView;
 
-	@SuppressLint("InflateParams")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -52,19 +52,16 @@ public class PersonalPostActivity extends Activity {
 
 		getData();
 
-		
 		myAdapter = new PersonalPostAdapter(list, getApplication());
-		inflater=LayoutInflater.from(getApplication());
-		View headView = inflater.inflate(R.layout.list_head_personal_post, null);
-		 context = (LinearLayout)headView.findViewById(R.id.personal_post_cotext);
-		 getContext();
+
+		getContext();
 		listView.addHeaderView(headView);
 		listView.setAdapter(myAdapter);
 	}
 
 	private void getData() {
 		AdapterData data = new AdapterData();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 3; i++) {
 			data = new AdapterData();
 			data.setPost_details_head(R.drawable.zhu_ge_wo_ai_ni_tu);
 			data.setPost_details_name("猪哥我爱你");
@@ -101,6 +98,7 @@ public class PersonalPostActivity extends Activity {
 		}
 	};
 
+	@SuppressLint("InflateParams")
 	private void findView() {
 
 		include = (RelativeLayout) findViewById(R.id.personal_post_include_title);
@@ -110,6 +108,10 @@ public class PersonalPostActivity extends Activity {
 
 		title = (TextView) include.findViewById(R.id.title_navigation_text_title);
 		toReturn = include.findViewById(R.id.title_navigation_back_icon);
+
+		inflater = LayoutInflater.from(getApplication());
+		headView = inflater.inflate(R.layout.list_head_personal_post, null);
+		context = (LinearLayout) headView.findViewById(R.id.personal_post_cotext);
 		title.setText("帖子详情");
 		toReturn.setVisibility(View.VISIBLE);
 		listView = (ListView) findViewById(R.id.personal_post_list_message);
