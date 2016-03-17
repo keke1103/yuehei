@@ -147,9 +147,9 @@ public class Friends_Fragment extends Fragment {
 			}
 			holder.groupname.setText(list.get(index));
 			if (expand) {
-				holder.icon.setBackgroundResource(R.drawable.rub_course_descending_order_non_sel);
+				holder.icon.setBackgroundResource(R.drawable.yo_hey_up_triangle);
 			} else {
-				holder.icon.setBackgroundResource(R.drawable.rub_course_descending_order);
+				holder.icon.setBackgroundResource(R.drawable.yo_hey_dwon_triangle);
 			}
 			return convertview;
 		}

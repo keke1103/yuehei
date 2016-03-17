@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="50dp" 
+        android:background="#000000">
 
         <ImageView
             android:id="@+id/friend_message_frame_back"
@@ -16,22 +17,29 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:contentDescription="@drawable/ic_launcher"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:src="@drawable/ic_launcher" />
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:src="@drawable/yo_hey_back_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
             android:layout_toRightOf="@+id/friend_message_frame_back"
-            android:text="好友" />
+            android:layout_toEndOf="@+id/friend_message_frame_back"
+            android:text="消息" 
+            android:textColor="#ffffff"
+            android:textSize="15sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="赵日天" />
+            android:text="赵日天"
+            android:textColor="#ffffff"
+            android:textSize="17sp"/>
 
         <ImageView
             android:id="@+id/friend_message_frame_person"
@@ -39,13 +47,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:src="@drawable/ic_launcher" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/friend_message_frame_person"
             android:src="@drawable/ic_launcher" />
 
         <View
