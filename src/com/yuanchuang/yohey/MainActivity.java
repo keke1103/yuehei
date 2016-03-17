@@ -50,7 +50,6 @@ public class MainActivity extends FragmentActivity {
 	RadioGroup mRadio;
 	ViewPager mPager;
 
-
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_text);
@@ -79,11 +78,11 @@ public class MainActivity extends FragmentActivity {
 				}
 				break;
 			case R.id.fragment_text_post:
-				intent = new Intent(MainActivity.this,PostingInterfaceActivity.class);
+				intent = new Intent(MainActivity.this, PostingInterfaceActivity.class);
 				startActivity(intent);
 				break;
 			case R.id.fragment_text_share:
-				intent = new Intent(MainActivity.this,ShareItActivity.class);
+				intent = new Intent(MainActivity.this, ShareItActivity.class);
 				startActivity(intent);
 				break;
 			default:

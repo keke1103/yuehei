@@ -6,7 +6,8 @@ import java.util.List;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.DynamicAdapter;
 import com.yuanchuang.yohey.myData.AdapterData;
-
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -45,20 +46,22 @@ public class DynamicFragment extends Fragment {
 		return mView;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void findView() {
 		listView = (ListView) mView.findViewById(R.id.dynamic_list_view);
 		layoutTitle = (RelativeLayout) mView.findViewById(R.id.dynamic_title);
 		title = (TextView) layoutTitle.findViewById(R.id.title_navigation_text_title);
 		title.setText(R.string.dynamic);
+		title.setTextColor(getResources().getColor(R.color.title_yellow));
 		list = new ArrayList<AdapterData>();
 		getData();
 		Log.i("DynamicFragment", "DynamicFragment");
 		mAdapter = new DynamicAdapter(getActivity(), list);
 
-		ImageView image = new ImageView(getActivity());
+		View v = new View(getActivity());
+		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.dynamic_banner));
 
-		image.setImageResource(R.drawable.ic_launcher);
-		listView.addHeaderView(image);
+		listView.addHeaderView(v);
 		listView.setAdapter(mAdapter);
 
 	}

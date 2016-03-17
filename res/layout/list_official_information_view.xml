@@ -1,17 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_height="100dp"
+    android:background="@color/write"
     android:orientation="horizontal" >
 
+    <!-- 资讯图 -->
+
     <ImageView
+        android:id="@+id/official_information_image_head"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@drawable/guan_fang_zi_xun_1"
         android:src="@drawable/guan_fang_zi_xun_1" />
-	
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <!-- 资讯标题 -->
+
+        <TextView
+            android:id="@+id/official_information_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3.11免费英雄更换公告"
+            android:textColor="@color/main_title_text"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/official_information_text_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:lineSpacingExtra="5dp"
+            android:text="@string/nuokesashi"
+            android:textColor="@color/main_text"
+            android:textSize="11sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/official_information_text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:text="一分钟前"
+                android:textColor="@color/main_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
