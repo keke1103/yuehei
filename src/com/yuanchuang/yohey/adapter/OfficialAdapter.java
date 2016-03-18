@@ -2,7 +2,6 @@ package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
 
-import com.tencent.connect.avatar.c;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.myData.AdapterData;
 

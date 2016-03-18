@@ -88,9 +88,11 @@ public class PersonalPostActivity extends Activity {
 
 	private OnSendListener mListener = new OnSendListener() {
 
+		@Override
 		public void start() {
 		}
 
+		@Override
 		public void end(String result) {
 			try {
 				JSONObject mjo = new JSONObject(result);
@@ -111,8 +113,8 @@ public class PersonalPostActivity extends Activity {
 
 	private void getContext(String content) {
 		TextView text = new TextView(this);
-		LayoutParams params = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		text.setLayoutParams(params);
 		text.setText(content);
 		context.addView(text);

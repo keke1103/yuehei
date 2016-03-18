@@ -26,6 +26,7 @@ public class Lu_Activity extends Fragment {
 	Friends_Fragment fr_friends;
 	FragmentManager fm;
 
+	@Override
 	public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

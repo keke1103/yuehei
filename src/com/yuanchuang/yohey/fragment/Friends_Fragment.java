@@ -97,11 +97,13 @@ class MyAdapter extends BaseExpandableListAdapter
 		// TODO Auto-generated method stub
 		return childPosition;
 	}
-   public boolean hasStableIds() {
+   @Override
+public boolean hasStableIds() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 //group View
+	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 		Viewholder holder;
 		String key=list.get(groupPosition);
@@ -134,6 +136,7 @@ class MyAdapter extends BaseExpandableListAdapter
 		return convertView;
 	}
 //child view
+	@Override
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
 			ViewGroup parent) {
 		// TODO Auto-generated method stub

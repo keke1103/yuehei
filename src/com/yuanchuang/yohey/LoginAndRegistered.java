@@ -145,10 +145,12 @@ public class LoginAndRegistered extends Activity {
 	 * 登陆回掉监听！
 	 */
 	public OnSendListener loginPostListener = new OnSendListener() {
+		@Override
 		public void start() {
 
 		}
 
+		@Override
 		public void end(String result) {
 			try {
 				JSONObject jsonObject = new JSONObject(result);// 解析result这个json数据
@@ -209,6 +211,7 @@ public class LoginAndRegistered extends Activity {
 					application.qqInfo = new UserInfo(LoginAndRegistered.this, application.mTencent.getQQToken());
 					application.qqInfo.getUserInfo(new QQBaseUIListener(LoginAndRegistered.this) {
 
+						@Override
 						protected void doComplete(JSONObject jo) {
 							String username;
 							String icon;
@@ -252,6 +255,7 @@ public class LoginAndRegistered extends Activity {
 		}
 	}
 
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.i("LoginActivity", "-->onActivityResult " + requestCode + " resultCode=" + resultCode);
 		Log.i("LoginActivity", data.toString());

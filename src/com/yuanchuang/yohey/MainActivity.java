@@ -50,6 +50,7 @@ public class MainActivity extends FragmentActivity {
 	RadioGroup mRadio;
 	ViewPager mPager;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_text);

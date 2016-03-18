@@ -29,12 +29,13 @@ public class AddFriendsActivity extends Activity {
 	LinearLayout QQWeb;// qq微博
 	TextView xin;// 新浪图标
 	TextView qq;// qq图标
-        protected void onCreate(Bundle savedInstanceState) {
+        @Override
+		protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_add);
 		findView();
-		LayoutParams params = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		TextView text = new TextView(this);
 		text.setLayoutParams(params);
 		text.setText(R.string.friends);

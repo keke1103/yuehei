@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 /**
@@ -81,8 +79,8 @@ public class DynamicAdapter extends BaseAdapter {
 		Log.i("position", position + "");
 
 		holder.headPortrait.setImageResource(R.drawable.tui_jian_kai_hei_1);
-		holder.nickNmae.setText((CharSequence) list.get(position).getDy_name());
-		holder.time.setText((CharSequence) list.get(position).getDy_time());
+		holder.nickNmae.setText(list.get(position).getDy_name());
+		holder.time.setText(list.get(position).getDy_time());
 		holder.line.setText(list.get(position).getDy_context());
 		DensityUtil.sudoku(context, holder.imageLayout, list.get(position).getDy_image());
 

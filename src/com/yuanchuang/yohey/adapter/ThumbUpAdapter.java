@@ -3,7 +3,6 @@ package com.yuanchuang.yohey.adapter;
 import java.util.List;
 import java.util.Map;
 
-import com.tencent.connect.avatar.c;
 import com.yuanchuang.yohey.R;
 
 import android.content.Context;

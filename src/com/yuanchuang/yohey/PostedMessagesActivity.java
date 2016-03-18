@@ -42,8 +42,8 @@ public class PostedMessagesActivity extends Activity {
 		postAdapter = new PostSAdater(list, this);
 
 		Log.i("DynamicFragment", "DynamicFragment");
-		LayoutParams params = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		TextView text = new TextView(getApplication());
 		text.setLayoutParams(params);
 		text.setPadding(10, 10, 10, 10);

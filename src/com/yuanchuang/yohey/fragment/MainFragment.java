@@ -35,16 +35,20 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 @SuppressWarnings("deprecation")
 public class MainFragment extends Fragment {
+	TextView gameZone;//游戏大区
 	View myView;// 视图
 	ListView listView;
 	List<Post> reList;
@@ -101,9 +105,50 @@ public class MainFragment extends Fragment {
 		return myView;
 
 	}
+	/**
+	 * 设置PopupWindow
+	 * @param view
+	 */
+	@SuppressLint("InflateParams")
+	private void showPopupWindow(View view,String str[]){
+		View contentView=LayoutInflater.from(getActivity()).inflate(R.layout.game_zone_main,null);
+		ListView listView1=(ListView)contentView.findViewById(R.id.game_zone_listview1);
+		final ListView listView2=(ListView)contentView.findViewById(R.id.game_zone_listview2);
+		ArrayList<String> list=new ArrayList<String>();
+		for(int i=0;i<str.length;i++){
+			list.add(str[i]);
+		}
+		ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
+		listView1.setAdapter(arrayAdapter);
+		listView1.setOnItemClickListener(new OnItemClickListener() {
 
-	private void findInflate(View view) {
-
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				String str1[]={ "艾欧尼亚","祖安","诺克萨斯","皮尔特沃夫","班德尔城","战争学院","巨神峰","雷瑟守备","裁决之地","黑色玫瑰","暗影岛","钢铁烈阳","均衡教派","水晶之痕","影流","守望之海","征服之海","卡拉曼达","皮城警备"};				
+				String str2[]={"比尔吉沃特","德玛西亚","弗雷尔卓德","无畏先锋","恕瑞玛","扭曲丛林"};
+				String str3[]={"教育一"};
+				listView2.setVisibility(View.VISIBLE);
+				ArrayList<String> list=new ArrayList<String>();
+				for(int i=0;i<str1.length;i++){
+					list.add(str1[i]);
+				}
+				ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
+				listView2.setAdapter(arrayAdapter);
+			}
+		});
+		PopupWindow popupWindow=new PopupWindow(contentView,600,LayoutParams.WRAP_CONTENT,true);
+		popupWindow.setTouchable(true);
+		popupWindow.setFocusable(true);
+		popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white));
+		popupWindow.showAsDropDown(view);
+	}
+	
+    /**
+     * 控件ID
+     * @param view
+     */
+	private void findInflate(View view) {       
 		main_guang_gao = (ViewFlipper) view.findViewById(R.id.main_image_guang_gao);
 		playerHead1 = (ImageView) view.findViewById(R.id.main_image_recommended_user1);
 		playerHead2 = (ImageView) view.findViewById(R.id.main_image_recommended_user2);
@@ -189,6 +234,10 @@ public class MainFragment extends Fragment {
 			case R.id.main_list_head_liner_win_points:
 
 				break;
+			case R.id.title_navigation_game_zone://游戏大区的点击事件
+				String str[]={"全部","网通","电信","体验服"};
+				showPopupWindow(v,str);
+				break;
 			default:
 				break;
 			}
@@ -227,10 +276,12 @@ public class MainFragment extends Fragment {
 		HttpGet p = new HttpGet(YoheyApplication.ServiceIp + "/index.php/home/api/getrecommend");
 		p.setOnSendListener(new OnSendListener() {
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void end(String result) {
 				try {
 					JSONObject jjo = new JSONObject(result);
@@ -264,7 +315,9 @@ public class MainFragment extends Fragment {
 	}
 
 	private void findView() {
+		gameZone=(TextView)myView.findViewById(R.id.title_navigation_game_zone);
 		listView = (ListView) myView.findViewById(R.id.main_list_posts);
+		gameZone.setOnClickListener(onClickListener);
 	}
 
 	/**
