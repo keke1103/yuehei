@@ -34,6 +34,7 @@
             android:textSize="15sp"/>
 
         <TextView
+            android:id="@+id/friend_message_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -46,46 +47,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:src="@drawable/ic_launcher" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:layout_alignLeft="@+id/title_navigation_back_icon"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/title_navigation_back_icon"
-            android:background="@color/gray" />
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_centerVertical="true"
+            android:src="@drawable/main_shou_ye_wo_not_select" 
+            android:contentDescription="@drawable/main_shou_ye_wo_not_select"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/friend_message_frame_linear"
+    <ListView
+        android:id="@+id/friend_message_frame_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:divider="@null"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp" 
+        android:background="#000000"
         android:orientation="horizontal">
         <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"/>
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/yo_hey_iconfont_huatong"
+            android:contentDescription="@drawable/yo_hey_iconfont_huatong"/>
         <EditText 
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:cursorVisible="false"
+            android:background="@drawable/et_bg"/>
         <ImageView 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/yo_hey_smiling_face"
+            android:contentDescription="@drawable/yo_hey_smiling_face"/>
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="发送"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="发送"
+            android:textColor="#ffffff"
+            android:textSize="15sp"/>
     </LinearLayout>
 </LinearLayout>

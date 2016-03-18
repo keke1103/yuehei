@@ -7,6 +7,7 @@ import com.yuanchuang.yohey.OfficialinformationActivity;
 import com.yuanchuang.yohey.PersonalPostActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.RecommendActivity;
+import com.yuanchuang.yohey.Vide0CollectionActivity;
 import com.yuanchuang.yohey.adapter.GalleryAdapter;
 import com.yuanchuang.yohey.adapter.MainAdapter;
 import com.yuanchuang.yohey.myData.AdapterData;
@@ -166,7 +167,9 @@ public class MainFragment extends Fragment {
 				startActivity(intent);
 				break;
 			case R.id.main_list_head_liner_video_highlights:
-
+				intent = getActivity().getIntent();
+				intent.setClass(getActivity(), Vide0CollectionActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.main_list_head_liner_win_points:
 

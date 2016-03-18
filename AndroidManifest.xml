@@ -118,6 +118,7 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.QQRegisterActivity" >
         </activity>
+        <activity android:name="com.yuanchuang.yohey.Vide0CollectionActivity"></activity>
     </application>
 
 </manifest>
