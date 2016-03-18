@@ -47,7 +47,7 @@ public class IntegralStoreActivity extends Activity {
 		sendGift = (TextView) findViewById(R.id.integral_store_send);
 		
 		backImage.setVisibility(View.VISIBLE);
-		backImage.setImageResource(R.drawable.rub_course_back_icon);
+		backImage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("积分商城");
 		
 		myIntegral.setText("我的积分");

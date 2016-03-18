@@ -23,11 +23,6 @@
             android:label="@string/app_name" >
         </activity>
         <activity android:name="com.yuanchuang.yohey.LoginAndRegistered" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.yuanchuang.yohey.IntegralExchangeCommodityActivity" >
         </activity>
@@ -38,6 +33,11 @@
         <activity
             android:name="com.yuanchuang.yohey.MainActivity"
             android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.yuanchuang.yohey.RecommendActivity" >
         </activity>
@@ -89,7 +89,8 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.OfficialinformationActivity" >
         </activity>
-
+        <activity android:name="com.yuanchuang.yohey.ThumbUpActivity" >
+        </activity>
         <!-- QQ第三方登陆所需注册页面 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -116,7 +117,8 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.QQRegisterActivity" >
         </activity>
-        <activity android:name="com.yuanchuang.yohey.Vide0CollectionActivity"></activity>
+        <activity android:name="com.yuanchuang.yohey.Vide0CollectionActivity" >
+        </activity>
     </application>
 
 </manifest>

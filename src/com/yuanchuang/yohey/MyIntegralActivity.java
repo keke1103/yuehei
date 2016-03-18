@@ -27,7 +27,7 @@ public class MyIntegralActivity extends Activity {
 		setContentView(R.layout.my_integral_main);
 		findView();
 		backImage.setVisibility(View.VISIBLE);
-		backImage.setImageResource(R.drawable.rub_course_back_icon);
+		backImage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("我的积分");
 		backImage.setOnClickListener(clickListener);
 	}

@@ -59,8 +59,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="@null"
-        android:dividerHeight="10dp" />
+        android:divider="@null" />
 
     <!-- 底部菜单 -->
 

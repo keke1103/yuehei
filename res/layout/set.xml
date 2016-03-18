@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/rub_course_back_icon" />
+            android:background="@drawable/yo_hey_back_image" />
     </RelativeLayout>
 
     <View
@@ -21,7 +21,7 @@
         android:layout_height="2dp"
         android:background="@color/beizhu" />
 
-  <TextView
+   <TextView
         android:id="@+id/tv_account_manager"
         android:layout_width="match_parent"
         android:layout_height="30dp"

@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.ThumbUpActivity;
 import com.yuanchuang.yohey.adapter.DynamicAdapter;
 import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.DensityUtil;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -67,8 +71,19 @@ public class DynamicFragment extends Fragment {
 		v.setBackgroundResource(R.drawable.main_guang_gao);
 		listView.addHeaderView(v);
 		listView.setAdapter(mAdapter);
+		listView.setOnItemClickListener(clickListener);
 
 	}
+
+	OnItemClickListener clickListener = new OnItemClickListener() {
+		Intent intent;
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			intent = new Intent(getActivity(), ThumbUpActivity.class);
+			startActivity(intent);
+		}
+	};
 
 	private void getData() {
 

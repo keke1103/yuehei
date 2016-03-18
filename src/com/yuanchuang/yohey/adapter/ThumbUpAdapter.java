@@ -55,16 +55,17 @@ public class ThumbUpAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		if(convertView==null){
-			holder=new ViewHolder();
-			convertView=inflater.inflate(R.layout.list_thumb_up_view, null);
-			holder.head=(ImageView) convertView.findViewById(R.id.list_thumb_up_head);
-			holder.name=(TextView) convertView.findViewById(R.id.list_thumb_up_name);
+		if (convertView == null) {
+			holder = new ViewHolder();
+			convertView = inflater.inflate(R.layout.list_thumb_up_view, null);
+			holder.head = (ImageView) convertView.findViewById(R.id.list_thumb_up_head);
+			holder.name = (TextView) convertView.findViewById(R.id.list_thumb_up_name);
 			convertView.setTag(holder);
-		}else{
-			holder=(ViewHolder) convertView.getTag();
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-		
+		holder.head.setImageResource((Integer) list.get(position).get("head"));
+		holder.name.setText((CharSequence) list.get(position).get("name"));
 		return convertView;
 	}
 

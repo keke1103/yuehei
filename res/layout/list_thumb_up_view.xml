@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/write"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="10dp" >
@@ -19,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:text="叶良成"
         android:textColor="@color/main_text"
         android:textSize="12sp" />
 

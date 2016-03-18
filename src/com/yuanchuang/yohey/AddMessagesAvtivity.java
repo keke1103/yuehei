@@ -44,7 +44,7 @@ public class AddMessagesAvtivity extends Activity {
 		text.setText(R.string.msg);
 
 		@SuppressWarnings("deprecation")
-		Drawable drawable = getResources().getDrawable(R.drawable.rub_course_back_icon);
+		Drawable drawable = getResources().getDrawable(R.drawable.yo_hey_back_image);
 
 		/// 这一步必须要做,否则不会显示.
 

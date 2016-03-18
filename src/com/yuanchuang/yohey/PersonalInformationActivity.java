@@ -30,7 +30,7 @@ public class PersonalInformationActivity extends Activity {
 		title=(TextView)include.findViewById(R.id.title_navigation_text_title);
 		backimage=(ImageView)include.findViewById(R.id.title_navigation_back_icon);
 		backimage.setVisibility(View.VISIBLE);
-		backimage.setImageResource(R.drawable.rub_course_back_icon);
+		backimage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("个人资料");
 		backimage.setOnClickListener(clickListener);
 	}

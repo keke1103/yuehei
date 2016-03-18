@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/write"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -47,15 +48,24 @@
             android:layout_toEndOf="@id/list_head_thumb_up_image_head"
             android:layout_toRightOf="@id/list_head_thumb_up_image_head"
             android:paddingTop="3dp"
-            android:text="18:55"
             android:textColor="@color/main_text"
             android:textSize="10sp" />
     </RelativeLayout>
 
     <!-- 发表内容 -->
 
+    <TextView
+        android:id="@+id/list_head_thumb_up_text_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/main_text"
+        android:textSize="12sp" />
+
     <LinearLayout
-        android:id="@+id/list_thumb_up_linear_content"
+        android:id="@+id/list_head_thumb_up_linear_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -78,7 +88,7 @@
         <!-- 转发 -->
 
         <TextView
-            android:id="@+id/list_thumb_up_text_view_for"
+            android:id="@+id/list_head_thumb_up_text_view_for"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -87,43 +97,41 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/list_thumb_up_text_forwarding"
+            android:id="@+id/list_head_thumb_up_text_forwarding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/list_thumb_up_text_view_for"
-            android:layout_toRightOf="@+id/list_thumb_up_text_view_for"
-            android:text="1"
+            android:layout_toEndOf="@+id/list_head_thumb_up_text_view_for"
+            android:layout_toRightOf="@+id/list_head_thumb_up_text_view_for"
             android:textColor="@color/main_text"
             android:textSize="12sp" />
 
         <!-- 评论 -->
 
         <TextView
-            android:id="@+id/list_thumb_up_text_view_comm"
+            android:id="@+id/list_head_thumb_up_text_view_comm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="42dp"
             android:layout_marginStart="42dp"
-            android:layout_toEndOf="@id/list_thumb_up_text_forwarding"
-            android:layout_toRightOf="@id/list_thumb_up_text_forwarding"
+            android:layout_toEndOf="@id/list_head_thumb_up_text_forwarding"
+            android:layout_toRightOf="@id/list_head_thumb_up_text_forwarding"
             android:text="@string/comments"
             android:textColor="@color/main_text"
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/list_thumb_up_text_comments"
+            android:id="@+id/list_head_thumb_up_text_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/list_thumb_up_text_view_comm"
-            android:layout_toRightOf="@id/list_thumb_up_text_view_comm"
-            android:text="1"
+            android:layout_toEndOf="@id/list_head_thumb_up_text_view_comm"
+            android:layout_toRightOf="@id/list_head_thumb_up_text_view_comm"
             android:textColor="@color/main_text"
             android:textSize="12sp" />
         <!-- 点赞图标 -->
@@ -151,7 +159,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/personal_post_text_zhan"
+                android:id="@+id/list_head_thumb_up_text_tuumb_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -33,7 +33,7 @@ public class SendGiftActivity extends Activity {
 		setContentView(R.layout.integral_exchange_commodity);
 		findView();
 		backImage.setVisibility(View.VISIBLE);
-		backImage.setImageResource(R.drawable.rub_course_back_icon);
+		backImage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("送出的礼品");
 		backImage.setOnClickListener(clickListener);
 		addImage(6);
