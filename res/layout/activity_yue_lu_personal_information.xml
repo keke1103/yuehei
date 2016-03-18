@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="10dp" >
-
+<!-- 头像 -->
                 <ImageView
                     android:id="@+id/personal_user_image_portrait"
                     android:layout_width="45dp"
@@ -39,56 +39,51 @@
                     android:background="@color/light_gray"
                     android:contentDescription="@drawable/ic_launcher" />
 
-                <TextView
-                    android:id="@+id/personal_user_text_nickname"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
                     android:layout_toEndOf="@id/personal_user_image_portrait"
                     android:layout_toRightOf="@id/personal_user_image_portrait"
-                    android:text="@string/zhao" />
-
-                <TextView
-                    android:id="@+id/personal_user_text_grade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/personal_user_text_nickname"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/personal_user_image_portrait"
-                    android:layout_toRightOf="@id/personal_user_image_portrait"
-                    android:text="LV30" />
-
-                <TextView
-                    android:id="@+id/personal_user_text_designation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/personal_user_text_nickname"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/personal_user_text_grade"
-                    android:layout_toRightOf="@id/personal_user_text_grade"
-                    android:text="@string/zhuanshi" />
-
-                <TextView
-                    android:id="@+id/personal_user_text_args"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_toEndOf="@id/personal_user_text_nickname"
-                    android:layout_toRightOf="@id/personal_user_text_nickname"
-                    android:text="19" />
-
-                <TextView
-                    android:id="@+id/personal_text_thumbs_up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/personal_user_text_args"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:text="250" />
+                    android:orientation="vertical" >
+<!-- 昵称 -->
+                    <TextView
+                        android:id="@+id/personal_user_text_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/zhao" />
+<!-- 等级 -->
+                    <TextView
+                        android:id="@+id/personal_user_text_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:text="LV30" />
+<!-- 段位 -->
+                    <TextView
+                        android:id="@+id/personal_user_text_designation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/zhuanshi" />
+<!-- 年龄 -->
+                    <TextView
+                        android:id="@+id/personal_user_text_args"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:text="19" />
+<!-- 赞 -->
+                    <TextView
+                        android:id="@+id/personal_text_thumbs_up"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="250" />
+                </LinearLayout>
             </RelativeLayout>
 
             <LinearLayout

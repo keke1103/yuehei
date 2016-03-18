@@ -55,8 +55,6 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.ParticipationPostsActivity" >
         </activity>
-        <activity android:name="com.yuanchuang.yohey.DynamicActivity" >
-        </activity>
         <activity android:name="com.yuanchuang.yohey.MyIntegralActivity" >
         </activity>
         <activity android:name="com.yuanchuang.yohey.PurchaseCommodityActivity" >

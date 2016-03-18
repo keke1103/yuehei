@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 /**
  * 个人资料界面
  * @author Administrator
  *
  */
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 public class PersonalInformationActivity extends Activity {
 	RelativeLayout include;//导入头文件
 	TextView title;//标题
