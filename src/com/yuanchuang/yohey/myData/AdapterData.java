@@ -1,11 +1,14 @@
 package com.yuanchuang.yohey.myData;
 
+import android.graphics.Bitmap;
+
 public class AdapterData {
 	// 动态数据
 	String dy_head;
 	String dy_name;
 	String dy_time;
 	String dy_context;
+	Bitmap[] dy_image;
 	// 帖子数据
 	String post_head;
 	String post_name;
@@ -41,6 +44,13 @@ public class AdapterData {
 	String official_announcement;// 官方资讯标题
 	String official_context;// 官方资讯内容
 	String official_time;// 官方资讯已发布多长时间时间
+	public Bitmap[] getDy_image() {
+		return dy_image;
+	}
+
+	public void setDy_image(Bitmap[] dy_image) {
+		this.dy_image = dy_image;
+	}
 
 	public int getOfficial_image_brief() {
 		return official_image_brief;
