@@ -3,8 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="60dp"
     android:layout_alignParentBottom="true"
-    android:layout_gravity="bottom"
-    android:background="@color/write" >
+    android:layout_gravity="bottom" >
 
     <RadioGroup
         android:id="@+id/selection_bar_radio_group"

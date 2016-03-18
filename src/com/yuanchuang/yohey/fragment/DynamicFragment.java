@@ -6,8 +6,7 @@ import java.util.List;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.DynamicAdapter;
 import com.yuanchuang.yohey.myData.AdapterData;
-import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
