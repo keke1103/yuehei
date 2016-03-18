@@ -3,7 +3,8 @@ package com.yuanchuang.yohey.adapter;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.myData.AdapterData;
+import com.yuanchuang.yohey.myData.Post;
+import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,13 +15,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 /**
  * 主页面的adapter
+ * 
  * @author Administrator
  *
  */
 public class MainAdapter extends BaseAdapter {
-	List<AdapterData> list;
+	List<Post> list;
 	Context context;
 	LayoutInflater inflater;
 
@@ -28,10 +31,15 @@ public class MainAdapter extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MainAdapter(List<AdapterData> list, Context context) {
+	public MainAdapter(List<Post> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
+	}
+
+	public void setData(List<Post> list) {
+		this.list = list;
+		notifyDataSetChanged();
 	}
 
 	@Override
@@ -56,6 +64,7 @@ public class MainAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
+		Post p = list.get(position);
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.list_main_post, null);
@@ -73,21 +82,21 @@ public class MainAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.add.setText(list.get(position).getMain_add() + "");
-		holder.name.setText(list.get(position).getMain_name());
-		holder.time.setText(list.get(position).getMain_time());
+		holder.add.setText(p.getJoincount() + "");
+		holder.name.setText(p.getUser().getUsername());
+		holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatetime() * 1000L));
 		holder.context.removeAllViews();
 		TextView text = new TextView(context);
-		text.setText(list.get(position).getMain_context());
+		text.setText(p.getContent());
 		text.setPadding(10, 5, 0, 0);
 		text.setTextSize(12);
 		holder.context.addView(text);
 		holder.line.setVisibility(View.GONE);
-		holder.area.setText(list.get(position).getMain_area());
-		holder.dan.setText(list.get(position).getMain_dan());
-		holder.head.setImageResource(R.drawable.meng_mei_head);
-		holder.message.setText(list.get(position).getMain_message() + "");
-		holder.up.setText(list.get(position).getMain_up() + "");
+		holder.area.setText(p.getGame().getGameregion());
+		holder.dan.setText(p.getGame().getGamedan());
+		p.getUser().bindHeaderView(holder.head);
+		holder.message.setText(p.getComcount() + "");
+		holder.up.setText(p.getLikenumber() + "");
 		return convertView;
 	}
 

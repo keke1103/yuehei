@@ -3,9 +3,9 @@ package com.yuanchuang.yohey.adapter;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.adapter.MainAdapter.ViewHolder;
-import com.yuanchuang.yohey.myData.AdapterData;
-
+import com.yuanchuang.yohey.myData.Post;
+import com.yuanchuang.yohey.tools.TimeUtil;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +14,29 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 /**
  * 主页面中间的画廊的BaseAdapter
+ * 
  * @author Administrator
  *
  */
 public class GalleryAdapter extends BaseAdapter {
-	List<AdapterData> list;
+	List<Post> list;
 	Context context;
 	LayoutInflater inflater;
 
-	public GalleryAdapter(List<AdapterData> list, Context context) {
+	public GalleryAdapter(List<Post> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
 
-	@Override
+	public void setData(List<Post> list) {
+		this.list = list;
+		notifyDataSetChanged();
+	}
+
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list.size();
@@ -48,10 +54,11 @@ public class GalleryAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		AdapterData data=list.get(position);
+		Post data = list.get(position);
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.list_main_post, null);
@@ -69,7 +76,20 @@ public class GalleryAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.add.setText(data.getMain_add()+"");
+		holder.add.setText("" + data.getJoincount());
+		data.getUser().bindHeaderView(holder.head);
+		holder.name.setText(data.getUser().getUsername());
+		holder.time.setText(TimeUtil.formateTimeToNow(data.getCreatetime() * 1000L));
+		holder.area.setText(data.getGame().getGameregion());
+		holder.dan.setText(data.getGame().getGamedan());
+		holder.context.removeAllViews();
+		TextView text = new TextView(context);
+		text.setText(data.getContent());
+		text.setPadding(10, 5, 0, 0);
+		text.setTextSize(12);
+		holder.context.addView(text);
+		holder.message.setText(data.getComcount() + "");
+		holder.up.setText(data.getLikenumber() + "");
 		return convertView;
 	}
 
