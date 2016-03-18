@@ -148,12 +148,11 @@ public class LoginAndRegistered extends Activity {
 		public void start() {
 
 		}
-
 		public void end(String result) {
 			try {
 				JSONObject jsonObject = new JSONObject(result);// 解析result这个json数据
 				int status = jsonObject.getInt("status");// 获得登录是否成功的数字，1为成功，其他为失败
-				Log.d("login>status", "" + status);
+				Log.d("login>r", "" + result);
 				if (status == 1) {
 					Intent intent = new Intent(LoginAndRegistered.this, MainActivity.class);
 					startActivity(intent);

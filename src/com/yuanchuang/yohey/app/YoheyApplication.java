@@ -8,7 +8,7 @@ import android.app.Application;
 
 public class YoheyApplication extends Application {
 
-	public static final String ServiceIp = "http://192.168.11.240";
+	public static final String ServiceIp = "http://192.168.0.137";
 	/**
 	 * 当前登陆用户！
 	 */

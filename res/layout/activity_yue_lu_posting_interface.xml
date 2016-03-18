@@ -37,31 +37,15 @@
         android:background="#F0F0F0" />
     <!-- 权限设置 -->
 
-    <LinearLayout
-        android:id="@+id/posting_include_linear_settings"
-        android:layout_width="fill_parent"
+    <CheckBox
+        android:id="@+id/area_check"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/text_stroke"
-        android:gravity="center"
+        android:button="@null"
+        android:drawableEnd="@drawable/rub_course_go_to_next_right"
+        android:drawableRight="@drawable/rub_course_go_to_next_right"
         android:padding="10dp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-           
-            android:text="@string/permission_settings"
-            android:textSize="13sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/rub_course_go_to_next_right"
-            android:padding="5dp"
-            android:src="@drawable/rub_course_go_to_next_right" />
-    </LinearLayout>
+        android:text="@string/area"
+        android:textSize="13sp" />
 
 </LinearLayout>
