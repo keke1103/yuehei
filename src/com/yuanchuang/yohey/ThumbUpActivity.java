@@ -1,5 +1,9 @@
 package com.yuanchuang.yohey;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +17,13 @@ public class ThumbUpActivity extends Activity {
 	LinearLayout comment;// 评论
 	LinearLayout thumbUp;// 赞
 	ListView listView;
-
+	List<Map<String,Object>> list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_thumb_up_for_details);
+		list=new ArrayList<Map<String,Object>>();
 		findView();
 	}
 
