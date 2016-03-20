@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/forwarding_text_toReturn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/yu_hei_returns_the_icon"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/yu_hei_returns_the_icon"
+            android:gravity="center_vertical"
+            android:text="@string/to_return"
+            android:textColor="@color/write"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="转发"
+            android:textColor="@color/write"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/forwarding_text_send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_rounded_yellow_background"
+                android:paddingBottom="3dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="3dp"
+                android:text="@string/to_return"
+                android:textColor="@color/main_title_text"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/forwarding_edit_reason"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:gravity="top"
+        android:hint="说说分享理由。。。"
+        android:textColor="@color/main_text"
+        android:textSize="12sp" />
+
+    <CheckBox
+        android:id="@+id/forwarding_check_box_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:button="@null"
+        android:drawableLeft="@drawable/tick_box"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/tick_box"
+        android:text="同时评论"
+        android:textColor="@color/main_title_text"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/forwarding_view_ait"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:contentDescription="@drawable/ait_icon"
+            android:paddingEnd="6dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="6dp"
+            android:paddingStart="10dp"
+            android:src="@drawable/ait_icon" />
+
+        <ImageView
+            android:id="@+id/forwarding_view_expression"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:contentDescription="@drawable/expression_inco"
+            android:paddingEnd="6dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:paddingStart="6dp"
+            android:src="@drawable/expression_inco" />
+
+        <ImageView
+            android:id="@+id/forwarding_view_defoult"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:contentDescription="@drawable/default_image"
+            android:paddingEnd="6dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:paddingStart="6dp"
+            android:src="@drawable/default_image" />
+    </LinearLayout>
+
+</LinearLayout>

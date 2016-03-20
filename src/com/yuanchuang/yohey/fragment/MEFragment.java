@@ -24,10 +24,10 @@ public class MEFragment extends Fragment {
 	RelativeLayout layouttitle;// 标题布局
 	TextView title;// 标题
 	TextView signIn;// 签到
-	TextView myProfile;// 我的资料
-	TextView myPosts;// 我的帖子
-	TextView integral;// 积分商城
-	TextView settings;// 系统设置
+	LinearLayout myProfile;// 我的资料
+	LinearLayout myPosts;// 我的帖子
+	LinearLayout integral;// 积分商城
+	LinearLayout settings;// 系统设置
 	View mView;
 
 	@Override
@@ -51,10 +51,10 @@ public class MEFragment extends Fragment {
 		layouttitle = (RelativeLayout) mView.findViewById(R.id.homepage_title_bar);
 		title = (TextView) layouttitle.findViewById(R.id.title_navigation_text_title);
 		signIn = (TextView) layouttitle.findViewById(R.id.title_navigation_text_right_title);
-		myProfile = (TextView) mView.findViewById(R.id.homepage_text_my_msg);
-		myPosts = (TextView) mView.findViewById(R.id.homepage_text_my_post);
-		integral = (TextView) mView.findViewById(R.id.homepage_text_score);
-		settings = (TextView) mView.findViewById(R.id.homepage_text_system_set);
+		myProfile = (LinearLayout) mView.findViewById(R.id.homepage_text_my_msg);
+		myPosts = (LinearLayout) mView.findViewById(R.id.homepage_text_my_post);
+		integral = (LinearLayout) mView.findViewById(R.id.homepage_text_score);
+		settings = (LinearLayout) mView.findViewById(R.id.homepage_text_system_set);
 		title.setText(R.string.me);
 		Resources resources = getContext().getResources();
 		Drawable drawable = resources.getDrawable(R.drawable.button_rounded_corners_and_solid);
@@ -82,8 +82,8 @@ public class MEFragment extends Fragment {
 				startActivity(intent);
 				break;
 			case R.id.homepage_text_system_set:// 跳到系统设置
-                intent = new Intent(getActivity(),Set_Activity.class);
-                startActivity(intent);
+				intent = new Intent(getActivity(), Set_Activity.class);
+				startActivity(intent);
 				break;
 			default:
 				break;

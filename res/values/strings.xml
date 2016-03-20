@@ -69,8 +69,10 @@
     <!-- 个人资料 -->
     <string name="others_impression">他人印象</string>
     <string name="recruitment_information">招募信息</string>
+    <string name="signature">个性签名</string>
     <string name="record">战绩</string>
     <string name="ao_virginia">艾欧尼亚</string>
+    <string name="available_first_win">首胜可用</string>
     <!-- 注册 -->
     <string name="china">中国+86</string>
     <string name="fill_in_your_phone_number">填写手机号码</string>

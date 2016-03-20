@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@color/line"
     android:orientation="vertical" >
 
     <include
@@ -11,7 +11,8 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@color/line" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -24,67 +25,184 @@
                 android:id="@+id/personal_information_text_server"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ao_virginia" />
+                android:layout_marginTop="8dp"
+                android:text="@string/ao_virginia"
+                android:textColor="@color/main_title_text"
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp" >
-<!-- 头像 -->
+                android:orientation="horizontal" >
+
+                <!-- 头像 -->
+
                 <ImageView
                     android:id="@+id/personal_user_image_portrait"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:background="@color/light_gray"
                     android:contentDescription="@drawable/ic_launcher" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_toEndOf="@id/personal_user_image_portrait"
                     android:layout_toRightOf="@id/personal_user_image_portrait"
+                    android:gravity="center_vertical"
                     android:orientation="vertical" >
-<!-- 昵称 -->
-                    <TextView
-                        android:id="@+id/personal_user_text_nickname"
-                        android:layout_width="wrap_content"
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/zhao" />
-<!-- 等级 -->
-                    <TextView
-                        android:id="@+id/personal_user_text_grade"
-                        android:layout_width="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <!-- 昵称 -->
+
+                        <TextView
+                            android:id="@+id/personal_user_text_nickname"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/zhao"
+                            android:textColor="@color/main_text"
+                            android:textSize="12sp" />
+                        <!-- 首胜可用 -->
+
+                        <TextView
+                            android:id="@+id/personal_user_text_first"
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_marginEnd="55dp"
+                            android:layout_marginRight="55dp"
+                            android:background="@drawable/rounded_gray_line_on_a_white_background"
+                            android:padding="3dp"
+                            android:text="@string/available_first_win"
+                            android:textColor="#F0FF44"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text="LV30" />
-<!-- 段位 -->
-                    <TextView
-                        android:id="@+id/personal_user_text_designation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/zhuanshi" />
-<!-- 年龄 -->
-                    <TextView
-                        android:id="@+id/personal_user_text_args"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:text="19" />
-<!-- 赞 -->
-                    <TextView
-                        android:id="@+id/personal_text_thumbs_up"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="250" />
+                        android:layout_marginTop="2dp"
+                        android:baselineAligned="false"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <!-- 等级 -->
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/personal_user_text_grade"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="LV30"
+                                android:textColor="@color/main_text"
+                                android:textSize="12sp" />
+                            <!-- 段位 -->
+
+                            <TextView
+                                android:id="@+id/personal_user_text_designation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:text="@string/zhuanshi"
+                                android:textColor="@color/main_text"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- 年龄 -->
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/rounded_gray_line_on_a_white_background"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="3dp" >
+
+                            <ImageView
+                                android:id="@+id/personal_user_text_sex"
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
+                                android:contentDescription="@drawable/image_nan"
+                                android:src="@drawable/image_nan" />
+
+                            <TextView
+                                android:id="@+id/personal_user_text_ages"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
+                                android:text="19"
+                                android:textColor="#F0FF44"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                        <!-- 赞 -->
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="3dp" >
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="14dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:contentDescription="@drawable/thumbs_up_inco"
+                                android:src="@drawable/thumbs_up_inco" />
+
+                            <TextView
+                                android:id="@+id/personal_text_thumbs_up"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="11dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="11dp"
+                                android:layout_marginStart="8dp"
+                                android:text="250"
+                                android:textColor="@color/main_text"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="23dp"
+                android:background="@color/thread_gray" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -95,34 +213,71 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <View
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
                         android:background="@drawable/view_black_filled_circle" />
+                    <!-- 他人印象 -->
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
-                        android:text="@string/others_impression" />
+                        android:text="@string/others_impression"
+                        android:textColor="@color/main_text"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="@color/thread_gray" />
+                <!-- 他人印象的布局 -->
 
                 <LinearLayout
                     android:id="@+id/personal_user_linear_other_impression"
                     android:layout_width="fill_parent"
                     android:layout_height="60dp"
-                    android:background="@drawable/text_stroke"
                     android:orientation="horizontal"
                     android:paddingBottom="10dp"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:paddingTop="10dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_stroke_fillet_18_degrees"
+                        android:padding="3dp"
+                        android:text="托儿索"
+                        android:textColor="@color/main_text"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="23dp"
+                android:background="@color/thread_gray" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -133,34 +288,62 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <View
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
                         android:background="@drawable/view_black_filled_circle" />
+                    <!-- 个性签名 -->
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
-                        android:text="@string/recruitment_information" />
+                        android:text="@string/signature"
+                        android:textColor="@color/main_text"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/personal_user_text_recruitment_information"
+                <View
                     android:layout_width="fill_parent"
-                    android:layout_height="60dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingTop="10dp" >
-                </LinearLayout>
+                    android:layout_height="1px"
+                    android:background="@color/thread_gray" />
+                <!-- 个性签名的内容 -->
+
+                <TextView
+                    android:id="@+id/personal_user_text_signature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="12dp"
+                    android:text="问君鞥有几多愁，恰是一江春水向东流"
+                    android:textColor="@color/main_text"
+                    android:textSize="12sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="23dp"
+                android:background="@color/thread_gray" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -171,32 +354,37 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <View
-                        android:layout_width="5dp"
-                        android:layout_height="5dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
                         android:background="@drawable/view_black_filled_circle" />
+                    <!-- 战绩 -->
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
-                        android:text="@string/record" />
+                        android:text="@string/record"
+                        android:textColor="@color/main_text"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="@color/thread_gray" />
 
                 <LinearLayout
                     android:id="@+id/personal_user_linear_record"
                     android:layout_width="fill_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingTop="10dp" >
+                    android:orientation="vertical" >
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

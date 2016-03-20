@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="4dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <!-- 英雄头像 -->
+
+    <ImageView
+        android:id="@+id/view_personal_informat_text_head"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/light_gray"
+        android:contentDescription="@drawable/add" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <!-- 游戏模式 -->
+
+        <TextView
+            android:id="@+id/view_personal_informat_text_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/main_text"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/view_personal_informat_text_win"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_personal_informat_text_mode"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <!-- 胜利 -->
+
+            <TextView
+                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_win_rounded_stroke_fill_color"
+                android:padding="1dp"
+                android:text="胜利"
+                android:textColor="@color/write"
+                android:textSize="7dp" />
+            <!-- 击杀数 -->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@drawable/win_kills"
+                android:src="@drawable/win_kills" />
+
+            <TextView
+                android:id="@+id/view_personal_informat_text_win_kills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#01A484"
+                android:textSize="10sp" />
+            <!-- 人头数 -->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@drawable/win_kills"
+                android:src="@drawable/win_head_count_inco" />
+
+            <TextView
+                android:id="@+id/view_personal_informat_text_win_head_count_inco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#01A484"
+                android:textSize="10sp" />
+            <!-- 助攻数 -->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@drawable/win_kills"
+                android:src="@drawable/win_kills" />
+
+            <TextView
+                android:id="@+id/view_personal_informat_text_win_assists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#01A484"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+             android:id="@+id/view_personal_informat_text_lose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_personal_informat_text_mode"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <!-- 失败 -->
+
+            <TextView
+               
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_win_rounded_stroke_fill_color"
+                android:padding="1dp"
+                android:text="失败"
+                android:textColor="@color/write"
+                android:textSize="7dp" />
+            <!-- 击杀数 -->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@drawable/lose_kills"
+                android:src="@drawable/lose_kills" />
+
+            <TextView
+                android:id="@+id/view_personal_informat_text_lose_kills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#01A484"
+                android:textSize="10sp" />
+            <!-- 人头数 -->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@drawable/lose_headcount"
+                android:src="@drawable/lose_headcount" />
+
+            <TextView
+                android:id="@+id/view_personal_informat_text_lose_headcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#01A484"
+                android:textSize="10sp" />
+            <!-- 助攻数 -->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@drawable/lose_assists"
+                android:src="@drawable/lose_assists" />
+
+            <TextView
+                android:id="@+id/view_personal_informat_text_lose_assists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#01A484"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- 日期 -->
+
+    <TextView
+        android:id="@+id/view_personal_informat_text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main_text"
+        android:textSize="12sp" />
+    <!-- 时间 -->
+
+    <TextView
+        android:id="@+id/view_personal_informat_text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/main_text"
+        android:textSize="12sp" />
+    <!-- 右箭头 -->
+
+    <ImageView
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="17dp"
+        android:contentDescription="@drawable/right_arrow_icon"
+        android:src="@drawable/right_arrow_icon" />
+
+</LinearLayout>
