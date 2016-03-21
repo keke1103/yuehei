@@ -27,15 +27,15 @@
             android:layout_centerInParent="true"
             android:background="@drawable/friend_message_shape"
             android:orientation="horizontal"
-            android:padding="2dp">
+            android:padding="2dp" >
 
             <RadioButton
                 android:id="@+id/rb_msg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/selector_lu"
                 android:button="@null"
-                android:background="@drawable/selector_lu" 
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
@@ -49,8 +49,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/selector_lu"
                 android:button="@null"
-                android:background="@drawable/selector_lu"   
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
@@ -79,17 +79,17 @@
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
         android:layout_marginTop="7dp"
-        android:background="@drawable/et_bg" >
+        android:background="@drawable/shape_share_end" >
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:background="@null"
             android:cursorVisible="false"
             android:gravity="center"
-            android:background="@null"
             android:hint="搜索"
-            android:textSize="15dp"
-            android:textColor="#888888"/>
+            android:textColor="#888888"
+            android:textSize="15dp" />
 
         <ImageView
             android:layout_width="15dp"
