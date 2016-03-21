@@ -91,6 +91,8 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.ThumbUpActivity" >
         </activity>
+        <activity android:name="com.yuanchuang.yohey.ForwardingActivity" >
+        </activity>
         <!-- QQ第三方登陆所需注册页面 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"

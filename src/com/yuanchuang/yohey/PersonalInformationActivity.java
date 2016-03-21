@@ -75,7 +75,7 @@ public class PersonalInformationActivity extends Activity {
 		mLoseHeadcount = (TextView) mView.findViewById(R.id.view_personal_informat_text_lose_headcount);
 		mLoseAssists = (TextView) mView.findViewById(R.id.view_personal_informat_text_lose_assists);
 		setData();
-		
+
 	}
 
 	private void setData() {
@@ -108,17 +108,14 @@ public class PersonalInformationActivity extends Activity {
 		others_impression = (LinearLayout) include.findViewById(R.id.personal_user_linear_other_impression);
 		record = (LinearLayout) findViewById(R.id.personal_user_linear_record);
 
-		inflater = getLayoutInflater();
-		mView = inflater.inflate(R.layout.view_personal_information, null);
 		backimage.setVisibility(View.VISIBLE);
 		backimage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("个人资料");
 		backimage.setOnClickListener(clickListener);
-
 		
-	
-			//record.addView(mView);
-		
+		inflater = getLayoutInflater();
+		mView = inflater.inflate(R.layout.view_personal_information, null);
+		record.addView(mView);
 	}
 
 	OnClickListener clickListener = new OnClickListener() {

@@ -7,11 +7,12 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ForwardingActivity extends Activity {
 	TextView toReturn;// 返回
-	LinearLayout send;// 发送
+	RelativeLayout send;// 发送
 	EditText content;// 输入内容
 	CheckBox comment;// 是否评论
 	View ait;// 艾特
@@ -28,7 +29,7 @@ public class ForwardingActivity extends Activity {
 
 	private void findView() {
 		toReturn = (TextView) findViewById(R.id.forwarding_text_toReturn);
-		send = (LinearLayout) findViewById(R.id.forwarding_text_send);
+		send = (RelativeLayout) findViewById(R.id.forwarding_text_send);
 		content = (EditText) findViewById(R.id.forwarding_edit_reason);
 		comment = (CheckBox) findViewById(R.id.forwarding_check_box_comment);
 		ait = findViewById(R.id.forwarding_view_ait);

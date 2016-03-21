@@ -48,11 +48,12 @@
             <!-- 胜利 -->
 
             <TextView
-                
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_win_rounded_stroke_fill_color"
                 android:padding="1dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
                 android:text="胜利"
                 android:textColor="@color/write"
                 android:textSize="7dp" />
@@ -113,7 +114,7 @@
         </LinearLayout>
 
         <LinearLayout
-             android:id="@+id/view_personal_informat_text_lose"
+            android:id="@+id/view_personal_informat_text_lose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/view_personal_informat_text_mode"
@@ -127,11 +128,12 @@
             <!-- 失败 -->
 
             <TextView
-               
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_win_rounded_stroke_fill_color"
                 android:padding="1dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
                 android:text="失败"
                 android:textColor="@color/write"
                 android:textSize="7dp" />

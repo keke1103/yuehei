@@ -2,21 +2,22 @@ package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
 
+import com.yuanchuang.yohey.ForwardingActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.DensityUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 /**
@@ -85,9 +86,32 @@ public class DynamicAdapter extends BaseAdapter {
 		holder.time.setText((CharSequence) list.get(position).getDy_time());
 		holder.line.setText(list.get(position).getDy_context());
 		DensityUtil.sudoku(context, holder.imageLayout, list.get(position).getDy_image());
-
+		holder.forwarding.setOnClickListener(clickListener);
 		return convertView;
 	}
+
+	OnClickListener clickListener = new OnClickListener() {
+		Intent intent;
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.list_dynamic_image_share_it:
+				intent = new Intent(context, ForwardingActivity.class);
+				context.startActivity(intent);
+				break;
+			case R.id.list_dynamic_image_leave_a_message:
+
+				break;
+			case R.id.list_dynamic_image_like:
+
+				break;
+			default:
+				break;
+			}
+
+		}
+	};
 
 	class ViewHolder {
 		ImageView headPortrait;// 用户头像
