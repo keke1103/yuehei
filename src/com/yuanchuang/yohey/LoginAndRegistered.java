@@ -15,13 +15,15 @@ import com.yuanchuang.yohey.myData.User;
 import com.yuanchuang.yohey.tools.HttpPost;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 import com.yuanchuang.yohey.tools.QQBaseUIListener;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,9 +40,11 @@ import android.widget.Toast;
  */
 public class LoginAndRegistered extends Activity {
 	YoheyApplication application;
-
+    
+	AlertDialog alertDialog;//自定义的alertDialog
 	EditText account;// 账号输入框
 	EditText password;// 密码输入框
+	ImageView rememberPassword;//记住密码图
 	TextView dorget_password;// 忘记密码
 	Button login;// 登录按钮
 	Button registered;// 注册按钮
@@ -65,13 +69,27 @@ public class LoginAndRegistered extends Activity {
 		login.setOnClickListener(onClickListener);
 		registered.setOnClickListener(onClickListener);
 		qqLogin.setOnClickListener(onClickListener);
+		rememberPassword.setOnClickListener(onClickListener);
+		dorget_password.setOnClickListener(onClickListener);
 	}
-
+    /**
+     * 自定义的Dialog
+     */
+	@SuppressLint("InflateParams")
+	public void customDialog(){
+		LayoutInflater inflater=getLayoutInflater();
+		View view=inflater.inflate(R.layout.choose_game_region_main, null);
+		AlertDialog.Builder builder=new AlertDialog.Builder(this);
+		alertDialog=builder.create();
+		alertDialog.setView(view);
+		alertDialog.show();
+	}
+	
 	/**
 	 * 点击事件
 	 */
 	OnClickListener onClickListener = new OnClickListener() {
-
+		boolean remember=true;//为了完成记住密码图片的改变定义的boolean
 		@Override
 		public void onClick(View v) {
 			Intent intent;
@@ -89,6 +107,18 @@ public class LoginAndRegistered extends Activity {
 			case R.id.login_register_text_qq_login:
 				onClickQQLogin();
 				break;
+			case R.id.login_registered_relative_remberpassword:	
+				if(remember){
+					rememberPassword.setImageResource(R.drawable.yo_hey_remember_password1);
+					remember=false;
+				}else {
+					rememberPassword.setImageResource(R.drawable.yo_hey_remberpassword);
+					remember=true;
+				}
+				break;
+			case R.id.login_register_text_forget:
+				customDialog();
+				break;
 			default:
 				break;
 			}
@@ -99,6 +129,7 @@ public class LoginAndRegistered extends Activity {
 	 * 查找ID
 	 */
 	private void findView() {
+		rememberPassword=(ImageView)findViewById(R.id.login_registered_relative_remberpassword);
 		account = (EditText) findViewById(R.id.login_registered_edit_account);
 		password = (EditText) findViewById(R.id.login_registered_edit_password);
 		dorget_password = (TextView) findViewById(R.id.login_register_text_forget);

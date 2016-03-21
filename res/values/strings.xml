@@ -218,5 +218,14 @@
         <item >扭曲森林</item>
         <item >巨龙之巢</item>
     </string-array>
-
+    <!-- 游戏段位 -->
+    <string-array name="game_dan">
+        <item >青铜</item>
+        <item >白银</item>
+        <item >黄金</item>
+        <item >白金</item>
+        <item >砖石</item>
+        <item >大师</item>
+        <item >王者</item>
+    </string-array>
 </resources>
