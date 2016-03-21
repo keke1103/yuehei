@@ -184,5 +184,35 @@
     <string name="app_main_others">其他</string>
     <string name="app_main_appbar">应用吧</string>
     <string name="app_main_qqgroupp_api">群API</string>
-
+    <!-- 游戏大区 -->
+        <string-array name="game_region">
+        <!-- 电信区 -->
+        <item >艾欧里亚</item>
+        <item >祖安</item>
+        <item >洛克萨斯</item>
+        <item >班德尔城</item>
+        <item >皮尔特沃夫</item>
+        <item >战争学院</item>
+        <item >巨神峰</item>
+        <item >雷瑟守备</item>
+        <item >裁决之地</item>
+        <item >黑色玫瑰</item>
+        <item >暗影岛</item>
+        <item >钢铁烈阳</item>
+        <item >均衡教派</item>
+        <item >水晶之痕</item>
+        <item >影流</item>
+        <item >守望之海</item>
+        <item >征服之海</item>
+        <item >卡拉曼达</item>
+        <item >皮城警备</item>
+        <!-- 网通区 -->
+        <item >比尔吉沃特</item>
+        <item >德玛西亚</item>
+        <item >弗雷尔卓德</item>
+        <item >无畏先锋</item>
+        <item >怒瑞玛</item>
+        <item >扭曲森林</item>
+        <item >巨龙之巢</item>
+    </string-array>
 </resources>

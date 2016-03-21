@@ -48,6 +48,12 @@ import android.widget.ViewFlipper;
 
 @SuppressWarnings("deprecation")
 public class MainFragment extends Fragment {
+	PopupWindow popupWindow;
+	
+	String str3[];//游戏大区的具体数据
+	ListView listView1;//游戏大区的listview
+	int listViewPosition;//listview1的第几项
+	ListView listView2;//游戏大区listview
 	TextView gameZone;//游戏大区
 	View myView;// 视图
 	ListView listView;
@@ -112,32 +118,16 @@ public class MainFragment extends Fragment {
 	@SuppressLint("InflateParams")
 	private void showPopupWindow(View view,String str[]){
 		View contentView=LayoutInflater.from(getActivity()).inflate(R.layout.game_zone_main,null);
-		ListView listView1=(ListView)contentView.findViewById(R.id.game_zone_listview1);
-		final ListView listView2=(ListView)contentView.findViewById(R.id.game_zone_listview2);
+		listView1=(ListView)contentView.findViewById(R.id.game_zone_listview1);
+		listView2=(ListView)contentView.findViewById(R.id.game_zone_listview2);
 		ArrayList<String> list=new ArrayList<String>();
 		for(int i=0;i<str.length;i++){
 			list.add(str[i]);
 		}
 		ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
 		listView1.setAdapter(arrayAdapter);
-		listView1.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-				String str1[]={ "艾欧尼亚","祖安","诺克萨斯","皮尔特沃夫","班德尔城","战争学院","巨神峰","雷瑟守备","裁决之地","黑色玫瑰","暗影岛","钢铁烈阳","均衡教派","水晶之痕","影流","守望之海","征服之海","卡拉曼达","皮城警备"};				
-				String str2[]={"比尔吉沃特","德玛西亚","弗雷尔卓德","无畏先锋","恕瑞玛","扭曲丛林"};
-				String str3[]={"教育一"};
-				listView2.setVisibility(View.VISIBLE);
-				ArrayList<String> list=new ArrayList<String>();
-				for(int i=0;i<str1.length;i++){
-					list.add(str1[i]);
-				}
-				ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
-				listView2.setAdapter(arrayAdapter);
-			}
-		});
-		PopupWindow popupWindow=new PopupWindow(contentView,600,LayoutParams.WRAP_CONTENT,true);
+		listView1.setOnItemClickListener(clickListener);
+		popupWindow=new PopupWindow(contentView,600,LayoutParams.WRAP_CONTENT,true);
 		popupWindow.setTouchable(true);
 		popupWindow.setFocusable(true);
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white));
@@ -176,11 +166,56 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			intent.setClass(getActivity(), PersonalPostActivity.class);
-			Post p = (Post) parent.getAdapter().getItem(position);
-			YoheyApplication app = (YoheyApplication) getActivity().getApplication();
-			app.data = p;
-			startActivity(intent);
+			switch (parent.getId()) {
+			case R.id.game_zone_listview2:
+				if(listViewPosition==2){
+					gameZone.setText(str3[position+19]);
+					Log.i(">>>>>>>>>>>>>>>",str3[position]);
+				}else{
+					gameZone.setText(str3[position]);
+					Log.i(">>>>>>>>>>>>>>>",str3[position]);
+				}	
+				popupWindow.dismiss();//关闭popupWindow
+				break;
+			case R.id.main_list_posts:
+				intent.setClass(getActivity(), PersonalPostActivity.class);
+				Post p = (Post) parent.getAdapter().getItem(position);
+				YoheyApplication app = (YoheyApplication) getActivity().getApplication();
+				app.data = p;
+				startActivity(intent);
+				break;
+			case R.id.game_zone_listview1:
+				listViewPosition=position;
+				str3=getResources().getStringArray(R.array.game_region);
+				ArrayList<String> list=new ArrayList<String>();
+				switch (position) {
+				case 0:	
+					for(int i=0;i<str3.length;i++){
+						list.add(str3[i]);
+					}
+					break;
+				case 1:
+					for(int i=0;i<19;i++){
+						list.add(str3[i]);
+					}
+					break;
+				case 2:
+					for(int i=0;i<7;i++){
+						list.add(str3[i+19]);
+					}
+					break;
+				default:
+					break;
+				}
+				listView2.setVisibility(View.VISIBLE);				
+				ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
+				listView2.setAdapter(arrayAdapter);
+				listView2.setOnItemClickListener(clickListener);
+				break;
+			default:
+				break;
+			}
+		
 		}
 	};
 	OnClickListener onClickListener = new OnClickListener() {
@@ -235,7 +270,7 @@ public class MainFragment extends Fragment {
 
 				break;
 			case R.id.title_navigation_game_zone://游戏大区的点击事件
-				String str[]={"全部","网通","电信","体验服"};
+				String str[]={"全部","电信","网通"};
 				showPopupWindow(v,str);
 				break;
 			default:

@@ -52,9 +52,9 @@ public class IntegralStoreActivity extends Activity {
 		
 		myIntegral.setText("我的积分");
 		integralBuyStore.setText("积分兑换的商品");
-		buyGift.setText("购买的礼品");
-		receiveGift.setText("收到的礼品");
-		sendGift.setText("送出的礼品");
+		buyGift.setText("购买过的商品");
+		receiveGift.setText("收到的商品");
+		sendGift.setText("送出的商品");
 		
 		myIntegral.setOnClickListener(clickListener);
 		integralBuyStore.setOnClickListener(clickListener);
