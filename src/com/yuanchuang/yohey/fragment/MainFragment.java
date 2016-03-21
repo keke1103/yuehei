@@ -55,6 +55,7 @@ public class MainFragment extends Fragment {
 	int listViewPosition;//listview1的第几项
 	ListView listView2;//游戏大区listview
 	TextView gameZone;//游戏大区
+	ImageView gameDan;//游戏段位
 	View myView;// 视图
 	ListView listView;
 	List<Post> reList;
@@ -72,7 +73,7 @@ public class MainFragment extends Fragment {
 	ImageView playerHead3;// 玩家3的头像
 	ImageView playerHead4;// 玩家4的头像
 	ImageView playerHead5;// 玩家5的头像
-	View more;// 更多
+	LinearLayout more;// 更多
 	RelativeLayout new_freads;// 撸友新动态
 	RelativeLayout afarid_official;// 官方新动态
 	RelativeLayout video_highlights;// 视屏集锦
@@ -126,7 +127,6 @@ public class MainFragment extends Fragment {
 		}
 		ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
 		listView1.setAdapter(arrayAdapter);
-		listView1.setOnItemClickListener(clickListener);
 		popupWindow=new PopupWindow(contentView,600,LayoutParams.WRAP_CONTENT,true);
 		popupWindow.setTouchable(true);
 		popupWindow.setFocusable(true);
@@ -145,7 +145,7 @@ public class MainFragment extends Fragment {
 		playerHead3 = (ImageView) view.findViewById(R.id.main_image_recommended_user3);
 		playerHead4 = (ImageView) view.findViewById(R.id.main_image_recommended_user4);
 		playerHead5 = (ImageView) view.findViewById(R.id.main_image_recommended_user5);
-		more = view.findViewById(R.id.main_image_recommended_gen_duo);
+		more = (LinearLayout)view.findViewById(R.id.main_image_recommended_geng_duo_linear);
 		new_freads = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_new_freads);
 		afarid_official = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_not_afarid_official);
 		video_highlights = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_video_highlights);
@@ -248,8 +248,7 @@ public class MainFragment extends Fragment {
 
 				break;
 
-			case R.id.main_image_recommended_gen_duo:
-
+			case R.id.main_image_recommended_geng_duo_linear://跳转到推荐开黑的列表
 				intent.setClass(getActivity(), RecommendActivity.class);
 				startActivity(intent);
 				break;
@@ -272,6 +271,10 @@ public class MainFragment extends Fragment {
 			case R.id.title_navigation_game_zone://游戏大区的点击事件
 				String str[]={"全部","电信","网通"};
 				showPopupWindow(v,str);
+				listView1.setOnItemClickListener(clickListener);
+				break;
+			case R.id.title_navigation_text_right_title://游戏段位的点击事件
+				showPopupWindow(v, getResources().getStringArray(R.array.game_dan));
 				break;
 			default:
 				break;
@@ -350,9 +353,11 @@ public class MainFragment extends Fragment {
 	}
 
 	private void findView() {
+		gameDan=(ImageView)myView.findViewById(R.id.title_navigation_text_right_title);
 		gameZone=(TextView)myView.findViewById(R.id.title_navigation_game_zone);
 		listView = (ListView) myView.findViewById(R.id.main_list_posts);
 		gameZone.setOnClickListener(onClickListener);
+		gameDan.setOnClickListener(onClickListener);
 	}
 
 	/**

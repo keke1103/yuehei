@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#f2f4f5"
     android:orientation="vertical" >
 
     <!-- 我的积分界面 -->
@@ -13,7 +13,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="#ffffff"
         android:paddingBottom="8dp"
         android:paddingTop="8dp" >
 
@@ -22,7 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:text="@string/another_one" />
+            android:text="我的积分" 
+            android:layout_centerVertical="true"
+            android:textColor="#323232"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/my_integral_number"
@@ -32,17 +36,20 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/num" />
+            android:text="2645"
+            android:layout_centerVertical="true"
+            android:textColor="#888888"
+            android:textSize="14sp"/>
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
+        android:layout_height="10dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="#ffffff"
         android:paddingBottom="8dp"
         android:paddingTop="8dp" >
 
@@ -51,7 +58,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:text="@string/another_one" />
+            android:layout_centerVertical="true"
+            android:text="签到获得" 
+            android:textColor="#323232"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/my_integral_registration_number"
@@ -61,17 +71,20 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/num" />
+            android:layout_centerVertical="true"
+            android:text="1500"
+            android:textColor="#888888"
+            android:textSize="14sp"/>
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
+        android:layout_height="10dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="#ffffff"
         android:paddingBottom="8dp"
         android:paddingTop="8dp" >
 
@@ -80,7 +93,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:text="@string/another_one" />
+            android:layout_centerVertical="true"
+            android:text="好评奖励" 
+            android:textColor="#323232"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/my_integral_praise_number"
@@ -90,17 +106,20 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/num" />
+            android:layout_centerVertical="true"
+            android:text="500"
+            android:textColor="#888888"
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
+        android:layout_height="10dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="#ffffff"
         android:paddingBottom="8dp"
         android:paddingTop="8dp" >
 
@@ -109,7 +128,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:text="@string/another_one" />
+            android:layout_centerVertical="true"
+            android:text="任务获得" 
+            android:textColor="#323232"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/my_integral_task_number"
@@ -119,7 +141,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/num" />
+            android:layout_centerVertical="true"
+            android:text="645" 
+            android:textColor="#888888"
+            android:textSize="14sp"/>
     </RelativeLayout>
 
 </LinearLayout>

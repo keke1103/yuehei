@@ -19,8 +19,9 @@ import android.widget.TextView;
  */
 public class IntegralExchangeCommodityActivity extends Activity {
 	LinearLayout integralCommodity;// 积分兑换商品界面的LinearLayout
-	ImageView commodityImage1;// 商品图片
-	ImageView commodityImage2;// 商品图片
+	LinearLayout commodity1;// 商品信息
+	LinearLayout commodity2;// 商品信息
+	LinearLayout commodity3;// 商品信息
 	ImageView backImage;// 返回图标
 	TextView title;// 标题
 	RelativeLayout include;// 导入头文件
@@ -75,20 +76,25 @@ public class IntegralExchangeCommodityActivity extends Activity {
 	 */
 	@SuppressLint("InflateParams")
 	public void addImage(int i) {
-		for (int j = 0; j < i / 2; j++) {
+		for (int j = 0; j < i / 3; j++) {
 			View view = inflater.inflate(R.layout.commodity_image_main, null);
-			commodityImage1 = (ImageView) view.findViewById(R.id.integral_exchange_commodity_image1);
-			commodityImage2 = (ImageView) view.findViewById(R.id.integral_exchange_commodity_image2);
+			commodity1=(LinearLayout)view.findViewById(R.id.commodity1);
+			commodity2=(LinearLayout)view.findViewById(R.id.commodity2);
+			commodity3=(LinearLayout)view.findViewById(R.id.commodity3);
 			integralCommodity.addView(view);
-			commodityImage1.setImageResource(R.drawable.ic_launcher);
-			commodityImage2.setImageResource(R.drawable.ic_launcher);
 		}
-		if (i % 2 == 1) {
+		if (i % 3 == 1) {
 			View view = inflater.inflate(R.layout.commodity_image_main, null);
-			commodityImage1 = (ImageView) view.findViewById(R.id.integral_exchange_commodity_image1);
-			commodityImage2 = (ImageView) view.findViewById(R.id.integral_exchange_commodity_image2);
+			commodity2=(LinearLayout)view.findViewById(R.id.commodity2);
+			commodity3=(LinearLayout)view.findViewById(R.id.commodity3);
+			commodity2.setVisibility(View.GONE);
+			commodity3.setVisibility(View.GONE);
 			integralCommodity.addView(view);
-			commodityImage1.setImageResource(R.drawable.ic_launcher);
+		}else if(i%3==2){
+			View view = inflater.inflate(R.layout.commodity_image_main, null);
+			commodity3=(LinearLayout)view.findViewById(R.id.commodity3);
+			commodity3.setVisibility(View.GONE);
+			integralCommodity.addView(view);
 		}
 	}
 }

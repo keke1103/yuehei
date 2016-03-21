@@ -20,6 +20,7 @@
     <!-- 推荐开黑 -->
 
     <LinearLayout
+        android:id="@+id/main_image_recommended_geng_duo_linear"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_gray"
