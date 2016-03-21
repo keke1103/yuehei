@@ -1,6 +1,7 @@
 package com.yuanchuang.yohey;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,13 +12,15 @@ import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.yuanchuang.yohey.app.YoheyApplication;
-import com.yuanchuang.yohey.myData.User;
+import com.yuanchuang.yohey.bmob.Game;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.HttpPost;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 import com.yuanchuang.yohey.tools.QQBaseUIListener;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -29,6 +32,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * 登录注册页面
@@ -54,10 +61,18 @@ public class LoginAndRegistered extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_login_registered);
+		String appId = "032e79773577386c1ae147ff379fb465";
+		Bmob.initialize(getApplicationContext(), appId);
 		application = (YoheyApplication) getApplication();
 		application.mTencent = Tencent.createInstance(application.APP_ID, this);
 		findView();
 		initView();
+
+		try {
+			loginByQq(getLoginData());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -148,6 +163,7 @@ public class LoginAndRegistered extends Activity {
 		public void start() {
 
 		}
+
 		public void end(String result) {
 			try {
 				JSONObject jsonObject = new JSONObject(result);// 解析result这个json数据
@@ -158,7 +174,8 @@ public class LoginAndRegistered extends Activity {
 					startActivity(intent);
 					JSONObject jo = jsonObject.getJSONObject("result");
 					application.token = jo.getString("token");
-					application.mUser = User.parseJsonObject(jo.getJSONObject("user"));
+					// application.mUser =
+					// User.parseJsonObject(jo.getJSONObject("user"));
 					finish();
 				} else {
 					Toast.makeText(LoginAndRegistered.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
@@ -195,60 +212,179 @@ public class LoginAndRegistered extends Activity {
 			doComplete((JSONObject) response);
 		}
 
-		protected void doComplete(JSONObject values) {
-			try {
-				String token = values.getString(Constants.PARAM_ACCESS_TOKEN);
-				String expires = values.getString(Constants.PARAM_EXPIRES_IN);
-				String openId = values.getString(Constants.PARAM_OPEN_ID);
-
-				if (!TextUtils.isEmpty(token) && !TextUtils.isEmpty(expires) && !TextUtils.isEmpty(openId)) {
-
-					application.mTencent.setAccessToken(token, expires);
-					application.mTencent.setOpenId(openId);
-					application.qqInfo = new UserInfo(LoginAndRegistered.this, application.mTencent.getQQToken());
-					application.qqInfo.getUserInfo(new QQBaseUIListener(LoginAndRegistered.this) {
-
-						protected void doComplete(JSONObject jo) {
-							String username;
-							String icon;
-							String sex;
-							Log.i("UserInfo", jo.toString());
-							try {
-								username = jo.getString("nickname");
-								icon = jo.getString("figureurl_qq_2");
-								sex = jo.getString("gender");
-								String url = YoheyApplication.ServiceIp + "/index.php/home/api/otherlogin";
-								HttpPost post = HttpPost.parseUrl(url);
-								post.putString("qid", application.mTencent.getOpenId());
-								post.putString("username", username);
-								post.putString("icon", icon);
-								post.putString("sex", sex);
-								post.setOnSendListener(loginPostListener);
-								post.send();
-							} catch (JSONException e) {
-							} catch (MalformedURLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-					});
-				}
-			} catch (Exception e) {
-			}
+		public void doComplete(JSONObject values) {
+			saveLoginData(values);
+			loginByQq(values);
 		}
 
-		@Override
 		public void onError(UiError e) {
 			Toast.makeText(getApplicationContext(), "onError: " + e.errorDetail, Toast.LENGTH_SHORT).show();
 		}
 
-		@Override
 		public void onCancel() {
 			Toast.makeText(getApplicationContext(), "onCancel:  ", Toast.LENGTH_SHORT).show();
 			if (application.isServerSideLogin) {
 				application.isServerSideLogin = false;
 			}
 		}
+	}
+
+	private void loginByQq(JSONObject values) {
+
+		try {
+			String token = values.getString(Constants.PARAM_ACCESS_TOKEN);
+			String expires = values.getString(Constants.PARAM_EXPIRES_IN);
+			String openId = values.getString(Constants.PARAM_OPEN_ID);
+
+			if (!TextUtils.isEmpty(token) && !TextUtils.isEmpty(expires) && !TextUtils.isEmpty(openId)) {
+
+				application.mTencent.setAccessToken(token, expires);
+				application.mTencent.setOpenId(openId);
+				application.qqInfo = new UserInfo(LoginAndRegistered.this, application.mTencent.getQQToken());
+				application.qqInfo.getUserInfo(new QQBaseUIListener(LoginAndRegistered.this) {
+
+					protected void doComplete(JSONObject jo) {
+						final String username;
+						final String icon;
+						final String sex;
+						Log.i("UserInfo", jo.toString());
+						try {
+							username = jo.getString("nickname");
+							icon = jo.getString("figureurl_qq_2");
+							sex = jo.getString("gender");
+
+							final com.yuanchuang.yohey.bmob.User user = new com.yuanchuang.yohey.bmob.User();
+							user.setUsername(application.mTencent.getOpenId());
+							user.setPassword("123456");
+							BmobQuery<com.yuanchuang.yohey.bmob.User> query = new BmobQuery<com.yuanchuang.yohey.bmob.User>();
+
+							query.addWhereEqualTo("username", application.mTencent.getOpenId());
+							query.setLimit(1);
+							query.findObjects(getApplicationContext(),
+									new FindListener<com.yuanchuang.yohey.bmob.User>() {
+
+								public void onError(int arg0, String arg1) {
+
+								}
+
+								public void onSuccess(List<User> arg0) {
+									if (arg0.size() == 0) {
+
+										user.setIcon(icon);
+										user.setNickName(username);
+										user.setSex(!"男".equals(sex));
+										user.signUp(LoginAndRegistered.this, new SaveListener() {
+											public void onSuccess() {
+												addGame(user);
+											}
+
+											public void onFailure(int arg0, String arg1) {
+
+												Toast.makeText(getApplicationContext(), "error" + arg1,
+														Toast.LENGTH_SHORT).show();
+											}
+										});
+									} else {
+
+										user.login(getApplicationContext(), new SaveListener() {
+
+											public void onSuccess() {
+												BmobQuery<Game> query = new BmobQuery<Game>();
+												query.addWhereEqualTo("user", user);
+												query.findObjects(getApplicationContext(), new FindListener<Game>() {
+													public void onSuccess(List<Game> arg0) {
+														if (arg0.size() == 0) {
+															addGame(user);
+														} else {
+															Intent intent = new Intent(LoginAndRegistered.this,
+																	MainActivity.class);
+															startActivity(intent);
+															finish();
+														}
+													}
+
+													public void onError(int arg0, String arg1) {
+														Toast.makeText(getApplicationContext(), "error" + arg1,
+																Toast.LENGTH_SHORT).show();
+													}
+												});
+											}
+
+											public void onFailure(int arg0, String arg1) {
+												Toast.makeText(getApplicationContext(), "error" + arg1,
+														Toast.LENGTH_SHORT).show();
+											}
+										});
+									}
+								}
+							});
+
+							/*
+							 * String url = YoheyApplication.ServiceIp +
+							 * "/index.php/home/api/otherlogin"; HttpPost post =
+							 * HttpPost.parseUrl(url); post.putString("qid",
+							 * application.mTencent.getOpenId());
+							 * post.putString("username", username);
+							 * post.putString("icon", icon);
+							 * post.putString("sex", sex);
+							 * post.setOnSendListener(loginPostListener);
+							 * post.send();
+							 */
+						} catch (JSONException e) {
+						}
+					}
+				});
+			}
+		} catch (Exception e) {
+		}
+	}
+
+	@SuppressWarnings("static-access")
+	public void saveLoginData(JSONObject re) {
+		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
+				getApplicationContext().MODE_PRIVATE);
+		SharedPreferences.Editor edit = storage.edit();
+		edit.putString("qqData", re.toString());
+		edit.commit();
+	}
+
+	public JSONObject getLoginData() throws JSONException {
+		@SuppressWarnings("static-access")
+		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
+				getApplicationContext().MODE_PRIVATE);
+		String js = storage.getString("qqData", "");
+		JSONObject jo = new JSONObject(js);
+		return jo;
+	}
+
+	/**
+	 * 绑定用户角色的方法！
+	 * 
+	 * @param user
+	 */
+	public void addGame(final User user) {
+		final Game game = new Game();
+		game.setGamedan(23);
+		game.setGamegrade(30);
+		game.setGameregion("艾欧尼亚");
+		game.setGamename("大侠");
+		game.setUser(user);
+		game.save(getApplicationContext(), new SaveListener() {
+
+			public void onSuccess() {
+				Log.i("onSuccess", "onSuccess");
+				Intent intent = new Intent(LoginAndRegistered.this, MainActivity.class);
+				startActivity(intent);
+				finish();
+				User u = new User();
+				u.setDefGame(game);
+				u.update(getApplicationContext(), user.getObjectId(), null);
+			}
+
+			public void onFailure(int arg0, String arg1) {
+				Toast.makeText(getApplicationContext(), "error" + arg1, Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -1,12 +1,7 @@
 package com.yuanchuang.yohey.fragment;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.yuanchuang.yohey.OfficialinformationActivity;
 import com.yuanchuang.yohey.PersonalPostActivity;
@@ -16,11 +11,9 @@ import com.yuanchuang.yohey.Vide0CollectionActivity;
 import com.yuanchuang.yohey.adapter.GalleryAdapter;
 import com.yuanchuang.yohey.adapter.MainAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.Game;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.AdapterData;
-import com.yuanchuang.yohey.myData.Post;
-import com.yuanchuang.yohey.tools.HttpGet;
-import com.yuanchuang.yohey.tools.HttpPost;
-import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -40,8 +33,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 @SuppressWarnings("deprecation")
 public class MainFragment extends Fragment {
@@ -67,6 +61,10 @@ public class MainFragment extends Fragment {
 	RelativeLayout afarid_official;// 官方新动态
 	RelativeLayout video_highlights;// 视屏集锦
 	RelativeLayout win_points;// 转转赢积分
+	/**
+	 * 当前锁定区服;默认为null，就是全服
+	 */
+	String gameregion;
 
 	@SuppressLint({ "InflateParams", "CutPasteId" })
 	@Override
@@ -77,17 +75,19 @@ public class MainFragment extends Fragment {
 		reList = new ArrayList<Post>();
 		myView = inflater.inflate(R.layout.activity_yue_lu_main, lay);
 		findView();// 找到本页面的id
-		getData();
-		adapter = new MainAdapter(list, getActivity());
+		
+		
 
 		View view = inflater.inflate(R.layout.list_head_view, null);
 		findInflate(view);// 找到导入的头文件的id
 		gallery = (Gallery) view.findViewById(R.id.main_list_head_gallery);
-
-		getRemData();
 		galleryAdapter = new GalleryAdapter(reList, getActivity());
 		gallery.setAdapter(galleryAdapter);
-
+		getRemData(gameregion, -1, -1);
+		
+		adapter = new MainAdapter(list, getActivity());
+		getPostData(gameregion, -1, -1);
+		
 		listView.addHeaderView(view);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(clickListener);
@@ -195,72 +195,97 @@ public class MainFragment extends Fragment {
 
 		}
 	};
-	private OnSendListener mListener = new OnSendListener() {
 
-		@Override
-		public void start() {
+	private void getRemData(String gameregion, int gamedanmin, int gamedanmax) {
+		FindListener<Post> findLister = new FindListener<Post>() {
+
+			public void onSuccess(List<Post> arg0) {
+				galleryAdapter.setData(arg0);
+			}
+
+			public void onError(int arg0, String arg1) {
+				Log.w("MainFragment", "" + arg1);
+			}
+		};
+
+		BmobQuery<Post> query = new BmobQuery<Post>();
+		query.setLimit(6);
+		query.include("user");
+		query.include("game");
+		BmobQuery<Game> gameQuery = null;
+
+		if (gameregion != null) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereEqualTo("gameregion", gameregion);
+
 		}
-
-		@Override
-		public void end(String result) {
-			JSONObject jor;
-			try {
-				jor = new JSONObject(result);
-				if (jor.getInt("stauts") == 1) {
-					JSONArray ja = jor.getJSONArray("result");
-					list = new ArrayList<Post>();
-					for (int i = 0; i < ja.length(); i++) {
-						list.add(Post.paresJSONObject(ja.getJSONObject(i)));
-					}
-					adapter.setData(list);
-				} else {
-					Toast.makeText(getActivity(), jor.getString("message"), Toast.LENGTH_SHORT).show();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-				Log.w("HttpPost result", result);
-			}
+		if (gamedanmin > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereGreaterThanOrEqualTo("gamedan", gamedanmin);
 		}
-	};
-
-	private void getRemData() {
-		HttpGet p = new HttpGet(YoheyApplication.ServiceIp + "/index.php/home/api/getrecommend");
-		p.setOnSendListener(new OnSendListener() {
-
-			public void start() {
-
-			}
-
-			public void end(String result) {
-				try {
-					JSONObject jjo = new JSONObject(result);
-					if (jjo.getInt("stauts") == 1) {
-						JSONArray ja = jjo.getJSONArray("result");
-						for (int i = 0; i < ja.length(); i++) {
-							Post p = Post.paresJSONObject(ja.getJSONObject(i));
-							Log.i("remind post", i +"<><>"+ p.getId());
-							reList.add(p);
-						}
-						galleryAdapter.setData(reList);
-					}
-
-				} catch (JSONException e) {
-
-					e.printStackTrace();
-				}
-			}
-		});
-		p.send();
+		if (gamedanmax > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereLessThanOrEqualTo("gamedan", gamedanmax);
+		}
+		if (gameQuery != null) {
+			query.addWhereMatchesQuery("game", "Game", gameQuery);
+		}
+		query.addWhereGreaterThan("recommend", 0);
+		query.findObjects(getActivity(), findLister);
 	}
 
-	private void getData() {
-		try {
-			HttpPost p = HttpPost.parseUrl(YoheyApplication.ServiceIp + "/index.php/home/api/main");
-			p.setOnSendListener(mListener);
-			p.send();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+	/**
+	 * 首页普通帖子数据的获取
+	 * 
+	 * @param gameregion
+	 *            区服的筛选 (不筛选传null)
+	 * @param gamedanmin
+	 *            最小段位筛选(不筛选传-1)
+	 * @param gamedanmax
+	 *            最高段位筛选(不筛选传-1)
+	 */
+	private void getPostData(String gameregion, int gamedanmin, int gamedanmax) {
+
+		FindListener<Post> findLister = new FindListener<Post>() {
+
+			public void onSuccess(List<Post> arg0) {
+				adapter.setData(arg0);
+			}
+
+			public void onError(int arg0, String arg1) {
+				Log.w("MainFragment", arg1);
+			}
+		};
+
+		BmobQuery<Post> query = new BmobQuery<Post>();
+		query.setLimit(6);
+		query.include("user");
+		query.include("game");
+		BmobQuery<Game> gameQuery = null;
+
+		if (gameregion != null) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereEqualTo("gameregion", gameregion);
 		}
+		if (gamedanmin > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereGreaterThanOrEqualTo("gamedan", gamedanmin);
+		}
+		if (gamedanmax > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereLessThanOrEqualTo("gamedan", gamedanmax);
+		}
+		if (gameQuery != null) {
+			query.addWhereMatchesQuery("game", "Game", gameQuery);
+		}
+
+		query.findObjects(getActivity(), findLister);
 	}
 
 	private void findView() {
@@ -319,6 +344,12 @@ public class MainFragment extends Fragment {
 		public OnClickListener getListener() {
 			return listener;
 		}
+	}
 
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == 1) {
+			getPostData(gameregion, -1, -1);
+			getRemData(gameregion, -1, -1);
+		}
 	}
 }

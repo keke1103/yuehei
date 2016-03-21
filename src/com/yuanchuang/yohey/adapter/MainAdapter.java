@@ -3,11 +3,12 @@ package com.yuanchuang.yohey.adapter;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.myData.Post;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,18 +84,21 @@ public class MainAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.add.setText(p.getJoincount() + "");
-		holder.name.setText(p.getUser().getUsername());
-		holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatetime() * 1000L));
+		holder.name.setText(p.getUser().getNickName());
+		Log.i("MainAdapter", p.getCreatedAt());
+		// holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatetime() *
+		// 1000L));
+		holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatedAt()));
 		holder.context.removeAllViews();
 		TextView text = new TextView(context);
-		text.setText(p.getContent());
+		text.setText(p.getTitle());
 		text.setPadding(10, 5, 0, 0);
 		text.setTextSize(12);
 		holder.context.addView(text);
 		holder.line.setVisibility(View.GONE);
 		holder.area.setText(p.getGame().getGameregion());
 		holder.dan.setText(p.getGame().getGamedan());
-		p.getUser().bindHeaderView(holder.head);
+		p.getUser().binderImageView(holder.head);
 		holder.message.setText(p.getComcount() + "");
 		holder.up.setText(p.getLikenumber() + "");
 		return convertView;

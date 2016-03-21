@@ -8,7 +8,8 @@ import android.app.Application;
 
 public class YoheyApplication extends Application {
 
-	public static final String ServiceIp = "http://192.168.0.137";
+	public static final String ServiceIp = "http://cloud.bmob.cn/a52fec72f31cc7c8/";
+	
 	/**
 	 * 当前登陆用户！
 	 */
@@ -19,6 +20,12 @@ public class YoheyApplication extends Application {
 	public final String APP_ID = "1105254592";
 
 	public boolean isServerSideLogin = false;
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		
+	}
 
 	/**
 	 * 用于页面间的数据交换

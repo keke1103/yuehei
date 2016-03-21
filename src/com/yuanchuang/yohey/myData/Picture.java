@@ -34,7 +34,8 @@ public class Picture {
 	 * @param url
 	 */
 	public Picture(String url) {
-		if (url.startsWith("http")) {
+
+		if (url != null && url.startsWith("http")) {
 			thumbnail_pic = url;
 		} else {
 			thumbnail_pic = YoheyApplication.ServiceIp + url;
