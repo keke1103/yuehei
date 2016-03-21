@@ -3,7 +3,7 @@ package com.yuanchuang.yohey.adapter;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.myData.Post;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.tools.TimeUtil;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -78,14 +78,14 @@ public class GalleryAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.add.setText("" + data.getJoincount());
-		data.getUser().bindHeaderView(holder.head);
-		holder.name.setText(data.getUser().getUsername());
-		holder.time.setText(TimeUtil.formateTimeToNow(data.getCreatetime() * 1000L));
+		data.getUser().binderImageView(holder.head);
+		holder.name.setText(data.getUser().getNickName());
+		holder.time.setText(TimeUtil.formateTimeToNow(data.getCreatedAt()));
 		holder.area.setText(data.getGame().getGameregion());
 		holder.dan.setText(data.getGame().getGamedan());
 		holder.context.removeAllViews();
 		TextView text = new TextView(context);
-		text.setText(data.getContent());
+		text.setText(data.getTitle());
 		text.setPadding(10, 5, 0, 0);
 		text.setTextSize(12);
 		holder.context.addView(text);

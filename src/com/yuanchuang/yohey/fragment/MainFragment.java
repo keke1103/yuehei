@@ -1,12 +1,7 @@
 package com.yuanchuang.yohey.fragment;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.yuanchuang.yohey.OfficialinformationActivity;
 import com.yuanchuang.yohey.PersonalPostActivity;
@@ -16,11 +11,9 @@ import com.yuanchuang.yohey.Vide0CollectionActivity;
 import com.yuanchuang.yohey.adapter.GalleryAdapter;
 import com.yuanchuang.yohey.adapter.MainAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.Game;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.AdapterData;
-import com.yuanchuang.yohey.myData.Post;
-import com.yuanchuang.yohey.tools.HttpGet;
-import com.yuanchuang.yohey.tools.HttpPost;
-import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -43,19 +36,20 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 @SuppressWarnings("deprecation")
 public class MainFragment extends Fragment {
 	PopupWindow popupWindow;
-	
-	String str3[];//游戏大区的具体数据
-	ListView listView1;//游戏大区的listview
-	int listViewPosition;//listview1的第几项
-	ListView listView2;//游戏大区listview
-	TextView gameZone;//游戏大区
-	ImageView gameDan;//游戏段位
+
+	String str3[];// 游戏大区的具体数据
+	ListView listView1;// 游戏大区的listview
+	int listViewPosition;// listview1的第几项
+	ListView listView2;// 游戏大区listview
+	TextView gameZone;// 游戏大区
+	ImageView gameDan;// 游戏段位
 	View myView;// 视图
 	ListView listView;
 	List<Post> reList;
@@ -78,6 +72,10 @@ public class MainFragment extends Fragment {
 	RelativeLayout afarid_official;// 官方新动态
 	RelativeLayout video_highlights;// 视屏集锦
 	RelativeLayout win_points;// 转转赢积分
+	/**
+	 * 当前锁定区服;默认为null，就是全服
+	 */
+	String gameregion;
 
 	@SuppressLint({ "InflateParams", "CutPasteId" })
 	@Override
@@ -88,16 +86,16 @@ public class MainFragment extends Fragment {
 		reList = new ArrayList<Post>();
 		myView = inflater.inflate(R.layout.activity_yue_lu_main, lay);
 		findView();// 找到本页面的id
-		getData();
-		adapter = new MainAdapter(list, getActivity());
 
 		View view = inflater.inflate(R.layout.list_head_view, null);
 		findInflate(view);// 找到导入的头文件的id
 		gallery = (Gallery) view.findViewById(R.id.main_list_head_gallery);
-
-		getRemData();
 		galleryAdapter = new GalleryAdapter(reList, getActivity());
 		gallery.setAdapter(galleryAdapter);
+		getRemData(gameregion, -1, -1);
+
+		adapter = new MainAdapter(list, getActivity());
+		getPostData(gameregion, -1, -1);
 
 		listView.addHeaderView(view);
 		listView.setAdapter(adapter);
@@ -112,40 +110,44 @@ public class MainFragment extends Fragment {
 		return myView;
 
 	}
+
 	/**
 	 * 设置PopupWindow
+	 * 
 	 * @param view
 	 */
 	@SuppressLint("InflateParams")
-	private void showPopupWindow(View view,String str[]){
-		View contentView=LayoutInflater.from(getActivity()).inflate(R.layout.game_zone_main,null);
-		listView1=(ListView)contentView.findViewById(R.id.game_zone_listview1);
-		listView2=(ListView)contentView.findViewById(R.id.game_zone_listview2);
-		ArrayList<String> list=new ArrayList<String>();
-		for(int i=0;i<str.length;i++){
+	private void showPopupWindow(View view, String str[]) {
+		View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.game_zone_main, null);
+		listView1 = (ListView) contentView.findViewById(R.id.game_zone_listview1);
+		listView2 = (ListView) contentView.findViewById(R.id.game_zone_listview2);
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i = 0; i < str.length; i++) {
 			list.add(str[i]);
 		}
-		ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
+				list);
 		listView1.setAdapter(arrayAdapter);
-		popupWindow=new PopupWindow(contentView,600,LayoutParams.WRAP_CONTENT,true);
+		popupWindow = new PopupWindow(contentView, 600, LayoutParams.WRAP_CONTENT, true);
 		popupWindow.setTouchable(true);
 		popupWindow.setFocusable(true);
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white));
 		popupWindow.showAsDropDown(view);
 	}
-	
-    /**
-     * 控件ID
-     * @param view
-     */
-	private void findInflate(View view) {       
+
+	/**
+	 * 控件ID
+	 * 
+	 * @param view
+	 */
+	private void findInflate(View view) {
 		main_guang_gao = (ViewFlipper) view.findViewById(R.id.main_image_guang_gao);
 		playerHead1 = (ImageView) view.findViewById(R.id.main_image_recommended_user1);
 		playerHead2 = (ImageView) view.findViewById(R.id.main_image_recommended_user2);
 		playerHead3 = (ImageView) view.findViewById(R.id.main_image_recommended_user3);
 		playerHead4 = (ImageView) view.findViewById(R.id.main_image_recommended_user4);
 		playerHead5 = (ImageView) view.findViewById(R.id.main_image_recommended_user5);
-		more = (LinearLayout)view.findViewById(R.id.main_image_recommended_geng_duo_linear);
+		more = (LinearLayout) view.findViewById(R.id.main_image_recommended_geng_duo_linear);
 		new_freads = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_new_freads);
 		afarid_official = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_not_afarid_official);
 		video_highlights = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_video_highlights);
@@ -168,14 +170,14 @@ public class MainFragment extends Fragment {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			switch (parent.getId()) {
 			case R.id.game_zone_listview2:
-				if(listViewPosition==2){
-					gameZone.setText(str3[position+19]);
-					Log.i(">>>>>>>>>>>>>>>",str3[position]);
-				}else{
+				if (listViewPosition == 2) {
+					gameZone.setText(str3[position + 19]);
+					Log.i(">>>>>>>>>>>>>>>", str3[position]);
+				} else {
 					gameZone.setText(str3[position]);
-					Log.i(">>>>>>>>>>>>>>>",str3[position]);
-				}	
-				popupWindow.dismiss();//关闭popupWindow
+					Log.i(">>>>>>>>>>>>>>>", str3[position]);
+				}
+				popupWindow.dismiss();// 关闭popupWindow
 				break;
 			case R.id.main_list_posts:
 				intent.setClass(getActivity(), PersonalPostActivity.class);
@@ -185,37 +187,38 @@ public class MainFragment extends Fragment {
 				startActivity(intent);
 				break;
 			case R.id.game_zone_listview1:
-				listViewPosition=position;
-				str3=getResources().getStringArray(R.array.game_region);
-				ArrayList<String> list=new ArrayList<String>();
+				listViewPosition = position;
+				str3 = getResources().getStringArray(R.array.game_region);
+				ArrayList<String> list = new ArrayList<String>();
 				switch (position) {
-				case 0:	
-					for(int i=0;i<str3.length;i++){
+				case 0:
+					for (int i = 0; i < str3.length; i++) {
 						list.add(str3[i]);
 					}
 					break;
 				case 1:
-					for(int i=0;i<19;i++){
+					for (int i = 0; i < 19; i++) {
 						list.add(str3[i]);
 					}
 					break;
 				case 2:
-					for(int i=0;i<7;i++){
-						list.add(str3[i+19]);
+					for (int i = 0; i < 7; i++) {
+						list.add(str3[i + 19]);
 					}
 					break;
 				default:
 					break;
 				}
-				listView2.setVisibility(View.VISIBLE);				
-				ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,list);
+				listView2.setVisibility(View.VISIBLE);
+				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
+						android.R.layout.simple_list_item_1, list);
 				listView2.setAdapter(arrayAdapter);
 				listView2.setOnItemClickListener(clickListener);
 				break;
 			default:
 				break;
 			}
-		
+
 		}
 	};
 	OnClickListener onClickListener = new OnClickListener() {
@@ -248,7 +251,7 @@ public class MainFragment extends Fragment {
 
 				break;
 
-			case R.id.main_image_recommended_geng_duo_linear://跳转到推荐开黑的列表
+			case R.id.main_image_recommended_geng_duo_linear:// 跳转到推荐开黑的列表
 				intent.setClass(getActivity(), RecommendActivity.class);
 				startActivity(intent);
 				break;
@@ -268,12 +271,12 @@ public class MainFragment extends Fragment {
 			case R.id.main_list_head_liner_win_points:
 
 				break;
-			case R.id.title_navigation_game_zone://游戏大区的点击事件
-				String str[]={"全部","电信","网通"};
-				showPopupWindow(v,str);
+			case R.id.title_navigation_game_zone:// 游戏大区的点击事件
+				String str[] = { "全部", "电信", "网通" };
+				showPopupWindow(v, str);
 				listView1.setOnItemClickListener(clickListener);
 				break;
-			case R.id.title_navigation_text_right_title://游戏段位的点击事件
+			case R.id.title_navigation_text_right_title:// 游戏段位的点击事件
 				showPopupWindow(v, getResources().getStringArray(R.array.game_dan));
 				break;
 			default:
@@ -282,79 +285,102 @@ public class MainFragment extends Fragment {
 
 		}
 	};
-	private OnSendListener mListener = new OnSendListener() {
 
-		@Override
-		public void start() {
+	private void getRemData(String gameregion, int gamedanmin, int gamedanmax) {
+		FindListener<Post> findLister = new FindListener<Post>() {
+
+			public void onSuccess(List<Post> arg0) {
+				galleryAdapter.setData(arg0);
+			}
+
+			public void onError(int arg0, String arg1) {
+				Log.w("MainFragment", "" + arg1);
+			}
+		};
+
+		BmobQuery<Post> query = new BmobQuery<Post>();
+		query.setLimit(6);
+		query.include("user");
+		query.include("game");
+		BmobQuery<Game> gameQuery = null;
+
+		if (gameregion != null) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereEqualTo("gameregion", gameregion);
+
 		}
-
-		@Override
-		public void end(String result) {
-			JSONObject jor;
-			try {
-				jor = new JSONObject(result);
-				if (jor.getInt("stauts") == 1) {
-					JSONArray ja = jor.getJSONArray("result");
-					list = new ArrayList<Post>();
-					for (int i = 0; i < ja.length(); i++) {
-						list.add(Post.paresJSONObject(ja.getJSONObject(i)));
-					}
-					adapter.setData(list);
-				} else {
-					Toast.makeText(getActivity(), jor.getString("message"), Toast.LENGTH_SHORT).show();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-				Log.w("HttpPost result", result);
-			}
+		if (gamedanmin > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereGreaterThanOrEqualTo("gamedan", gamedanmin);
 		}
-	};
-
-	private void getRemData() {
-		HttpGet p = new HttpGet(YoheyApplication.ServiceIp + "/index.php/home/api/getrecommend");
-		p.setOnSendListener(new OnSendListener() {
-
-			@Override
-			public void start() {
-
-			}
-
-			@Override
-			public void end(String result) {
-				try {
-					JSONObject jjo = new JSONObject(result);
-					if (jjo.getInt("stauts") == 1) {
-						JSONArray ja = jjo.getJSONArray("result");
-						for (int i = 0; i < ja.length(); i++) {
-							Post p = Post.paresJSONObject(ja.getJSONObject(i));
-							Log.i("remind post", i +"<><>"+ p.getId());
-							reList.add(p);
-						}
-						galleryAdapter.setData(reList);
-					}
-
-				} catch (JSONException e) {
-
-					e.printStackTrace();
-				}
-			}
-		});
-		p.send();
+		if (gamedanmax > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereLessThanOrEqualTo("gamedan", gamedanmax);
+		}
+		if (gameQuery != null) {
+			query.addWhereMatchesQuery("game", "Game", gameQuery);
+		}
+		query.addWhereGreaterThan("recommend", 0);
+		query.findObjects(getActivity(), findLister);
 	}
 
-	private void getData() {
-		try {
-			HttpPost p = HttpPost.parseUrl(YoheyApplication.ServiceIp + "/index.php/home/api/main");
-			p.setOnSendListener(mListener);
-			p.send();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+	/**
+	 * 首页普通帖子数据的获取
+	 * 
+	 * @param gameregion
+	 *            区服的筛选 (不筛选传null)
+	 * @param gamedanmin
+	 *            最小段位筛选(不筛选传-1)
+	 * @param gamedanmax
+	 *            最高段位筛选(不筛选传-1)
+	 */
+	private void getPostData(String gameregion, int gamedanmin, int gamedanmax) {
+
+		FindListener<Post> findLister = new FindListener<Post>() {
+
+			public void onSuccess(List<Post> arg0) {
+				adapter.setData(arg0);
+			}
+
+			public void onError(int arg0, String arg1) {
+				Log.w("MainFragment", "" + arg1);
+			}
+		};
+
+		BmobQuery<Post> query = new BmobQuery<Post>();
+		query.setLimit(6);
+		query.include("user");
+		query.include("game");
+		BmobQuery<Game> gameQuery = null;
+
+		if (gameregion != null) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereEqualTo("gameregion", gameregion);
 		}
+		if (gamedanmin > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereGreaterThanOrEqualTo("gamedan", gamedanmin);
+		}
+		if (gamedanmax > -1) {
+			if (gameQuery == null)
+				gameQuery = new BmobQuery<Game>();
+			gameQuery.addWhereLessThanOrEqualTo("gamedan", gamedanmax);
+		}
+		if (gameQuery != null) {
+			query.addWhereMatchesQuery("game", "Game", gameQuery);
+		}
+
+		query.findObjects(getActivity(), findLister);
 	}
 
 	private void findView() {
-		gameDan=(ImageView)myView.findViewById(R.id.title_navigation_text_right_title);
-		gameZone=(TextView)myView.findViewById(R.id.title_navigation_game_zone);
+		gameDan = (ImageView) myView.findViewById(R.id.title_navigation_text_right_title);
+		gameZone = (TextView) myView.findViewById(R.id.title_navigation_game_zone);
 		listView = (ListView) myView.findViewById(R.id.main_list_posts);
 		gameZone.setOnClickListener(onClickListener);
 		gameDan.setOnClickListener(onClickListener);
@@ -412,6 +438,12 @@ public class MainFragment extends Fragment {
 		public OnClickListener getListener() {
 			return listener;
 		}
+	}
 
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == 1) {
+			getPostData(gameregion, -1, -1);
+			getRemData(gameregion, -1, -1);
+		}
 	}
 }

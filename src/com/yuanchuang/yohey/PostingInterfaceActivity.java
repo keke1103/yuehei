@@ -1,29 +1,23 @@
 package com.yuanchuang.yohey;
 
-import java.net.MalformedURLException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.yuanchuang.yohey.app.YoheyApplication;
-import com.yuanchuang.yohey.myData.Game;
-import com.yuanchuang.yohey.tools.HttpPost;
-import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
+import com.yuanchuang.yohey.bmob.Game;
+import com.yuanchuang.yohey.bmob.Post;
+import com.yuanchuang.yohey.bmob.User;
 
 import android.app.Activity;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * 发表帖子页面
@@ -39,7 +33,7 @@ public class PostingInterfaceActivity extends Activity {
 	EditText context;// 帖子内容
 	CheckBox areaSet;// 权限设置
 	YoheyApplication application;
-	int gid;
+	Game game;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +48,7 @@ public class PostingInterfaceActivity extends Activity {
 		text.setLayoutParams(params);
 		text.setTextSize(13);
 		text.setText(R.string.cancel);
+		game = BmobUser.getCurrentUser(getApplicationContext(), User.class).getDefGame();
 		toReturn.addView(text);
 	}
 
@@ -84,7 +79,7 @@ public class PostingInterfaceActivity extends Activity {
 				showArea();
 				break;
 			case R.id.title_navigation_text_right_title:
-				surePost();
+				submit();
 				break;
 			case R.id.title_navigation_view:
 				finish();
@@ -95,64 +90,43 @@ public class PostingInterfaceActivity extends Activity {
 		}
 	};
 
-	@SuppressWarnings("deprecation")
 	private void showArea() {
-		PopupWindow p = new PopupWindow(300, 300);
-		LinearLayout layout = new LinearLayout(this);
-		layout.setOrientation(LinearLayout.VERTICAL);
-		TextView text;
-
-		for (Game g : application.mUser.getGame()) {
-			text = new TextView(this);
-			text.setId(g.getId());
-			text.setText(g.getGameregion() + "-" + g.getGamename());
-			text.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					areaSet.setText(((TextView) v).getText());
-					gid = v.getId();
-				}
-			});
-			layout.addView(text);
-		}
-
-		p.setContentView(layout);
-		p.setBackgroundDrawable(new BitmapDrawable());
-		p.showAsDropDown(areaSet);
+		/*
+		 * PopupWindow p = new PopupWindow(300, 300); LinearLayout layout = new
+		 * LinearLayout(this); layout.setOrientation(LinearLayout.VERTICAL);
+		 * TextView text;
+		 * 
+		 * for (Game g : application.mUser.getGame()) { text = new
+		 * TextView(this); text.setId(g.getId()); text.setText(g.getGameregion()
+		 * + "-" + g.getGamename()); text.setOnClickListener(new
+		 * OnClickListener() { public void onClick(View v) {
+		 * areaSet.setText(((TextView) v).getText()); gid = v.getId(); } });
+		 * layout.addView(text); }
+		 * 
+		 * p.setContentView(layout); p.setBackgroundDrawable(new
+		 * BitmapDrawable()); p.showAsDropDown(areaSet);
+		 */
 	}
 
-	private void surePost() {
-		String content = context.getText().toString();
-		if (!TextUtils.isEmpty(content) && gid != 0) {
-			try {
-				HttpPost post = HttpPost.parseUrl(YoheyApplication.ServiceIp + "/index.php/home/api/postcreate");
-				post.putString("token", application.token);
-				post.putString("uid", application.mUser.getId() + "");
-				post.putString("gid", gid + "");
-				post.putString("title", content);
-				post.setOnSendListener(new OnSendListener() {
-					public void start() {
-					}
+	private void submit() {
+		User user = BmobUser.getCurrentUser(this, User.class);
+		Post p = new Post();
+		p.setUser(user);
+		p.setGame(user.getDefGame());
+		p.setTitle(context.getText().toString());
+		p.save(getApplicationContext(), new SaveListener() {
 
-					public void end(String result) {
-						try {
-							JSONObject jo = new JSONObject(result);
-							if (jo.getInt("stauts") == 1) {
-								finish();
-							} else {
-								Toast.makeText(getApplicationContext(), jo.getString("message"), Toast.LENGTH_SHORT)
-										.show();
-							}
-						} catch (JSONException e) {
-
-							e.printStackTrace();
-						}
-
-					}
-				});
-				post.send();
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
+			public void onSuccess() {
+				Toast.makeText(getApplicationContext(), "帖子发表成功", Toast.LENGTH_SHORT).show();
+				setResult(1);
+				finish();
 			}
-		}
+
+			public void onFailure(int arg0, String arg1) {
+				Toast.makeText(getApplicationContext(), "帖子发表失败:" + arg1, Toast.LENGTH_SHORT).show();
+			}
+		});
+
 	}
+
 }

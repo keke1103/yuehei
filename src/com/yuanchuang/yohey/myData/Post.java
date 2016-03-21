@@ -17,14 +17,13 @@ public class Post {
 	int joincount;
 	int recommend;
 	int uid;
+	User user;
+	int gid;
+	Game game;
 
 	public Game getGame() {
 		return game;
 	}
-
-	User user;
-	int gid;
-	Game game;
 
 	/**
 	 * 获得帖子id;

@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import com.yuanchuang.yohey.adapter.PersonalPostAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
-import com.yuanchuang.yohey.myData.Post;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.PostComment;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
@@ -82,7 +82,7 @@ public class PersonalPostActivity extends Activity {
 
 	private void getData() {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "/index.php/home/api/comment");
-		get.putString("pid", "" + post.getId());
+		// get.putString("pid", "" + post.getId());
 		get.setOnSendListener(mListener);
 		get.send();
 	}
@@ -171,13 +171,16 @@ public class PersonalPostActivity extends Activity {
 	 * 设置帖子内容的显示
 	 */
 	private void setData() {
-		nickName.setText(post.getUser().getUsername());
-		post.getUser().bindHeaderView(head);
-		time.setText(TimeUtil.formateTimeToNow(post.getCreatetime() * 1000L));
+		nickName.setText(post.getUser().getNickName());
+		post.getUser().binderImageView(head);
+		time.setText(TimeUtil.formateTimeToNow(post.getCreatedAt()));
 		joinCount.setText("" + post.getJoincount());
 		comCount.setText("" + post.getComcount());
 		likeCount.setText("" + post.getLikenumber());
-		if (!TextUtils.isEmpty(post.getContent()))
-			getContext(post.getContent());
+		if (!TextUtils.isEmpty(post.getTitle())) {
+			getContext(post.getTitle());
+		} else {
+
+		}
 	}
 }

@@ -1,10 +1,13 @@
 package com.yuanchuang.yohey;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ViewFlipper;
 
 public class WelcomeActivity extends Activity {
@@ -30,13 +33,32 @@ public class WelcomeActivity extends Activity {
 		mView.setFlipInterval(5000);
 		mView.startFlipping();
 
+		handler.postDelayed(run, 15500);
+
 	}
 
-	class MyHalder extends Handler {
-		@Override
+	@SuppressLint("HandlerLeak")
+	Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			super.handleMessage(msg);
+			mView.stopFlipping();
+			mView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = getIntent();
+					intent.setClass(getApplicationContext(), LoginAndRegistered.class);
+					startActivity(intent);
+					finish();
+				}
+			});
 		}
-	}
+	};
+
+	Runnable run = new Runnable() {
+
+		public void run() {
+			handler.sendEmptyMessage(1);
+		}
+	};
+
 }

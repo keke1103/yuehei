@@ -67,7 +67,6 @@ public class MainActivity extends FragmentActivity {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.selection_bar_post_share:
 				if (postshare) {
@@ -80,7 +79,7 @@ public class MainActivity extends FragmentActivity {
 				break;
 			case R.id.fragment_text_post:
 				intent = new Intent(MainActivity.this, PostingInterfaceActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, 100);
 				break;
 			case R.id.fragment_text_share:
 				intent = new Intent(MainActivity.this, ShareItActivity.class);
@@ -165,5 +164,12 @@ public class MainActivity extends FragmentActivity {
 		public void onPageScrollStateChanged(int arg0) {
 
 		}
+	};
+
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		if (arg0 == 100) {
+			mainFragment.onActivityResult(arg0, arg1, arg2);
+		}
+
 	};
 }

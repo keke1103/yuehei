@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.R;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ public class Message_Fragment extends Fragment {
 	ListView listview;
 	String[] str={"赵日天","黑色玫瑰妹纸","12：08","3"};
 	LayoutInflater inflater;
+@SuppressLint("InflateParams")
 @Override
 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	// TODO Auto-generated method stub
