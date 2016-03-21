@@ -42,6 +42,7 @@ public class Set_Activity extends Activity {
 	}
 
 	OnClickListener listener = new OnClickListener() {
+		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.tv_account_manager://跳转到界面管理界面

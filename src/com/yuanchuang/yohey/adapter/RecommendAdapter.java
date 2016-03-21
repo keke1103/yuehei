@@ -71,10 +71,10 @@ public class RecommendAdapter extends BaseAdapter {
 		}
 
 		holder.head.setBackgroundResource(R.drawable.zhao_ri_tian_bu_fu);
-		holder.name.setText((CharSequence) list.get(position).getReco_name());
+		holder.name.setText(list.get(position).getReco_name());
 		holder.dan.setText(list.get(position).getReco_dan());
 		holder.area.setText(list.get(position).getReco_area());
-		holder.message.setText((CharSequence) list.get(position).getReco_message());
+		holder.message.setText(list.get(position).getReco_message());
 
 		return convertView;
 	}

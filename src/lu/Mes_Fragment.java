@@ -30,6 +30,7 @@ public class Mes_Fragment extends Fragment {
 	MyAdapter adapter;
 	View view;
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		this.inflater = inflater;

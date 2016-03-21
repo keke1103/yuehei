@@ -53,6 +53,7 @@ public class Picture {
 	public void binderImageView(ImageView v) {
 		this.mView = v;
 		mHandler = new Handler() {
+			@Override
 			public void handleMessage(android.os.Message msg) {
 				// if (mBitmap != null)
 				mView.setBackgroundColor(0);
@@ -65,6 +66,7 @@ public class Picture {
 	public void setBitmap() {
 
 		new Thread() {
+			@Override
 			public void run() {
 				URL url;
 				try {

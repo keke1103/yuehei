@@ -266,11 +266,13 @@ public class HttpPost {
 
 	private class MyAyckTast extends AsyncTask<Void, Integer, String> {
 
+		@Override
 		protected String doInBackground(Void... params) {
 
 			return sendInBack();
 		}
 
+		@Override
 		protected void onPostExecute(String result) {
 			if (mListener != null)
 				mListener.end(result);

@@ -72,11 +72,12 @@ public class PostSAdater extends BaseAdapter {
 		{
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.head.setImageResource(R.drawable.meng_mei_head);
-		holder.name.setText((CharSequence) list.get(position).getPost_name());
-		holder.time.setText((CharSequence) list.get(position).getPost_time());
+
+		holder.name.setText(list.get(position).getPost_name());
+		holder.time.setText(list.get(position).getPost_time());
 		holder.browse.setText(list.get(position).getPost_browse() + "");
 		holder.message.setText(list.get(position).getPost_message() + "");
+
 		holder.con.setText(list.get(position).getPost_con());
 		return convertView;
 	}

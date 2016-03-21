@@ -6,14 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.R.drawable;
-import com.yuanchuang.yohey.R.id;
-import com.yuanchuang.yohey.R.layout;
-import com.yuanchuang.yohey.fragment.Message_Fragment.Adapter;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class Message_Fragment extends Fragment {
 	Map<String,String> map;
@@ -64,6 +57,7 @@ public Adapter(List<Map<String,String>> list)
 	
 }
 
+@Override
 public int getCount() {
 		// TODO Auto-generated method stub
 		return arraylist.size();

@@ -27,8 +27,8 @@ public class PostingInterfaceActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_posting_interface);
 		findView();
-		LayoutParams params = new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		TextView text = new TextView(this);
 		text.setLayoutParams(params);
 		text.setTextSize(13);

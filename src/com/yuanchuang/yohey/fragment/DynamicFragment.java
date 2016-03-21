@@ -64,7 +64,7 @@ public class DynamicFragment extends Fragment {
 		Log.i("DynamicFragment", "DynamicFragment");
 		mAdapter = new DynamicAdapter(getActivity(), list);
 		android.widget.AbsListView.LayoutParams params = new android.widget.AbsListView.LayoutParams(
-				LinearLayout.LayoutParams.FILL_PARENT, DensityUtil.dip2px(getActivity(), 133));
+				LayoutParams.FILL_PARENT, DensityUtil.dip2px(getActivity(), 133));
 		View v = new View(getActivity());
 		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.dynamic_banner));
 		v.setLayoutParams(params);
