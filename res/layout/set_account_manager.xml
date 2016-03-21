@@ -2,78 +2,107 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F5F4"
     android:orientation="vertical" >
+
     <!-- 帐号管理界面 -->
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="50dp"
+        android:background="@color/black" >
 
+<!-- 標題 -->
         <ImageView
+            android:id="@+id/set_account_to_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/yo_hey_back_image" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/yo_hey_back_image"
+            android:contentDescription="@drawable/yo_hey_back_image" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/account_manager"
-            android:textSize="15sp" />
+            android:textColor="@color/write"
+            android:textSize="16sp" />
     </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/beizhu" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="206.6dp"
+        android:background="@drawable/yo_hey_material_background" >
 
+<!-- 头像 -->
         <ImageView
+            android:id="@+id/set_account_head"
+            android:layout_width="69.3dp"
+            android:layout_height="69.3dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:contentDescription="@drawable/meng_mei_head"
+            android:src="@drawable/meng_mei_head" />
+
+<!-- 用户名 -->
+        <TextView
+            android:id="@+id/set_account_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/icon" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:text="用户名" />
+            android:layout_below="@id/set_account_head"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:text="用户名"
+            android:textColor="#E4F037"
+            android:textSize="16sp" />
     </RelativeLayout>
 
-    <View
+<!-- 添加账户 -->
+    <LinearLayout
+        android:id="@+id/set_account_add_linear_account_number"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/write"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@color/beizhu"
-            android:src="@drawable/add" />
+            android:layout_width="18.6dp"
+            android:layout_height="18.6dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginRight="7dp"
+            android:contentDescription="@drawable/add_icon"
+            android:src="@drawable/add_icon" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:text="@string/add_account" />
-    </RelativeLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_account"
+            android:textColor="@color/main_title_text"
+            android:textSize="13sp" />
+    </LinearLayout>
 
-    <View
+<!-- 退出当前账号 -->
+    <LinearLayout
+        android:id="@+id/set_account_exit_account_linear_account_number"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="#E9F83D"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退出当前账号"
+            android:textColor="@color/main_title_text"
+            android:textSize="13sp" />
+    </LinearLayout>
 
 </LinearLayout>

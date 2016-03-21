@@ -2,29 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/thread_gray"
+    android:background="#F3F4F6"
     android:orientation="vertical" >
 
     <include
         android:id="@+id/homepage_title_bar"
         layout="@layout/title_navigation_bar" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:background="@color/thread_gray" />
-
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@color/write"
         android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="10dp"
+            android:background="@color/write" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#D9DADC" />
 
         <LinearLayout
             android:id="@+id/homepage_text_my_msg"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="3dp"
             android:background="@color/write"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
@@ -39,83 +44,158 @@
                 android:contentDescription="@drawable/yo_hey_head_portrait"
                 android:src="@drawable/yo_hey_head_portrait" />
 
-            <TextView
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SKT-1 Caker"
+                    android:textColor="@color/main_title_text"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="游戏大区："
+                        android:textColor="@color/main_title_text"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:text="艾欧尼亚"
+                        android:textColor="@color/main_title_text"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/my_msg"
-                android:textColor="@color/main_title_text"
-                android:textSize="12sp" />
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/right_arrow_icon"
+                android:src="@drawable/right_arrow_icon" />
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:background="#D9DADC" />
 
         <LinearLayout
             android:id="@+id/homepage_text_my_post"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="40dp"
             android:background="@color/write"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="20dp"
+                android:layout_width="13dp"
+                android:layout_height="19dp"
+                android:layout_marginEnd="15.3dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="15.3dp"
+                android:layout_marginStart="22dp"
                 android:contentDescription="@drawable/my_posts_icon"
                 android:src="@drawable/my_posts_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/my_post"
                 android:textColor="@color/main_title_text"
                 android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/right_arrow_icon"
+                android:src="@drawable/right_arrow_icon" />
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:background="#D9DADC" />
 
         <LinearLayout
             android:id="@+id/homepage_text_score"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="40dp"
             android:background="@color/write"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="17dp"
+                android:layout_height="19dp"
+                android:layout_marginEnd="14dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="14dp"
                 android:layout_marginStart="20dp"
                 android:contentDescription="@drawable/iconfont_geren"
                 android:src="@drawable/integral_icon" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/score"
                 android:textColor="@color/main_title_text"
                 android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/right_arrow_icon"
+                android:src="@drawable/right_arrow_icon" />
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:background="#D9DADC" />
 
         <LinearLayout
             android:id="@+id/homepage_text_system_set"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
             android:background="@color/write"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginEnd="12dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="12dp"
                 android:layout_marginStart="20dp"
                 android:contentDescription="@drawable/system_settings_icon"
                 android:src="@drawable/system_settings_icon" />
@@ -136,6 +216,11 @@
                 android:contentDescription="@drawable/right_arrow_icon"
                 android:src="@drawable/right_arrow_icon" />
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#D9DADC" />
     </LinearLayout>
 
 </LinearLayout>

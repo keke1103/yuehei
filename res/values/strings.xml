@@ -161,7 +161,7 @@
     <string name="add_need">加我时需要验证</string>
     <string name="qq_friend">向我推荐QQ好友</string>
     <string name="search_by_tel">可通过手机号搜索到我</string>
-    <string name="blacklist">黑名单</string>
+    <string name="blacklist">通讯录黑名单</string>
     <string name="do_let_them_see">不让他（她）看到我的lu友圈</string>
     <string name="say_something">说点什么吧...</string>
     <string name="display_location">显示位置</string>
