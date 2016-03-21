@@ -2,187 +2,210 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F5F4"
     android:orientation="vertical" >
+
     <!-- 帐号安全界面 -->
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="50dp"
+        android:background="@color/black" >
+
+        <!-- 标题 -->
 
         <ImageView
+            android:id="@+id/account_safety_image_to_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/yo_hey_back_image" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/yo_hey_back_image"
+            android:contentDescription="@drawable/yo_hey_back_image" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/account_safety"
-            android:textSize="15sp" />
+            android:textColor="@color/write"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/beizhu" />
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="10dp"
+        android:background="#E2E4E3" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/write"
+        android:orientation="vertical" >
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/account_safety_linear_login_name"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <!-- 用户登录名 -->
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/login_name"
+                android:textColor="@color/main_title_text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/account_safety_text_login_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/account_manager"
+                android:textColor="@color/main_text"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="#D9D9D9" />
+
+        <LinearLayout
+            android:id="@+id/account_safety_linear_email_addr"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:text="@string/login_name" />
+            android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:gravity="center_vertical"
-            android:text="300M" />
-    </RelativeLayout>
+            <!-- 邮箱地址 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/email_addr"
+                android:textColor="#383838"
+                android:textSize="14sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
+            <TextView
+                android:id="@+id/account_safety_text_email_addr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/unbind"
+                android:textColor="@color/main_text"
+                android:textSize="14sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:contentDescription="@drawable/right_arrow_icon"
+                android:src="@drawable/right_arrow_icon" />
+        </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="#D9D9D9" />
+
+        <LinearLayout
+            android:id="@+id/account_safety_linear_phone_number"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:text="@string/email_addr" />
+            android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:gravity="center_vertical"
-            android:text="@string/unbind" />
+            <!-- 手机号 -->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/rub_course_go_to_next_right" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/tel"
+                android:textColor="#383838"
+                android:textSize="14sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
+            <TextView
+                android:id="@+id/account_safety_text_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/account_manager"
+                android:textColor="@color/main_text"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/tel" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:gravity="center_vertical"
-            android:text="10086" />
-    </RelativeLayout>
+        android:layout_marginBottom="10dp"
+        android:background="#E2E4E3" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+        android:background="#E2E4E3" />
+    <!-- 修改密码 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/change_pw" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/account_safety_text_change_password"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/change_pw" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:background="#D9D9D9" />
+    <!-- 安全中心 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/safety_center" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/account_safety_text_safety_center"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/safety_center" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+        android:background="#E2E4E3" />
 
 </LinearLayout>

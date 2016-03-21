@@ -2,58 +2,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/write"
     android:orientation="vertical" >
+
     <!-- 问题反馈界面 -->
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="50dp"
+        android:background="@color/black" >
+
+        <!-- 标题 -->
 
         <ImageView
+            android:id="@+id/question_image_to_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/yo_hey_back_image" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/yo_hey_back_image"
+            android:contentDescription="@drawable/yo_hey_back_image" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/question_back"
-            android:textSize="15sp" />
+            android:textColor="@color/write"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/beizhu" />
+        android:layout_height="10dp"
+        android:background="#F3F5F4" />
+    <!-- 反馈内容 -->
 
     <EditText
+        android:id="@+id/question_image_edit_content"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@null"
         android:gravity="start"
         android:hint="@string/say_something"
-        android:singleLine="false" />
+        android:inputType="text" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp" >
+        android:layout_height="30dp"
+        android:gravity="center_vertical" >
 
-        <TextView
+        <!-- 显示位置 -->
+
+        <LinearLayout
+            android:id="@+id/question_image_linear_display_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:text="@string/display_location" />
+            android:orientation="horizontal" >
 
-        <TextView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@drawable/display_position"
+                android:src="@drawable/display_position" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:text="@string/display_location" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <!-- 公开 -->
+
+        <LinearLayout
+            android:id="@+id/question_image_linear_globe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:text="@string/str_public" />
-    </RelativeLayout>
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@drawable/globe"
+                android:src="@drawable/globe" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:text="@string/str_public" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

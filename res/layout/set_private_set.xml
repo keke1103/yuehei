@@ -2,171 +2,233 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F5F4"
     android:orientation="vertical" >
+
     <!-- 隐私设置界面 -->
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="50dp"
+        android:background="@color/black" >
+
+        <ImageView
+            android:id="@+id/private_set_image_to_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/yo_hey_back_image"
+            android:contentDescription="@drawable/yo_hey_back_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/private_set"
+            android:textColor="@color/write"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#E2E4E3" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/write"
+        android:orientation="vertical" >
+
+        <!-- 加我时验证 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/add_need"
+                android:textColor="@color/main_title_text"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/private_set_check_box_add_need"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/selector_chack_box_slide_switches"
+                android:button="@null"
+                android:checked="false" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="#D9D9D9" />
+        <!-- 向我推荐扣扣好友 -->
+
+        <LinearLayout
+            android:id="@+id/system_settings_linear_safety"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/qq_friend"
+                android:textColor="@color/main_title_text"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/private_set_check_box_qq_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/selector_chack_box_slide_switches"
+                android:button="@null"
+                android:checked="true" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:background="#D9D9D9" />
+        <!-- 可通过手机号搜索到我 -->
+
+        <LinearLayout
+            android:id="@+id/system_settings_linear_usual_set"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/search_by_tel"
+                android:textColor="@color/main_title_text"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/private_set_check_box_search"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/selector_chack_box_slide_switches"
+                android:button="@null"
+                android:checked="true" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="10dp"
+        android:background="#E2E4E3" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#E2E4E3" />
+
+    <LinearLayout
+        android:id="@+id/private_set_linear_biack_list"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/blacklist"
+            android:textColor="@color/main_title_text"
+            android:textSize="14sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/yo_hey_back_image" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="隐私设置"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@drawable/right_arrow_icon"
+            android:src="@drawable/right_arrow_icon" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/beizhu" />
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:background="#D9D9D9" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
+    <LinearLayout
+        android:id="@+id/private_set_linear_not_see_mi"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/add_need" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/qq_friend" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/search_by_tel" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/blacklist" />
+            android:text="@string/do_let_them_see"
+            android:textColor="@color/main_title_text"
+            android:textSize="14sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/rub_course_go_to_next_right" />
-    </RelativeLayout>
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@drawable/right_arrow_icon"
+            android:src="@drawable/right_arrow_icon" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/do_let_them_see" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/rub_course_go_to_next_right" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+        android:background="#E2E4E3" />
 
 </LinearLayout>

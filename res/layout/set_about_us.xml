@@ -2,124 +2,111 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F5F4"
     android:orientation="vertical" >
+
     <!-- 关于我们界面 -->
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="50dp"
+        android:background="@color/black" >
+
+        <!-- 标题栏 -->
 
         <ImageView
+            android:id="@+id/set_about_us_to_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/yo_hey_back_image" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/yo_hey_back_image"
+            android:contentDescription="@drawable/yo_hey_back_image" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/about_us"
-            android:textSize="15sp" />
+            android:textColor="@color/write"
+            android:textSize="16sp" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/beizhu" />
-
-    <ImageView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_launcher" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+        <!-- 图标 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="13dp"
+            android:contentDescription="@drawable/log_ic"
+            android:src="@drawable/log_ic" />
+       
+        <!-- 版本号 -->
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/score_to_me" />
-    </RelativeLayout>
+            android:id="@+id/set_about_us_version_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:layout_marginTop="6dp"
+            android:text="lu3.2.0.9"
+            android:textColor="@color/main_title_text"
+            android:textSize="12sp" />
+    </LinearLayout>
+    
+    <!-- 给我们评分 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+    <TextView
+        android:id="@+id/set_about_us_score"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:text="@string/score_to_me"
+        android:textColor="@color/main_title_text"
+        android:textSize="12sp" />
+   
+    <!-- 功能介绍 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
+    <TextView
+        android:id="@+id/set_about_us_features"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:text="@string/function"
+        android:textColor="@color/main_title_text"
+        android:textSize="12sp" />
+    
+    <!-- 检查更新 -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/function" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/background" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/check_new_version" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/beizhu" />
+    <TextView
+        android:id="@+id/set_about_us_new_version"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:text="@string/check_new_version"
+        android:textColor="@color/main_title_text"
+        android:textSize="12sp" />
 
 </LinearLayout>
