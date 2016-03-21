@@ -23,11 +23,6 @@
             android:label="@string/app_name" >
         </activity>
         <activity android:name="com.yuanchuang.yohey.LoginAndRegistered" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.yuanchuang.yohey.IntegralExchangeCommodityActivity" >
         </activity>
@@ -38,7 +33,6 @@
         <activity
             android:name="com.yuanchuang.yohey.MainActivity"
             android:launchMode="singleTask" >
-            
         </activity>
         <activity android:name="com.yuanchuang.yohey.RecommendActivity" >
         </activity>
@@ -93,6 +87,13 @@
         <activity android:name="com.yuanchuang.yohey.ThumbUpActivity" >
         </activity>
         <activity android:name="com.yuanchuang.yohey.ForwardingActivity" >
+        </activity>
+        <activity android:name="com.yuanchuang.yohey.WelcomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!-- QQ第三方登陆所需注册页面 -->
         <activity

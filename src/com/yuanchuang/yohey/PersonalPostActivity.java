@@ -44,6 +44,7 @@ public class PersonalPostActivity extends Activity {
 	TextView rowse;// 浏览量
 	LinearLayout context;// 发表内容
 	EditText say;// 说一句
+	View send;// 发送
 	TextView title;// 标题
 	View toReturn;// 返回
 	TextView joinCount;
@@ -132,6 +133,9 @@ public class PersonalPostActivity extends Activity {
 			case R.id.title_navigation_back_icon:
 				finish();
 				break;
+			case R.id.personal_post_image_send:
+
+				break;
 			default:
 				break;
 			}
@@ -154,6 +158,9 @@ public class PersonalPostActivity extends Activity {
 
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		toReturn = findViewById(R.id.title_navigation_back_icon);
+		send = findViewById(R.id.personal_post_image_send);
+
+		send.setOnClickListener(onClickListener);
 		toReturn.setOnClickListener(onClickListener);
 		title.setText("帖子详情");
 		toReturn.setVisibility(View.VISIBLE);
