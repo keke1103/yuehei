@@ -186,6 +186,7 @@
     <string name="app_main_others">其他</string>
     <string name="app_main_appbar">应用吧</string>
     <string name="app_main_qqgroupp_api">群API</string>
+
     <!-- 游戏大区 -->
         <string-array name="game_region">
         <!-- 电信区 -->
@@ -217,4 +218,5 @@
         <item >扭曲森林</item>
         <item >巨龙之巢</item>
     </string-array>
+
 </resources>

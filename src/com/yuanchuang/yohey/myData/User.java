@@ -1,5 +1,6 @@
 package com.yuanchuang.yohey.myData;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +24,11 @@ public class User {
 	int likecount;// 我的点赞数
 	int likednumber;// 我的被点赞数
 	int defgid;// 默认区服游戏的ID
+	Game game[];
+
+	public Game[] getGame() {
+		return game;
+	}
 
 	public static User parseJsonObject(JSONObject jo) {
 		User u = new User();
@@ -51,6 +57,25 @@ public class User {
 		} catch (JSONException e8) {
 
 		}
+
+		try {
+			JSONArray gja = jo.getJSONArray("game");
+			u.game = new Game[gja.length()];
+			for (int i = 0; i < gja.length(); i++) {
+				u.game[i] = Game.paresJSONObejct(gja.getJSONObject(i));
+			}
+		} catch (JSONException e8) {
+
+		}
+		try {
+			JSONArray fja = jo.getJSONArray("friends");
+			u.friends = new User[fja.length()];
+			for (int i = 0; i < fja.length(); i++) {
+				u.friends[i] = User.parseJsonObject(fja.getJSONObject(i));
+			}
+		} catch (JSONException e8) {
+		}
+
 		try {
 			u.registertime = jo.getLong("registertime");
 		} catch (JSONException e7) {
