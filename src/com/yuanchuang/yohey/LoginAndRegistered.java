@@ -1,5 +1,7 @@
 package com.yuanchuang.yohey;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.json.JSONException;
@@ -59,6 +61,9 @@ public class LoginAndRegistered extends Activity {
 	TextView webLogin;// 微博登录
 
 	ImageView headicon;
+	
+	int zhandouli;//战斗力
+	int level;//游戏等级
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,36 +94,54 @@ public class LoginAndRegistered extends Activity {
 	 * 自定义的Dialog
 	 */
 	@SuppressLint({ "InflateParams", "NewApi" })
-	public void customDialog() {
+	public void customDialog(final User user) {
 		LayoutInflater inflater = getLayoutInflater();
 		View view = inflater.inflate(R.layout.choose_game_region_main, null);
 		final Spinner area = (Spinner) view.findViewById(R.id.choose_game_spinner);
 		final EditText name = (EditText) view.findViewById(R.id.choose_game_name);
-		name.setText("前面的灬给我趴下");
+		final EditText duanwei=(EditText)view.findViewById(R.id.choose_game_duanwei);
 		View btn = view.findViewById(R.id.choose_comit);
 
-		btn.setOnClickListener(new OnClickListener() {
-
+		btn.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
-				String a = ((TextView) area.getSelectedView()).getText().toString();
-				String n = name.getText().toString();
-				HttpGet get = new HttpGet("http://API.xunjob.cn/playerinfo.php?serverName=" + a + "&playerName=" + n);
-				get.putString("serverName", a);
-				get.putString("playerName", n);
-
+				final String a = ((TextView) area.getSelectedView()).getText().toString();
+				final String n = name.getText().toString();
+				final String d=duanwei.getText().toString();
+				HttpGet get;
+				try {
+					get = new HttpGet("http://API.xunjob.cn/playerinfo.php");//玩家的基本信息接口
+					get.putString("serverName", URLEncoder.encode(a, "UTF-8"));
+					get.putString("playerName",URLEncoder.encode(n, "UTF-8"));
+					
 				Log.i("insert", a + " -- " + n);
-				OnSendListener mListener = new OnSendListener() {
+				OnSendListener mListener = new OnSendListener() {				
 					public void start() {
-						// 03-22 00:44:33.498: I/insert(10271): 德玛西亚 -- 前面的灬给我趴下
 					}
-
 					public void end(String result) {
+						
 						Log.i("lol result", result);
-					}
+					
+							JSONObject object;
+							try {
+								object = new JSONObject(result);
+								level=object.getInt("level");
+								zhandouli=object.getInt("zhandouli");
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+	                        setGame(user, n,a, level,d,zhandouli);
+										
+					}	
 				};
 				get.setOnSendListener(mListener);
 				get.send();
+				
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -251,7 +274,10 @@ public class LoginAndRegistered extends Activity {
 			}
 		}
 	}
-
+    /**
+     * 第三方登陆的方法
+     * @param values 
+     */
 	private void loginByQq(JSONObject values) {
 
 		try {
@@ -350,7 +376,10 @@ public class LoginAndRegistered extends Activity {
 		}
 
 	}
-
+    /**
+     * 授权数据存到本地
+     * @param re
+     */
 	@SuppressWarnings("static-access")
 	public void saveLoginData(JSONObject re) {
 		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
@@ -359,7 +388,11 @@ public class LoginAndRegistered extends Activity {
 		edit.putString("qqData", re.toString());
 		edit.commit();
 	}
-
+    /**
+     * 获取本地的授权数据
+     * @return
+     * @throws JSONException
+     */
 	public JSONObject getLoginData() throws JSONException {
 		@SuppressWarnings("static-access")
 		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
@@ -374,19 +407,27 @@ public class LoginAndRegistered extends Activity {
 	 * 
 	 * @param user
 	 */
-	public void addGame(final User user) {
+	public void addGame(User user) {
 
-		customDialog();
+		customDialog(user);
 
 	}
-
-	private void setGame(final User user, String name, String region, int grade, int dan) {
+    /**
+     * 获得账号的基本信息
+     * @param user 
+     * @param name 游戏昵称
+     * @param region 区服
+     * @param grade 等级
+     * @param dan 段位
+     */
+	private void setGame(final User user, String name, String region, int grade, String dan,int zhandouli) {
 		final Game game = new Game();
 		game.setGamedan(dan);
 		game.setGamegrade(grade);
 		game.setGameregion(region);
 		game.setGamename(name);
 		game.setUser(user);
+		game.setZhandouli(zhandouli);
 		game.save(getApplicationContext(), new SaveListener() {
 
 			public void onSuccess() {
@@ -404,7 +445,9 @@ public class LoginAndRegistered extends Activity {
 			}
 		});
 	}
-
+    /**
+     * Activity回调
+     */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.i("LoginActivity", "-->onActivityResult " + requestCode + " resultCode=" + resultCode);
 		Log.i("LoginActivity", data.toString());

@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.yuanchuang.yohey.R;
 
 import android.annotation.SuppressLint;
@@ -182,5 +185,74 @@ public class User extends BmobUser {
 	public void setNickName(String nick) {
 		this.nickname = nick;
 	}
+	/**
+	 * 
+	 * @param jo
+	 * @return
+	 */
+	public static User parseJsonObject(JSONObject jo) {
+		User u = new User();
+		try {
+			u.setObjectId(jo.getString("objectId"));
+		} catch (JSONException e) {
+			return null;
+		}
+		try {
+			u.setUsername(jo.getString("username"));
+		} catch (JSONException e9) {
 
+		}
+		try {
+			u.setNickName(jo.getString("nickName"));
+		} catch (JSONException e9) {
+
+		}
+		try {
+			u.setIcon(jo.getString("icon"));
+			 
+		} catch (JSONException e8) {
+
+		}
+		try {
+			u.setCreatedAt(jo.getString("createdAt"));
+		} catch (JSONException e7) {
+
+		}
+		try {
+			u.ntegral=jo.getInt("ntegral");
+		} catch (JSONException e6) {
+
+		}
+		try {
+			u.tasknte = jo.getInt("tasknte");
+		} catch (JSONException e5) {
+
+		}
+		try {
+			u.likente = jo.getInt("likente");
+		} catch (JSONException e4) {
+
+		}
+		try {
+			u.bonuspoints = jo.getInt("bonuspoints");
+		} catch (JSONException e3) {
+
+		}
+		try {
+			u.likecount = jo.getInt("likecount");
+		} catch (JSONException e2) {
+
+		}
+		try {
+			u.likednumber = jo.getInt("likenumber");
+		} catch (JSONException e1) {
+
+		}
+		try {
+			u.defGame=Game.paresJSONObejct(jo.getJSONObject("defGame"));
+		} catch (JSONException e) {
+
+		}
+		return u;
+	}
 }

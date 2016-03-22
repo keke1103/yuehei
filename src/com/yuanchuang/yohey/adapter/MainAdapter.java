@@ -85,10 +85,8 @@ public class MainAdapter extends BaseAdapter {
 		}
 		holder.add.setText(p.getJoincount() + "");
 		holder.name.setText(p.getUser().getNickName());
-		Log.i("MainAdapter", p.getCreatedAt());
-		// holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatetime() *
-		// 1000L));
-		holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatedAt()));
+		//Log.i("MainAdapter", p.getCreatedAt());
+		//holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatedAt()));
 		holder.context.removeAllViews();
 		TextView text = new TextView(context);
 		text.setText(p.getTitle());

@@ -20,6 +20,13 @@
         android:background="@null"
         android:cursorVisible="false"
         android:hint="绑定游戏账号,昵称" />
+    <EditText 
+         android:id="@+id/choose_game_duanwei"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@null"
+        android:cursorVisible="false"
+        android:hint="游戏段位"/>
 
     <View
         android:layout_width="match_parent"

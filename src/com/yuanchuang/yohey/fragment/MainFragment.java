@@ -3,6 +3,10 @@ package com.yuanchuang.yohey.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.yuanchuang.yohey.OfficialinformationActivity;
 import com.yuanchuang.yohey.PersonalPostActivity;
 import com.yuanchuang.yohey.R;
@@ -37,7 +41,10 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+import cn.bmob.v3.AsyncCustomEndpoints;
+import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.CloudCodeListener;
 import cn.bmob.v3.listener.FindListener;
 
 @SuppressWarnings("deprecation")
@@ -92,7 +99,7 @@ public class MainFragment extends Fragment {
 		gallery = (Gallery) view.findViewById(R.id.main_list_head_gallery);
 		galleryAdapter = new GalleryAdapter(reList, getActivity());
 		gallery.setAdapter(galleryAdapter);
-		getRemData(gameregion, -1, -1);
+		//getRemData(gameregion, -1, -1);
 
 		adapter = new MainAdapter(list, getActivity());
 		getPostData(gameregion, -1, -1);
@@ -339,45 +346,59 @@ public class MainFragment extends Fragment {
 	 *            最高段位筛选(不筛选传-1)
 	 */
 	private void getPostData(String gameregion, int gamedanmin, int gamedanmax) {
-
-		FindListener<Post> findLister = new FindListener<Post>() {
-
-			public void onSuccess(List<Post> arg0) {
-				adapter.setData(arg0);
+		AsyncCustomEndpoints custom=new AsyncCustomEndpoints();
+		JSONObject jo=null;
+		if(gameregion!=null){
+			try {
+				if(jo==null)jo=new JSONObject();
+				
+				jo.put("gameregion", gameregion);
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-
-			public void onError(int arg0, String arg1) {
-				Log.w("MainFragment", "" + arg1);
+		}
+		if(gamedanmin>-1){
+			try {
+				if(jo==null)jo=new JSONObject();
+				
+				jo.put("gamedanmin", gamedanmin);
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		};
-
-		BmobQuery<Post> query = new BmobQuery<Post>();
-		query.setLimit(6);
-		query.include("user");
-		query.include("game");
-		query.order("-id");
-		BmobQuery<Game> gameQuery = null;
-
-		if (gameregion != null) {
-			if (gameQuery == null)
-				gameQuery = new BmobQuery<Game>();
-			gameQuery.addWhereEqualTo("gameregion", gameregion);
 		}
-		if (gamedanmin > -1) {
-			if (gameQuery == null)
-				gameQuery = new BmobQuery<Game>();
-			gameQuery.addWhereGreaterThanOrEqualTo("gamedan", gamedanmin);
+		if(gamedanmax>-1){
+			try {
+				if(jo==null)jo=new JSONObject();
+				
+				jo.put("gamedanmax", gamedanmax);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
-		if (gamedanmax > -1) {
-			if (gameQuery == null)
-				gameQuery = new BmobQuery<Game>();
-			gameQuery.addWhereLessThanOrEqualTo("gamedan", gamedanmax);
-		}
-		if (gameQuery != null) {
-			query.addWhereMatchesQuery("game", "Game", gameQuery);
-		}
-
-		query.findObjects(getActivity(), findLister);
+		custom.callEndpoint(getActivity(), "getpost", jo, new CloudCodeListener() {
+			
+			@Override
+			public void onSuccess(Object arg0) {
+				 Log.i("+++++++++++++++++",arg0.toString());
+				try {
+						JSONObject joo=new JSONObject(arg0.toString());
+						JSONArray ja= joo.getJSONArray("results");
+						for(int i=0;i<ja.length();i++){
+							Post p=Post.paresJSONObject(ja.getJSONObject(i));
+							list.add(p);
+						}
+						adapter.setData(list);
+				} catch (JSONException e) {
+						e.printStackTrace();
+				}
+	
+				 
+			}
+			public void onFailure(int arg0, String arg1) {
+				 
+			}
+		});
+		
 	}
 
 	private void findView() {
