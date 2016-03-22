@@ -2,16 +2,7 @@ package com.yuanchuang.yohey.bmob;
 
 import com.yuanchuang.yohey.myData.Picture;
 
-import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.yuanchuang.yohey.bmob.User;
-
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.FindListener;
 
 @SuppressWarnings("serial")
 public class Post extends BmobObject {

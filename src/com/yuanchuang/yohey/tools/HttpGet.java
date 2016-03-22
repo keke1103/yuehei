@@ -92,6 +92,7 @@ public class HttpGet {
 			URL url = new URL(mUrl + mBuilder.toString());
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
+			conn.setDoInput(true);
 			StringBuilder result = new StringBuilder();
 			InputStream in;
 			if (conn.getResponseCode() == 200) {

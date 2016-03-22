@@ -302,6 +302,7 @@ public class MainFragment extends Fragment {
 		query.setLimit(6);
 		query.include("user");
 		query.include("game");
+		query.order("-recommend,-id");
 		BmobQuery<Game> gameQuery = null;
 
 		if (gameregion != null) {
@@ -354,6 +355,7 @@ public class MainFragment extends Fragment {
 		query.setLimit(6);
 		query.include("user");
 		query.include("game");
+		query.order("-id");
 		BmobQuery<Game> gameQuery = null;
 
 		if (gameregion != null) {
