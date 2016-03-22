@@ -1,6 +1,5 @@
 package com.yuanchuang.yohey;
 
-import java.net.MalformedURLException;
 import java.util.List;
 
 import org.json.JSONException;
@@ -14,9 +13,10 @@ import com.tencent.tauth.UiError;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Game;
 import com.yuanchuang.yohey.bmob.User;
-import com.yuanchuang.yohey.tools.HttpPost;
+import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 import com.yuanchuang.yohey.tools.QQBaseUIListener;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,9 +32,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -57,21 +57,18 @@ public class LoginAndRegistered extends Activity {
 	Button registered;// 注册按钮
 	View qqLogin;// qq登录
 	TextView webLogin;// 微博登录
-	String userID;// 游戏ID
-	String userPassword;// 游戏密码
+
 	ImageView headicon;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_login_registered);
-		String appId = "032e79773577386c1ae147ff379fb465";
-		Bmob.initialize(getApplicationContext(), appId);
+
 		application = (YoheyApplication) getApplication();
 		application.mTencent = Tencent.createInstance(application.APP_ID, this);
 		findView();
 		initView();
-
 		try {
 			loginByQq(getLoginData());
 		} catch (JSONException e) {
@@ -91,10 +88,39 @@ public class LoginAndRegistered extends Activity {
 	/**
 	 * 自定义的Dialog
 	 */
-	@SuppressLint("InflateParams")
+	@SuppressLint({ "InflateParams", "NewApi" })
 	public void customDialog() {
 		LayoutInflater inflater = getLayoutInflater();
 		View view = inflater.inflate(R.layout.choose_game_region_main, null);
+		final Spinner area = (Spinner) view.findViewById(R.id.choose_game_spinner);
+		final EditText name = (EditText) view.findViewById(R.id.choose_game_name);
+		name.setText("前面的灬给我趴下");
+		View btn = view.findViewById(R.id.choose_comit);
+
+		btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String a = ((TextView) area.getSelectedView()).getText().toString();
+				String n = name.getText().toString();
+				HttpGet get = new HttpGet("http://API.xunjob.cn/playerinfo.php?serverName=" + a + "&playerName=" + n);
+				get.putString("serverName", a);
+				get.putString("playerName", n);
+
+				Log.i("insert", a + " -- " + n);
+				OnSendListener mListener = new OnSendListener() {
+					public void start() {
+						// 03-22 00:44:33.498: I/insert(10271): 德玛西亚 -- 前面的灬给我趴下
+					}
+
+					public void end(String result) {
+						Log.i("lol result", result);
+					}
+				};
+				get.setOnSendListener(mListener);
+				get.send();
+			}
+		});
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		alertDialog = builder.create();
 		alertDialog.setView(view);
@@ -112,8 +138,8 @@ public class LoginAndRegistered extends Activity {
 			Intent intent;
 			switch (v.getId()) {
 			case R.id.login_registered_button_login:
-				userID = account.getText().toString();
-				userPassword = password.getText().toString();
+				String userID = account.getText().toString();
+				String userPassword = password.getText().toString();
 				loginService(userID, userPassword);
 				break;
 
@@ -134,7 +160,10 @@ public class LoginAndRegistered extends Activity {
 				}
 				break;
 			case R.id.login_register_text_forget:
-				customDialog();
+				// customDialog();
+				break;
+			case R.id.choose_comit:
+				// 游戏账号绑定监听！
 				break;
 			default:
 				break;
@@ -166,16 +195,6 @@ public class LoginAndRegistered extends Activity {
 	 *            用户登录的密码
 	 */
 	public void loginService(String userID, String userPassword) {
-		String httpPost = YoheyApplication.ServiceIp + "/index.php/home/api/login";
-		try {
-			HttpPost post = HttpPost.parseUrl(httpPost);
-			post.putString("username", userID);
-			post.putString("password", userPassword);
-			post.setOnSendListener(loginPostListener);// 监听事件
-			post.send();// 发送数据
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
 
 	}
 
@@ -188,37 +207,6 @@ public class LoginAndRegistered extends Activity {
 		Log.i("YoheyApplication", "do login");
 		Log.d("SDKQQAgentPref", "FirstLaunch_SDK:" + SystemClock.elapsedRealtime());
 	}
-
-	/**
-	 * 登陆回掉监听！
-	 */
-	public OnSendListener loginPostListener = new OnSendListener() {
-
-		public void start() {
-
-		}
-
-		public void end(String result) {
-			try {
-				JSONObject jsonObject = new JSONObject(result);// 解析result这个json数据
-				int status = jsonObject.getInt("status");// 获得登录是否成功的数字，1为成功，其他为失败
-				Log.d("login>r", "" + result);
-				if (status == 1) {
-					Intent intent = new Intent(LoginAndRegistered.this, MainActivity.class);
-					startActivity(intent);
-					JSONObject jo = jsonObject.getJSONObject("result");
-					application.token = jo.getString("token");
-					// application.mUser =
-					// User.parseJsonObject(jo.getJSONObject("user"));
-					finish();
-				} else {
-					Toast.makeText(LoginAndRegistered.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-	};
 
 	public IUiListener loginListener = new BaseUiListener();
 
@@ -353,18 +341,6 @@ public class LoginAndRegistered extends Activity {
 									}
 								}
 							});
-
-							/*
-							 * String url = YoheyApplication.ServiceIp +
-							 * "/index.php/home/api/otherlogin"; HttpPost post =
-							 * HttpPost.parseUrl(url); post.putString("qid",
-							 * application.mTencent.getOpenId());
-							 * post.putString("username", username);
-							 * post.putString("icon", icon);
-							 * post.putString("sex", sex);
-							 * post.setOnSendListener(loginPostListener);
-							 * post.send();
-							 */
 						} catch (JSONException e) {
 						}
 					}
@@ -399,22 +375,28 @@ public class LoginAndRegistered extends Activity {
 	 * @param user
 	 */
 	public void addGame(final User user) {
+
+		customDialog();
+
+	}
+
+	private void setGame(final User user, String name, String region, int grade, int dan) {
 		final Game game = new Game();
-		game.setGamedan(23);
-		game.setGamegrade(30);
-		game.setGameregion("艾欧尼亚");
-		game.setGamename("大侠");
+		game.setGamedan(dan);
+		game.setGamegrade(grade);
+		game.setGameregion(region);
+		game.setGamename(name);
 		game.setUser(user);
 		game.save(getApplicationContext(), new SaveListener() {
 
 			public void onSuccess() {
 				Log.i("onSuccess", "onSuccess");
-				Intent intent = new Intent(LoginAndRegistered.this, MainActivity.class);
-				startActivity(intent);
-				finish();
 				User u = new User();
 				u.setDefGame(game);
 				u.update(getApplicationContext(), user.getObjectId(), null);
+				Intent intent = new Intent(LoginAndRegistered.this, MainActivity.class);
+				startActivity(intent);
+				finish();
 			}
 
 			public void onFailure(int arg0, String arg1) {

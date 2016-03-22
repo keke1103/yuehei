@@ -4,28 +4,36 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical" >
+
     <!-- 选择游戏大区和填写游戏ID -->
-    <Spinner 
+
+    <Spinner
         android:id="@+id/choose_game_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/game_region"/>
-    <EditText 
+        android:entries="@array/game_region" />
+
+    <EditText
         android:id="@+id/choose_game_name"
         android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:background="@null"
         android:cursorVisible="false"
-        android:layout_height="30dp"/>
-    <View 
+        android:hint="绑定游戏账号,昵称" />
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#f2f4f5"/>
-    <Button 
+        android:background="#f2f4f5" />
+
+    <Button
+        android:id="@+id/choose_comit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/button_rounded_corners_and_solid"
         android:text="确定"
         android:textColor="#ffffff"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
+
 </LinearLayout>
