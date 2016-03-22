@@ -20,6 +20,16 @@
             android:padding="10dp"
             android:src="@drawable/meng_mei_head" />
 
+        <ImageView
+            android:id="@+id/list_main_image_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@drawable/popular_icons"
+            android:src="@drawable/popular_icons"
+            android:visibility="gone" />
         <!-- 昵称 -->
 
         <TextView
@@ -59,16 +69,6 @@
             android:layout_marginTop="10dp"
             android:contentDescription="@drawable/tian_jia_an_niu"
             android:src="@drawable/tian_jia_an_niu" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginStart="50dp"
-            android:background="@color/thread_gray" />
     </RelativeLayout>
 
     <LinearLayout
@@ -137,12 +137,13 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_centerVertical="true"
+            android:layout_marginBottom="2dp"
             android:layout_marginEnd="3dp"
             android:layout_marginRight="3dp"
             android:layout_toLeftOf="@id/list_main_text_up"
             android:layout_toStartOf="@id/list_main_text_up"
-            android:contentDescription="@drawable/iconfont_dianzan"
-            android:src="@drawable/iconfont_dianzan" />
+            android:contentDescription="@drawable/like_point_grey"
+            android:src="@drawable/like_point_grey" />
 
         <TextView
             android:id="@+id/list_main_text_message"
@@ -164,8 +165,8 @@
             android:layout_marginRight="3dp"
             android:layout_toLeftOf="@id/list_main_text_message"
             android:layout_toStartOf="@id/list_main_text_message"
-            android:contentDescription="@drawable/rub_course_grey_comment"
-            android:src="@drawable/rub_course_grey_comment" />
+            android:contentDescription="@drawable/comments_grey"
+            android:src="@drawable/comments_grey" />
 
         <TextView
             android:id="@+id/list_main_text_add"

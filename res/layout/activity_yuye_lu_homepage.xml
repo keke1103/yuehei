@@ -155,7 +155,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="14dp"
                 android:layout_marginStart="20dp"
-                android:contentDescription="@drawable/iconfont_geren"
+                android:contentDescription="@drawable/integral_icon"
                 android:src="@drawable/integral_icon" />
 
             <TextView
