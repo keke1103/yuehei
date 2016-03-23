@@ -98,6 +98,7 @@
     <string name="say">我也说一句....</string>
     <string name="personal_post">个人发帖</string>
     <string name="posts">帖子内容。。。</string>
+    <string name="add_picture">添加图片</string>
     <string name="permission_settings">权限设置</string>
     <string name="osts">发帖</string>
     <string name="publication">发表</string>
@@ -118,6 +119,15 @@
     <string name="praise">赞</string>
     <string name="to_return">返回</string>
     <string name="details">详情</string>
+    <string name="public_w">公开</string>
+    <string name="private_w">私密</string>
+    <string name="partially_visible">部分可见</string>
+    <string name="invisible_part">不给谁看</string>
+    <string name="visible_to_friends">所有朋友可见</string>
+    <string name="only_yourself_visible">仅自己可见</string>
+    <string name="select_visible">选中的朋友可见</string>
+    <string name="selected_invisible">选中的朋友不可见</string>
+
     <!-- 阿里雲引用 -->
     <string name="iconfont">&#13804;</string>
     <string name="gt">&#xe624;</string>

@@ -59,7 +59,7 @@ public class DynamicFragment extends Fragment {
 		layoutTitle = (RelativeLayout) mView.findViewById(R.id.dynamic_title);
 		title = (TextView) layoutTitle.findViewById(R.id.title_navigation_text_title);
 		title.setText(R.string.dynamic);
-		title.setTextColor(getResources().getColor(R.color.title_yellow));
+		
 		list = new ArrayList<AdapterData>();
 		getData();
 		Log.i("DynamicFragment", "DynamicFragment");
