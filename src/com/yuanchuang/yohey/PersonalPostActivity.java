@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.yuanchuang.yohey.adapter.PersonalPostAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Comment;
+import com.yuanchuang.yohey.bmob.Friends;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.HttpGet;
@@ -56,6 +57,7 @@ public class PersonalPostActivity extends Activity {
 	View send;// 发送
 	TextView title;// 标题
 	View toReturn;// 返回
+
 	TextView joinCount;//想加入的人数
 	TextView comCount;//评论数
 	TextView likeCount;//点赞数
@@ -65,6 +67,11 @@ public class PersonalPostActivity extends Activity {
 	View ait;// 艾特符号
 	View smile;// 表情
 	View photos;// 图片
+
+
+
+	View addFriend;
+
 
 
 	List<Comment> list;
@@ -115,17 +122,17 @@ public class PersonalPostActivity extends Activity {
 		public void end(String result) {
 			try {
 				JSONObject mjo = new JSONObject(result);
-				JSONArray ja=mjo.getJSONArray("results");
+				JSONArray ja = mjo.getJSONArray("results");
 				list.clear();
 				Comment comment;
-				for(int i=0;i<ja.length();i++){
-					 comment=Comment.comJsonObject(ja.getJSONObject(i));
-					 list.add(comment);	
-				}	
+				for (int i = 0; i < ja.length(); i++) {
+					comment = Comment.comJsonObject(ja.getJSONObject(i));
+					list.add(comment);
+				}
 				myAdapter.setData(list);
 			} catch (JSONException e) {
 				e.printStackTrace();
-				Toast.makeText(getApplication(), ""+result,Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplication(), "" + result, Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
@@ -160,8 +167,10 @@ public class PersonalPostActivity extends Activity {
 			case R.id.personal_post_image_send:
 				sendCom();
 				break;
+
 			case R.id.personal_post_image_zhan:
 				likeCount.setText(""+1);
+
 
 				Toast.makeText(getApplication(), "发送不出去", Toast.LENGTH_SHORT).show();
 				break;
@@ -173,6 +182,11 @@ public class PersonalPostActivity extends Activity {
 				break;
 			case R.id.personal_post_image_photos:
 				Toast.makeText(getApplication(), "你没有图片", Toast.LENGTH_SHORT).show();
+
+			case R.id.add_friend:
+				addFriend();
+
+
 				break;
 			default:
 				break;
@@ -188,6 +202,7 @@ public class PersonalPostActivity extends Activity {
 
 		inflater = getLayoutInflater();
 		headView = inflater.inflate(R.layout.list_head_personal_post, null);
+		addFriend = headView.findViewById(R.id.add_friend);
 		head = (ImageView) headView.findViewById(R.id.personal_post_image_head);
 		nickName = (TextView) headView.findViewById(R.id.personal_post_nick_text_name);
 		time = (TextView) headView.findViewById(R.id.personal_post_text_time);
@@ -195,11 +210,13 @@ public class PersonalPostActivity extends Activity {
 		joinCount = (TextView) headView.findViewById(R.id.personal_post_text_addd);
 		comCount = (TextView) headView.findViewById(R.id.personal_post_text_message);
 		likeCount = (TextView) headView.findViewById(R.id.personal_post_text_zhan);
+
 		likeCountImage=(ImageView)headView.findViewById(R.id.personal_post_image_zhan);
-        
+
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		toReturn = findViewById(R.id.title_navigation_back_icon);
 		send = findViewById(R.id.personal_post_image_send);
+
 
         say=(EditText)findViewById(R.id.personal_post_edit_say);
         
@@ -216,12 +233,44 @@ public class PersonalPostActivity extends Activity {
 		toReturn.setOnClickListener(onClickListener);
 		title.setText("详情");
 
+
+		say = (EditText) findViewById(R.id.personal_post_edit_say);
+
+		send.setOnClickListener(onClickListener);
+		toReturn.setOnClickListener(onClickListener);
+
+		likeCountImage.setOnClickListener(onClickListener);
+
+		addFriend.setOnClickListener(onClickListener);
+
+		title.setText("帖子详情");
+
 		toReturn.setVisibility(View.VISIBLE);
 		listView = (ListView) findViewById(R.id.personal_post_list_message);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * 获取帖子内容的
+=======
+	 * 好友添加
+	 */
+	private void addFriend() {
+		Friends f = new Friends();
+		f.addFriend(PersonalPostActivity.this, post.getUser(), new SaveListener() {
+			public void onSuccess() {
+				Toast.makeText(getApplicationContext(), "好友添加成功", Toast.LENGTH_SHORT).show();
+			}
+
+			public void onFailure(int arg0, String arg1) {
+				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	/**
+	 * 设置帖子内容的显示
+>>>>>>> origin/feature/tools_keke
 	 */
 	private void setData() {
 		nickName.setText(post.getUser().getNickName());
@@ -236,33 +285,34 @@ public class PersonalPostActivity extends Activity {
 
 		}
 	}
+
 	/**
 	 * 向服务器发送评论数据
 	 */
-	private void sendCom(){
-		String content=say.getText().toString();
-		if(!TextUtils.isEmpty(content)){
-			Comment comment=new Comment();
+	private void sendCom() {
+		String content = say.getText().toString();
+		if (!TextUtils.isEmpty(content)) {
+			Comment comment = new Comment();
 			comment.setPost(post);
 			comment.setUser(BmobUser.getCurrentUser(this, User.class));
 			comment.setContent(content);
 			comment.save(this, new SaveListener() {
 				public void onSuccess() {
 					say.setText("");
+
 					resultCode=1;
 					comCount.setText("" + (post.getComcount()+1));
 					Post p=new Post();
 					p.setComcount(post.getComcount()+1);
 					p.update(getApplicationContext(),post.getObjectId(),null);
-                    
 					getData();
 				}
-			 
+
 				public void onFailure(int arg0, String arg1) {
-					
+
 				}
 			});
-		}		
+		}
 	}
     /**
      * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
