@@ -18,12 +18,16 @@ import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,9 +55,10 @@ public class PersonalPostActivity extends Activity {
 	View send;// 发送
 	TextView title;// 标题
 	View toReturn;// 返回
-	TextView joinCount;
-	TextView comCount;
-	TextView likeCount;
+	TextView joinCount;//想加入的人数
+	TextView comCount;//评论数
+	TextView likeCount;//点赞数
+	ImageView likeCountImage;//点赞的图标
 	int resultCode=0;
 	
 
@@ -85,7 +90,9 @@ public class PersonalPostActivity extends Activity {
 		listView.setAdapter(myAdapter);
 		setData();
 	}
-
+    /**
+     * 获取评论的数据
+     */
 	private void getData() {
 		HttpGet get = new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getpostcom");
 		get.putString("pid", post.getObjectId());
@@ -117,7 +124,10 @@ public class PersonalPostActivity extends Activity {
 			}
 		}
 	};
-
+    /**
+     * 显示帖子的内容
+     * @param content 帖子的内容
+     */
 	private void getContext(String content) {
 		TextView text = new TextView(this);
 		LayoutParams params = new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
@@ -127,7 +137,9 @@ public class PersonalPostActivity extends Activity {
 		context.addView(text);
 
 	}
-
+    /**
+     * 点击事件
+     */
 	OnClickListener onClickListener = new OnClickListener() {
 
 		@Override
@@ -143,13 +155,18 @@ public class PersonalPostActivity extends Activity {
 			case R.id.personal_post_image_send:
 				sendCom();
 				break;
+			case R.id.personal_post_image_zhan:
+				likeCount.setText(""+1);
+				break;
 			default:
 				break;
 			}
 
 		}
 	};
-
+    /**
+     * 控件ID
+     */
 	@SuppressLint("InflateParams")
 	private void findView() {
 
@@ -162,6 +179,7 @@ public class PersonalPostActivity extends Activity {
 		joinCount = (TextView) headView.findViewById(R.id.personal_post_text_addd);
 		comCount = (TextView) headView.findViewById(R.id.personal_post_text_message);
 		likeCount = (TextView) headView.findViewById(R.id.personal_post_text_zhan);
+		likeCountImage=(ImageView)headView.findViewById(R.id.personal_post_image_zhan);
         
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		toReturn = findViewById(R.id.title_navigation_back_icon);
@@ -170,13 +188,14 @@ public class PersonalPostActivity extends Activity {
         
 		send.setOnClickListener(onClickListener);
 		toReturn.setOnClickListener(onClickListener);
+		likeCountImage.setOnClickListener(onClickListener);
 		title.setText("帖子详情");
 		toReturn.setVisibility(View.VISIBLE);
 		listView = (ListView) findViewById(R.id.personal_post_list_message);
 	}
 
 	/**
-	 * 设置帖子内容的显示
+	 * 获取帖子内容的
 	 */
 	private void setData() {
 		nickName.setText(post.getUser().getNickName());
@@ -209,7 +228,7 @@ public class PersonalPostActivity extends Activity {
 					Post p=new Post();
 					p.setComcount(post.getComcount()+1);
 					p.update(getApplicationContext(),post.getObjectId(),null);
-
+                    
 					getData();
 				}
 			 
@@ -219,4 +238,49 @@ public class PersonalPostActivity extends Activity {
 			});
 		}		
 	}
+    /**
+     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
+     * @param v
+     * @param event
+     * @return
+     */
+	private boolean isShouldHideKeyboard(View v,MotionEvent event){
+		if(v!=null&&(v instanceof EditText)){
+			int[] l={0,0};
+			v.getLocationInWindow(l);
+			int left=l[0];
+			int top=l[1];
+			int bottom=top+v.getHeight();
+			int right=left+v.getWidth();
+			if(event.getX()>left&&event.getX()<right&&event.getY()>top&&event.getY()<bottom){
+				//点击EditText的事件，忽略它
+				return false;
+			}else{
+				return true;
+			}
+		}
+		// 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditText上，和用户用轨迹球选择其他的焦点
+		return false;
+	}
+	/**
+     * 获取InputMethodManager，隐藏软键盘
+     * @param token
+     */
+    private void hideKeyboard(IBinder token) {
+        if (token != null) {
+            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+    
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideKeyboard(v, ev)) {
+                hideKeyboard(v.getWindowToken());
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 }

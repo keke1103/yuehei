@@ -148,6 +148,7 @@
         <!-- 点赞图标 -->
 
         <ImageView
+            android:id="@+id/personal_post_image_zhan"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="5dp"

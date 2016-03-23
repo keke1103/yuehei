@@ -141,7 +141,7 @@ public class MainFragment extends Fragment {
 	}
 
 	/**
-	 * 控件ID
+	 * 控件viewID
 	 * 
 	 * @param view
 	 */
@@ -168,13 +168,15 @@ public class MainFragment extends Fragment {
 		win_points.setOnClickListener(onClickListener);
 		more.setOnClickListener(onClickListener);
 	}
-
+   /**
+    * listView的点击事件
+    */
 	OnItemClickListener clickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			switch (parent.getId()) {
-			case R.id.game_zone_listview2:
+			case R.id.game_zone_listview2://具体区服listview的点击事件
 				if (listViewPosition == 2) {
 					gameZone.setText(str3[position + 20]);
 					gameregion=str3[position + 20];
@@ -194,14 +196,14 @@ public class MainFragment extends Fragment {
 				getRemData(gameregion, -1, -1);
 				popupWindow.dismiss();// 关闭popupWindow
 				break;
-			case R.id.main_list_posts:
+			case R.id.main_list_posts://首页listview的点击事件
 				intent.setClass(getActivity(), PersonalPostActivity.class);
 				Post p = (Post) parent.getAdapter().getItem(position);
 				YoheyApplication app = (YoheyApplication) getActivity().getApplication();
 				app.data = p;
 				startActivityForResult(intent, 100);
 				break;
-			case R.id.game_zone_listview1:
+			case R.id.game_zone_listview1://大区listview的点击事件
 				listViewPosition = position;
 				str3 = getResources().getStringArray(R.array.game_region);
 				ArrayList<String> list = new ArrayList<String>();
@@ -236,6 +238,9 @@ public class MainFragment extends Fragment {
 
 		}
 	};
+	/**
+	 * 简单的点击事件
+	 */
 	OnClickListener onClickListener = new OnClickListener() {
 
 		@Override
@@ -300,7 +305,12 @@ public class MainFragment extends Fragment {
 
 		}
 	};
-
+     /**
+      * 首页热门帖子的数据获取
+      * @param gameregion  区服的筛选 (不筛选传null)
+      * @param gamedanmin  最小段位筛选(不筛选传-1)
+      * @param gamedanmax  最高段位筛选(不筛选传-1)
+      */
 	private void getRemData(String gameregion, int gamedanmin, int gamedanmax) {
 		HttpGet get=new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getrempost");
 		if(gameregion!=null){
@@ -400,7 +410,9 @@ public class MainFragment extends Fragment {
 		});	
 		get.send();
 	}
-
+    /**
+     * 控件ID
+     */
 	private void findView() {
 		gameDan = (ImageView) myView.findViewById(R.id.title_navigation_text_right_title);
 		gameZone = (TextView) myView.findViewById(R.id.title_navigation_game_zone);
