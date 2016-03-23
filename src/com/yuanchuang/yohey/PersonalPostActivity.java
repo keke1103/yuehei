@@ -9,8 +9,9 @@ import org.json.JSONObject;
 
 import com.yuanchuang.yohey.adapter.PersonalPostAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.Comment;
 import com.yuanchuang.yohey.bmob.Post;
-import com.yuanchuang.yohey.myData.PostComment;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 import com.yuanchuang.yohey.tools.TimeUtil;
@@ -29,6 +30,9 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * 发帖详情
@@ -50,8 +54,10 @@ public class PersonalPostActivity extends Activity {
 	TextView joinCount;
 	TextView comCount;
 	TextView likeCount;
+	int resultCode=0;
+	
 
-	List<PostComment> list;
+	List<Comment> list;
 	PersonalPostAdapter myAdapter;
 	ListView listView;
 	LayoutInflater inflater;
@@ -72,7 +78,7 @@ public class PersonalPostActivity extends Activity {
 		findView();
 
 		getData();
-		list = new ArrayList<PostComment>();
+		list = new ArrayList<Comment>();
 		myAdapter = new PersonalPostAdapter(list, getApplication());
 
 		listView.addHeaderView(headView);
@@ -81,8 +87,8 @@ public class PersonalPostActivity extends Activity {
 	}
 
 	private void getData() {
-		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "/index.php/home/api/comment");
-		// get.putString("pid", "" + post.getId());
+		HttpGet get = new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getpostcom");
+		get.putString("pid", post.getObjectId());
 		get.setOnSendListener(mListener);
 		get.send();
 	}
@@ -97,17 +103,17 @@ public class PersonalPostActivity extends Activity {
 		public void end(String result) {
 			try {
 				JSONObject mjo = new JSONObject(result);
-				if (mjo.getInt("stauts") == 1) {
-					JSONArray ja = mjo.getJSONArray("result");
-					for (int i = 0; i < ja.length(); i++) {
-						PostComment pc = PostComment.paresJSONObject(ja.getJSONObject(i));
-						list.add(pc);
-					}
-					myAdapter.setData(list);
-				}
+				JSONArray ja=mjo.getJSONArray("results");
+				list.clear();
+				Comment comment;
+				for(int i=0;i<ja.length();i++){
+					 comment=Comment.comJsonObject(ja.getJSONObject(i));
+					 list.add(comment);	
+				}	
+				myAdapter.setData(list);
 			} catch (JSONException e) {
-
 				e.printStackTrace();
+				Toast.makeText(getApplication(), ""+result,Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
@@ -131,10 +137,11 @@ public class PersonalPostActivity extends Activity {
 
 				break;
 			case R.id.title_navigation_back_icon:
+				setResult(resultCode);
 				finish();
 				break;
 			case R.id.personal_post_image_send:
-
+				sendCom();
 				break;
 			default:
 				break;
@@ -155,11 +162,12 @@ public class PersonalPostActivity extends Activity {
 		joinCount = (TextView) headView.findViewById(R.id.personal_post_text_addd);
 		comCount = (TextView) headView.findViewById(R.id.personal_post_text_message);
 		likeCount = (TextView) headView.findViewById(R.id.personal_post_text_zhan);
-
+        
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		toReturn = findViewById(R.id.title_navigation_back_icon);
 		send = findViewById(R.id.personal_post_image_send);
-
+        say=(EditText)findViewById(R.id.personal_post_edit_say);
+        
 		send.setOnClickListener(onClickListener);
 		toReturn.setOnClickListener(onClickListener);
 		title.setText("帖子详情");
@@ -182,5 +190,33 @@ public class PersonalPostActivity extends Activity {
 		} else {
 
 		}
+	}
+	/**
+	 * 向服务器发送评论数据
+	 */
+	private void sendCom(){
+		String content=say.getText().toString();
+		if(!TextUtils.isEmpty(content)){
+			Comment comment=new Comment();
+			comment.setPost(post);
+			comment.setUser(BmobUser.getCurrentUser(this, User.class));
+			comment.setContent(content);
+			comment.save(this, new SaveListener() {
+				public void onSuccess() {
+					say.setText("");
+					resultCode=1;
+					comCount.setText("" + (post.getComcount()+1));
+					Post p=new Post();
+					p.setComcount(post.getComcount()+1);
+					p.update(getApplicationContext(),post.getObjectId(),null);
+
+					getData();
+				}
+			 
+				public void onFailure(int arg0, String arg1) {
+					
+				}
+			});
+		}		
 	}
 }

@@ -93,12 +93,12 @@ public class Post extends BmobObject {
 
 		}
 		try {
-			p.setCreatedAt(jo.getString("createAt")); 
+			p.setCreatedAt(jo.getString("createdAt")); 
 		} catch (JSONException e6) {
 
 		}
 		try {
-			p.setUpdatedAt(jo.getString("updateAt"));
+			p.setUpdatedAt(jo.getString("updatedAt"));
 		} catch (JSONException e6) {
 
 		}

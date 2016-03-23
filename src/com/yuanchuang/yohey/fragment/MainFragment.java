@@ -1,5 +1,7 @@
 package com.yuanchuang.yohey.fragment;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +17,10 @@ import com.yuanchuang.yohey.Vide0CollectionActivity;
 import com.yuanchuang.yohey.adapter.GalleryAdapter;
 import com.yuanchuang.yohey.adapter.MainAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
-import com.yuanchuang.yohey.bmob.Game;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.AdapterData;
+import com.yuanchuang.yohey.tools.HttpGet;
+import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -41,11 +44,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-import cn.bmob.v3.AsyncCustomEndpoints;
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.CloudCodeListener;
-import cn.bmob.v3.listener.FindListener;
 
 @SuppressWarnings("deprecation")
 public class MainFragment extends Fragment {
@@ -99,7 +97,7 @@ public class MainFragment extends Fragment {
 		gallery = (Gallery) view.findViewById(R.id.main_list_head_gallery);
 		galleryAdapter = new GalleryAdapter(reList, getActivity());
 		gallery.setAdapter(galleryAdapter);
-		//getRemData(gameregion, -1, -1);
+		getRemData(gameregion, -1, -1);
 
 		adapter = new MainAdapter(list, getActivity());
 		getPostData(gameregion, -1, -1);
@@ -178,12 +176,22 @@ public class MainFragment extends Fragment {
 			switch (parent.getId()) {
 			case R.id.game_zone_listview2:
 				if (listViewPosition == 2) {
-					gameZone.setText(str3[position + 19]);
-					Log.i(">>>>>>>>>>>>>>>", str3[position]);
-				} else {
+					gameZone.setText(str3[position + 20]);
+					gameregion=str3[position + 20];
+				} else if(listViewPosition == 1){
+					gameZone.setText(str3[position+1]);
+					gameregion=str3[position + 1];
+				}else{
 					gameZone.setText(str3[position]);
-					Log.i(">>>>>>>>>>>>>>>", str3[position]);
+					if("全部".equals(str3[position])){
+						gameregion=null;
+					}else{	
+						gameregion=str3[position];
+					}
 				}
+				Log.i("Gameregion", ">>>>"+gameregion);
+				getPostData(gameregion, -1, -1);
+				getRemData(gameregion, -1, -1);
 				popupWindow.dismiss();// 关闭popupWindow
 				break;
 			case R.id.main_list_posts:
@@ -191,7 +199,7 @@ public class MainFragment extends Fragment {
 				Post p = (Post) parent.getAdapter().getItem(position);
 				YoheyApplication app = (YoheyApplication) getActivity().getApplication();
 				app.data = p;
-				startActivity(intent);
+				startActivityForResult(intent, 100);
 				break;
 			case R.id.game_zone_listview1:
 				listViewPosition = position;
@@ -205,12 +213,12 @@ public class MainFragment extends Fragment {
 					break;
 				case 1:
 					for (int i = 0; i < 19; i++) {
-						list.add(str3[i]);
+						list.add(str3[i+1]);
 					}
 					break;
 				case 2:
 					for (int i = 0; i < 7; i++) {
-						list.add(str3[i + 19]);
+						list.add(str3[i + 20]);
 					}
 					break;
 				default:
@@ -294,45 +302,49 @@ public class MainFragment extends Fragment {
 	};
 
 	private void getRemData(String gameregion, int gamedanmin, int gamedanmax) {
-		FindListener<Post> findLister = new FindListener<Post>() {
-
-			public void onSuccess(List<Post> arg0) {
-				galleryAdapter.setData(arg0);
+		HttpGet get=new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getrempost");
+		if(gameregion!=null){
+		 	try {
+				gameregion=URLEncoder.encode(gameregion, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
-			public void onError(int arg0, String arg1) {
-				Log.w("MainFragment", "" + arg1);
+			get.putString ("gameregion", gameregion);
+		}
+		if(gamedanmin>-1){
+	 			
+			get.putString("gamedanmin",""+ gamedanmin);
+		}
+		if(gamedanmax>-1){
+	 			
+			get.putString("gamedanmax",""+ gamedanmax);
+		}
+		
+		get.setOnSendListener(new OnSendListener() {
+ 
+			public void start() {
+				 
 			}
-		};
-
-		BmobQuery<Post> query = new BmobQuery<Post>();
-		query.setLimit(6);
-		query.include("user");
-		query.include("game");
-		query.order("-recommend,-id");
-		BmobQuery<Game> gameQuery = null;
-
-		if (gameregion != null) {
-			if (gameQuery == null)
-				gameQuery = new BmobQuery<Game>();
-			gameQuery.addWhereEqualTo("gameregion", gameregion);
-
-		}
-		if (gamedanmin > -1) {
-			if (gameQuery == null)
-				gameQuery = new BmobQuery<Game>();
-			gameQuery.addWhereGreaterThanOrEqualTo("gamedan", gamedanmin);
-		}
-		if (gamedanmax > -1) {
-			if (gameQuery == null)
-				gameQuery = new BmobQuery<Game>();
-			gameQuery.addWhereLessThanOrEqualTo("gamedan", gamedanmax);
-		}
-		if (gameQuery != null) {
-			query.addWhereMatchesQuery("game", "Game", gameQuery);
-		}
-		query.addWhereGreaterThan("recommend", 0);
-		query.findObjects(getActivity(), findLister);
+		 
+			public void end(String result) {
+				 Log.i("+++++++++++++++++",">>>:"+result);
+					try {
+							JSONObject joo=new JSONObject(result);
+							JSONArray ja= joo.getJSONArray("results");
+							reList.clear();
+							for(int i=0;i<ja.length();i++){
+								Post p=Post.paresJSONObject(ja.getJSONObject(i));
+								reList.add(p);
+							}
+							galleryAdapter.setData(reList);
+					} catch (JSONException e) {
+							e.printStackTrace();
+					}		 
+			}
+		});	
+		get.send();
+		
 	}
 
 	/**
@@ -346,59 +358,47 @@ public class MainFragment extends Fragment {
 	 *            最高段位筛选(不筛选传-1)
 	 */
 	private void getPostData(String gameregion, int gamedanmin, int gamedanmax) {
-		AsyncCustomEndpoints custom=new AsyncCustomEndpoints();
-		JSONObject jo=null;
+ 
+		HttpGet get=new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getpost");
 		if(gameregion!=null){
-			try {
-				if(jo==null)jo=new JSONObject();
-				
-				jo.put("gameregion", gameregion);
-			} catch (JSONException e) {
+		 	try {
+				gameregion=URLEncoder.encode(gameregion, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
+			get.putString ("gameregion", gameregion);
 		}
 		if(gamedanmin>-1){
-			try {
-				if(jo==null)jo=new JSONObject();
-				
-				jo.put("gamedanmin", gamedanmin);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+	 			
+			get.putString("gamedanmin",""+ gamedanmin);
 		}
 		if(gamedanmax>-1){
-			try {
-				if(jo==null)jo=new JSONObject();
-				
-				jo.put("gamedanmax", gamedanmax);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+	 			
+			get.putString("gamedanmax",""+ gamedanmax);
 		}
-		custom.callEndpoint(getActivity(), "getpost", jo, new CloudCodeListener() {
-			
-			@Override
-			public void onSuccess(Object arg0) {
-				 Log.i("+++++++++++++++++",arg0.toString());
-				try {
-						JSONObject joo=new JSONObject(arg0.toString());
-						JSONArray ja= joo.getJSONArray("results");
-						for(int i=0;i<ja.length();i++){
-							Post p=Post.paresJSONObject(ja.getJSONObject(i));
-							list.add(p);
-						}
-						adapter.setData(list);
-				} catch (JSONException e) {
-						e.printStackTrace();
-				}
-	
-				 
-			}
-			public void onFailure(int arg0, String arg1) {
-				 
-			}
-		});
 		
+		get.setOnSendListener(new OnSendListener() {
+ 
+			public void start() {
+				 
+			}
+		 
+			public void end(String result) {
+					try {
+							JSONObject joo=new JSONObject(result);
+							JSONArray ja= joo.getJSONArray("results");
+							list.clear();
+							for(int i=0;i<ja.length();i++){
+								Post p=Post.paresJSONObject(ja.getJSONObject(i));
+								list.add(p);
+							}
+							adapter.setData(list);
+					} catch (JSONException e) {
+							e.printStackTrace();
+					}		 
+			}
+		});	
+		get.send();
 	}
 
 	private void findView() {

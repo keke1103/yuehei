@@ -1,6 +1,5 @@
 package com.yuanchuang.yohey.tools;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -62,7 +61,7 @@ public class TimeUtil {
 		try {
 			Date date = f.parse(time);
 			return formateTimeToNow(date);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 			return "异常";

@@ -3,7 +3,7 @@ package com.yuanchuang.yohey.adapter;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.myData.PostComment;
+import com.yuanchuang.yohey.bmob.Comment;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
@@ -23,7 +23,7 @@ import android.widget.TextView;
  *
  */
 public class PersonalPostAdapter extends BaseAdapter {
-	List<PostComment> list;
+	List<Comment> list;
 	Context context;
 	LayoutInflater inflater;
 
@@ -31,13 +31,13 @@ public class PersonalPostAdapter extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PersonalPostAdapter(List<PostComment> list, Context context) {
+	public PersonalPostAdapter(List<Comment> list, Context context) {
 		this.list = list;
 		this.context = context;
 		inflater = LayoutInflater.from(context);
 	}
 
-	public void setData(List<PostComment> list) {
+	public void setData(List<Comment> list) {
 		this.list = list;
 		notifyDataSetChanged();
 	}
@@ -64,7 +64,7 @@ public class PersonalPostAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		PostComment pc = list.get(position);
+		Comment pc = list.get(position);
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.list_post_details, null);
@@ -76,9 +76,9 @@ public class PersonalPostAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		pc.getUser().bindHeaderView(holder.head);
-		holder.name.setText(pc.getUser().getUsername());
-		holder.time.setText(TimeUtil.formateTimeToNow(pc.getTime() * 1000L));
+		pc.getUser().binderImageView(holder.head);
+		holder.name.setText(pc.getUser().getNickName());
+		holder.time.setText(TimeUtil.formateTimeToNow(pc.getCreatedAt()));
 		holder.context.setText(pc.getContent());
 		return convertView;
 	}

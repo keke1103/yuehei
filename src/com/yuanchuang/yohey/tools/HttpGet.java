@@ -89,7 +89,7 @@ public class HttpGet {
 	public String sendInBack() {
 		HttpURLConnection conn;
 		try {
-			URL url = new URL(mUrl + mBuilder.toString());
+			URL url = new URL(getUrl());
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setDoInput(true);
@@ -128,7 +128,9 @@ public class HttpGet {
 		new MyAyckTast().execute();
 
 	}
-
+	public String getUrl(){
+		return mUrl + mBuilder.toString();
+	}
 	private OnSendListener mListener;
 
 	/**

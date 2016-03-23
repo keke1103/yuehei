@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -167,9 +168,10 @@ public class MainActivity extends FragmentActivity {
 	};
 
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		if (arg0 == 100) {
-			mainFragment.onActivityResult(arg0, arg1, arg2);
-		}
+		Log.i("onActivityResult", "req="+arg0+" res="+arg1);
+		
+		mainFragment.onActivityResult(arg0, arg1, arg2);
+		
 
 	};
 }

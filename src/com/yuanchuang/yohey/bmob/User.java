@@ -203,7 +203,7 @@ public class User extends BmobUser {
 
 		}
 		try {
-			u.setNickName(jo.getString("nickName"));
+			u.setNickName(jo.getString("nickname"));
 		} catch (JSONException e9) {
 
 		}
@@ -244,7 +244,7 @@ public class User extends BmobUser {
 
 		}
 		try {
-			u.likednumber = jo.getInt("likenumber");
+			u.likednumber = jo.getInt("likednumber");
 		} catch (JSONException e1) {
 
 		}

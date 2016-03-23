@@ -189,9 +189,9 @@
 
     <!-- 游戏大区 -->
     <string-array name="game_region">
-
-        <!-- 电信区 -->
-        <item>艾欧里亚</item>
+        <item >全部</item>
+        <!-- 电信区 -->  
+        <item>艾欧尼亚</item>
         <item>祖安</item>
         <item>洛克萨斯</item>
         <item>班德尔城</item>
@@ -217,7 +217,7 @@
         <item>无畏先锋</item>
         <item>怒瑞玛</item>
         <item>扭曲森林</item>
-        <item>巨龙之巢</item>
+        <item>巨龙之巢</item>     
     </string-array>
     <!-- 游戏段位 -->
     <string-array name="game_dan">
