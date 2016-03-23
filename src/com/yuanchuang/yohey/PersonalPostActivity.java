@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 发帖详情
@@ -50,6 +51,9 @@ public class PersonalPostActivity extends Activity {
 	TextView joinCount;
 	TextView comCount;
 	TextView likeCount;
+	View ait;// 艾特符号
+	View smile;// 表情
+	View photos;// 图片
 
 	List<PostComment> list;
 	PersonalPostAdapter myAdapter;
@@ -134,7 +138,16 @@ public class PersonalPostActivity extends Activity {
 				finish();
 				break;
 			case R.id.personal_post_image_send:
-
+				Toast.makeText(getApplication(), "发送不出去", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.personal_post_image_ait:
+				Toast.makeText(getApplication(), "你想@谁", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.personal_post_image_smile:
+				Toast.makeText(getApplication(), "不能发表情", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.personal_post_image_photos:
+				Toast.makeText(getApplication(), "你没有图片", Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;
@@ -159,10 +172,16 @@ public class PersonalPostActivity extends Activity {
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		toReturn = findViewById(R.id.title_navigation_back_icon);
 		send = findViewById(R.id.personal_post_image_send);
+		ait = findViewById(R.id.personal_post_image_ait);
+		smile = findViewById(R.id.personal_post_image_smile);
+		photos = findViewById(R.id.personal_post_image_photos);
 
+		ait.setOnClickListener(onClickListener);
+		smile.setOnClickListener(onClickListener);
+		photos.setOnClickListener(onClickListener);
 		send.setOnClickListener(onClickListener);
 		toReturn.setOnClickListener(onClickListener);
-		title.setText("帖子详情");
+		title.setText("详情");
 		toReturn.setVisibility(View.VISIBLE);
 		listView = (ListView) findViewById(R.id.personal_post_list_message);
 	}

@@ -3,6 +3,7 @@ package com.yuanchuang.yohey.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ThumbUpActivity;
 import com.yuanchuang.yohey.adapter.DynamicAdapter;
@@ -80,7 +81,7 @@ public class DynamicFragment extends Fragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			intent = new Intent(getActivity(), ThumbUpActivity.class);
+			intent = new Intent(getActivity(), CommentDynamicActivity.class);
 			startActivity(intent);
 		}
 	};

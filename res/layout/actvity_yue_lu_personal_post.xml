@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/write"
+    android:background="#F3F4F6"
     android:orientation="vertical" >
 
     <include
@@ -29,13 +29,33 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:orientation="horizontal" >
 
             <ImageView
+                android:id="@+id/personal_post_image_ait"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
-                android:contentDescription="@drawable/ait_icon"
-                android:src="@drawable/ait_icon" />
+                android:contentDescription="@drawable/ait_grey"
+                android:src="@drawable/ait_grey" />
+
+            <ImageView
+                android:id="@+id/personal_post_image_smile"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp"
+                android:contentDescription="@drawable/smile_grey"
+                android:src="@drawable/smile_grey" />
+
+            <ImageView
+                android:id="@+id/personal_post_image_photos"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp"
+                android:contentDescription="@drawable/photos_gray"
+                android:src="@drawable/photos_gray" />
         </LinearLayout>
 
         <LinearLayout
