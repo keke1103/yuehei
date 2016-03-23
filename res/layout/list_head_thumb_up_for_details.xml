@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/write"
+    android:background="#F3F4F6"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -75,11 +75,12 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="10dp"
-        android:background="@color/thread_gray" />
+        android:background="#DADBDD" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="25dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
@@ -110,33 +111,42 @@
 
         <!-- 评论 -->
 
-        <TextView
-            android:id="@+id/list_head_thumb_up_text_view_comm"
+        <LinearLayout
+            android:id="@+id/list_head_thumb_up_linear_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="42dp"
-            android:layout_marginStart="42dp"
-            android:layout_toEndOf="@id/list_head_thumb_up_text_forwarding"
-            android:layout_toRightOf="@id/list_head_thumb_up_text_forwarding"
-            android:text="@string/comments"
-            android:textColor="@color/main_text"
-            android:textSize="12sp" />
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:orientation="horizontal"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp" >
 
-        <TextView
-            android:id="@+id/list_head_thumb_up_text_comments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/list_head_thumb_up_text_view_comm"
-            android:layout_toRightOf="@id/list_head_thumb_up_text_view_comm"
-            android:textColor="@color/main_text"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/list_head_thumb_up_text_view_comm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/comments"
+                android:textColor="@color/main_text"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/list_head_thumb_up_text_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/num"
+                android:textColor="@color/main_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <!-- 点赞图标 -->
 
         <LinearLayout
+            android:id="@+id/list_head_thumb_up_linear_tuumb_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -149,6 +159,7 @@
             android:paddingTop="3dp" >
 
             <TextView
+                android:id="@+id/list_head_thumb_up_text_view_tuumb_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"

@@ -73,6 +73,8 @@ public class GalleryAdapter extends BaseAdapter {
 			holder.time = (TextView) convertView.findViewById(R.id.list_main_text_time);
 			holder.up = (TextView) convertView.findViewById(R.id.list_main_text_up);
 			holder.line = convertView.findViewById(R.id.list_main_line_zhong);
+			holder.popular = (ImageView) convertView.findViewById(R.id.list_main_image_popular);
+			holder.lineDi = convertView.findViewById(R.id.list_main_line_di);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -91,19 +93,23 @@ public class GalleryAdapter extends BaseAdapter {
 		holder.context.addView(text);
 		holder.message.setText(data.getComcount() + "");
 		holder.up.setText(data.getLikenumber() + "");
+		holder.popular.setVisibility(View.VISIBLE);
+		holder.lineDi.setVisibility(View.GONE);
 		return convertView;
 	}
 
 	class ViewHolder {
 		View line;
-		ImageView head;
-		TextView name;
-		TextView time;
-		LinearLayout context;
-		TextView area;
-		TextView dan;
-		TextView add;
-		TextView message;
-		TextView up;
+		ImageView head;// 头像
+		TextView name;// 名字
+		TextView time;// 时间
+		LinearLayout context;// 内容
+		TextView area;// 大区
+		TextView dan;// 段位
+		TextView add;// 添加人
+		TextView message;// 信息
+		TextView up;// 点赞
+		ImageView popular;// 热门图标
+		View lineDi;// 底部的线
 	}
 }

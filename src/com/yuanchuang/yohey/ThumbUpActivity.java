@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.tencent.map.b.m;
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.tools.DensityUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ThumbUpActivity extends Activity {
 	LinearLayout toReturn;// 返回
@@ -37,6 +40,7 @@ public class ThumbUpActivity extends Activity {
 	TextView forwarding;// 转发数量
 	TextView comments;// 评论数量
 	TextView thumbNumber;// 赞
+	Intent mIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class ThumbUpActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_thumb_up_for_details);
 		list = new ArrayList<Map<String, Object>>();
+		mIntent = getIntent();
 		findView();
 		fingHeadView();
 		getData();
@@ -118,10 +123,11 @@ public class ThumbUpActivity extends Activity {
 
 				break;
 			case R.id.thumb_up_linear_comment:
-
+				mIntent.setClass(ThumbUpActivity.this, CommentDynamicActivity.class);
+				startActivity(mIntent);
 				break;
 			case R.id.thumb_up_linear_thumb_up:
-
+				Toast.makeText(getApplicationContext(), "就在点赞页面", Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;

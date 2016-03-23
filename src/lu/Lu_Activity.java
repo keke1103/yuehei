@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import com.yuanchuang.yohey.FriendMaterialActivity;
 import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
@@ -11,10 +12,14 @@ import com.yuanchuang.yohey.adapter.FriendsBaseAdapter;
 import com.yuanchuang.yohey.adapter.MessageBaseAdapter;
 import com.yuanchuang.yohey.bmob.User;
 import android.annotation.SuppressLint;
+
+import com.yuanchuang.yohey.AddFriendsActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
@@ -25,6 +30,7 @@ import android.widget.RadioGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 
 public class Lu_Activity extends Fragment {
 	RadioGroup radiogroup;
@@ -37,26 +43,47 @@ public class Lu_Activity extends Fragment {
 	ArrayList<User> msglist;
 	ArrayList<String> friendslist;
 	Map<Integer, ArrayList<User>> friendsmap;
-
+    TextView add;
 	@Override
 	public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
 			Bundle savedInstanceState) {
 		LinearLayout lay = new LinearLayout(getActivity());
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		View view = inflater.inflate(R.layout.lu, lay);
+		
 		radiogroup = (RadioGroup) view.findViewById(R.id.radiogroup);
 		msg = (RadioButton) view.findViewById(R.id.rb_msg);
 		friends = (RadioButton) view.findViewById(R.id.rb_friends);
 		msgList=(ListView)view.findViewById(R.id.listview);
 		friendList=(ExpandableListView)view.findViewById(R.id.expand);
+		add=(TextView)view.findViewById(R.id.rb_add);
 		this.radiogroup.setOnCheckedChangeListener(changelistener);
 		getData();
 		msgadapter = new MessageBaseAdapter(msglist, getActivity());
 		msgList.setAdapter(msgadapter);
 		msgList.setOnItemClickListener(clickListener);
+		add.setOnClickListener(click);
 		return view;
 	};
 
+	OnClickListener click = new OnClickListener() {
+		Intent intent;
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.rb_add:
+				intent = getActivity().getIntent();
+				intent.setClass(getActivity(), AddFriendsActivity.class);
+				getActivity().startActivity(intent);
+				break;
+
+			default:
+				break;
+			}
+
+		}
+	};
 	OnCheckedChangeListener changelistener = new OnCheckedChangeListener() {
 		@Override
 		public void onCheckedChanged(RadioGroup arg0, int id) {

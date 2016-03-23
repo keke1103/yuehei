@@ -30,10 +30,10 @@ public class WelcomeActivity extends Activity {
 		mView.addView(view2);
 		mView.addView(view3);
 		mView.addView(view4);
-		mView.setFlipInterval(5000);
+		mView.setFlipInterval(2000);
 		mView.startFlipping();
 
-		handler.postDelayed(run, 15500);
+		handler.postDelayed(run, 6500);
 
 	}
 

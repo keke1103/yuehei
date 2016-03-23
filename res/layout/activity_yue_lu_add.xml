@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F2F4F5"
     android:orientation="vertical" >
 
     <include
@@ -15,26 +16,29 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/text_stroke"
+        android:background="@color/write"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:paddingBottom="13dp"
+        android:paddingTop="13dp" >
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
             android:layout_weight="1"
             android:text="@string/qq"
-            android:textSize="11sp" />
+            android:textColor="#333333"
+            android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/add_text_qq"
+        <ImageView
+            android:id="@+id/add_image_qq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/search" />
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@drawable/search_icon_yellow"
+            android:src="@drawable/search_icon_yellow" />
     </LinearLayout>
 
     <!-- 新的朋友 -->
@@ -44,19 +48,29 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/text_stroke"
+        android:background="@color/write"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:paddingBottom="13dp"
+        android:paddingTop="13dp" >
+
+        <ImageView
+            android:id="@+id/add_image_frieds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:contentDescription="@drawable/friend_buddy_icon_yellow"
+            android:src="@drawable/friend_buddy_icon_yellow" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp"
             android:layout_weight="1"
             android:text="@string/new_frieds"
-            android:textSize="11sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/add_text_number"
@@ -64,18 +78,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
-            android:text="@string/qq"
+            android:text="12"
+            android:textColor="@color/main_text"
             android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/add_image_frieds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/rub_course_go_to_next_right"
-            android:src="@drawable/rub_course_go_to_next_right"
-            android:visibility="invisible" />
     </LinearLayout>
 
     <!-- 喜爱最多 -->
@@ -85,107 +90,128 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/text_stroke"
+        android:background="@color/write"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:paddingBottom="13dp"
+        android:paddingTop="13dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:contentDescription="@drawable/lick_inco_yellow"
+            android:src="@drawable/lick_inco_yellow"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
             android:layout_weight="1"
-            android:text="@string/favorite"
-            android:textSize="11sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp" />
+            android:text="@string/favorite" />
 
         <ImageView
             android:id="@+id/add_image_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/rub_course_go_to_next_right"
-            android:src="@drawable/rub_course_go_to_next_right"
-            android:visibility="invisible" />
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@drawable/right_arrow_icon"
+            android:src="@drawable/right_arrow_icon" />
     </LinearLayout>
 
     <!-- 新浪微博 -->
 
     <LinearLayout
-        android:id="@+id/add_line_xinlang"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+        android:background="@color/write"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/add_text_xinliang"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/add_line_xinlang"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:text="@string/xin_lang_web" />
+            android:orientation="horizontal"
+            android:paddingBottom="13dp"
+            android:paddingTop="13dp" >
 
-        <TextView
-            android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/add_image_xinliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:contentDescription="@drawable/weibo_yellow"
+                android:src="@drawable/weibo_yellow" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:layout_marginStart="9dp"
+                android:layout_weight="1"
+                android:text="@string/xinlang"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:contentDescription="@drawable/right_arrow_icon"
+                android:src="@drawable/right_arrow_icon" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#DDDEDF" />
+        <!-- QQ微博 -->
+
+        <LinearLayout
+            android:id="@+id/add_line_qq_web"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:text="@string/xinlang"
-            android:textSize="11sp" />
+            android:background="@color/write"
+            android:orientation="horizontal"
+            android:paddingBottom="13dp"
+            android:paddingTop="13dp" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/rub_course_go_to_next_right"
-            android:src="@drawable/rub_course_go_to_next_right" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/add_image_qq_web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:contentDescription="@drawable/qq_yellow"
+                android:src="@drawable/qq_yellow" />
 
-    <!-- QQ微博 -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:text="@string/qqweb"
+                android:textColor="#333333"
+                android:textSize="14sp" />
 
-    <LinearLayout
-        android:id="@+id/add_line_qq_web"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/add_text_qq_web"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:text="@string/QQ" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:text="@string/qqweb"
-            android:textSize="11sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/rub_course_go_to_next_right"
-            android:src="@drawable/rub_course_go_to_next_right" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:contentDescription="@drawable/right_arrow_icon"
+                android:src="@drawable/right_arrow_icon" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

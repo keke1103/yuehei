@@ -7,17 +7,21 @@
     <color name="light_gray">#cccccc</color>
     <color name="main_yellow">#fa7122</color>
     <color name="yellow">#E49C38</color>
+    <color name="yellow_zan">#E3F240</color>
     <color name="background">#EEEEEE</color>
     <color name="beizhu">#9B9B9B</color>
     <color name="blue">#0000ff</color>
     <color name="white">#ffffff</color>
     <color name="assist">#ff8417</color>
     <color name="red">#dd0000</color>
-	<color name="main_gray">#f5f5f5</color>
-	<color name="thread_gray">#F0F0F0</color>
-	<color name="line">#d9dbdc</color>
+    <color name="main_gray">#f5f5f5</color>
+    <color name="thread_gray">#F0F0F0</color>
+    <color name="line">#d9dbdc</color>
     <color name="main_title_text">#2B2B2B</color>
     <color name="main_text">#888888</color>
     <color name="title_text">#333333</color>
     <color name="title_yellow">#e9f83c</color>
+    <color name="post_background">#F3F4F6</color>
+    <color name="post_line">#DADBDD</color>
+
 </resources>

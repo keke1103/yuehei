@@ -57,7 +57,7 @@ public class MEFragment extends Fragment {
 		settings = (LinearLayout) mView.findViewById(R.id.homepage_text_system_set);
 		title.setText(R.string.me);
 		Resources resources = getContext().getResources();
-		Drawable drawable = resources.getDrawable(R.drawable.button_rounded_corners_and_solid);
+		Drawable drawable = resources.getDrawable(R.drawable.shape_rounded_yellow);
 		signIn.setVisibility(View.VISIBLE);
 		signIn.setBackgroundDrawable(drawable);
 		signIn.setText(R.string.sign_in);

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F4F6"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -24,8 +25,8 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:contentDescription="@drawable/yu_hei_returns_the_icon"
-                android:src="@drawable/yu_hei_returns_the_icon" />
+                android:contentDescription="@drawable/yo_hey_back_image"
+                android:src="@drawable/yo_hey_back_image" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -59,7 +60,8 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="@null" />
+        android:divider="@color/post_line"
+        android:dividerHeight="1px" />
 
     <!-- 底部菜单 -->
 

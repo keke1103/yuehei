@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F4F6"
     android:focusable="true"
     android:orientation="vertical" >
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:background="@color/thread_gray" />
+        android:layout_height="10dp" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -75,8 +75,8 @@
         android:layout_width="fill_parent"
         android:layout_height="0.5px"
         android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:background="@color/line" />
+        android:layout_marginStart="14dp"
+        android:background="#F1F1F1" />
     <!-- 发表内容 -->
 
     <LinearLayout
@@ -90,12 +90,13 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="10dp"
-        android:background="@color/thread_gray" />
+        android:background="#DADBDD" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="25dp"
         android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
@@ -128,12 +129,12 @@
         <!-- 留言图标 -->
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:contentDescription="@drawable/iconfont_xinxi"
-            android:src="@drawable/iconfont_xinxi" />
+            android:contentDescription="@drawable/comments_grey"
+            android:src="@drawable/comments_grey" />
 
         <TextView
             android:id="@+id/personal_post_text_message"
@@ -149,12 +150,12 @@
 
         <ImageView
             android:id="@+id/personal_post_image_zhan"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:contentDescription="@drawable/iconfont_dianzan"
-            android:src="@drawable/iconfont_dianzan" />
+            android:contentDescription="@drawable/like_point_grey"
+            android:src="@drawable/like_point_grey" />
 
         <TextView
             android:id="@+id/personal_post_text_zhan"

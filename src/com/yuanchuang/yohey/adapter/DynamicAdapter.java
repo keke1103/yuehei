@@ -2,8 +2,10 @@ package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
 
+import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.ForwardingActivity;
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.ThumbUpActivity;
 import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.DensityUtil;
 
@@ -87,6 +89,8 @@ public class DynamicAdapter extends BaseAdapter {
 		holder.line.setText(list.get(position).getDy_context());
 		DensityUtil.sudoku(context, holder.imageLayout, list.get(position).getDy_image());
 		holder.forwarding.setOnClickListener(clickListener);
+		holder.thumbUp.setOnClickListener(clickListener);
+		holder.leaveMessage.setOnClickListener(clickListener);
 		return convertView;
 	}
 
@@ -101,10 +105,12 @@ public class DynamicAdapter extends BaseAdapter {
 				context.startActivity(intent);
 				break;
 			case R.id.list_dynamic_image_leave_a_message:
-
+				intent = new Intent(context, CommentDynamicActivity.class);
+				context.startActivity(intent);
 				break;
 			case R.id.list_dynamic_image_like:
-
+				intent = new Intent(context, ThumbUpActivity.class);
+				context.startActivity(intent);
 				break;
 			default:
 				break;
