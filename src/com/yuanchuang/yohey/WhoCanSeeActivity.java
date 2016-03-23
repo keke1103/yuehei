@@ -1,10 +1,13 @@
 package com.yuanchuang.yohey;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.yuanchuang.yohey.adapter.WhoExpandableAdpter;
+import com.yuanchuang.yohey.myData.AdapterData;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -14,7 +17,6 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
-
 import android.widget.TextView;
 
 /**
@@ -32,10 +34,14 @@ public class WhoCanSeeActivity extends Activity {
 	View toReturn;
 	TextView title;
 	TextView rightTitle;
-	Map<String, Object> map;
+
 	ExpandableListView listView;
 	private int lastClick = -1;// 上一次点击的group的position
+	boolean bool;
 
+	Map<Integer, ArrayList<AdapterData>> list;
+
+	@SuppressLint("UseSparseArrays")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -43,11 +49,12 @@ public class WhoCanSeeActivity extends Activity {
 		setContentView(R.layout.activity_who_can_see);
 		// mainTable = new ArrayList<Map<String, Object>>();
 		// childTeble = new ArrayList<Map<String, Object>>();
+		list = new HashMap<Integer, ArrayList<AdapterData>>();
 
 		mainTable = new String[] { "公开", "私密", "部分可见", "不给谁看" };
-		childTeble = new String[][] { { "小岚", "泡泡" }, { "小岚", "泡泡" }, { "小岚", "泡泡" }, { "小岚", "泡泡" } };
+		childTeble = new String[][] { { "所有人都可以看" }, { "只有自己能看" }, { "选中的可以看" }, { "选中的不能看" } };
 		findView();
-
+		getData();
 		listView.setOnGroupClickListener(new OnGroupClickListener() {
 
 			@Override
@@ -77,13 +84,37 @@ public class WhoCanSeeActivity extends Activity {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition,
 					long id) {
-				Log.i(">>>>>>", parent + "<<<" + v + ".." + groupPosition + "123" + childPosition);
+
 				myAdapter.notifyDataSetChanged();
 				return false;
 			}
 		});
-		myAdapter = new WhoExpandableAdpter(mainTable, childTeble, this);
+		myAdapter = new WhoExpandableAdpter(mainTable, childTeble, this, list);
 		listView.setAdapter(myAdapter);
+	}
+
+	private void getData() {
+		ArrayList<AdapterData> array;
+		AdapterData data;
+		for (int i = 0; i < 4; i++) {
+
+			array = new ArrayList<AdapterData>();
+			if (i < 2) {
+
+			} else {
+				for (int j = 0; j < 4; j++) {
+					data = new AdapterData();
+					data.setWhoName("小岚");
+					data.setWhoContent("泡泡");
+					array.add(data);
+				}
+			}
+			list.put(i, array);
+			Log.i("data", array.size() + "sss" + list.get(i).size());
+		}
+		for (int i = 0; i < 4; i++) {
+
+		}
 	}
 
 	@Override

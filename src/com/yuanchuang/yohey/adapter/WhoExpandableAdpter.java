@@ -1,9 +1,14 @@
 package com.yuanchuang.yohey.adapter;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.myData.AdapterData;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,15 +28,18 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 	String[][] childTeble;
 	Context context;
 	LayoutInflater inflater;
+	Map<Integer, ArrayList<AdapterData>> list;
 
 	public WhoExpandableAdpter() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WhoExpandableAdpter(String[] mainTable, String[][] childTeble, Context context) {
+	public WhoExpandableAdpter(String[] mainTable, String[][] childTeble, Context context,
+			Map<Integer, ArrayList<AdapterData>> list) {
 		this.mainTable = mainTable;
 		this.childTeble = childTeble;
 		this.context = context;
+		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
 
@@ -45,7 +53,7 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 	public int getChildrenCount(int groupPosition) {
 		// TODO Auto-generated method stub
 
-		return childTeble[groupPosition].length;
+		return list.get(groupPosition).size();
 	}
 
 	@Override
@@ -58,7 +66,8 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
 
-		return childTeble[groupPosition][childPosition];
+		return list.get(groupPosition).get(childPosition);
+		// childTeble[groupPosition][childPosition];
 	}
 
 	@Override
@@ -99,36 +108,32 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 		} else {
 			holder.mainBox.setBackgroundResource(R.drawable.unselected_round);
 		}
-		holder.mainContent.setText(mainTable[groupPosition].toString());
+		holder.mainContent.setText(childTeble[groupPosition][0].toString());
 		holder.mainTitle.setText(mainTable[groupPosition].toString());
 		return convertView;
 	}
 
-	@SuppressLint("InflateParams")
+	@SuppressLint({ "InflateParams", "NewApi" })
 	@Override
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
 			ViewGroup parent) {
-		boolean bool = false;
+
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.list_view_who_child_view, null);
 			holder.childName = (TextView) convertView.findViewById(R.id.list_child_who_can_see_text_public);
 			holder.childContent = (TextView) convertView.findViewById(R.id.list_child_who_can_see_text_frisnds);
-			holder.childBox = (ImageView) convertView.findViewById(R.id.list_child_who_can_see_check_box);
+			holder.childBox = (CheckBox) convertView.findViewById(R.id.list_child_who_can_see_check_box);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		if (bool) {
-			holder.childBox.setBackgroundResource(R.drawable.tick_round);
-		} else {
-			holder.childBox.setBackgroundResource(R.drawable.unselected_round);
-		}
-
-		holder.childContent.setText(childTeble[groupPosition][childPosition]);
-		holder.childName.setText(childTeble[groupPosition][childPosition]);
+		Log.i("aaaaaa", list.get(groupPosition).size() + "");
+		holder.childContent.setText((CharSequence) list.get(groupPosition).get(childPosition).getWhoContent());
+		holder.childName.setText((CharSequence) list.get(groupPosition).get(childPosition).getWhoName());
 		return convertView;
+
 	}
 
 	@Override
@@ -145,7 +150,7 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 		// 二级导航
 		TextView childName;// 标题
 		TextView childContent;// 内容
-		ImageView childBox;
+		CheckBox childBox;
 	}
 
 	public void expandGroup(int i) {

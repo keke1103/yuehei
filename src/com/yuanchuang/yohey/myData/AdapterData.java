@@ -44,6 +44,36 @@ public class AdapterData {
 	String official_announcement;// 官方资讯标题
 	String official_context;// 官方资讯内容
 	String official_time;// 官方资讯已发布多长时间时间
+
+	// 谁看过我
+	String whoContent;
+	String whoName;
+	boolean whoBox;
+
+	public String getWhoContent() {
+		return whoContent;
+	}
+
+	public void setWhoContent(String whoContent) {
+		this.whoContent = whoContent;
+	}
+
+	public String getWhoName() {
+		return whoName;
+	}
+
+	public void setWhoName(String whoName) {
+		this.whoName = whoName;
+	}
+
+	public boolean isWhoBox() {
+		return whoBox;
+	}
+
+	public void setWhoBox(boolean whoBox) {
+		this.whoBox = whoBox;
+	}
+
 	public Bitmap[] getDy_image() {
 		return dy_image;
 	}

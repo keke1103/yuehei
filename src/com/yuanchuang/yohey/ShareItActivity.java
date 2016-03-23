@@ -1,6 +1,7 @@
 package com.yuanchuang.yohey;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class ShareItActivity extends Activity {
 	LinearLayout linearWho;// 谁可以看
 	LinearLayout linearRemind;// 提醒谁看
 
+	Intent intent;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,24 +49,26 @@ public class ShareItActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
-			case R.id.title_navigation_back_icon://返回
+			case R.id.title_navigation_back_icon:// 返回
 				finish();
 				break;
 
-			case R.id.title_navigation_text_right_title://发送
-				
+			case R.id.title_navigation_text_right_title:// 发送
+
 				break;
-			case R.id.share_it_relation_add://添加图片
-				
+			case R.id.share_it_relation_add:// 添加图片
+
 				break;
-			case R.id.share_it_linear_position://所在位置
-				
+			case R.id.share_it_linear_position:// 所在位置
+
 				break;
-			case R.id.share_it_linear_remind://谁可以看
-				
+			case R.id.share_it_linear_who:// 谁可以看
+				intent = getIntent();
+				intent.setClass(ShareItActivity.this, WhoCanSeeActivity.class);
+				startActivity(intent);
 				break;
-			case R.id.share_it_linear_who://提醒谁看
-				
+			case R.id.share_it_linear_remind:// 提醒谁看
+
 				break;
 			default:
 				break;
