@@ -110,7 +110,9 @@ public class ShareItActivity extends Activity {
 				startActivity(intent);
 				break;
 			case R.id.share_it_linear_remind:// 提醒谁看
-
+				intent = getIntent();
+				intent.setClass(ShareItActivity.this, WhoReminderActivity.class);
+				startActivity(getIntent());
 				break;
 			default:
 				break;

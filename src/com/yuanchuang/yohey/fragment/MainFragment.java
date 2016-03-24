@@ -94,9 +94,11 @@ public class MainFragment extends Fragment {
 
 		View view = inflater.inflate(R.layout.list_head_view, null);
 		findInflate(view);// 找到导入的头文件的id
-		gallery = (Gallery) view.findViewById(R.id.main_list_head_gallery);
+
 		galleryAdapter = new GalleryAdapter(reList, getActivity());
+		
 		gallery.setAdapter(galleryAdapter);
+		gallery.setOnItemClickListener(clickListener);
 		getRemData(gameregion, -1, -1);
 
 		adapter = new MainAdapter(list, getActivity());
@@ -157,6 +159,7 @@ public class MainFragment extends Fragment {
 		afarid_official = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_not_afarid_official);
 		video_highlights = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_video_highlights);
 		win_points = (RelativeLayout) view.findViewById(R.id.main_list_head_liner_win_points);
+		gallery = (Gallery) view.findViewById(R.id.main_list_head_gallery);
 		playerHead1.setOnClickListener(onClickListener);
 		playerHead2.setOnClickListener(onClickListener);
 		playerHead3.setOnClickListener(onClickListener);
@@ -168,42 +171,43 @@ public class MainFragment extends Fragment {
 		win_points.setOnClickListener(onClickListener);
 		more.setOnClickListener(onClickListener);
 	}
-   /**
-    * listView的点击事件
-    */
+
+	/**
+	 * listView的点击事件
+	 */
 	OnItemClickListener clickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			switch (parent.getId()) {
-			case R.id.game_zone_listview2://具体区服listview的点击事件
+			case R.id.game_zone_listview2:// 具体区服listview的点击事件
 				if (listViewPosition == 2) {
 					gameZone.setText(str3[position + 20]);
-					gameregion=str3[position + 20];
-				} else if(listViewPosition == 1){
-					gameZone.setText(str3[position+1]);
-					gameregion=str3[position + 1];
-				}else{
+					gameregion = str3[position + 20];
+				} else if (listViewPosition == 1) {
+					gameZone.setText(str3[position + 1]);
+					gameregion = str3[position + 1];
+				} else {
 					gameZone.setText(str3[position]);
-					if("全部".equals(str3[position])){
-						gameregion=null;
-					}else{	
-						gameregion=str3[position];
+					if ("全部".equals(str3[position])) {
+						gameregion = null;
+					} else {
+						gameregion = str3[position];
 					}
 				}
-				Log.i("Gameregion", ">>>>"+gameregion);
+				Log.i("Gameregion", ">>>>" + gameregion);
 				getPostData(gameregion, -1, -1);
 				getRemData(gameregion, -1, -1);
 				popupWindow.dismiss();// 关闭popupWindow
 				break;
-			case R.id.main_list_posts://首页listview的点击事件
+			case R.id.main_list_posts:// 首页listview的点击事件
 				intent.setClass(getActivity(), PersonalPostActivity.class);
 				Post p = (Post) parent.getAdapter().getItem(position);
 				YoheyApplication app = (YoheyApplication) getActivity().getApplication();
 				app.data = p;
 				startActivityForResult(intent, 100);
 				break;
-			case R.id.game_zone_listview1://大区listview的点击事件
+			case R.id.game_zone_listview1:// 大区listview的点击事件
 				listViewPosition = position;
 				str3 = getResources().getStringArray(R.array.game_region);
 				ArrayList<String> list = new ArrayList<String>();
@@ -215,7 +219,7 @@ public class MainFragment extends Fragment {
 					break;
 				case 1:
 					for (int i = 0; i < 19; i++) {
-						list.add(str3[i+1]);
+						list.add(str3[i + 1]);
 					}
 					break;
 				case 2:
@@ -231,6 +235,13 @@ public class MainFragment extends Fragment {
 						android.R.layout.simple_list_item_1, list);
 				listView2.setAdapter(arrayAdapter);
 				listView2.setOnItemClickListener(clickListener);
+				break;
+			case R.id.main_list_head_gallery:
+				intent.setClass(getActivity(), PersonalPostActivity.class);
+				Post po = (Post) parent.getAdapter().getItem(position);
+				YoheyApplication you = (YoheyApplication) getActivity().getApplication();
+				you.data = po;
+				startActivityForResult(intent, 100);
 				break;
 			default:
 				break;
@@ -305,56 +316,61 @@ public class MainFragment extends Fragment {
 
 		}
 	};
-     /**
-      * 首页热门帖子的数据获取
-      * @param gameregion  区服的筛选 (不筛选传null)
-      * @param gamedanmin  最小段位筛选(不筛选传-1)
-      * @param gamedanmax  最高段位筛选(不筛选传-1)
-      */
+
+	/**
+	 * 首页热门帖子的数据获取
+	 * 
+	 * @param gameregion
+	 *            区服的筛选 (不筛选传null)
+	 * @param gamedanmin
+	 *            最小段位筛选(不筛选传-1)
+	 * @param gamedanmax
+	 *            最高段位筛选(不筛选传-1)
+	 */
 	private void getRemData(String gameregion, int gamedanmin, int gamedanmax) {
-		HttpGet get=new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getrempost");
-		if(gameregion!=null){
-		 	try {
-				gameregion=URLEncoder.encode(gameregion, "UTF-8");
+		HttpGet get = new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getrempost");
+		if (gameregion != null) {
+			try {
+				gameregion = URLEncoder.encode(gameregion, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			get.putString ("gameregion", gameregion);
+			get.putString("gameregion", gameregion);
 		}
-		if(gamedanmin>-1){
-	 			
-			get.putString("gamedanmin",""+ gamedanmin);
+		if (gamedanmin > -1) {
+
+			get.putString("gamedanmin", "" + gamedanmin);
 		}
-		if(gamedanmax>-1){
-	 			
-			get.putString("gamedanmax",""+ gamedanmax);
+		if (gamedanmax > -1) {
+
+			get.putString("gamedanmax", "" + gamedanmax);
 		}
-		
+
 		get.setOnSendListener(new OnSendListener() {
- 
+
 			public void start() {
-				 
+
 			}
-		 
+
 			public void end(String result) {
-				 Log.i("+++++++++++++++++",">>>:"+result);
-					try {
-							JSONObject joo=new JSONObject(result);
-							JSONArray ja= joo.getJSONArray("results");
-							reList.clear();
-							for(int i=0;i<ja.length();i++){
-								Post p=Post.paresJSONObject(ja.getJSONObject(i));
-								reList.add(p);
-							}
-							galleryAdapter.setData(reList);
-					} catch (JSONException e) {
-							e.printStackTrace();
-					}		 
+				Log.i("+++++++++++++++++", ">>>:" + result);
+				try {
+					JSONObject joo = new JSONObject(result);
+					JSONArray ja = joo.getJSONArray("results");
+					reList.clear();
+					for (int i = 0; i < ja.length(); i++) {
+						Post p = Post.paresJSONObject(ja.getJSONObject(i));
+						reList.add(p);
+					}
+					galleryAdapter.setData(reList);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
-		});	
+		});
 		get.send();
-		
+
 	}
 
 	/**
@@ -368,51 +384,52 @@ public class MainFragment extends Fragment {
 	 *            最高段位筛选(不筛选传-1)
 	 */
 	private void getPostData(String gameregion, int gamedanmin, int gamedanmax) {
- 
-		HttpGet get=new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getpost");
-		if(gameregion!=null){
-		 	try {
-				gameregion=URLEncoder.encode(gameregion, "UTF-8");
+
+		HttpGet get = new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getpost");
+		if (gameregion != null) {
+			try {
+				gameregion = URLEncoder.encode(gameregion, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			get.putString ("gameregion", gameregion);
+			get.putString("gameregion", gameregion);
 		}
-		if(gamedanmin>-1){
-	 			
-			get.putString("gamedanmin",""+ gamedanmin);
+		if (gamedanmin > -1) {
+
+			get.putString("gamedanmin", "" + gamedanmin);
 		}
-		if(gamedanmax>-1){
-	 			
-			get.putString("gamedanmax",""+ gamedanmax);
+		if (gamedanmax > -1) {
+
+			get.putString("gamedanmax", "" + gamedanmax);
 		}
-		
+
 		get.setOnSendListener(new OnSendListener() {
- 
+
 			public void start() {
-				 
+
 			}
-		 
+
 			public void end(String result) {
-					try {
-							JSONObject joo=new JSONObject(result);
-							JSONArray ja= joo.getJSONArray("results");
-							list.clear();
-							for(int i=0;i<ja.length();i++){
-								Post p=Post.paresJSONObject(ja.getJSONObject(i));
-								list.add(p);
-							}
-							adapter.setData(list);
-					} catch (JSONException e) {
-							e.printStackTrace();
-					}		 
+				try {
+					JSONObject joo = new JSONObject(result);
+					JSONArray ja = joo.getJSONArray("results");
+					list.clear();
+					for (int i = 0; i < ja.length(); i++) {
+						Post p = Post.paresJSONObject(ja.getJSONObject(i));
+						list.add(p);
+					}
+					adapter.setData(list);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
-		});	
+		});
 		get.send();
 	}
-    /**
-     * 控件ID
-     */
+
+	/**
+	 * 控件ID
+	 */
 	private void findView() {
 		gameDan = (ImageView) myView.findViewById(R.id.title_navigation_text_right_title);
 		gameZone = (TextView) myView.findViewById(R.id.title_navigation_game_zone);
