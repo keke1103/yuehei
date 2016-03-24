@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item   android:state_focused="false" android:state_pressed="true">
-        <shape android:shape="oval">
-            <stroke   android:width="11dp" android:color="#85D3EF" />
-            <solid android:color="@null"/>
-        </shape>
-    </item>
-    <item   android:state_focused="false" android:state_pressed="false">
-        <shape android:shape="oval">
-            <stroke   android:width="11dp" android:color="@color/write" />
-              <solid android:color="@null"/>
-        </shape>
-    </item>
- 
+    <item android:state_focused="false" android:state_pressed="true"><shape android:shape="oval">
+            <stroke android:width="11dp" android:color="@color/main_gray" />
+
+            <solid android:color="@null" />
+        </shape></item>
+    <item android:state_focused="false" android:state_pressed="false"><shape android:shape="oval">
+            <stroke android:width="11dp" android:color="@color/write" />
+
+            <solid android:color="@null" />
+        </shape></item>
+
 </selector>

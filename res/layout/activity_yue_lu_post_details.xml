@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECECEC"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <include
@@ -13,7 +13,10 @@
         android:id="@+id/post_details_list_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@null" >
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:listSelector="@drawable/select_list_view_color"
+        android:scrollingCache="false" >
     </ListView>
 
     <TextView

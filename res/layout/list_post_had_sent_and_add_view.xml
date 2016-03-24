@@ -12,27 +12,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/click_the_list_to_change_the_background"
         android:baselineAligned="false"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <RelativeLayout
-            android:layout_width="105dp"
-            android:layout_height="105dp"
-            android:layout_marginBottom="-10dp"
-            android:layout_marginLeft="-10dp"
-            android:layout_marginRight="-10dp"
-            android:layout_marginTop="-20dp"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginTop="-5dp"
             android:gravity="center" >
 
             <ImageView
                 android:id="@+id/list_post_details_image_head_portrait"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
                 android:layout_centerInParent="true"
                 android:contentDescription="@drawable/click_the_list_to_change_the_background_shape"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/log_ic" />
 
             <View
                 android:layout_width="match_parent"
@@ -44,9 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:orientation="vertical" >
 
@@ -99,7 +93,7 @@
                 android:id="@+id/list_post_details_text_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/main_text"
                 android:textSize="13sp" />
 
@@ -108,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/main_text"
                 android:textSize="13sp" />
         </LinearLayout>
