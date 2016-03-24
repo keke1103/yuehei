@@ -1,15 +1,32 @@
 package com.yuanchuang.yohey;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.Game;
+import com.yuanchuang.yohey.bmob.Post;
+import com.yuanchuang.yohey.bmob.User;
+import com.yuanchuang.yohey.tools.HttpGet;
+import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * 个人资料界面
@@ -32,7 +49,8 @@ public class PersonalInformationActivity extends Activity {
 	TextView up;// 点赞数
 	TextView signature;// 个性签名
 	LinearLayout others_impression;// 他人印象
-	LinearLayout record;//// 战绩
+	TextView mSignature;//修改个性签名
+	LinearLayout record;// 战绩
 	LayoutInflater inflater;
 	/**
 	 * 战绩
@@ -50,6 +68,12 @@ public class PersonalInformationActivity extends Activity {
 	TextView mLosekills;// 战绩失败的击杀
 	TextView mLoseHeadcount;// 战绩失败的人头
 	TextView mLoseAssists;// 战绩失败的助攻
+	
+	User user;
+	Post post;
+	YoheyApplication app;
+	
+	AlertDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +81,12 @@ public class PersonalInformationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_personal_information);
 		findView();
+		
+		app = (YoheyApplication) getApplication();
+		user=BmobUser.getCurrentUser(this, User.class);
+		post = (Post) app.data;
+		app.data = null;
+		
 		findRecord();
 	}
 
@@ -87,7 +117,7 @@ public class PersonalInformationActivity extends Activity {
 		mkills.setText("10");
 		mHeadcount.setText("12");
 		mAssists.setText("13");
-
+		gainUser();
 	}
 
 	@SuppressLint("InflateParams")
@@ -105,6 +135,7 @@ public class PersonalInformationActivity extends Activity {
 		sex = (ImageView) findViewById(R.id.personal_user_text_sex);
 		up = (TextView) findViewById(R.id.personal_text_thumbs_up);
 		signature = (TextView) findViewById(R.id.personal_user_text_signature);
+		mSignature=(TextView)findViewById(R.id.personal_signature_modification);
 		others_impression = (LinearLayout) include.findViewById(R.id.personal_user_linear_other_impression);
 		record = (LinearLayout) findViewById(R.id.personal_user_linear_record);
 
@@ -112,6 +143,7 @@ public class PersonalInformationActivity extends Activity {
 		backimage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("个人资料");
 		backimage.setOnClickListener(clickListener);
+		mSignature.setOnClickListener(clickListener);
 		
 		inflater = getLayoutInflater();
 		mView = inflater.inflate(R.layout.view_personal_information, null);
@@ -127,10 +159,79 @@ public class PersonalInformationActivity extends Activity {
 			case R.id.title_navigation_back_icon:
 				finish();
 				break;
-
+			case R.id.personal_signature_modification:
+				customDialog();
+				break;
 			default:
 				break;
 			}
 		}
 	};
+	/**
+	 * 自定义Dialog
+	 */
+	public void customDialog(){
+		LinearLayout layout=new LinearLayout(getApplication());
+		LayoutParams params=new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+		layout.setLayoutParams(params);
+		layout.setOrientation(1);
+		
+		EditText editText=new EditText(getApplication());
+		editText.setLayoutParams(params);
+		layout.addView(editText);
+		
+		Button button=new Button(getApplication());
+		button.setLayoutParams(params);
+		button.setText("确定");
+		layout.addView(button);
+		
+		AlertDialog.Builder builder=new AlertDialog.Builder(this);
+		dialog=builder.create();
+		dialog.setView(layout);
+		dialog.show();
+	}
+	/**
+	 * 获取用户信息
+	 */
+	public void gainUser(){
+		name.setText(user.getNickName());
+	    user.binderImageView(head);	
+	    HttpGet get=new HttpGet(YoheyApplication.ServiceIp+"getgame");
+	    get.putString("gid", user.getDefGame().getObjectId());
+	    get.setOnSendListener(new OnSendListener() {
+
+			public void start() {
+			
+			}
+			
+			@Override
+			public void end(String result) {	
+	          try {
+				user.setDefGame(Game.paresJSONObejct(new JSONObject(result)));
+				area.setText(user.getDefGame().getGameregion());
+				dan.setText(user.getDefGame().getGamedan());
+				grade.setText("LV"+user.getDefGame().getGamegrade());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		});
+	    get.send();
+	}
+	/**
+	 * 更新用户信息
+	 */
+	public void newUserInformation(){
+		BmobUser newUser=new BmobUser();
+		BmobUser bmobUser=BmobUser.getCurrentUser(this);
+		newUser.update(this, bmobUser.getObjectId(),new UpdateListener() {
+			public void onSuccess() {
+				Toast.makeText(getApplication(),"更新用户信息成功",Toast.LENGTH_SHORT).show();
+			}
+			public void onFailure(int arg0, String arg1) {
+				Toast.makeText(getApplication(),"更新用户信息失败",Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 }

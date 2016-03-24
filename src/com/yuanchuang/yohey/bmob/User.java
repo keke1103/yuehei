@@ -26,7 +26,7 @@ public class User extends BmobUser {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Boolean sex;
+	private Boolean sex;//性别
 
 	private String nickname;
 
@@ -38,8 +38,25 @@ public class User extends BmobUser {
 	private int bonuspoints;// 消费积分
 	private int likecount;// 我的点赞数
 	private int likednumber;// 我的被点赞数
+    private String mood;//个性签名
+    private int age;//年龄
+	private Game defGame; 
 
-	private Game defGame;
+	public String getMood() {
+		return mood;
+	}
+
+	public void setMood(String mood) {
+		this.mood = mood;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 
 	public Game getDefGame() {
 		return defGame;
