@@ -36,7 +36,22 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/share_it_edit_ider" >
 
-            <RelativeLayout
+            <GridView
+                android:id="@+id/noScrollgridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:horizontalSpacing="3dp"
+                android:numColumns="4"
+                android:scrollbars="none"
+                android:verticalSpacing="5dp" >
+            </GridView>
+
+            <!--
+                 <RelativeLayout
                 android:id="@+id/share_it_view_add"
                 android:layout_width="53dp"
                 android:layout_height="53dp"
@@ -68,6 +83,7 @@
                 android:text="@string/add_picture"
                 android:textColor="#A9A9A9"
                 android:textSize="12sp" />
+            -->
         </RelativeLayout>
 
         <View

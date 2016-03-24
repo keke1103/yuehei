@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
@@ -40,6 +41,21 @@ public class WhoCanSeeActivity extends Activity {
 	boolean bool;
 
 	Map<Integer, ArrayList<AdapterData>> list;
+	private OnClickListener clike = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.title_navigation_back_icon:
+				finish();
+				break;
+
+			default:
+				break;
+			}
+
+		}
+	};
 
 	@SuppressLint("UseSparseArrays")
 	@Override
@@ -139,5 +155,6 @@ public class WhoCanSeeActivity extends Activity {
 		rightTitle.setBackgroundDrawable(drawable);
 		rightTitle.setText("完成");
 		toReturn.setVisibility(View.VISIBLE);
+		toReturn.setOnClickListener(clike);
 	}
 }
