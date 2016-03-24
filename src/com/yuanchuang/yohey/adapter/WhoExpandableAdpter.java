@@ -14,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 谁可以看&&谁不能看
@@ -130,12 +133,27 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		Log.i("aaaaaa", list.get(groupPosition).size() + "");
+		holder.childBox.setChecked(list.get(groupPosition).get(childPosition).isWhoBox());
+		holder.childBox.setOnCheckedChangeListener(checkChange);
 		holder.childContent.setText((CharSequence) list.get(groupPosition).get(childPosition).getWhoContent());
 		holder.childName.setText((CharSequence) list.get(groupPosition).get(childPosition).getWhoName());
 		return convertView;
 
 	}
+OnCheckedChangeListener checkChange=new OnCheckedChangeListener() {
 
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if(isChecked){
+			
+			Toast.makeText(context, "你已选中", Toast.LENGTH_SHORT).show();
+		}else{
+			Toast.makeText(context, "你已取消", Toast.LENGTH_SHORT).show();
+		}
+		
+	}
+	
+};
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub

@@ -22,6 +22,8 @@
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/yo_hey_back_image"
             android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:text="@string/to_return"
             android:textColor="@color/write"
             android:textSize="13sp" />
@@ -96,34 +98,40 @@
         <ImageView
             android:id="@+id/forwarding_view_ait"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="30dp"
             android:contentDescription="@drawable/ait_icon"
+            android:paddingBottom="5dp"
             android:paddingEnd="6dp"
             android:paddingLeft="10dp"
             android:paddingRight="6dp"
             android:paddingStart="10dp"
+            android:paddingTop="5dp"
             android:src="@drawable/ait_icon" />
 
         <ImageView
             android:id="@+id/forwarding_view_expression"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="30dp"
             android:contentDescription="@drawable/expression_inco"
+            android:paddingBottom="5dp"
             android:paddingEnd="6dp"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:paddingStart="6dp"
+            android:paddingTop="5dp"
             android:src="@drawable/expression_inco" />
 
         <ImageView
             android:id="@+id/forwarding_view_defoult"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="30dp"
             android:contentDescription="@drawable/default_image"
+            android:paddingBottom="5dp"
             android:paddingEnd="6dp"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:paddingStart="6dp"
+            android:paddingTop="5dp"
             android:src="@drawable/default_image" />
     </LinearLayout>
 

@@ -162,32 +162,20 @@
                         </LinearLayout>
                         <!-- 赞 -->
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/personal_text_thumbs_up"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="3dp" >
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="14dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginStart="10dp"
-                                android:contentDescription="@drawable/thumbs_up_inco"
-                                android:src="@drawable/thumbs_up_inco" />
-
-                            <TextView
-                                android:id="@+id/personal_text_thumbs_up"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="11dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="11dp"
-                                android:layout_marginStart="8dp"
-                                android:text="250"
-                                android:textColor="@color/main_text"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                            android:layout_marginEnd="11dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="11dp"
+                            android:layout_marginStart="10dp"
+                            android:drawableLeft="@drawable/thumbs_up_inco"
+                            android:drawablePadding="8dp"
+                            android:drawableStart="@drawable/thumbs_up_inco"
+                            android:text="250"
+                            android:textColor="@color/main_text"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>

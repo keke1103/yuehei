@@ -50,6 +50,44 @@ public class AdapterData {
 	String whoName;
 	boolean whoBox;
 
+	// 提醒谁看
+	String editName; // 显示的数据
+	String editSortLetters; // 显示数据拼音的首字母
+	String editHead;// 头像
+	boolean editbox;
+
+	public String getEditHead() {
+		return editHead;
+	}
+
+	public void setEditHead(String editHead) {
+		this.editHead = editHead;
+	}
+
+	public boolean isEditbox() {
+		return editbox;
+	}
+
+	public void setEditbox(boolean editbox) {
+		this.editbox = editbox;
+	}
+
+	public String getEditName() {
+		return editName;
+	}
+
+	public void setEditName(String editName) {
+		this.editName = editName;
+	}
+
+	public String getEditSortLetters() {
+		return editSortLetters;
+	}
+
+	public void setEditSortLetters(String editSortLetters) {
+		this.editSortLetters = editSortLetters;
+	}
+
 	public String getWhoContent() {
 		return whoContent;
 	}

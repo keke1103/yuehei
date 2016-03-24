@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F5F4"
     android:orientation="vertical" >
 
     <!-- 导入头文件 -->
@@ -10,26 +11,112 @@
         android:id="@+id/posting_include_itle"
         layout="@layout/title_navigation_bar" />
 
-    <!-- 输入内容 -->
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/text_stroke"
+        android:layout_height="186.3dp"
+        android:background="@color/write"
         android:orientation="vertical" >
+
+        <!-- 输入内容 -->
 
         <EditText
             android:id="@+id/posting_include_edit_context"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="73dp"
             android:background="@null"
             android:gravity="top"
-            android:hint="@string/posts"
-            android:paddingTop="10dp"
+            android:hint="@string/idea"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
             android:textSize="12sp" />
-    </LinearLayout>
+        <!-- 添加图片 -->
+
+        <RelativeLayout
+            android:id="@+id/share_it_relation_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/posting_include_edit_context" >
+
+            <RelativeLayout
+                android:id="@+id/share_it_view_add"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@drawable/text_stroke" >
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="27dp"
+                    android:layout_centerInParent="true"
+                    android:background="#D2D4D4" />
+
+                <View
+                    android:layout_width="27dp"
+                    android:layout_height="1px"
+                    android:layout_centerInParent="true"
+                    android:background="#D2D4D4" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/share_it_view_add"
+                android:layout_toRightOf="@id/share_it_view_add"
+                android:text="@string/add_picture"
+                android:textColor="#A9A9A9"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/share_it_relation_add"
+            android:layout_marginTop="10dp"
+            android:background="#D9DBDC" />
+        <!-- 所在位置 -->
+
+        <LinearLayout
+            android:id="@+id/share_it_linear_position"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/write"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginStart="11dp"
+                android:contentDescription="@drawable/display_position"
+                android:src="@drawable/display_position" />
+
+            <TextView
+                android:id="@+id/share_it_text_position"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/position"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@drawable/right_arrow_icon"
+                android:src="@drawable/right_arrow_icon" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="fill_parent"
@@ -41,11 +128,13 @@
         android:id="@+id/area_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/write"
         android:button="@null"
         android:drawableEnd="@drawable/rub_course_go_to_next_right"
         android:drawableRight="@drawable/rub_course_go_to_next_right"
         android:padding="10dp"
         android:text="@string/area"
-        android:textSize="13sp" />
+        android:textColor="#666666"
+        android:textSize="14sp" />
 
 </LinearLayout>

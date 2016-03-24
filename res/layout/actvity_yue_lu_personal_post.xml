@@ -34,27 +34,30 @@
 
             <ImageView
                 android:id="@+id/personal_post_image_ait"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:contentDescription="@drawable/ait_grey"
+                android:padding="5dp"
                 android:src="@drawable/ait_grey" />
 
             <ImageView
                 android:id="@+id/personal_post_image_smile"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:layout_marginLeft="13dp"
                 android:layout_marginStart="13dp"
                 android:contentDescription="@drawable/smile_grey"
+                android:padding="5dp"
                 android:src="@drawable/smile_grey" />
 
             <ImageView
                 android:id="@+id/personal_post_image_photos"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:layout_marginLeft="13dp"
                 android:layout_marginStart="13dp"
                 android:contentDescription="@drawable/photos_gray"
+                android:padding="5dp"
                 android:src="@drawable/photos_gray" />
         </LinearLayout>
 
@@ -65,34 +68,33 @@
             android:orientation="horizontal"
             android:padding="10dp" >
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+            <EditText
+                android:id="@+id/personal_post_edit_say"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/shape_share_end"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:hint="@string/say"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/main_text"
+                android:textSize="12sp" />
 
-                <EditText
-                    android:id="@+id/personal_post_edit_say"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/say"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingStart="5dp"
-                    android:textColor="@color/main_text"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/personal_post_image_send"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:contentDescription="@drawable/send_comments"
-                    android:padding="5dp"
-                    android:src="@drawable/send_comments" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/personal_post_text_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
+                android:background="@drawable/button_rounded_corners_and_solid"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp"
+                android:text="@string/send" />
         </LinearLayout>
     </LinearLayout>
 

@@ -71,11 +71,13 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:contentDescription="@drawable/yo_hey_iconfont_huatong"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:src="@drawable/yo_hey_iconfont_huatong" />
 
         <EditText
@@ -91,17 +93,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
             android:contentDescription="@drawable/yo_hey_smiling_face"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:src="@drawable/yo_hey_smiling_face" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="发送"
             android:textColor="#ffffff"
             android:textSize="15sp" />

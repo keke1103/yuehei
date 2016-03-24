@@ -62,41 +62,35 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="3dp"
                     android:text="1253"
                     android:textColor="@color/main_title_text"
                     android:textSize="13sp" />
-
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="7dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@drawable/the_number_of_posts_to_view"
-                    android:src="@drawable/the_number_of_posts_to_view" />
 
                 <TextView
                     android:id="@+id/list_post_details_text_yan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:drawableLeft="@drawable/the_number_of_posts_to_view"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/the_number_of_posts_to_view"
+                    android:padding="10dp"
                     android:textColor="@color/main_text"
                     android:textSize="10sp" />
-
-                <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="10dp"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginStart="23dp"
-                    android:contentDescription="@drawable/post_message"
-                    android:src="@drawable/post_message" />
 
                 <TextView
                     android:id="@+id/list_post_details_text_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginStart="23dp"
+                    android:drawableLeft="@drawable/post_message"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/post_message"
+                    android:padding="10dp"
                     android:textColor="@color/main_text"
                     android:textSize="10sp" />
             </LinearLayout>

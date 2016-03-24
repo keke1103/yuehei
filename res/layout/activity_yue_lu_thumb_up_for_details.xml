@@ -83,7 +83,9 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" >
 
             <ImageView
                 android:layout_width="20dp"
@@ -109,9 +111,12 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" >
 
             <ImageView
+                android:id="@+id/thumb_up_image_comment"
                 android:layout_width="20dp"
                 android:layout_height="19dp"
                 android:contentDescription="@drawable/yu_hei_comment_icon"
@@ -135,9 +140,12 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" >
 
             <ImageView
+                android:id="@+id/thumb_up_image_thumb_up"
                 android:layout_width="20dp"
                 android:layout_height="19dp"
                 android:contentDescription="@drawable/yu_hei_thumb_up_icon"

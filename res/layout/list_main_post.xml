@@ -121,74 +121,93 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/list_main_text_up"
+        <LinearLayout
+            android:id="@+id/list_main_linear_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:text="99+" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingEnd="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp" >
 
-        <ImageView
-            android:id="@+id/list_main_image_up"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_toLeftOf="@id/list_main_text_up"
-            android:layout_toStartOf="@id/list_main_text_up"
-            android:contentDescription="@drawable/like_point_grey"
-            android:src="@drawable/like_point_grey" />
+            <ImageView
+                android:id="@+id/list_main_image_up"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:contentDescription="@drawable/like_point_grey"
+                android:src="@drawable/like_point_grey" />
 
-        <TextView
-            android:id="@+id/list_main_text_message"
+            <TextView
+                android:id="@+id/list_main_text_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="99+" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/list_main_linear_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/list_main_image_up"
-            android:layout_toStartOf="@id/list_main_image_up"
-            android:text="99+" />
+            android:layout_toLeftOf="@id/list_main_linear_up"
+            android:layout_toStartOf="@id/list_main_linear_up"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" >
 
-        <ImageView
-            android:id="@+id/list_main_image_message"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_toLeftOf="@id/list_main_text_message"
-            android:layout_toStartOf="@id/list_main_text_message"
-            android:contentDescription="@drawable/comments_grey"
-            android:src="@drawable/comments_grey" />
+            <ImageView
+                android:id="@+id/list_main_image_message"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:contentDescription="@drawable/comments_grey"
+                android:src="@drawable/comments_grey" />
 
-        <TextView
-            android:id="@+id/list_main_text_add"
+            <TextView
+                android:id="@+id/list_main_text_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="99+" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/list_main_linear_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/list_main_image_message"
-            android:layout_toStartOf="@id/list_main_image_message"
-            android:text="99+" />
+            android:layout_toLeftOf="@id/list_main_linear_message"
+            android:layout_toStartOf="@id/list_main_linear_message"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_toLeftOf="@id/list_main_text_add"
-            android:layout_toStartOf="@id/list_main_text_add"
-            android:contentDescription="@drawable/main_jia_ru_zhan_dui"
-            android:src="@drawable/main_jia_ru_zhan_dui" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:contentDescription="@drawable/main_jia_ru_zhan_dui"
+                android:src="@drawable/main_jia_ru_zhan_dui" />
+
+            <TextView
+                android:id="@+id/list_main_text_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="99+"
+                android:textColor="@color/main_text"
+                android:textSize="12sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <View

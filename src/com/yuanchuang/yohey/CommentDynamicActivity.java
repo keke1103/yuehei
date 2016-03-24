@@ -9,13 +9,11 @@ import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.tools.DensityUtil;
-import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -99,16 +97,6 @@ public class CommentDynamicActivity extends Activity {
 		}
 	}
 
-	/*
-	 * private void getContext(String content) { TextView text = new
-	 * TextView(this); LayoutParams params = new
-	 * LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-	 * android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-	 * text.setLayoutParams(params); text.setText(content); image.addView(text);
-	 * 
-	 * }
-	 */
-
 	OnClickListener onClickListener = new OnClickListener() {
 
 		@Override
@@ -120,7 +108,7 @@ public class CommentDynamicActivity extends Activity {
 			case R.id.title_navigation_back_icon:
 				finish();
 				break;
-			case R.id.personal_post_image_send:
+			case R.id.personal_post_text_send:
 				Toast.makeText(getApplication(), "为什么要发呢", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.personal_post_image_ait:
@@ -142,7 +130,7 @@ public class CommentDynamicActivity extends Activity {
 	private void findView() {
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		toReturn = findViewById(R.id.title_navigation_back_icon);
-		send = findViewById(R.id.personal_post_image_send);
+		send = findViewById(R.id.personal_post_text_send);
 		ait = findViewById(R.id.personal_post_image_ait);
 		smile = findViewById(R.id.personal_post_image_smile);
 		photos = findViewById(R.id.personal_post_image_photos);
