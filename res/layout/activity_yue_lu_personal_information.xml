@@ -306,13 +306,23 @@
                     <!-- 个性签名 -->
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:text="@string/signature"
                         android:textColor="@color/main_text"
                         android:textSize="12sp" />
+                    <TextView 
+                        android:id="@+id/personal_signature_modification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:background="@drawable/rounded_gray_line_on_a_white_background"
+                        android:text="修改"
+                        android:textColor="#f0ff44"
+                        android:textSize="12sp"/>
                 </LinearLayout>
 
                 <View

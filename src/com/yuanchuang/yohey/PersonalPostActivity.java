@@ -24,11 +24,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,8 +62,8 @@ public class PersonalPostActivity extends Activity {
 
 	TextView joinCount;//想加入的人数
 	TextView comCount;//评论数
-	TextView likeCount;//点赞数
-	ImageView likeCountImage;//点赞的图标
+	CheckBox likeCountImage;//点赞的图标
+	boolean liked;//判断是否点赞
 	int resultCode=0;
 	
 	View ait;// 艾特符号
@@ -81,6 +83,7 @@ public class PersonalPostActivity extends Activity {
 	View headView;
 	Intent mIntent;
 	Post post;
+	User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,7 @@ public class PersonalPostActivity extends Activity {
 		mIntent = getIntent();
 
 		YoheyApplication app = (YoheyApplication) getApplication();
+		user=BmobUser.getCurrentUser(this, User.class);
 		post = (Post) app.data;
 		app.data = null;
 		findView();
@@ -100,7 +104,44 @@ public class PersonalPostActivity extends Activity {
 
 		listView.addHeaderView(headView);
 		listView.setAdapter(myAdapter);
+		
 		setData();
+		isLike();
+	}
+	/**
+	 * 访问点赞接口
+	 */
+	private void likepost(){
+			HttpGet get=new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/likepost");
+			get.putString("pid", post.getObjectId());
+            get.putString("uid",user.getObjectId());
+        	if(likeCountImage.isChecked()){
+			    post.setLikenumber(post.getLikenumber()+1);
+			}else{
+				post.setLikenumber(post.getLikenumber()-1);
+			}	
+			likeCountImage.setText((post.getLikenumber())+"");
+			resultCode=1;
+            get.send();
+	}
+	
+	/**
+	 * 初始化点赞数据
+	 */
+	private void isLike(){
+		HttpGet get=new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/islike");
+		get.putString("pid", post.getObjectId());
+		get.putString("uid", user.getObjectId());
+		get.setOnSendListener(new OnSendListener() {
+ 
+			public void start() {			 
+			}
+			public void end(String result) {
+				Log.i("+++++++++++++++", ">>>>>"+result);
+				likeCountImage.setChecked("like".equals(result));				 
+			}
+		});
+		get.send();
 	}
     /**
      * 获取评论的数据
@@ -167,13 +208,6 @@ public class PersonalPostActivity extends Activity {
 			case R.id.personal_post_image_send:
 				sendCom();
 				break;
-
-			case R.id.personal_post_image_zhan:
-				likeCount.setText(""+1);
-
-
-				Toast.makeText(getApplication(), "发送不出去", Toast.LENGTH_SHORT).show();
-				break;
 			case R.id.personal_post_image_ait:
 				Toast.makeText(getApplication(), "你想@谁", Toast.LENGTH_SHORT).show();
 				break;
@@ -185,8 +219,9 @@ public class PersonalPostActivity extends Activity {
 
 			case R.id.add_friend:
 				addFriend();
-
-
+				break;	
+			case R.id.personal_post_image_zhan:
+				likepost();
 				break;
 			default:
 				break;
@@ -209,9 +244,8 @@ public class PersonalPostActivity extends Activity {
 		context = (LinearLayout) headView.findViewById(R.id.personal_post_cotext);
 		joinCount = (TextView) headView.findViewById(R.id.personal_post_text_addd);
 		comCount = (TextView) headView.findViewById(R.id.personal_post_text_message);
-		likeCount = (TextView) headView.findViewById(R.id.personal_post_text_zhan);
 
-		likeCountImage=(ImageView)headView.findViewById(R.id.personal_post_image_zhan);
+		likeCountImage=(CheckBox)headView.findViewById(R.id.personal_post_image_zhan);
 
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		toReturn = findViewById(R.id.title_navigation_back_icon);
@@ -219,8 +253,6 @@ public class PersonalPostActivity extends Activity {
 
 
         say=(EditText)findViewById(R.id.personal_post_edit_say);
-        
-		likeCountImage.setOnClickListener(onClickListener);
 
 		ait = findViewById(R.id.personal_post_image_ait);
 		smile = findViewById(R.id.personal_post_image_smile);
@@ -242,17 +274,17 @@ public class PersonalPostActivity extends Activity {
 		likeCountImage.setOnClickListener(onClickListener);
 
 		addFriend.setOnClickListener(onClickListener);
-
+		
+ 
+		likeCountImage.setOnClickListener(onClickListener);
 		title.setText("帖子详情");
 
 		toReturn.setVisibility(View.VISIBLE);
 		listView = (ListView) findViewById(R.id.personal_post_list_message);
 	}
 
+ 
 	/**
-<<<<<<< HEAD
-	 * 获取帖子内容的
-=======
 	 * 好友添加
 	 */
 	private void addFriend() {
@@ -270,7 +302,6 @@ public class PersonalPostActivity extends Activity {
 
 	/**
 	 * 设置帖子内容的显示
->>>>>>> origin/feature/tools_keke
 	 */
 	private void setData() {
 		nickName.setText(post.getUser().getNickName());
@@ -278,7 +309,7 @@ public class PersonalPostActivity extends Activity {
 		time.setText(TimeUtil.formateTimeToNow(post.getCreatedAt()));
 		joinCount.setText("" + post.getJoincount());
 		comCount.setText("" + post.getComcount());
-		likeCount.setText("" + post.getLikenumber());
+		likeCountImage.setText("" + post.getLikenumber());
 		if (!TextUtils.isEmpty(post.getTitle())) {
 			getContext(post.getTitle());
 		} else {
@@ -294,12 +325,11 @@ public class PersonalPostActivity extends Activity {
 		if (!TextUtils.isEmpty(content)) {
 			Comment comment = new Comment();
 			comment.setPost(post);
-			comment.setUser(BmobUser.getCurrentUser(this, User.class));
+			comment.setUser(user);
 			comment.setContent(content);
 			comment.save(this, new SaveListener() {
 				public void onSuccess() {
 					say.setText("");
-
 					resultCode=1;
 					comCount.setText("" + (post.getComcount()+1));
 					Post p=new Post();

@@ -31,7 +31,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-
+/**
+ * 好友消息界面
+ * @author Administrator
+ *
+ */
 public class Lu_Activity extends Fragment {
 	RadioGroup radiogroup;
 	RadioButton msg;//消息

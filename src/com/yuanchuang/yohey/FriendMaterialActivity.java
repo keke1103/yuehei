@@ -1,6 +1,7 @@
 package com.yuanchuang.yohey;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,8 +11,10 @@ import android.view.View.OnClickListener;
  *
  */
 import android.widget.ImageView;
+import android.widget.TextView;
 public class FriendMaterialActivity extends Activity {
 	ImageView backImage;//返回
+	TextView sendMessage;//发送消息按钮
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -31,7 +34,10 @@ public class FriendMaterialActivity extends Activity {
 			case R.id.friend_message_frame_back:
 				finish();
 				break;
-
+			case R.id.friend_material_send_message:
+				Intent intent = new Intent(FriendMaterialActivity.this, FriendMessageActivity.class);
+				startActivity(intent);
+				break;
 			default:
 				break;
 			}
@@ -43,8 +49,10 @@ public class FriendMaterialActivity extends Activity {
 	private void findView() {
 		// TODO Auto-generated method stub
 		backImage=(ImageView)findViewById(R.id.friend_message_frame_back);
+		sendMessage=(TextView)findViewById(R.id.friend_material_send_message);
 		
 		backImage.setOnClickListener(clickListener);
+		sendMessage.setOnClickListener(clickListener);
 	}
 
 }
