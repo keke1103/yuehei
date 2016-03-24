@@ -75,6 +75,7 @@ public class GalleryAdapter extends BaseAdapter {
 			holder.line = convertView.findViewById(R.id.list_main_line_zhong);
 			holder.popular = (ImageView) convertView.findViewById(R.id.list_main_image_popular);
 			holder.lineDi = convertView.findViewById(R.id.list_main_line_di);
+			holder.shapeView = convertView.findViewById(R.id.list_main_image_head_tu_view);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -89,6 +90,7 @@ public class GalleryAdapter extends BaseAdapter {
 		TextView text = new TextView(context);
 		text.setText(data.getTitle());
 		text.setPadding(10, 5, 0, 0);
+		holder.shapeView.setBackgroundResource(R.drawable.shape_main_head_white);
 		text.setTextSize(12);
 		holder.context.addView(text);
 		holder.message.setText(data.getComcount() + "");
@@ -100,6 +102,7 @@ public class GalleryAdapter extends BaseAdapter {
 
 	class ViewHolder {
 		View line;
+		View shapeView;
 		ImageView head;// 头像
 		TextView name;// 名字
 		TextView time;// 时间

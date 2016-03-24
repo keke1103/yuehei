@@ -40,53 +40,106 @@
 
         <!-- 玩家头像1-5 -->
 
-        <ImageView
-            android:id="@+id/main_image_recommended_user1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="11dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="11dp"
-            android:background="@drawable/head_shape_round_stroke"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/tui_jian_kai_hei_1" />
+        <RelativeLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp" >
 
-        <ImageView
-            android:id="@+id/main_image_recommended_user2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/tui_jian_kai_hei_2" />
+            <ImageView
+                android:id="@+id/main_image_recommended_user1"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/head_shape_round_stroke"
+                android:contentDescription="@drawable/ic_launcher"
+                android:src="@drawable/tui_jian_kai_hei_1" />
 
-        <ImageView
-            android:id="@+id/main_image_recommended_user3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/tui_jian_kai_hei_3" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/shape_main_head_recommend_round" />
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/main_image_recommended_user4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/tui_jian_kai_hei_4" />
+        <RelativeLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp" >
 
-        <ImageView
-            android:id="@+id/main_image_recommended_user5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/tui_jian_kai_hei_5" />
+            <ImageView
+                android:id="@+id/main_image_recommended_user2"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@drawable/ic_launcher"
+                android:src="@drawable/tui_jian_kai_hei_2" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/shape_main_head_recommend_round" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp" >
+
+            <ImageView
+                android:id="@+id/main_image_recommended_user3"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@drawable/ic_launcher"
+                android:src="@drawable/tui_jian_kai_hei_3" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/shape_main_head_recommend_round" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp" >
+
+            <ImageView
+                android:id="@+id/main_image_recommended_user4"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@drawable/ic_launcher"
+                android:src="@drawable/tui_jian_kai_hei_4" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/shape_main_head_recommend_round" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp" >
+
+            <ImageView
+                android:id="@+id/main_image_recommended_user5"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+               android:layout_centerInParent="true"
+                android:contentDescription="@drawable/ic_launcher"
+                android:src="@drawable/tui_jian_kai_hei_5" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/shape_main_head_recommend_round" />
+        </RelativeLayout>
         <!-- 更多图标 -->
 
         <ImageView

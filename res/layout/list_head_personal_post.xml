@@ -13,23 +13,30 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
+        android:background="@color/write"
         android:orientation="horizontal"
         android:paddingBottom="3dp" >
 
         <!-- 头像 -->
 
-        <ImageView
-            android:id="@+id/personal_post_image_head"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/tui_jian_kai_hei_1" />
+        <RelativeLayout
+            android:id="@+id/personal_post_linear_head"
+            android:layout_width="70dp"
+            android:layout_height="70dp" >
 
+            <ImageView
+                android:id="@+id/personal_post_image_head"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@drawable/ic_launcher"
+                android:src="@drawable/tui_jian_kai_hei_1" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/shape_main_head_white" />
+        </RelativeLayout>
         <!-- 昵称 -->
 
         <TextView
@@ -37,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_toEndOf="@id/personal_post_image_head"
-            android:layout_toRightOf="@+id/personal_post_image_head"
+            android:layout_toEndOf="@id/personal_post_linear_head"
+            android:layout_toRightOf="@+id/personal_post_linear_head"
             android:text="@string/zhao"
             android:textColor="@color/main_title_text"
             android:textSize="14sp" />
@@ -84,6 +91,7 @@
         android:id="@+id/personal_post_cotext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@color/write"
         android:orientation="vertical"
         android:padding="10dp" >
     </LinearLayout>
@@ -91,16 +99,18 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="10dp"
-        android:background="#DADBDD" />
+        android:background="#F3F4F6" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="35dp"
+        android:background="@color/write"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
 
         <View
             android:layout_width="0dp"
