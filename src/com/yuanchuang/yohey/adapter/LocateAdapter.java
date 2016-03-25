@@ -58,13 +58,8 @@ public class LocateAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		if (position == 0) {
-			holder.name.setText("重庆");
-			holder.content.setVisibility(View.GONE);
-		} else {
 			holder.content.setText(list.get(position).getLocatContent());
 			holder.name.setText(list.get(position).getLocatLocation());
-		}
 		return convertView;
 	}
 

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -25,6 +26,8 @@ public class LocateActivity extends Activity {
 	LocateAdapter myAdapter;
 	AdapterData data;
 	LayoutInflater inflater;
+	TextView name;// 定位的地点名
+	CheckBox locate;// 是否显示位置
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -34,13 +37,23 @@ public class LocateActivity extends Activity {
 		setContentView(R.layout.activity_yue_lu_dynamic);
 		list = new ArrayList<AdapterData>();
 		findView();
-		getData();
-		myAdapter = new LocateAdapter(list, getApplication());
 		inflater = getLayoutInflater();
 		headView = inflater.inflate(R.layout.list_locate_head, null);
+		findInView();
+		getData();
+
+		myAdapter = new LocateAdapter(list, getApplication());
+
 		listView.setDivider(null);
 		listView.addHeaderView(headView);
 		listView.setAdapter(myAdapter);
+
+	}
+
+	private void findInView() {
+		name = (TextView) headView.findViewById(R.id.locate_head_text_name);
+		locate = (CheckBox) headView.findViewById(R.id.locate_head_image);
+		name.setText("重庆");
 
 	}
 

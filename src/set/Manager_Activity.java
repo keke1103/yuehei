@@ -1,26 +1,29 @@
 package set;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.app.YoheyApplication;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-/**
- * 帐号管理界面
- * @author Administrator
- *
- */
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * 帐号管理界面
+ * 
+ * @author Administrator
+ *
+ */
 public class Manager_Activity extends Activity {
 	View toReturn;// 返回
 	ImageView head;// 头像
 	TextView name;// 名字
 	LinearLayout addNumber;// 添加账号
 	LinearLayout exitNumber;// 退出账号
+	YoheyApplication youhei;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class Manager_Activity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_account_manager);
 		findVIew();
+		youhei = (YoheyApplication) getApplication();
 	}
 
 	private void findVIew() {
@@ -51,10 +55,10 @@ public class Manager_Activity extends Activity {
 				finish();
 				break;
 			case R.id.set_account_add_linear_account_number:
-
+				
 				break;
 			case R.id.set_account_exit_account_linear_account_number:
-				
+				youhei.loginOutQq(Manager_Activity.this);
 				break;
 			default:
 				break;
