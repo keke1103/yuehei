@@ -36,23 +36,32 @@
                 android:orientation="horizontal" >
 
                 <!-- 头像 -->
-
-                <ImageView
-                    android:id="@+id/personal_user_image_portrait"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                <RelativeLayout 
+                    android:id="@+id/personal_user_image_relative"
+                    android:layout_width="69dp"
+                    android:layout_height="69dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@color/light_gray"
-                    android:contentDescription="@drawable/ic_launcher" />
-
+                    android:layout_marginStart="10dp">
+                	<ImageView
+                    	android:id="@+id/personal_user_image_portrait"
+                    	android:layout_width="50dp"
+                    	android:layout_height="50dp"
+                    	android:layout_centerInParent="true"
+                    	android:background="@color/light_gray"
+                    	android:contentDescription="@drawable/ic_launcher" />
+                	<View
+                		android:id="@+id/list_main_image_head_tu_view"
+                		android:layout_width="fill_parent"
+                		android:layout_height="fill_parent"
+               			android:background="@drawable/click_the_list_to_change_the_background_shape" />
+				</RelativeLayout>
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
-                    android:layout_toEndOf="@id/personal_user_image_portrait"
-                    android:layout_toRightOf="@id/personal_user_image_portrait"
+                    android:layout_toEndOf="@id/personal_user_image_relative"
+                    android:layout_toRightOf="@id/personal_user_image_relative"
                     android:gravity="center_vertical"
                     android:orientation="vertical" >
 

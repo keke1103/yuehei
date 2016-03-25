@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Game;
-import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
@@ -70,7 +69,6 @@ public class PersonalInformationActivity extends Activity {
 	TextView mLoseAssists;// 战绩失败的助攻
 	
 	User user;
-	Post post;
 	YoheyApplication app;
 	
 	AlertDialog dialog;
@@ -82,10 +80,7 @@ public class PersonalInformationActivity extends Activity {
 		setContentView(R.layout.activity_yue_lu_personal_information);
 		findView();
 		
-		app = (YoheyApplication) getApplication();
 		user=BmobUser.getCurrentUser(this, User.class);
-		post = (Post) app.data;
-		app.data = null;
 		
 		findRecord();
 	}
@@ -206,15 +201,14 @@ public class PersonalInformationActivity extends Activity {
 			
 			@Override
 			public void end(String result) {	
-	          try {
-				user.setDefGame(Game.paresJSONObejct(new JSONObject(result)));
-				area.setText(user.getDefGame().getGameregion());
-				dan.setText(user.getDefGame().getGamedan());
-				grade.setText("LV"+user.getDefGame().getGamegrade());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try {
+					user.setDefGame(Game.paresJSONObejct(new JSONObject(result)));
+					area.setText(user.getDefGame().getGameregion());
+					dan.setText(user.getDefGame().getGamedan());
+					grade.setText("LV"+user.getDefGame().getGamegrade());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	    get.send();
