@@ -56,6 +56,26 @@ public class AdapterData {
 	String editHead;// 头像
 	boolean editbox;
 
+	// 定位
+	String locatLocation;// 地点
+	String locatContent;// 内容
+
+	public String getLocatLocation() {
+		return locatLocation;
+	}
+
+	public void setLocatLocation(String locatLocation) {
+		this.locatLocation = locatLocation;
+	}
+
+	public String getLocatContent() {
+		return locatContent;
+	}
+
+	public void setLocatContent(String locatContent) {
+		this.locatContent = locatContent;
+	}
+
 	public String getEditHead() {
 		return editHead;
 	}

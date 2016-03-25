@@ -58,8 +58,10 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:cacheColorHint="@android:color/transparent"
         android:divider="@null"
-        android:orientation="horizontal" >
+        android:listSelector="@drawable/select_list_view_color"
+        android:scrollingCache="false" >
     </ListView>
 
 </LinearLayout>

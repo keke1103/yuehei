@@ -17,10 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/yo_hey_back_image"
-            android:contentDescription="@drawable/yo_hey_back_image" />
+            android:contentDescription="@drawable/yo_hey_back_image"
+            android:padding="6dp" />
 
         <TextView
             android:layout_width="wrap_content"

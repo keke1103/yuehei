@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -17,7 +16,6 @@ import android.widget.TextView;
  *
  */
 public class MyPostsActivity extends Activity {
-	RelativeLayout include;// 导入标题栏
 	View toRetrn;// 我的帖子
 	LinearLayout added;// 我加入的帖子
 	LinearLayout postedMessages;// 我发的帖子
@@ -47,7 +45,7 @@ public class MyPostsActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent;
 			switch (v.getId()) {
-			case R.id.title_navigation_view:
+			case R.id.title_navigation_back_icon:
 				finish();
 				break;
 
@@ -69,9 +67,9 @@ public class MyPostsActivity extends Activity {
 	};
 
 	private void fingVew() {
-		include = (RelativeLayout) findViewById(R.id.my_posts_include_title);
-		toRetrn = (View) include.findViewById(R.id.title_navigation_back_icon);
-		title = (TextView) include.findViewById(R.id.title_navigation_text_title);
+
+		toRetrn = (View) findViewById(R.id.title_navigation_back_icon);
+		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		added = (LinearLayout) findViewById(R.id.my_posts_linear_added);
 		postedMessages = (LinearLayout) findViewById(R.id.my_posts_linear_message);
 

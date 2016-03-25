@@ -49,6 +49,8 @@
             android:id="@+id/list_main_text_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/list_main_linear_head_tu"
             android:layout_toRightOf="@id/list_main_linear_head_tu"
@@ -88,6 +90,8 @@
         android:id="@+id/list_main_linear_context"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical" >
     </LinearLayout>
 

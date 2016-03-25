@@ -1,6 +1,7 @@
 package set;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.app.YoheyApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class Set_Activity extends Activity {
 	LinearLayout exit_account;// 退出账号
 	TextView clear;// 缓存
 	View toReturn;
+	YoheyApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class Set_Activity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_system_settings);
 		findView();
-
+		application = (YoheyApplication) getApplication();
 	}
 
 	private void findView() {
@@ -95,9 +97,9 @@ public class Set_Activity extends Activity {
 				startActivity(intent_about);
 				break;
 			case R.id.system_settings_linear_exit_assount:// 条到登录界面
-
+				application.loginOutQq(Set_Activity.this);
 				break;
-			case R.id.system_settings_image_to_return:// 条到登录界面
+			case R.id.system_settings_image_to_return:// 返回
 				finish();
 				break;
 			default:

@@ -102,7 +102,9 @@ public class ShareItActivity extends Activity {
 
 				break;
 			case R.id.share_it_linear_position:// 所在位置
-
+				intent = getIntent();
+				intent.setClass(ShareItActivity.this, LocateActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.share_it_linear_who:// 谁可以看
 				intent = getIntent();

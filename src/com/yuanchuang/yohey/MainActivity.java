@@ -6,7 +6,8 @@ import com.yuanchuang.yohey.fragment.DynamicFragment;
 import com.yuanchuang.yohey.fragment.MEFragment;
 import com.yuanchuang.yohey.fragment.MainFragment;
 import com.yuanchuang.yohey.fragment.Main_FragmentAdapter;
-
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,11 +18,15 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import lu.Lu_Activity;
 
 /**
@@ -42,7 +47,7 @@ public class MainActivity extends FragmentActivity {
 	DynamicFragment dynamicFragment;// 动态fragment
 	MEFragment meFragment;// 我的fragment
 
-	View postShare;// 发帖与分享
+	LinearLayout postShare;// 发帖与分享
 	ImageView postShareImage;
 	ImageView post;// 发帖
 	ImageView share;// 分享
@@ -115,6 +120,7 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
 
+	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	private void findView() {
 		post = (ImageView) findViewById(R.id.fragment_text_post);
@@ -122,7 +128,7 @@ public class MainActivity extends FragmentActivity {
 
 		inLayoutSelect = (RelativeLayout) findViewById(R.id.fragment_main_selection_bar);
 		mRadio = (RadioGroup) inLayoutSelect.findViewById(R.id.selection_bar_radio_group);
-		postShare = findViewById(R.id.fragment_text_post_share);
+		postShare = (LinearLayout) findViewById(R.id.fragment_text_post_share);
 		mRadio.setOnCheckedChangeListener(listener);
 		mPager = (ViewPager) findViewById(R.id.layou_main);
 		radioButton = new RadioButton[4];
@@ -147,6 +153,15 @@ public class MainActivity extends FragmentActivity {
 		pagerAdapter = new Main_FragmentAdapter(mfFragmentManager, fragmentList);
 		mPager.setAdapter(pagerAdapter);
 		mPager.setOnPageChangeListener(pageChange);
+
+		WindowManager wm = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
+		int width = wm.getDefaultDisplay().getWidth();// 获取屏幕的宽度
+		int height = wm.getDefaultDisplay().getHeight();// 获取屏幕的高度
+		LayoutParams layoutParams = new LayoutParams(
+				new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, (height / 2)));
+		layoutParams.setMargins(0, (height / 2), 0, 0);
+		postShare.setLayoutParams(layoutParams);
+
 	}
 
 	private OnPageChangeListener pageChange = new OnPageChangeListener() {
@@ -168,10 +183,9 @@ public class MainActivity extends FragmentActivity {
 	};
 
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		Log.i("onActivityResult", "req="+arg0+" res="+arg1);
-		
+		Log.i("onActivityResult", "req=" + arg0 + " res=" + arg1);
+
 		mainFragment.onActivityResult(arg0, arg1, arg2);
-		
 
 	};
 }
