@@ -33,7 +33,7 @@
                 android:layout_height="48dp"
                 android:layout_centerInParent="true"
                 android:contentDescription="@drawable/zhu_ge_wo_ai_ni_tu"
-                android:src="@drawable/log_ic" />
+                android:background="#f2f4f5" />
 
             <View
                 android:layout_width="fill_parent"

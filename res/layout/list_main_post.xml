@@ -23,7 +23,7 @@
                 android:layout_height="43dp"
                 android:layout_centerInParent="true"
                 android:contentDescription="@drawable/meng_mei_head"
-                android:src="@drawable/meng_mei_head" />
+                android:background="#f2f4f5" />
 
             <View
                 android:id="@+id/list_main_image_head_tu_view"

@@ -11,14 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#343434" >
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        
+        <RelativeLayout 
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="-9dp"
+            android:layout_marginBottom="-9dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/yo_hey_head_portrait" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginStart="20dp">
+            <ImageView
+            	android:layout_width="40dp"
+            	android:layout_height="40dp"
+            	android:layout_centerInParent="true"	
+            	android:background="#f2f4f5" 
+            	android:contentDescription="@drawable/yo_hey_head_portrait"/>
+            <View
+                android:id="@+id/list_main_image_head_tu_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+               	android:background="@drawable/my_head_selector" />
+        </RelativeLayout>
+
+        
 
         <RadioGroup
             android:id="@+id/radiogroup"

@@ -8,14 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#44030303"/>
+        android:background="#88030303"/>
    <RelativeLayout 
+       android:id="@+id/share_layout"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+       android:layout_height="250dp">
        <ImageView
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:src="@drawable/yp_hey_background_image"
+           android:layout_height="match_parent"
+           android:background="@drawable/yp_hey_background_image"
            android:contentDescription="@drawable/yp_hey_background_image"/>
        <TextView 
            android:layout_width="wrap_content"
@@ -25,5 +26,65 @@
            android:text="约上女神大神一起LOL"
            android:textColor="#a9a9a9"
            android:textSize="24sp"/>
+       <LinearLayout 
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="118dp"
+           android:orientation="horizontal">
+           <LinearLayout 
+               android:id="@+id/post_popupwindoe"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="62dp"
+               android:layout_marginStart="62dp"
+               android:orientation="vertical">
+               <ImageView 
+                   android:layout_width="67dp"
+                   android:layout_height="67dp"
+                   android:paddingLeft="16dp"
+                   android:paddingTop="20dp"
+                   android:paddingRight="16dp"
+                   android:paddingBottom="15dp"
+                   android:layout_gravity="center_horizontal"
+                   android:background="@drawable/post_yuan"
+                   android:src="@drawable/yo_hey_post_image"                   
+                   android:contentDescription="@drawable/yo_hey_post_image"/>
+               <TextView 
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center_horizontal"
+                   android:layout_marginTop="6dp"
+                   android:text="写帖子"
+                   android:textColor="#666666"
+                   android:textSize="15sp"/>
+           </LinearLayout>
+           <LinearLayout 
+                android:id="@+id/share_popupwindoe"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="103dp"
+               android:layout_marginStart="103dp"
+               android:orientation="vertical">
+               <ImageView 
+                   android:layout_width="67dp"
+                   android:layout_height="67dp"
+                   android:paddingLeft="16dp"
+                   android:paddingTop="20dp"
+                   android:paddingRight="16dp"
+                   android:paddingBottom="15dp"
+                   android:layout_gravity="center_horizontal"
+                   android:background="@drawable/share_yuan"
+                   android:src="@drawable/yo_hey_share_image"                  
+                   android:contentDescription="@drawable/yo_hey_share_image"/>
+               <TextView 
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center_horizontal"
+                   android:layout_marginTop="6dp"
+                   android:text="Lu友圈"
+                   android:textColor="#666666"
+                   android:textSize="15sp"/>
+           </LinearLayout>
+       </LinearLayout>
    </RelativeLayout>
 </LinearLayout>
