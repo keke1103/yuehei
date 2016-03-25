@@ -28,7 +28,7 @@ import cn.bmob.v3.listener.SaveListener;
 public class PostingInterfaceActivity extends Activity {
 	RelativeLayout include;// 导入头文件
 	TextView title;// 标题
-	LinearLayout toReturn;// 取消
+	TextView toReturn;// 取消
 	TextView right;// 发表
 	EditText context;// 帖子内容
 	CheckBox areaSet;// 权限设置
@@ -42,14 +42,8 @@ public class PostingInterfaceActivity extends Activity {
 		setContentView(R.layout.activity_yue_lu_posting_interface);
 		application = (YoheyApplication) getApplication();
 		findView();
-		LayoutParams params = new LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
-				android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-		TextView text = new TextView(this);
-		text.setLayoutParams(params);
-		text.setTextSize(13);
-		text.setText(R.string.cancel);
 		game = BmobUser.getCurrentUser(getApplicationContext(), User.class).getDefGame();
-		toReturn.addView(text);
+		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -58,14 +52,13 @@ public class PostingInterfaceActivity extends Activity {
 		areaSet = (CheckBox) findViewById(R.id.area_check);
 		context = (EditText) findViewById(R.id.posting_include_edit_context);
 		title = (TextView) include.findViewById(R.id.title_navigation_text_title);
-		toReturn = (LinearLayout) include.findViewById(R.id.title_navigation_view);
+		toReturn = (TextView) include.findViewById(R.id.title_navigation_back_text);
 		right = (TextView) include.findViewById(R.id.title_navigation_text_right_title);
 		title.setText(R.string.osts);
 		toReturn.setVisibility(View.VISIBLE);
 		right.setVisibility(View.VISIBLE);
 		areaSet.setOnClickListener(l);
 		right.setText(R.string.publication);
-		right.setTextColor(getResources().getColor(R.color.light_gray));
 		toReturn.setOnClickListener(l);
 		right.setOnClickListener(l);
 	}
@@ -81,7 +74,7 @@ public class PostingInterfaceActivity extends Activity {
 			case R.id.title_navigation_text_right_title:
 				submit();
 				break;
-			case R.id.title_navigation_view:
+			case R.id.title_navigation_back_text:
 				finish();
 				break;
 			default:

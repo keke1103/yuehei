@@ -101,6 +101,7 @@
         <activity android:name="com.yuanchuang.yohey.ForwardingActivity" >
         </activity>
         <activity android:name="com.yuanchuang.yohey.WelcomeActivity" >
+
         </activity>
         <activity android:name="com.yuanchuang.yohey.CommentDynamicActivity" >
         </activity>

@@ -24,6 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:padding="5dp"
         android:paddingBottom="@dimen/activity_navigation_bar_paddingtop"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -31,7 +33,7 @@
         android:paddingTop="@dimen/activity_navigation_bar_paddingtop"
         android:text="取消"
         android:textColor="@drawable/text_while"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:visibility="gone" />
 
     <LinearLayout
@@ -73,6 +75,7 @@
         android:paddingRight="@dimen/activity_navigation_bar_paddingtop"
         android:paddingTop="2dp"
         android:textSize="13sp"
+        android:textColor="#ffffff"
         android:visibility="gone" />
 
     <ImageView
