@@ -13,32 +13,6 @@
         android:orientation="vertical" >
     </android.support.v4.view.ViewPager>
 
-    <LinearLayout
-        android:id="@+id/fragment_text_post_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/fragment_main_selection_bar"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:visibility="gone" >
-
-        <ImageView
-            android:id="@+id/fragment_text_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/ic_launcher" />
-
-        <ImageView
-            android:id="@+id/fragment_text_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/ic_launcher" />
-    </LinearLayout>
-
     <include
         android:id="@+id/fragment_main_selection_bar"
         layout="@layout/bottom_of_the_selection_bar" />

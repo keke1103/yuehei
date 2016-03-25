@@ -7,7 +7,9 @@ import com.yuanchuang.yohey.fragment.MEFragment;
 import com.yuanchuang.yohey.fragment.MainFragment;
 import com.yuanchuang.yohey.fragment.Main_FragmentAdapter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,9 +17,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -42,10 +48,7 @@ public class MainActivity extends FragmentActivity {
 	DynamicFragment dynamicFragment;// 动态fragment
 	MEFragment meFragment;// 我的fragment
 
-	View postShare;// 发帖与分享
 	ImageView postShareImage;
-	ImageView post;// 发帖
-	ImageView share;// 分享
 	Lu_Activity LuFragment;
 
 	RadioGroup mRadio;
@@ -63,28 +66,11 @@ public class MainActivity extends FragmentActivity {
 	 * View的点击事件
 	 */
 	OnClickListener clickListener = new OnClickListener() {
-		boolean postshare = true;
-		Intent intent;
-
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.selection_bar_post_share:
-				if (postshare) {
-					postShare.setVisibility(View.VISIBLE);
-					postshare = false;
-				} else {
-					postShare.setVisibility(View.GONE);
-					postshare = true;
-				}
-				break;
-			case R.id.fragment_text_post:
-				intent = new Intent(MainActivity.this, PostingInterfaceActivity.class);
-				startActivityForResult(intent, 100);
-				break;
-			case R.id.fragment_text_share:
-				intent = new Intent(MainActivity.this, ShareItActivity.class);
-				startActivity(intent);
+				new PopupWindows(MainActivity.this, mPager);
 				break;
 			default:
 				break;
@@ -109,7 +95,6 @@ public class MainActivity extends FragmentActivity {
 		for (int i = 0; i < radioButton.length; i++) {
 			if (radioButton[i].isChecked()) {
 				mPager.setCurrentItem(i);
-				postShare.setVisibility(View.GONE);
 			} else {
 			}
 		}
@@ -117,12 +102,8 @@ public class MainActivity extends FragmentActivity {
 
 	@SuppressWarnings("deprecation")
 	private void findView() {
-		post = (ImageView) findViewById(R.id.fragment_text_post);
-		share = (ImageView) findViewById(R.id.fragment_text_share);
-
 		inLayoutSelect = (RelativeLayout) findViewById(R.id.fragment_main_selection_bar);
 		mRadio = (RadioGroup) inLayoutSelect.findViewById(R.id.selection_bar_radio_group);
-		postShare = findViewById(R.id.fragment_text_post_share);
 		mRadio.setOnCheckedChangeListener(listener);
 		mPager = (ViewPager) findViewById(R.id.layou_main);
 		radioButton = new RadioButton[4];
@@ -132,8 +113,6 @@ public class MainActivity extends FragmentActivity {
 		radioButton[3] = (RadioButton) inLayoutSelect.findViewById(R.id.selection_bar_personal);
 		postShareImage = (ImageView) inLayoutSelect.findViewById(R.id.selection_bar_post_share);
 		postShareImage.setOnClickListener(clickListener);
-		post.setOnClickListener(clickListener);
-		share.setOnClickListener(clickListener);
 		mainFragment = new MainFragment();
 		LuFragment = new Lu_Activity();
 		dynamicFragment = new DynamicFragment();
@@ -168,10 +147,63 @@ public class MainActivity extends FragmentActivity {
 	};
 
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		Log.i("onActivityResult", "req="+arg0+" res="+arg1);
-		
-		mainFragment.onActivityResult(arg0, arg1, arg2);
-		
+		Log.i("onActivityResult", "req=" + arg0 + " res=" + arg1);
 
+		mainFragment.onActivityResult(arg0, arg1, arg2);
 	};
+    /**
+     * 自定义的PopupWindow
+     * @author Administrator
+     *
+     */
+	public class PopupWindows extends PopupWindow {
+		Intent intent;
+		private OnClickListener click = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+				case 12345:
+					dismiss();
+					break;
+				case R.id.post_popupwindoe:
+					intent = new Intent(MainActivity.this, PostingInterfaceActivity.class);
+					startActivityForResult(intent, 100);
+					dismiss();
+					break;
+				case R.id.share_popupwindoe:
+					intent = new Intent(MainActivity.this, ShareItActivity.class);
+					startActivity(intent);
+					dismiss();
+					break;
+				default:
+					break;
+				}
+
+			}
+		};
+
+		@SuppressWarnings("deprecation")
+		public PopupWindows(Context mContext, View parent) {
+
+			View view = View.inflate(mContext, R.layout.post_share_main, null);
+			view.setId(12345);
+			view.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_ins));
+			View ll_popup = view.findViewById(R.id.share_layout);
+			ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.push_bottom_in_2));
+			view.setOnClickListener(click);
+			View post = view.findViewById(R.id.post_popupwindoe);
+			View share = view.findViewById(R.id.share_popupwindoe);
+			post.setOnClickListener(click);
+			share.setOnClickListener(click);
+			setWidth(LayoutParams.MATCH_PARENT);
+			setHeight(LayoutParams.MATCH_PARENT);
+			setBackgroundDrawable(new BitmapDrawable());
+			setFocusable(true);
+			setOutsideTouchable(true);
+			setContentView(view);
+			showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+		}
+
+	}
 }
