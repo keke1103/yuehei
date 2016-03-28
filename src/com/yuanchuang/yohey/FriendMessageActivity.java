@@ -111,7 +111,7 @@ public class FriendMessageActivity extends Activity {
 			if (e == null) {
 				if (list != null && !list.isEmpty()) {
 					if (friendMessageBaseAdapter == null)
-						friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, FriendMessageActivity.this);
+						friendMessageBaseAdapter = new FriendMessageBaseAdapter(list,FriendMessageActivity.this);
 					else
 						friendMessageBaseAdapter.setMessageData(list);
 				}
