@@ -5,10 +5,12 @@ import android.graphics.Color;
 import android.widget.AbsoluteLayout;
 import android.widget.AbsoluteLayout.LayoutParams;
 import android.widget.ImageView;
+
 import cn.bmob.v3.datatype.BmobFile;
 
 @SuppressWarnings("deprecation")
 public class DensityUtil {
+
 	/**
 	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
 	 */
@@ -52,7 +54,9 @@ public class DensityUtil {
 				v = new ImageView(mContext);
 				v.setBackgroundColor(Color.GRAY);
 				imageLayout.addView(v, params);
+
 				imgs[i].loadImage(mContext, v);
+
 				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35),
 						(w / 2) - dip2px(mContext, 30), 0);
 				v = new ImageView(mContext);
@@ -60,7 +64,9 @@ public class DensityUtil {
 				imageLayout.addView(v, params);
 				imgs[i].loadImage(mContext, v);
 			} else if (imgs.length == 4) {
+
 				for (BmobFile p : imgs) {
+
 					int x = ((i % 2) * w / 2) - dip2px(mContext, 30);
 					int y = ((i / 2) * w / 2) - dip2px(mContext, 30);
 					if (y < 0)

@@ -22,8 +22,8 @@
             android:id="@+id/list_dynamic_image_head_portrait"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/yp_hey_background_image"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:src="@drawable/yp_hey_background_image" />
 
         <!-- 用户昵称与发送时间 -->
 
@@ -71,8 +71,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/list_dynamic_layout_context"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp" >
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="15dp" >
     </AbsoluteLayout>
 
     <RelativeLayout
