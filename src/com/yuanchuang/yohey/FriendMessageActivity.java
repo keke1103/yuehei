@@ -1,5 +1,6 @@
 package com.yuanchuang.yohey;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +94,7 @@ public class FriendMessageActivity extends Activity {
 		msg.setExtraMap(map);
 		c.sendMessage(msg, new MessageSendListener() {
 			public void done(BmobIMMessage arg0, BmobException e) {
-				friendMessageBaseAdapter.addMessageData(arg0);
+				addMessage(arg0);
 				msgEdit.setText("");
 				if (e != null) {
 					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -110,10 +111,7 @@ public class FriendMessageActivity extends Activity {
 		public void done(List<BmobIMMessage> list, BmobException e) {
 			if (e == null) {
 				if (list != null && !list.isEmpty()) {
-					if (friendMessageBaseAdapter == null)
-						friendMessageBaseAdapter = new FriendMessageBaseAdapter(list,FriendMessageActivity.this);
-					else
-						friendMessageBaseAdapter.setMessageData(list);
+					setAdapter(list);
 				}
 
 			} else {
@@ -122,6 +120,35 @@ public class FriendMessageActivity extends Activity {
 			}
 		}
 	};
+
+	/**
+	 * 设置adapter
+	 * 
+	 * @param list
+	 */
+	private void setAdapter(List<BmobIMMessage> list) {
+		if (friendMessageBaseAdapter == null) {
+			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, FriendMessageActivity.this);
+			messageListView.setAdapter(friendMessageBaseAdapter);
+		} else
+			friendMessageBaseAdapter.setMessageData(list);
+	}
+
+	/**
+	 * 添加消息
+	 * 
+	 * @param msg
+	 */
+	private void addMessage(BmobIMMessage msg) {
+		if (friendMessageBaseAdapter == null) {
+			List<BmobIMMessage> list = new ArrayList<BmobIMMessage>();
+			list.add(msg);
+			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, FriendMessageActivity.this);
+			messageListView.setAdapter(friendMessageBaseAdapter);
+		} else {
+			friendMessageBaseAdapter.addMessageData(msg);
+		}
+	}
 
 	/**
 	 * 控件ID
