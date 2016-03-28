@@ -8,11 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-/**
- * 好友基本信息界面
- * @author Administrator
- *
- */
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +18,12 @@ import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.newim.listener.ConversationListener;
 import cn.bmob.v3.exception.BmobException;
 
+/**
+ * 好友基本信息界面
+ * 
+ * @author Administrator
+ *
+ */
 public class FriendMaterialActivity extends Activity {
 	View backImage;// 返回
 	TextView sendMessage;// 发送消息按钮
