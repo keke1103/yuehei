@@ -1,20 +1,17 @@
 package lu;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-
+import com.yuanchuang.yohey.AddFriendsActivity;
 import com.yuanchuang.yohey.FriendMaterialActivity;
 import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.FriendsBaseAdapter;
 import com.yuanchuang.yohey.adapter.MessageBaseAdapter;
+import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.User;
+
 import android.annotation.SuppressLint;
-
-import com.yuanchuang.yohey.AddFriendsActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,45 +19,51 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+
 /**
  * 好友消息界面
+ * 
  * @author Administrator
  *
  */
 public class Lu_Activity extends Fragment {
 	RadioGroup radiogroup;
-	RadioButton msg;//消息
-	RadioButton friends;//朋友
+	RadioButton msg;// 消息
+	RadioButton friends;// 朋友
 	ListView msgList;
 	ExpandableListView friendList;
 	MessageBaseAdapter msgadapter;
 	FriendsBaseAdapter friendsadapter;
 	ArrayList<User> msglist;
 	ArrayList<String> friendslist;
-	Map<Integer, ArrayList<User>> friendsmap;
-    TextView add;
+	TextView add;
+	User user;
+	YoheyApplication app;
+
 	@Override
 	public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
 			Bundle savedInstanceState) {
 		LinearLayout lay = new LinearLayout(getActivity());
+		app = (YoheyApplication) getActivity().getApplication();
+		user = User.getCurrentUser(getActivity(), User.class);
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		View view = inflater.inflate(R.layout.lu, lay);
-		
+
 		radiogroup = (RadioGroup) view.findViewById(R.id.radiogroup);
 		msg = (RadioButton) view.findViewById(R.id.rb_msg);
 		friends = (RadioButton) view.findViewById(R.id.rb_friends);
-		msgList=(ListView)view.findViewById(R.id.listview);
-		friendList=(ExpandableListView)view.findViewById(R.id.expand);
-		add=(TextView)view.findViewById(R.id.rb_add);
+		msgList = (ListView) view.findViewById(R.id.listview);
+		friendList = (ExpandableListView) view.findViewById(R.id.expand);
+		add = (TextView) view.findViewById(R.id.rb_add);
 		this.radiogroup.setOnCheckedChangeListener(changelistener);
 		getData();
 		msgadapter = new MessageBaseAdapter(msglist, getActivity());
@@ -91,7 +94,7 @@ public class Lu_Activity extends Fragment {
 	OnCheckedChangeListener changelistener = new OnCheckedChangeListener() {
 		@Override
 		public void onCheckedChanged(RadioGroup arg0, int id) {
-			
+
 			switch (id) {
 			case R.id.rb_msg:
 				msgList.setVisibility(View.VISIBLE);
@@ -104,36 +107,35 @@ public class Lu_Activity extends Fragment {
 			case R.id.rb_friends:
 				msgList.setVisibility(View.GONE);
 				friendList.setVisibility(View.VISIBLE);
-				friendsadapter = new FriendsBaseAdapter(friendslist, friendsmap, getActivity());
+				friendsadapter = new FriendsBaseAdapter(app.friendGroup, getActivity());
 				friendList.setAdapter(friendsadapter);
 				friendList.setOnChildClickListener(childClickListener);
 				break;
 			}
 		}
 	};
+
 	@SuppressLint("UseSparseArrays")
 	private void getData() {
 		// TODO Auto-generated method stub
 		msglist = new ArrayList<User>();
 		for (int i = 0; i < 15; i++) {
-			User user=new User();
+			User user = new User();
 			msglist.add(user);
 		}
 		friendslist = new ArrayList<String>();
-		friendsmap = new HashMap<Integer,ArrayList<User>>();
 		friendslist.add("约黑好友");
 		friendslist.add("游戏好友");
 		for (int i = 0; i < 2; i++) {
 			ArrayList<User> array = new ArrayList<User>();
 			for (int j = 0; j < 10; j++) {
-				User user=new User();
-				user.setUsername("开黑"+i);
+				User user = new User();
+				user.setUsername("开黑" + i);
 				array.add(user);
 			}
-			friendsmap.put(i, array);
-
 		}
 	}
+
 	/**
 	 * listview的点击事件
 	 */
@@ -141,7 +143,6 @@ public class Lu_Activity extends Fragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			// TODO Auto-generated method stub
 			Intent intent = new Intent(getActivity(), FriendMessageActivity.class);
 			startActivity(intent);
 		}
@@ -155,6 +156,7 @@ public class Lu_Activity extends Fragment {
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(getActivity(), FriendMaterialActivity.class);
+			app.data = parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
 			startActivity(intent);
 			return false;
 		}

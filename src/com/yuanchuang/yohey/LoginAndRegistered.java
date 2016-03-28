@@ -466,6 +466,8 @@ public class LoginAndRegistered extends Activity {
 
 	protected void onDestroy() {
 		application.connectChatService();
+		User u = User.getCurrentUser(getApplicationContext(), User.class);
+		u.getFriendGroup(application);
 		super.onDestroy();
 	}
 

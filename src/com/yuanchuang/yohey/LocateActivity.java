@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.yuanchuang.yohey.adapter.LocateAdapter;
 import com.yuanchuang.yohey.myData.AdapterData;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 public class LocateActivity extends Activity {
 	View toReturn;

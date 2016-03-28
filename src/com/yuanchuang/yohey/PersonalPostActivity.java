@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.yuanchuang.yohey.adapter.PersonalPostAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Comment;
-import com.yuanchuang.yohey.bmob.Friends;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.HttpGet;
@@ -58,6 +57,7 @@ public class PersonalPostActivity extends Activity {
 	View send;// 发送
 	TextView title;// 标题
 	View toReturn;// 返回
+	View person;// 发帖人信息栏布局
 
 	TextView joinCount;// 想加入的人数
 	TextView comCount;// 评论数
@@ -79,6 +79,8 @@ public class PersonalPostActivity extends Activity {
 	Intent mIntent;
 	Post post;
 	User user;
+	Intent intent;
+	YoheyApplication app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +203,7 @@ public class PersonalPostActivity extends Activity {
 		inflater = getLayoutInflater();
 		headView = inflater.inflate(R.layout.list_head_personal_post, null);
 		addFriend = headView.findViewById(R.id.add_friend);
+		person = headView.findViewById(R.id.personal_layout);
 		head = (ImageView) headView.findViewById(R.id.personal_post_image_head);
 		nickName = (TextView) headView.findViewById(R.id.personal_post_nick_text_name);
 		time = (TextView) headView.findViewById(R.id.personal_post_text_time);
@@ -229,6 +232,7 @@ public class PersonalPostActivity extends Activity {
 		photos.setOnClickListener(onClickListener);
 		send.setOnClickListener(onClickListener);
 		toReturn.setOnClickListener(onClickListener);
+		person.setOnClickListener(onClickListener);
 		title.setText("详情");
 
 		say = (EditText) findViewById(R.id.personal_post_edit_say);
@@ -248,25 +252,8 @@ public class PersonalPostActivity extends Activity {
 	}
 
 	/**
-	 * <<<<<<< HEAD <<<<<<< HEAD 获取帖子内容的 ======= 好友添加 ======= 好友添加 >>>>>>>
-	 * origin/feature/fengcan
-	 */
-	private void addFriend() {
-		Friends f = new Friends();
-		f.addFriend(PersonalPostActivity.this, post.getUser(), new SaveListener() {
-			public void onSuccess() {
-				Toast.makeText(getApplicationContext(), "好友添加成功", Toast.LENGTH_SHORT).show();
-			}
-
-			public void onFailure(int arg0, String arg1) {
-				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
-
-	/**
-	 * <<<<<<< HEAD 设置帖子内容的显示 >>>>>>> origin/feature/tools_keke =======
-	 * 设置帖子内容的显示 >>>>>>> origin/feature/fengcan
+	 * 设置帖子内容的显示
+	 * 
 	 */
 	private void setData() {
 		nickName.setText(post.getUser().getNickName());
@@ -388,10 +375,17 @@ public class PersonalPostActivity extends Activity {
 				Toast.makeText(getApplication(), "你没有图片", Toast.LENGTH_SHORT).show();
 
 			case R.id.add_friend:
-				addFriend();
+
 				break;
 			case R.id.personal_post_image_zhan:
 				likepost();
+				break;
+			case R.id.personal_layout:
+				intent = getIntent();
+				intent.setClass(PersonalPostActivity.this, PersonalInformationActivity.class);
+				app = (YoheyApplication) getApplication();
+				app.data = post.getUser();
+				startActivity(intent);
 				break;
 			default:
 				break;

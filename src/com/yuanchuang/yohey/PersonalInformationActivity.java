@@ -1,9 +1,12 @@
 package com.yuanchuang.yohey;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.FriendGroup;
+import com.yuanchuang.yohey.bmob.Friends;
 import com.yuanchuang.yohey.bmob.Game;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.HttpGet;
@@ -13,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,7 +52,7 @@ public class PersonalInformationActivity extends Activity {
 	TextView up;// 点赞数
 	TextView signature;// 个性签名
 	LinearLayout others_impression;// 他人印象
-	TextView mSignature;//修改个性签名
+	TextView mSignature;// 修改个性签名
 	LinearLayout record;// 战绩
 	LayoutInflater inflater;
 	/**
@@ -67,21 +71,33 @@ public class PersonalInformationActivity extends Activity {
 	TextView mLosekills;// 战绩失败的击杀
 	TextView mLoseHeadcount;// 战绩失败的人头
 	TextView mLoseAssists;// 战绩失败的助攻
-	
+
 	User user;
+	boolean isMine = true;
 	YoheyApplication app;
-	
+
 	AlertDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		app = (YoheyApplication) getApplication();
 		setContentView(R.layout.activity_yue_lu_personal_information);
+		if (app.data == null) {
+			user = BmobUser.getCurrentUser(this, User.class);
+		} else {
+			try {
+				user = (User) app.data;
+				app.data = null;
+				User u = BmobUser.getCurrentUser(getApplicationContext(), User.class);
+				isMine = user.getObjectId().equals(u.getObjectId());
+				Log.i("PersonalUser", isMine + " A:" + user.getObjectId() + " B:" + u.getObjectId());
+			} catch (ClassCastException e) {
+				user = BmobUser.getCurrentUser(this, User.class);
+			}
+		}
 		findView();
-		
-		user=BmobUser.getCurrentUser(this, User.class);
-		
 		findRecord();
 	}
 
@@ -130,16 +146,23 @@ public class PersonalInformationActivity extends Activity {
 		sex = (ImageView) findViewById(R.id.personal_user_text_sex);
 		up = (TextView) findViewById(R.id.personal_text_thumbs_up);
 		signature = (TextView) findViewById(R.id.personal_user_text_signature);
-		mSignature=(TextView)findViewById(R.id.personal_signature_modification);
+		mSignature = (TextView) findViewById(R.id.personal_signature_modification);
 		others_impression = (LinearLayout) include.findViewById(R.id.personal_user_linear_other_impression);
 		record = (LinearLayout) findViewById(R.id.personal_user_linear_record);
+		first = (TextView) findViewById(R.id.personal_user_text_first);
 
 		backimage.setVisibility(View.VISIBLE);
 		backimage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("个人资料");
 		backimage.setOnClickListener(clickListener);
 		mSignature.setOnClickListener(clickListener);
-		
+
+		if (!isMine) {
+			mSignature.setVisibility(View.INVISIBLE);
+			first.setText("加为好友");
+			first.setOnClickListener(clickListener);
+		}
+
 		inflater = getLayoutInflater();
 		mView = inflater.inflate(R.layout.view_personal_information, null);
 		record.addView(mView);
@@ -157,74 +180,137 @@ public class PersonalInformationActivity extends Activity {
 			case R.id.personal_signature_modification:
 				customDialog();
 				break;
+			case R.id.personal_user_text_first:
+				addFriend();
+				break;
 			default:
 				break;
 			}
 		}
 	};
+
 	/**
 	 * 自定义Dialog
 	 */
-	public void customDialog(){
-		LinearLayout layout=new LinearLayout(getApplication());
-		LayoutParams params=new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+	public void customDialog() {
+		LinearLayout layout = new LinearLayout(getApplication());
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		layout.setLayoutParams(params);
 		layout.setOrientation(1);
-		
-		EditText editText=new EditText(getApplication());
+
+		EditText editText = new EditText(getApplication());
 		editText.setLayoutParams(params);
 		layout.addView(editText);
-		
-		Button button=new Button(getApplication());
+
+		Button button = new Button(getApplication());
 		button.setLayoutParams(params);
 		button.setText("确定");
 		layout.addView(button);
-		
-		AlertDialog.Builder builder=new AlertDialog.Builder(this);
-		dialog=builder.create();
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		dialog = builder.create();
 		dialog.setView(layout);
 		dialog.show();
 	}
+
 	/**
 	 * 获取用户信息
 	 */
-	public void gainUser(){
+	public void gainUser() {
 		name.setText(user.getNickName());
-	    user.binderImageView(head);	
-	    HttpGet get=new HttpGet(YoheyApplication.ServiceIp+"getgame");
-	    get.putString("gid", user.getDefGame().getObjectId());
-	    get.setOnSendListener(new OnSendListener() {
+		user.binderImageView(head);
+		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getgame");
+		get.putString("gid", user.getDefGame().getObjectId());
+		get.setOnSendListener(new OnSendListener() {
 
 			public void start() {
-			
 			}
-			
+
 			@Override
-			public void end(String result) {	
+			public void end(String result) {
 				try {
 					user.setDefGame(Game.paresJSONObejct(new JSONObject(result)));
 					area.setText(user.getDefGame().getGameregion());
 					dan.setText(user.getDefGame().getGamedan());
-					grade.setText("LV"+user.getDefGame().getGamegrade());
+					grade.setText("LV" + user.getDefGame().getGamegrade());
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	    get.send();
+		get.send();
 	}
+
 	/**
 	 * 更新用户信息
 	 */
-	public void newUserInformation(){
-		BmobUser newUser=new BmobUser();
-		BmobUser bmobUser=BmobUser.getCurrentUser(this);
-		newUser.update(this, bmobUser.getObjectId(),new UpdateListener() {
+	public void newUserInformation() {
+		BmobUser newUser = new BmobUser();
+		BmobUser bmobUser = BmobUser.getCurrentUser(this);
+		newUser.update(this, bmobUser.getObjectId(), new UpdateListener() {
 			public void onSuccess() {
-				Toast.makeText(getApplication(),"更新用户信息成功",Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplication(), "更新用户信息成功", Toast.LENGTH_SHORT).show();
 			}
+
 			public void onFailure(int arg0, String arg1) {
-				Toast.makeText(getApplication(),"更新用户信息失败",Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplication(), "更新用户信息失败", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	/**
+	 * 向默认组,我的撸友分组添加好友
+	 * 
+	 */
+	private void addFriend() {
+		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getgroup");
+		get.putString("uid", BmobUser.getCurrentUser(getApplicationContext()).getObjectId());
+		get.setOnSendListener(new OnSendListener() {
+			public void start() {
+			}
+
+			public void end(String result) {
+				try {
+
+					JSONObject jo = new JSONObject(result);
+					JSONArray ja = jo.getJSONArray("results");
+					for (int i = 0; i < ja.length(); i++) {
+						FriendGroup fg = FriendGroup.parseJSONObject(ja.getJSONObject(i));
+						if (fg != null && fg.getGroupName().equals("我的撸友")) {
+							Log.i("PersonalInform", "add friends to " + fg.getObjectId());
+							addFriend(fg);
+							break;
+						}
+					}
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		get.send();
+	}
+
+	/**
+	 * 向某个组添加好友
+	 * 
+	 * @param groupId
+	 */
+	private void addFriend(final FriendGroup group) {
+		final Friends f = new Friends();
+		f.addFriend(getApplicationContext(), user, group, new OnSendListener() {
+			public void start() {
+			}
+
+			public void end(String result) {
+				try {
+					JSONObject jo = new JSONObject(result);
+					String time = jo.getString("updatedAt");
+					Log.i("AddFriends", time);
+					Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
+				} catch (JSONException e) {
+					Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 	}

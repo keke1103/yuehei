@@ -5,19 +5,25 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.tools.HttpGet;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.ImageView;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.SaveListener;
 
 public class User extends BmobUser {
 
@@ -26,7 +32,7 @@ public class User extends BmobUser {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Boolean sex;//性别
+	private Boolean sex;// 性别
 
 	private String nickname;
 
@@ -38,9 +44,9 @@ public class User extends BmobUser {
 	private int bonuspoints;// 消费积分
 	private int likecount;// 我的点赞数
 	private int likednumber;// 我的被点赞数
-    private String mood;//个性签名
-    private int age;//年龄
-	private Game defGame; 
+	private String mood;// 个性签名
+	private int age;// 年龄
+	private Game defGame;
 
 	public String getMood() {
 		return mood;
@@ -202,6 +208,7 @@ public class User extends BmobUser {
 	public void setNickName(String nick) {
 		this.nickname = nick;
 	}
+
 	/**
 	 * 
 	 * @param jo
@@ -226,7 +233,7 @@ public class User extends BmobUser {
 		}
 		try {
 			u.setIcon(jo.getString("icon"));
-			 
+
 		} catch (JSONException e8) {
 
 		}
@@ -236,7 +243,7 @@ public class User extends BmobUser {
 
 		}
 		try {
-			u.ntegral=jo.getInt("ntegral");
+			u.ntegral = jo.getInt("ntegral");
 		} catch (JSONException e6) {
 
 		}
@@ -266,10 +273,38 @@ public class User extends BmobUser {
 
 		}
 		try {
-			u.defGame=Game.paresJSONObejct(jo.getJSONObject("defGame"));
+			u.defGame = Game.paresJSONObejct(jo.getJSONObject("defGame"));
 		} catch (JSONException e) {
 
 		}
 		return u;
+	}
+
+	@Override
+	public void login(Context context, SaveListener listener) {
+		super.login(context, listener);
+	}
+
+	public void getFriendGroup(final YoheyApplication app) {
+		new Thread() {
+			public void run() {
+				HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getgroup");
+				get.putString("uid", User.this.getObjectId());
+				String data = get.sendInBack();
+				try {
+					JSONObject jo = new JSONObject(data);
+					JSONArray ja = jo.getJSONArray("results");
+					app.friendGroup = new Group[ja.length()];
+					for (int i = 0; i < ja.length(); i++) {
+						Group g = Group.parseJSONObject(ja.getJSONObject(i), User.this);
+						if (g != null)
+							app.friendGroup[i] = g;
+					}
+					Log.i("User", "friend group load end length=" + app.friendGroup.length);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			};
+		}.start();
 	}
 }

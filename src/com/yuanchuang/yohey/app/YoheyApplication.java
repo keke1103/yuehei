@@ -3,6 +3,7 @@ package com.yuanchuang.yohey.app;
 import com.tencent.connect.UserInfo;
 import com.tencent.tauth.Tencent;
 import com.yuanchuang.yohey.LoginAndRegistered;
+import com.yuanchuang.yohey.bmob.Group;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.chat.ChatMessageHandler;
 import android.app.Activity;
@@ -17,7 +18,6 @@ import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.listener.ConnectListener;
 import cn.bmob.v3.exception.BmobException;
 
-
 public class YoheyApplication extends Application {
 
 	// public static final String ServiceIp = "http://192.168.11.240";
@@ -27,6 +27,10 @@ public class YoheyApplication extends Application {
 	public Tencent mTencent;
 	public UserInfo qqInfo;
 	public final String APP_ID = "1105254592";
+	/**
+	 * 登陆用户的分组信息
+	 */
+	public Group[] friendGroup;
 
 	public boolean isServerSideLogin = false;
 
@@ -36,7 +40,7 @@ public class YoheyApplication extends Application {
 		String appId = "032e79773577386c1ae147ff379fb465";
 		Bmob.initialize(getApplicationContext(), appId);
 		BmobIM.init(this);
-		BmobIM.registerDefaultMessageHandler(new ChatMessageHandler());
+		BmobIM.registerDefaultMessageHandler(new ChatMessageHandler(getApplicationContext()));
 	}
 
 	/**
@@ -74,7 +78,7 @@ public class YoheyApplication extends Application {
 				if (e == null) {
 					Log.i("MainActivity", uid + "connect success");
 				} else {
-					Log.e("MainActivity", uid + "connect success");
+					Log.e("MainActivity", uid + "connect fail");
 				}
 			}
 		});
