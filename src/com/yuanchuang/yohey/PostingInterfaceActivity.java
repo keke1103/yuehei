@@ -6,6 +6,8 @@ import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.bmob.User;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,6 +61,13 @@ public class PostingInterfaceActivity extends Activity {
 		right.setVisibility(View.VISIBLE);
 		areaSet.setOnClickListener(l);
 		right.setText(R.string.publication);
+		
+		Resources resources = getResources();
+		Drawable drawable = resources.getDrawable(R.drawable.shape_rounded_yellow);
+		right.setVisibility(View.VISIBLE);
+		right.setTextColor(getResources().getColor(R.color.black));
+		right.setBackgroundDrawable(drawable);
+		
 		toReturn.setOnClickListener(l);
 		right.setOnClickListener(l);
 	}

@@ -6,10 +6,10 @@ import android.graphics.Color;
 import android.widget.AbsoluteLayout;
 import android.widget.AbsoluteLayout.LayoutParams;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 @SuppressWarnings("deprecation")
 public class DensityUtil {
+
 	/**
 	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
 	 */
@@ -42,7 +42,7 @@ public class DensityUtil {
 			ImageView v;
 			imageLayout.removeAllViews();
 			if (imgs.length == 1) {
-				params = new LayoutParams(w / 2, w / 2 , 10, 0);
+				params = new LayoutParams(w / 2, w / 2, dip2px(mContext, 10), 0);
 				v = new ImageView(mContext);
 				imageLayout.addView(v, params);
 				v.setBackgroundColor(Color.GRAY);
@@ -50,13 +50,14 @@ public class DensityUtil {
 				v.setImageBitmap(imgs[i]);
 
 			} else if (imgs.length == 2) {
-				params = new LayoutParams(w / 3 - 10, w / 3 - 10, 0, 0);
+				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), 0, 0);
 				v = new ImageView(mContext);
 				v.setBackgroundColor(Color.GRAY);
 				imageLayout.addView(v, params);
 				// imgs[0].binderImageView(v);
 				v.setImageBitmap(imgs[i]);
-				params = new LayoutParams(w / 2 - 10, w / 2 - 10, w / 2, 0);
+				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35),
+						(w / 2) - dip2px(mContext, 30), 0);
 				v = new ImageView(mContext);
 				v.setBackgroundColor(Color.GRAY);
 				imageLayout.addView(v, params);
@@ -64,7 +65,13 @@ public class DensityUtil {
 				v.setImageBitmap(imgs[i]);
 			} else if (imgs.length == 4) {
 				for (Bitmap p : imgs) {
-					params = new LayoutParams(w / 3 - 5, w / 3 - 5, (i % 3) * w / 3, (i / 3) * w / 3);
+					int x = ((i % 2) * w / 2) - dip2px(mContext, 30);
+					int y = ((i / 2) * w / 2) - dip2px(mContext, 30);
+					if (y < 0)
+						y = 0;
+					if (x < 0)
+						x = 0;
+					params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), x, y);
 					v = new ImageView(mContext);
 					v.setBackgroundColor(Color.GRAY);
 					imageLayout.addView(v, params);
@@ -77,7 +84,8 @@ public class DensityUtil {
 					if (i == 9) {
 						break;// 只显示9张图片！
 					}
-					params = new LayoutParams(w / 3 - 5, w / 3 - 5, (i % 3) * w / 3, (i / 3) * w / 3);
+					params = new LayoutParams(w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5), (i % 3) * w / 3,
+							(i / 3) * w / 3);
 					v = new ImageView(mContext);
 					v.setBackgroundColor(Color.GRAY);
 					imageLayout.addView(v, params);

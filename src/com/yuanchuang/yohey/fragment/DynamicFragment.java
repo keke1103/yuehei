@@ -65,7 +65,7 @@ public class DynamicFragment extends Fragment {
 		Log.i("DynamicFragment", "DynamicFragment");
 		mAdapter = new DynamicAdapter(getActivity(), list);
 		android.widget.AbsListView.LayoutParams params = new android.widget.AbsListView.LayoutParams(
-				LayoutParams.FILL_PARENT, DensityUtil.dip2px(getActivity(), 133));
+				LayoutParams.FILL_PARENT, DensityUtil.dip2px(getActivity(), 134));
 		View v = new View(getActivity());
 		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.dynamic_banner));
 		v.setLayoutParams(params);
@@ -95,15 +95,9 @@ public class DynamicFragment extends Fragment {
 			data.setDy_nmae("1分钟");
 			data.setDy_context("求大神带我飞");
 			Bitmap maps[] = new Bitmap[4];
-			maps[0] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			maps[1] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			maps[2] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			maps[3] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-//			maps[4] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-//			maps[5] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-//			maps[6] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			//maps[7] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			//maps[8] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+			for (int j = 0; j < maps.length; j++) {
+				maps[j] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+			}
 			data.setDy_image(maps);
 			list.add(data);
 			Log.i("getData", list.size() + "");
