@@ -18,30 +18,12 @@
 
         <!-- 用户头像 -->
 
-        <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginBottom="-20dp"
-            android:layout_marginEnd="-20dp"
-            android:layout_marginLeft="-20dp"
-            android:layout_marginRight="-20dp"
-            android:layout_marginStart="-20dp"
-            android:layout_marginTop="-20dp" >
-
-            <ImageView
-                android:id="@+id/list_dynamic_image_head_portrait"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:contentDescription="@drawable/head_shape_round_stroke"
-                android:padding="15dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:background="@drawable/head_shape_round_stroke" />
-        </RelativeLayout>
+        <com.yuanchuang.yohey.MyImageView
+            android:id="@+id/list_dynamic_image_head_portrait"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/yp_hey_background_image"
+            android:padding="15dp" />
 
         <!-- 用户昵称与发送时间 -->
 

@@ -15,15 +15,14 @@
 
         <!-- 头像 -->
 
-        <ImageView
+        <com.yuanchuang.yohey.MyImageView
             android:id="@+id/list_head_thumb_up_image_head"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:contentDescription="@drawable/ic_launcher"
-            android:src="@drawable/tui_jian_kai_hei_1" />
+            android:src="@drawable/yp_hey_background_image" />
 
         <!-- 昵称 -->
 

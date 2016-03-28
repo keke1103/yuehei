@@ -33,16 +33,13 @@
                 android:textColor="#ffffff"
                 android:textSize="15sp" />
         </RelativeLayout>
-
-        <ImageView
+        <com.yuanchuang.yohey.MyImageView
             android:id="@+id/friend_message_head_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginTop="60dp"
-            android:contentDescription="@drawable/yo_hey_head_portrait"
-            android:src="@drawable/yo_hey_head_portrait" />
-
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/yp_hey_background_image"/>
         <TextView
             android:id="@+id/friend_message_name"
             android:layout_width="wrap_content"
