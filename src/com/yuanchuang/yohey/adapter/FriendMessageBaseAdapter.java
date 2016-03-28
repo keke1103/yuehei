@@ -1,5 +1,6 @@
 package com.yuanchuang.yohey.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
@@ -45,6 +46,8 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 	}
 
 	public void addMessageData(BmobIMMessage msg) {
+		if (list == null)
+			list = new ArrayList<BmobIMMessage>();
 		list.add(msg);
 		notifyDataSetChanged();
 	}
