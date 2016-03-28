@@ -64,9 +64,8 @@ public class FriendMessageActivity extends Activity {
 		intent = getIntent();
 		c = BmobIMConversation.obtain(BmobIMClient.getInstance(),
 				(BmobIMConversation) intent.getSerializableExtra("c"));
-		getData();
 		findView();
-
+		getData();
 	}
 
 	/**
@@ -155,7 +154,6 @@ public class FriendMessageActivity extends Activity {
 	 */
 	private void findView() {
 		messageListView = (ListView) findViewById(R.id.friend_message_frame_listview);
-		messageListView.setAdapter(friendMessageBaseAdapter);
 		toReturn = findViewById(R.id.friend_message_frame_back);
 		toReturn.setOnClickListener(click);
 		msgEdit = (EditText) findViewById(R.id.msg_edit);

@@ -11,6 +11,7 @@ import com.yuanchuang.yohey.bmob.User;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,7 +97,7 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 		}
 
 		BmobIMUserInfo info = msg.getBmobIMUserInfo();
-
+		Log.i("FriendsMsgAdapter", msg.getFromId() + ":" + msg.getBmobIMConversation().getConversationIcon());
 		if (info != null && info.getUserId().equals(mine.getObjectId())) {
 
 			holder.myChatContent.setText(msg.getContent());
@@ -104,6 +105,7 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 			holder.myChat.setVisibility(View.VISIBLE);
 			holder.friendChat.setVisibility(View.GONE);
 		} else {
+			
 			holder.friendChatContent.setText(msg.getContent());
 			holder.myChat.setVisibility(View.GONE);
 			holder.friendChat.setVisibility(View.VISIBLE);

@@ -2,6 +2,7 @@ package com.yuanchuang.yohey.chat;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 import cn.bmob.newim.event.MessageEvent;
 import cn.bmob.newim.event.OfflineMessageEvent;
 import cn.bmob.newim.listener.BmobIMMessageHandler;
@@ -18,7 +19,8 @@ public class ChatMessageHandler extends BmobIMMessageHandler {
 	 */
 	public void onMessageReceive(MessageEvent arg0) {
 		super.onMessageReceive(arg0);
-		Log.i("ChatMessageHandler", arg0.getFromUserInfo() + ":" + arg0.getMessage());
+		Log.i("ChatMessageHandler", arg0.getFromUserInfo().getAvatar() + ":" + arg0.getMessage());
+		Toast.makeText(context, arg0.getMessage().getContent(), Toast.LENGTH_SHORT).show();
 	}
 
 	/**
