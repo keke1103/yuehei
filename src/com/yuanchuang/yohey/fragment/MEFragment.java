@@ -42,8 +42,8 @@ public class MEFragment extends Fragment {
 	LinearLayout integral;// 积分商城
 	LinearLayout settings;// 系统设置
 	View mView;
-	
-	User user; 
+
+	User user;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,10 +51,10 @@ public class MEFragment extends Fragment {
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		mView = inflater.inflate(R.layout.activity_yuye_lu_homepage, lay);
 		findView();
-		
-		user=BmobUser.getCurrentUser(getActivity(), User.class);
+
+		user = BmobUser.getCurrentUser(getActivity(), User.class);
 		getData();
-		
+
 		integral.setOnClickListener(onClickListener);
 		myPosts.setOnClickListener(onClickListener);
 
@@ -70,9 +70,9 @@ public class MEFragment extends Fragment {
 		layouttitle = (RelativeLayout) mView.findViewById(R.id.homepage_title_bar);
 		title = (TextView) layouttitle.findViewById(R.id.title_navigation_text_title);
 		signIn = (TextView) layouttitle.findViewById(R.id.title_navigation_text_right_title);
-		name=(TextView)mView.findViewById(R.id.homepage_name);
-		headImage=(ImageView)mView.findViewById(R.id.homepage_head_image);
-		gameArea=(TextView)mView.findViewById(R.id.homepage_area);
+		name = (TextView) mView.findViewById(R.id.homepage_name);
+		headImage = (ImageView) mView.findViewById(R.id.homepage_head_image);
+		gameArea = (TextView) mView.findViewById(R.id.homepage_area);
 		myProfile = (LinearLayout) mView.findViewById(R.id.homepage_text_my_msg);
 		myPosts = (LinearLayout) mView.findViewById(R.id.homepage_text_my_post);
 		integral = (LinearLayout) mView.findViewById(R.id.homepage_text_score);
@@ -81,6 +81,7 @@ public class MEFragment extends Fragment {
 		Resources resources = getContext().getResources();
 		Drawable drawable = resources.getDrawable(R.drawable.shape_rounded_yellow);
 		signIn.setVisibility(View.VISIBLE);
+		signIn.setTextColor(getResources().getColor(R.color.black));
 		signIn.setBackgroundDrawable(drawable);
 		signIn.setText(R.string.sign_in);
 	}
@@ -112,22 +113,23 @@ public class MEFragment extends Fragment {
 			}
 		}
 	};
+
 	/**
 	 * 获得用户信息
 	 */
-	public void getData(){
+	public void getData() {
 		name.setText(user.getNickName());
 		user.binderImageView(headImage);
-		HttpGet get=new HttpGet(YoheyApplication.ServiceIp+"getgame");
-	    get.putString("gid", user.getDefGame().getObjectId());
-	    get.setOnSendListener(new OnSendListener() {
+		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getgame");
+		get.putString("gid", user.getDefGame().getObjectId());
+		get.setOnSendListener(new OnSendListener() {
 
 			public void start() {
-			
+
 			}
-			
+
 			@Override
-			public void end(String result) {	
+			public void end(String result) {
 				try {
 					user.setDefGame(Game.paresJSONObejct(new JSONObject(result)));
 					gameArea.setText(user.getDefGame().getGameregion());
@@ -136,6 +138,6 @@ public class MEFragment extends Fragment {
 				}
 			}
 		});
-	    get.send();
+		get.send();
 	}
 }

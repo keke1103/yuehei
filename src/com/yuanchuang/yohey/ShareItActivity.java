@@ -185,11 +185,12 @@ public class ShareItActivity extends Activity {
 		toReturn.setText(R.string.cancel);
 		title.setText(R.string.share);
 		send.setText(R.string.send);
-		send.setVisibility(View.VISIBLE);
+
 		Resources resources = getResources();
 
 		Drawable drawable = resources.getDrawable(R.drawable.shape_rounded_yellow);
 		send.setVisibility(View.VISIBLE);
+		send.setTextColor(getResources().getColor(R.color.black));
 		send.setBackgroundDrawable(drawable);
 		send.setOnClickListener(onClickListener);
 
