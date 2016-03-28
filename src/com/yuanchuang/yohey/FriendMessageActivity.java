@@ -13,11 +13,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-/**
- * 好友聊天界面
- * @author Administrator
- *
- */
+
 import android.widget.ListView;
 import android.widget.Toast;
 import cn.bmob.newim.bean.BmobIMConversation;
@@ -28,6 +24,12 @@ import cn.bmob.newim.listener.MessageSendListener;
 import cn.bmob.newim.listener.MessagesQueryListener;
 import cn.bmob.v3.exception.BmobException;
 
+/**
+ * 好友聊天界面
+ * 
+ * @author Administrator
+ *
+ */
 public class FriendMessageActivity extends Activity {
 	ListView messageListView;// 聊天的listView
 	FriendMessageBaseAdapter friendMessageBaseAdapter;
