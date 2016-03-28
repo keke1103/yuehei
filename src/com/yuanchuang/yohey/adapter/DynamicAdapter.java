@@ -95,9 +95,11 @@ public class DynamicAdapter extends BaseAdapter {
 		mShare.getUser().binderImageView(holder.headPortrait);
 		holder.time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
 		holder.line.setText(mShare.getContent());
-		if (mShare.getImages() != null)
+		if (mShare.getImages() != null) {
+
 			DensityUtil.sudoku(context, holder.imageLayout,
 					mShare.getImages().toArray(new BmobFile[mShare.getImages().size()]));
+		}
 		holder.forwarding.setOnClickListener(clickListener);
 		holder.thumbUp.setOnClickListener(clickListener);
 		holder.leaveMessage.setOnClickListener(clickListener);

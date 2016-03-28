@@ -137,11 +137,26 @@ public class ShareItActivity extends Activity {
 		}
 		share.setContent(content);
 		share.setUser(BmobUser.getCurrentUser(getApplicationContext(), User.class));
+		if (Bimp.drr.isEmpty()) {
+			share.save(getApplicationContext(), new SaveListener() {
+
+				public void onSuccess() {
+					finish();
+				}
+
+				public void onFailure(int arg0, String arg1) {
+					Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
+				}
+			});
+			return;
+		}
+
 		Bmob.uploadBatch(this, Bimp.drr.toArray(new String[Bimp.drr.size()]), new UploadBatchListener() {
 
 			@Override
 			public void onSuccess(List<BmobFile> arg0, List<String> arg1) {
 				share.setImages(arg0);
+				Log.i("ShareItActivity", "image count" + arg0.size());
 				share.save(getApplicationContext(), new SaveListener() {
 					public void onSuccess() {
 						finish();

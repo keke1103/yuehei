@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.widget.AbsoluteLayout;
 import android.widget.AbsoluteLayout.LayoutParams;
 import android.widget.ImageView;
-
 import cn.bmob.v3.datatype.BmobFile;
 
 @SuppressWarnings("deprecation")
@@ -47,7 +46,7 @@ public class DensityUtil {
 				v = new ImageView(mContext);
 				imageLayout.addView(v, params);
 				v.setBackgroundColor(Color.GRAY);
-				imgs[i].loadImage(mContext, v);
+				imgs[i].loadImageThumbnail(mContext, v, w / 2, w / 2);
 
 			} else if (imgs.length == 2) {
 				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), 0, 0);
@@ -55,14 +54,14 @@ public class DensityUtil {
 				v.setBackgroundColor(Color.GRAY);
 				imageLayout.addView(v, params);
 
-				imgs[i].loadImage(mContext, v);
+				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35),w / 2 - dip2px(mContext, 35));
 
 				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35),
 						(w / 2) - dip2px(mContext, 30), 0);
 				v = new ImageView(mContext);
 				v.setBackgroundColor(Color.GRAY);
 				imageLayout.addView(v, params);
-				imgs[i].loadImage(mContext, v);
+				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35),w / 2 - dip2px(mContext, 35));
 			} else if (imgs.length == 4) {
 
 				for (BmobFile p : imgs) {
@@ -76,7 +75,7 @@ public class DensityUtil {
 					params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), x, y);
 					v = new ImageView(mContext);
 					v.setBackgroundColor(Color.GRAY);
-					p.loadImage(mContext, v);
+					p.loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 					i++;
 				}
 			} else {
@@ -89,7 +88,7 @@ public class DensityUtil {
 					v = new ImageView(mContext);
 					v.setBackgroundColor(Color.GRAY);
 					imageLayout.addView(v, params);
-					p.loadImage(mContext, v);
+					p.loadImageThumbnail(mContext, v, w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5));
 					i++;
 				}
 			}
