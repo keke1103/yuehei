@@ -317,13 +317,16 @@
                     android:background="@color/thread_gray" />
                 <!-- 个性签名的内容 -->
 
-                <TextView
+                <EditText
                     android:id="@+id/personal_user_text_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="27dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="12dp"
+                    android:background="@null"
+                    android:enabled="false"
+                    android:focusable="false"
                     android:text="问君鞥有几多愁，恰是一江春水向东流"
                     android:textColor="@color/main_text"
                     android:textSize="12sp" />

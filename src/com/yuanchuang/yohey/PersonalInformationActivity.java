@@ -14,17 +14,14 @@ import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +47,7 @@ public class PersonalInformationActivity extends Activity {
 	TextView age;// 年龄
 	ImageView sex;// 性别
 	TextView up;// 点赞数
-	TextView signature;// 个性签名
+	EditText signature;// 个性签名
 	LinearLayout others_impression;// 他人印象
 	TextView mSignature;// 修改个性签名
 	LinearLayout record;// 战绩
@@ -76,7 +73,6 @@ public class PersonalInformationActivity extends Activity {
 	boolean isMine = true;
 	YoheyApplication app;
 
-	AlertDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +141,7 @@ public class PersonalInformationActivity extends Activity {
 		age = (TextView) findViewById(R.id.personal_user_text_ages);
 		sex = (ImageView) findViewById(R.id.personal_user_text_sex);
 		up = (TextView) findViewById(R.id.personal_text_thumbs_up);
-		signature = (TextView) findViewById(R.id.personal_user_text_signature);
+		signature = (EditText) findViewById(R.id.personal_user_text_signature);
 		mSignature = (TextView) findViewById(R.id.personal_signature_modification);
 		others_impression = (LinearLayout) include.findViewById(R.id.personal_user_linear_other_impression);
 		record = (LinearLayout) findViewById(R.id.personal_user_linear_record);
@@ -154,9 +150,10 @@ public class PersonalInformationActivity extends Activity {
 		backimage.setVisibility(View.VISIBLE);
 		backimage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("个人资料");
+		
 		backimage.setOnClickListener(clickListener);
 		mSignature.setOnClickListener(clickListener);
-
+        
 		if (!isMine) {
 			mSignature.setVisibility(View.INVISIBLE);
 			first.setText("加为好友");
@@ -169,7 +166,7 @@ public class PersonalInformationActivity extends Activity {
 	}
 
 	OnClickListener clickListener = new OnClickListener() {
-
+        boolean msignature=true;
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
@@ -178,7 +175,21 @@ public class PersonalInformationActivity extends Activity {
 				finish();
 				break;
 			case R.id.personal_signature_modification:
-				customDialog();
+				if(msignature){
+					signature.setFocusable(true);
+					signature.setFocusableInTouchMode(true);
+					signature.requestFocus();
+					signature.findFocus();
+					signature.setEnabled(true);
+					mSignature.setText("确定");
+					msignature=false;
+					saveMood();
+				}else{
+					signature.setFocusable(false);
+					signature.setEnabled(false);
+					mSignature.setText("修改");
+					msignature=true;
+				}
 				break;
 			case R.id.personal_user_text_first:
 				addFriend();
@@ -189,30 +200,23 @@ public class PersonalInformationActivity extends Activity {
 		}
 	};
 
-	/**
-	 * 自定义Dialog
-	 */
-	public void customDialog() {
-		LinearLayout layout = new LinearLayout(getApplication());
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		layout.setLayoutParams(params);
-		layout.setOrientation(1);
-
-		EditText editText = new EditText(getApplication());
-		editText.setLayoutParams(params);
-		layout.addView(editText);
-
-		Button button = new Button(getApplication());
-		button.setLayoutParams(params);
-		button.setText("确定");
-		layout.addView(button);
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		dialog = builder.create();
-		dialog.setView(layout);
-		dialog.show();
+	private void saveMood(){
+		User nu=new User();
+		nu.setMood(signature.getText().toString());
+		nu.update(getApplicationContext(), user.getObjectId(), new UpdateListener() {
+ 
+			public void onSuccess() {
+				user.setMood(signature.getText().toString());
+			}
+			
+			@Override
+			public void onFailure(int arg0, String arg1) {
+				Toast.makeText(getApplicationContext(),arg1, Toast.LENGTH_SHORT).show();
+				signature.setText(user.getMood());
+			}
+		});
+		
 	}
-
 	/**
 	 * 获取用户信息
 	 */
