@@ -1,8 +1,9 @@
 package com.yuanchuang.yohey.chat;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 import cn.bmob.newim.event.MessageEvent;
 import cn.bmob.newim.event.OfflineMessageEvent;
 import cn.bmob.newim.listener.BmobIMMessageHandler;
@@ -18,9 +19,13 @@ public class ChatMessageHandler extends BmobIMMessageHandler {
 	 * 当接收到服务器发来的消息时，此方法被调用
 	 */
 	public void onMessageReceive(MessageEvent arg0) {
-		super.onMessageReceive(arg0);
+		// super.onMessageReceive(arg0);
 		Log.i("ChatMessageHandler", arg0.getFromUserInfo().getAvatar() + ":" + arg0.getMessage());
-		Toast.makeText(context, arg0.getMessage().getContent(), Toast.LENGTH_SHORT).show();
+		Intent arg1 = new Intent("cn.bmob.im.action.MESSAGE");
+		Bundle b = new Bundle();
+		b.putSerializable("event", arg0);
+		arg1.putExtras(b);
+		context.sendBroadcast(arg1);
 	}
 
 	/**

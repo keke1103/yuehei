@@ -109,7 +109,9 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.PersonalInformationActivity" >
         </activity>
-        <activity android:name="com.yuanchuang.yohey.FriendMessageActivity" >
+        <activity
+            android:name="com.yuanchuang.yohey.FriendMessageActivity"
+            android:noHistory="true" >
         </activity>
         <activity android:name="com.yuanchuang.yohey.FriendMaterialActivity" >
         </activity>
@@ -120,7 +122,6 @@
         <activity android:name="com.yuanchuang.yohey.ForwardingActivity" >
         </activity>
         <activity android:name="com.yuanchuang.yohey.WelcomeActivity" >
-
         </activity>
         <activity android:name="com.yuanchuang.yohey.CommentDynamicActivity" >
         </activity>

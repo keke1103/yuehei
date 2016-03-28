@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.adapter.FriendMessageBaseAdapter;
+import com.yuanchuang.yohey.app.YoheyNotificationManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -61,6 +62,7 @@ public class FriendMessageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_message_frame_main);
+		YoheyNotificationManager.getInstance(getApplicationContext()).addObserver(this);
 		intent = getIntent();
 		c = BmobIMConversation.obtain(BmobIMClient.getInstance(),
 				(BmobIMConversation) intent.getSerializableExtra("c"));
@@ -71,8 +73,7 @@ public class FriendMessageActivity extends Activity {
 	/**
 	 * 获得friendMessageList的数据
 	 */
-	private void getData() {
-
+	public void getData() {
 		c.queryMessages(null, 10, msgListener);
 	}
 
@@ -138,7 +139,7 @@ public class FriendMessageActivity extends Activity {
 	 * 
 	 * @param msg
 	 */
-	private void addMessage(BmobIMMessage msg) {
+	public void addMessage(BmobIMMessage msg) {
 		if (friendMessageBaseAdapter == null) {
 			List<BmobIMMessage> list = new ArrayList<BmobIMMessage>();
 			list.add(msg);
@@ -161,4 +162,13 @@ public class FriendMessageActivity extends Activity {
 		msgSend.setOnClickListener(click);
 	}
 
+	public BmobIMConversation getConversation() {
+		return c;
+	}
+
+	@Override
+	protected void onDestroy() {
+		YoheyNotificationManager.getInstance(getApplicationContext()).deleteObserver();
+		super.onDestroy();
+	}
 }
