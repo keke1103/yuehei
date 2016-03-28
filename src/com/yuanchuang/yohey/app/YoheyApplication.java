@@ -1,5 +1,8 @@
 package com.yuanchuang.yohey.app;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.tencent.connect.UserInfo;
 import com.tencent.tauth.Tencent;
 import com.yuanchuang.yohey.LoginAndRegistered;
@@ -32,6 +35,8 @@ public class YoheyApplication extends Application {
 	 */
 	public Group[] friendGroup;
 
+	Map<String, User> mFriend = new HashMap<String, User>();
+
 	public boolean isServerSideLogin = false;
 
 	@Override
@@ -62,6 +67,29 @@ public class YoheyApplication extends Application {
 		SharedPreferences.Editor edit = storage.edit();
 		edit.putString("qqData", "");
 		edit.commit();
+	}
+
+	/**
+	 * 根据ID获取好友分组里面的指定好友
+	 * 
+	 * @param objectId
+	 * @return
+	 */
+	public User getFriendById(String objectId) {
+		User u = mFriend.get(objectId);
+		if (u == null) {
+			for (Group g : friendGroup) {
+				for (User us : g.getFriends()) {
+					if (us.getObjectId().equals(objectId)) {
+						mFriend.put(objectId, us);
+						return us;
+					}
+				}
+			}
+			return null;
+		} else {
+			return u;
+		}
 	}
 
 	/**

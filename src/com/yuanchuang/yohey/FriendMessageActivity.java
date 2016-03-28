@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.adapter.FriendMessageBaseAdapter;
+import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.app.YoheyNotificationManager;
 
 import android.app.Activity;
@@ -17,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import cn.bmob.newim.bean.BmobIMConversation;
 import cn.bmob.newim.bean.BmobIMMessage;
@@ -39,8 +41,10 @@ public class FriendMessageActivity extends Activity {
 	BmobIMConversation c;
 	Intent intent;
 
+	TextView title;
 	EditText msgEdit;
 	View msgSend;
+	YoheyApplication app;
 
 	private OnClickListener click = new OnClickListener() {
 
@@ -62,6 +66,7 @@ public class FriendMessageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_message_frame_main);
+		app = (YoheyApplication) getApplication();
 		YoheyNotificationManager.getInstance(getApplicationContext()).addObserver(this);
 		intent = getIntent();
 		c = BmobIMConversation.obtain(BmobIMClient.getInstance(),
@@ -128,7 +133,7 @@ public class FriendMessageActivity extends Activity {
 	 */
 	private void setAdapter(List<BmobIMMessage> list) {
 		if (friendMessageBaseAdapter == null) {
-			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, FriendMessageActivity.this);
+			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, app);
 			messageListView.setAdapter(friendMessageBaseAdapter);
 		} else
 			friendMessageBaseAdapter.setMessageData(list);
@@ -143,7 +148,7 @@ public class FriendMessageActivity extends Activity {
 		if (friendMessageBaseAdapter == null) {
 			List<BmobIMMessage> list = new ArrayList<BmobIMMessage>();
 			list.add(msg);
-			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, FriendMessageActivity.this);
+			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, app);
 			messageListView.setAdapter(friendMessageBaseAdapter);
 		} else {
 			friendMessageBaseAdapter.addMessageData(msg);
@@ -155,11 +160,14 @@ public class FriendMessageActivity extends Activity {
 	 */
 	private void findView() {
 		messageListView = (ListView) findViewById(R.id.friend_message_frame_listview);
+		title = (TextView) findViewById(R.id.friend_message_name);
 		toReturn = findViewById(R.id.friend_message_frame_back);
 		toReturn.setOnClickListener(click);
 		msgEdit = (EditText) findViewById(R.id.msg_edit);
 		msgSend = findViewById(R.id.msg_send);
 		msgSend.setOnClickListener(click);
+		title.setText(app.getFriendById(c.getConversationId()).getNickName());
+
 	}
 
 	public BmobIMConversation getConversation() {

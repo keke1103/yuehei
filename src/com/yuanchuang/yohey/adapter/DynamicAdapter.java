@@ -6,8 +6,9 @@ import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.ForwardingActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ThumbUpActivity;
-import com.yuanchuang.yohey.myData.AdapterData;
+import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.tools.DensityUtil;
+import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 动态BaseAdapter
@@ -28,8 +30,9 @@ import android.widget.TextView;
  * @author Administrator
  *
  */
+@SuppressWarnings("deprecation")
 public class DynamicAdapter extends BaseAdapter {
-	List<AdapterData> list;
+	List<Share> list;
 	Context context;
 	LayoutInflater inflater;
 	ImageView image;
@@ -39,13 +42,17 @@ public class DynamicAdapter extends BaseAdapter {
 
 	}
 
-	public DynamicAdapter(Context context, List<AdapterData> list) {
+	public DynamicAdapter(Context context, List<Share> list) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
 
-	@Override
+	public void setData(List<Share> list) {
+		this.list = list;
+		notifyDataSetChanged();
+	}
+
 	public int getCount() {
 		return list.size();
 	}
@@ -60,12 +67,12 @@ public class DynamicAdapter extends BaseAdapter {
 		return position;
 	}
 
-	@SuppressWarnings("deprecation")
 	@SuppressLint({ "InflateParams", "ResourceAsColor" })
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		Log.i("position", position + "");
+		Share mShare = list.get(position);
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.list_dynamic, null);
@@ -84,10 +91,13 @@ public class DynamicAdapter extends BaseAdapter {
 		Log.i("position", position + "");
 
 		holder.headPortrait.setImageResource(R.drawable.tui_jian_kai_hei_1);
-		holder.nickNmae.setText(list.get(position).getDy_name());
-		holder.time.setText(list.get(position).getDy_time());
-		holder.line.setText(list.get(position).getDy_context());
-		DensityUtil.sudoku(context, holder.imageLayout, list.get(position).getDy_image());
+		holder.nickNmae.setText(mShare.getUser().getNickName());
+		mShare.getUser().binderImageView(holder.headPortrait);
+		holder.time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
+		holder.line.setText(mShare.getContent());
+		if (mShare.getImages() != null)
+			DensityUtil.sudoku(context, holder.imageLayout,
+					mShare.getImages().toArray(new BmobFile[mShare.getImages().size()]));
 		holder.forwarding.setOnClickListener(clickListener);
 		holder.thumbUp.setOnClickListener(clickListener);
 		holder.leaveMessage.setOnClickListener(clickListener);
@@ -128,7 +138,6 @@ public class DynamicAdapter extends BaseAdapter {
 		View leaveMessage;// 留言
 		View thumbUp;// 点赞RelativeLayout relative;// 整体布局
 
-		@SuppressWarnings("deprecation")
 		AbsoluteLayout imageLayout;
 	}
 }

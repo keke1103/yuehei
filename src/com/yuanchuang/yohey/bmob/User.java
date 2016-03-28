@@ -273,10 +273,15 @@ public class User extends BmobUser {
 
 		}
 		try {
+			u.mood = jo.getString("mood");
+		} catch (JSONException e) {
+		}
+		try {
 			u.defGame = Game.paresJSONObejct(jo.getJSONObject("defGame"));
 		} catch (JSONException e) {
 
 		}
+
 		return u;
 	}
 

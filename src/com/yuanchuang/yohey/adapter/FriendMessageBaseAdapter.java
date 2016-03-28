@@ -1,17 +1,15 @@
 package com.yuanchuang.yohey.adapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.User;
+import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,12 +34,11 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	User mine;
 	YoheyApplication app;
-	Map<String, User> chatUsers = new HashMap<String, User>();
 
-	public FriendMessageBaseAdapter(List<BmobIMMessage> list, Context context) {
-		// TODO Auto-generated constructor stub
+	public FriendMessageBaseAdapter(List<BmobIMMessage> list, YoheyApplication app) {
 		this.list = list;
-		this.context = context;
+		this.context = app.getApplicationContext();
+		this.app = app;
 		mine = BmobUser.getCurrentUser(context, User.class);
 		inflater = LayoutInflater.from(context);
 	}
@@ -97,15 +94,14 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 		}
 
 		BmobIMUserInfo info = msg.getBmobIMUserInfo();
-		Log.i("FriendsMsgAdapter", msg.getFromId() + ":" + msg.getBmobIMConversation().getConversationIcon());
+		holder.messageTime.setText(TimeUtil.formateTime(msg.getCreateTime()));
 		if (info != null && info.getUserId().equals(mine.getObjectId())) {
-
 			holder.myChatContent.setText(msg.getContent());
 			mine.binderImageView(holder.myChatImage);
 			holder.myChat.setVisibility(View.VISIBLE);
 			holder.friendChat.setVisibility(View.GONE);
 		} else {
-			
+			app.getFriendById(msg.getFromId()).binderImageView(holder.friendChatImage);
 			holder.friendChatContent.setText(msg.getContent());
 			holder.myChat.setVisibility(View.GONE);
 			holder.friendChat.setVisibility(View.VISIBLE);

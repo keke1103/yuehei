@@ -3,16 +3,22 @@ package com.yuanchuang.yohey.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.ThumbUpActivity;
 import com.yuanchuang.yohey.adapter.DynamicAdapter;
+import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.Share;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.DensityUtil;
+import com.yuanchuang.yohey.tools.HttpGet;
+import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -37,15 +43,17 @@ public class DynamicFragment extends Fragment {
 	ListView listView;
 	RelativeLayout layoutTitle;// 标题布局
 	View mView;
-	List<AdapterData> list;
+	List<Share> list;
 	DynamicAdapter mAdapter;
 	TextView title;
 	AdapterData data;// 数据类
+	User user;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		LinearLayout lay = new LinearLayout(getActivity());
 		lay.setLayoutParams(new LayoutParams(-1, -1));
+		user = User.getCurrentUser(getActivity(), User.class);
 		mView = inflater.inflate(R.layout.activity_yue_lu_dynamic, lay);
 
 		findView();
@@ -60,7 +68,7 @@ public class DynamicFragment extends Fragment {
 		title = (TextView) layoutTitle.findViewById(R.id.title_navigation_text_title);
 		title.setText(R.string.dynamic);
 
-		list = new ArrayList<AdapterData>();
+		list = new ArrayList<Share>();
 		getData();
 		Log.i("DynamicFragment", "DynamicFragment");
 		mAdapter = new DynamicAdapter(getActivity(), list);
@@ -87,27 +95,31 @@ public class DynamicFragment extends Fragment {
 	};
 
 	private void getData() {
+		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
+		get.putString("uid", user.getObjectId());
+		OnSendListener mListener = new OnSendListener() {
+			public void start() {
 
-		for (int i = 0; i < 5; i++) {
-			data = new AdapterData();
-			data.setDy_head(R.drawable.ic_launcher + "");
-			data.setDy_name("多啦不爱梦");
-			data.setDy_nmae("1分钟");
-			data.setDy_context("求大神带我飞");
-			Bitmap maps[] = new Bitmap[4];
-			maps[0] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			maps[1] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			maps[2] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			maps[3] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-//			maps[4] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-//			maps[5] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-//			maps[6] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			//maps[7] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			//maps[8] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			data.setDy_image(maps);
-			list.add(data);
-			Log.i("getData", list.size() + "");
-		}
+			}
+
+			public void end(String result) {
+				Log.i("DynamicFragment", result);
+				try {
+					JSONObject jo = new JSONObject(result);
+					JSONArray ja = jo.getJSONArray("results");
+					for (int i = 0; i < ja.length(); i++) {
+						Share s = Share.parseJSONObject(ja.getJSONObject(i));
+						list.add(s);
+					}
+					mAdapter.setData(list);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		get.setOnSendListener(mListener);
+		get.send();
+
 	}
 
 }
