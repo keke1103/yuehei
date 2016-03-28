@@ -54,7 +54,7 @@ public class QQRegisterActivity extends Activity {
 		toReturn.setVisibility(View.VISIBLE);
 		toReturn.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("QQ注册");
-		title.setTextColor(getResources().getColor(R.color.white));
+		title.setTextColor(getResources().getColor(R.color.write));
 		toReturn.setOnClickListener(onClickListener);
 	}
 

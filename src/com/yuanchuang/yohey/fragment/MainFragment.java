@@ -138,7 +138,7 @@ public class MainFragment extends Fragment {
 		popupWindow = new PopupWindow(contentView, 600, LayoutParams.WRAP_CONTENT, true);
 		popupWindow.setTouchable(true);
 		popupWindow.setFocusable(true);
-		popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white));
+		popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.write));
 		popupWindow.showAsDropDown(view);
 	}
 

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.widget.AbsoluteLayout;
 import android.widget.AbsoluteLayout.LayoutParams;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 @SuppressWarnings("deprecation")
 public class DensityUtil {
@@ -41,7 +42,7 @@ public class DensityUtil {
 			ImageView v;
 			imageLayout.removeAllViews();
 			if (imgs.length == 1) {
-				params = new LayoutParams(w/2 - 20, w /2- 20, 10, 0);
+				params = new LayoutParams(w / 2, w / 2 , 10, 0);
 				v = new ImageView(mContext);
 				imageLayout.addView(v, params);
 				v.setBackgroundColor(Color.GRAY);
@@ -58,11 +59,12 @@ public class DensityUtil {
 				params = new LayoutParams(w / 2 - 10, w / 2 - 10, w / 2, 0);
 				v = new ImageView(mContext);
 				v.setBackgroundColor(Color.GRAY);
+				imageLayout.addView(v, params);
 				// imgs[1].binderImageView(v);
 				v.setImageBitmap(imgs[i]);
 			} else if (imgs.length == 4) {
 				for (Bitmap p : imgs) {
-					params = new LayoutParams(w / 2 - 10, w / 2 - 10, (i % 3) * w / 2, (i / 3) * w / 2);
+					params = new LayoutParams(w / 3 - 5, w / 3 - 5, (i % 3) * w / 3, (i / 3) * w / 3);
 					v = new ImageView(mContext);
 					v.setBackgroundColor(Color.GRAY);
 					imageLayout.addView(v, params);
@@ -70,7 +72,7 @@ public class DensityUtil {
 					v.setImageBitmap(p);
 					i++;
 				}
-			} else
+			} else {
 				for (Bitmap p : imgs) {
 					if (i == 9) {
 						break;// 只显示9张图片！
@@ -83,6 +85,7 @@ public class DensityUtil {
 					v.setImageBitmap(p);
 					i++;
 				}
+			}
 		}
 	}
 }

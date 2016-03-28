@@ -59,7 +59,7 @@ public class DynamicFragment extends Fragment {
 		layoutTitle = (RelativeLayout) mView.findViewById(R.id.dynamic_title);
 		title = (TextView) layoutTitle.findViewById(R.id.title_navigation_text_title);
 		title.setText(R.string.dynamic);
-		
+
 		list = new ArrayList<AdapterData>();
 		getData();
 		Log.i("DynamicFragment", "DynamicFragment");
@@ -94,13 +94,16 @@ public class DynamicFragment extends Fragment {
 			data.setDy_name("多啦不爱梦");
 			data.setDy_nmae("1分钟");
 			data.setDy_context("求大神带我飞");
-			Bitmap maps[] = new Bitmap[2];
+			Bitmap maps[] = new Bitmap[4];
 			maps[0] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
 			maps[1] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
-			// maps[2] = BitmapFactory.decodeResource(getResources(),
-			// R.drawable.small_image_size);
-			// maps[3] = BitmapFactory.decodeResource(getResources(),
-			// R.drawable.small_image_size);
+			maps[2] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+			maps[3] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+//			maps[4] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+//			maps[5] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+//			maps[6] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+			//maps[7] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
+			//maps[8] = BitmapFactory.decodeResource(getResources(), R.drawable.small_image_size);
 			data.setDy_image(maps);
 			list.add(data);
 			Log.i("getData", list.size() + "");

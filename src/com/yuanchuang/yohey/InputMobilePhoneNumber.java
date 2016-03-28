@@ -66,6 +66,6 @@ public class InputMobilePhoneNumber extends Activity {
 		toReturn.setVisibility(View.VISIBLE);
 		toReturn.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("填写手机号");
-		title.setTextColor(getResources().getColor(R.color.white));
+		title.setTextColor(getResources().getColor(R.color.write));
 	}
 }

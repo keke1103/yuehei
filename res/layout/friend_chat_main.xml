@@ -4,64 +4,73 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:orientation="vertical" >
+
     <!-- 好友聊天的布局 -->
-    <TextView 
+
+    <TextView
         android:id="@+id/friend_chat_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="下午5:05"
         android:gravity="center"
+        android:text="下午5:05"
         android:textColor="#888888"
-        android:textSize="12sp"/>
-    <RelativeLayout 
+        android:textSize="12sp" />
+
+    <RelativeLayout
         android:id="@+id/my_chat_relative"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView 
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp" >
+
+        <TextView
             android:id="@+id/my_chat_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="9dp"
             android:layout_toLeftOf="@+id/my_chat_head_portrait"
             android:layout_toStartOf="@+id/my_chat_head_portrait"
-            android:layout_marginRight="9dp"
-            android:layout_marginEnd="9dp"
             android:text="嘿！约吗？"
             android:textColor="#42ACE2"
-            android:textSize="12sp"/>
-        <ImageView 
+            android:textSize="12sp" />
+
+        <com.yuanchuang.yohey.MyImageView
             android:id="@+id/my_chat_head_portrait"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/yo_hey_head_portrait"
-            android:contentDescription="@drawable/yo_hey_head_portrait"/>
+            android:layout_marginRight="10dp"
+            android:src="@drawable/yp_hey_background_image" />
     </RelativeLayout>
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/friend_chat_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView 
+        android:orientation="horizontal"
+        android:paddingBottom="5dp" >
+
+        <com.yuanchuang.yohey.MyImageView
             android:id="@+id/friend_chat_head_portrait"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/yo_hey_head_portrait"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:contentDescription="@drawable/yo_hey_head_portrait"/>
-        <TextView 
+            android:src="@drawable/yp_hey_background_image" />
+
+        <TextView
             android:id="@+id/friend_chat_content"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_marginLeft="9dp"
             android:layout_marginStart="9dp"
+            android:gravity="center"
             android:text="今天不约了有点生气"
             android:textColor="#888888"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
     </LinearLayout>
+
 </LinearLayout>

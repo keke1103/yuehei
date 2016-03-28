@@ -62,7 +62,7 @@ public class VerificationCodeActivity extends Activity {
 		toReturn.setVisibility(View.VISIBLE);
 		toReturn.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("填写验证码");
-		title.setTextColor(getResources().getColor(R.color.white));
+		title.setTextColor(getResources().getColor(R.color.write));
 		toReturn.setOnClickListener(clickListener);
 		nextbtn.setOnClickListener(clickListener);
 	}
