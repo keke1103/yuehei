@@ -7,12 +7,11 @@
     android:orientation="horizontal"
     android:padding="10dp" >
 
-    <ImageView
+    <com.yuanchuang.yohey.MyImageView
         android:id="@+id/list_thumb_up_head"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:contentDescription="@drawable/zhao_ri_tian_bu_fu"
-        android:src="@drawable/zhu_ge_wo_ai_ni_tu" />
+        android:src="@drawable/yp_hey_background_image"/>
 
     <TextView
         android:id="@+id/list_thumb_up_name"

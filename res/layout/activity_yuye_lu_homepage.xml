@@ -33,26 +33,17 @@
             android:background="@color/write"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
-			<RelativeLayout 
-			    android:layout_width="69dp"
-			    android:layout_height="69dp"
-			    android:layout_marginEnd="10dp"
-               	android:layout_marginLeft="20dp"
+
+           	<com.yuanchuang.yohey.MyImageView
+              	android:id="@+id/homepage_head_image"
+              	android:layout_width="50dp"
+              	android:layout_height="50dp" 	
+              	android:layout_marginLeft="22dp"
+              	android:layout_marginStart="22dp"
               	android:layout_marginRight="10dp"
-                android:layout_marginStart="20dp" >
-           	    <ImageView
-              		android:id="@+id/homepage_head_image"
-              		android:layout_width="50dp"
-              		android:layout_height="50dp" 	
-                    android:layout_centerInParent="true"
-               	    android:contentDescription="@drawable/yo_hey_head_portrait"
-                	android:background="#f2f4f5" />
-           	    <View
-                	android:id="@+id/list_main_image_head_tu_view"
-                	android:layout_width="fill_parent"
-                	android:layout_height="fill_parent"
-               		android:background="@drawable/click_the_list_to_change_the_background_shape" />
-			</RelativeLayout>
+              	android:layout_marginEnd="10dp"
+               	android:src="@drawable/yp_hey_background_image" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
