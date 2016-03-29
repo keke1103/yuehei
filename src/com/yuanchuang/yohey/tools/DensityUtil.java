@@ -40,28 +40,27 @@ public class DensityUtil {
 
 			int i = 0;
 			ImageView v;
-			imageLayout.removeAllViews();
 			if (imgs.length == 1) {
-				params = new LayoutParams(w / 2, w / 2, dip2px(mContext, 10), 0);
+				params = new LayoutParams(-2, -2, dip2px(mContext, 10), 0);
 				v = new ImageView(mContext);
 				imageLayout.addView(v, params);
-				v.setBackgroundColor(Color.GRAY);
+				v.setBackgroundColor(Color.LTGRAY);
 				imgs[i].loadImageThumbnail(mContext, v, w / 2, w / 2);
 
 			} else if (imgs.length == 2) {
-				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), 0, 0);
+				params = new LayoutParams(-2, -2, 0, 0);
 				v = new ImageView(mContext);
-				v.setBackgroundColor(Color.GRAY);
+				v.setBackgroundColor(Color.LTGRAY);
 				imageLayout.addView(v, params);
 
-				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35),w / 2 - dip2px(mContext, 35));
+				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 
 				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35),
 						(w / 2) - dip2px(mContext, 30), 0);
 				v = new ImageView(mContext);
-				v.setBackgroundColor(Color.GRAY);
+				v.setBackgroundColor(Color.LTGRAY);
 				imageLayout.addView(v, params);
-				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35),w / 2 - dip2px(mContext, 35));
+				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 			} else if (imgs.length == 4) {
 
 				for (BmobFile p : imgs) {
@@ -74,7 +73,7 @@ public class DensityUtil {
 						x = 0;
 					params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), x, y);
 					v = new ImageView(mContext);
-					v.setBackgroundColor(Color.GRAY);
+					v.setBackgroundColor(Color.LTGRAY);
 					p.loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 					i++;
 				}
@@ -83,10 +82,9 @@ public class DensityUtil {
 					if (i == 9) {
 						break;// 只显示9张图片！
 					}
-					params = new LayoutParams(w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5), (i % 3) * w / 3,
-							(i / 3) * w / 3);
+					params = new LayoutParams(-2, -2, (i % 3) * w / 3, (i / 3) * w / 3);
 					v = new ImageView(mContext);
-					v.setBackgroundColor(Color.GRAY);
+					v.setBackgroundColor(Color.LTGRAY);
 					imageLayout.addView(v, params);
 					p.loadImageThumbnail(mContext, v, w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5));
 					i++;

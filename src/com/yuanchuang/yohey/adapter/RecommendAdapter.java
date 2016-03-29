@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 /**
  * 推荐开黑
+ * 
  * @author Administrator
  *
  */
@@ -70,7 +72,7 @@ public class RecommendAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.head.setBackgroundResource(R.drawable.zhao_ri_tian_bu_fu);
+		holder.head.setBackgroundResource(R.drawable.yp_hey_background_image);
 		holder.name.setText(list.get(position).getReco_name());
 		holder.dan.setText(list.get(position).getReco_dan());
 		holder.area.setText(list.get(position).getReco_area());

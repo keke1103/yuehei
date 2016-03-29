@@ -155,8 +155,11 @@ public class ShareItActivity extends Activity {
 
 			@Override
 			public void onSuccess(List<BmobFile> arg0, List<String> arg1) {
+				if (Bimp.drr.size() != arg0.size()) {
+					// 有且只有在最后一张图上传成功过后发起说说
+					return;
+				}
 				share.setImages(arg0);
-				Log.i("ShareItActivity", "image count" + arg0.size());
 				share.save(getApplicationContext(), new SaveListener() {
 					public void onSuccess() {
 						finish();

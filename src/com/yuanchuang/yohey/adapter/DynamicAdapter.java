@@ -22,7 +22,6 @@ import android.widget.AbsoluteLayout;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 动态BaseAdapter
@@ -83,22 +82,21 @@ public class DynamicAdapter extends BaseAdapter {
 			holder.forwarding = convertView.findViewById(R.id.list_dynamic_image_share_it);
 			holder.leaveMessage = convertView.findViewById(R.id.list_dynamic_image_leave_a_message);
 			holder.thumbUp = convertView.findViewById(R.id.list_dynamic_image_like);
+			holder.likeCount = (TextView) convertView.findViewById(R.id.dynamic_like_text);
+			holder.commentCount = (TextView) convertView.findViewById(R.id.dynamic_comment_count);
 			holder.imageLayout = (AbsoluteLayout) convertView.findViewById(R.id.list_dynamic_absolute_image);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		Log.i("position", position + "");
-
 		holder.headPortrait.setImageResource(R.drawable.tui_jian_kai_hei_1);
 		holder.nickNmae.setText(mShare.getUser().getNickName());
 		mShare.getUser().binderImageView(holder.headPortrait);
 		holder.time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
 		holder.line.setText(mShare.getContent());
+		holder.imageLayout.removeAllViews();
 		if (mShare.getImages() != null) {
-
-			DensityUtil.sudoku(context, holder.imageLayout,
-					mShare.getImages().toArray(new BmobFile[mShare.getImages().size()]));
+			DensityUtil.sudoku(context, holder.imageLayout, mShare.getImages());
 		}
 		holder.forwarding.setOnClickListener(clickListener);
 		holder.thumbUp.setOnClickListener(clickListener);
@@ -139,7 +137,8 @@ public class DynamicAdapter extends BaseAdapter {
 		View forwarding;// 转发
 		View leaveMessage;// 留言
 		View thumbUp;// 点赞RelativeLayout relative;// 整体布局
-
+		TextView likeCount;// 点赞数量
+		TextView commentCount;// 评论数量
 		AbsoluteLayout imageLayout;
 	}
 }

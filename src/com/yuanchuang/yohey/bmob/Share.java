@@ -1,6 +1,5 @@
 package com.yuanchuang.yohey.bmob;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -14,7 +13,7 @@ import cn.bmob.v3.datatype.BmobFile;
 public class Share extends BmobObject {
 	private String content;
 	private User user;
-	private List<BmobFile> images;
+	private BmobFile[] images;
 
 	public String getContent() {
 		return content;
@@ -32,12 +31,12 @@ public class Share extends BmobObject {
 		this.user = user;
 	}
 
-	public List<BmobFile> getImages() {
+	public BmobFile[] getImages() {
 		return images;
 	}
 
 	public void setImages(List<BmobFile> images) {
-		this.images = images;
+		this.images = images.toArray(new BmobFile[images.size()]);
 	}
 
 	public static Share parseJSONObject(JSONObject jo) {
@@ -53,43 +52,36 @@ public class Share extends BmobObject {
 		try {
 			s.setCreatedAt(jo.getString("createdAt"));
 		} catch (JSONException e4) {
-			// TODO Auto-generated catch block
-			e4.printStackTrace();
+
 		}
 		try {
 			s.setUpdatedAt(jo.getString("updatedAt"));
 		} catch (JSONException e3) {
-			// TODO Auto-generated catch block
-			e3.printStackTrace();
+
 		}
 		try {
 			s.setContent(jo.getString("content"));
 		} catch (JSONException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+
 		}
 		try {
 			s.setUser(User.parseJsonObject(jo.getJSONObject("user")));
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		try {
 			JSONArray ja = jo.getJSONArray("images");
-			s.images = new ArrayList<BmobFile>();
+			s.images = new BmobFile[ja.length()];
 			JSONObject jmo;
 			for (int i = 0; i < ja.length(); i++) {
 				jmo = ja.getJSONObject(i);
+				String url = jmo.getString("url");
 				String fileName = jmo.getString("filename");
 				String group = jmo.getString("group");
-				String url = jmo.getString("url");
 				BmobFile image = new BmobFile(fileName, group, url);
-				s.images.add(image);
+				s.images[i] = image;
 			}
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		return s;
