@@ -140,20 +140,22 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 		return convertView;
 
 	}
-OnCheckedChangeListener checkChange=new OnCheckedChangeListener() {
 
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		if(isChecked){
-			
-			Toast.makeText(context, "你已选中", Toast.LENGTH_SHORT).show();
-		}else{
-			Toast.makeText(context, "你已取消", Toast.LENGTH_SHORT).show();
+	OnCheckedChangeListener checkChange = new OnCheckedChangeListener() {
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			if (isChecked) {
+
+				Toast.makeText(context, "你已选中", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(context, "你已取消", Toast.LENGTH_SHORT).show();
+			}
+
 		}
-		
-	}
-	
-};
+
+	};
+
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub

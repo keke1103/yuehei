@@ -66,15 +66,15 @@ public class Safety_Actitity extends Activity {
 			case R.id.account_safety_linear_login_name:
 
 				break;
-				
+
 			case R.id.account_safety_linear_email_addr:
 
 				break;
-				
+
 			case R.id.account_safety_linear_phone_number:
 
 				break;
-				
+
 			default:
 				break;
 			}

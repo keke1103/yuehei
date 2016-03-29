@@ -544,8 +544,8 @@ public class Util {
 	public static String ACTION_OPEN_DOCUMENT = "android.intent.action.OPEN_DOCUMENT";
 	public static int Build_VERSION_KITKAT = 19;
 
-	/** 通过URI获取本地图片的path
-	 *  兼容android 5.0
+	/**
+	 * 通过URI获取本地图片的path 兼容android 5.0
 	 * 
 	 * @param context
 	 * @param uri

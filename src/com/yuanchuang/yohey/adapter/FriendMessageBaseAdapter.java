@@ -96,7 +96,9 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 		BmobIMUserInfo info = msg.getBmobIMUserInfo();
 		holder.messageTime.setText(TimeUtil.formateTime(msg.getCreateTime()));
 		if (info != null && info.getUserId().equals(mine.getObjectId())) {
+			 
 			holder.myChatContent.setText(msg.getContent());
+			
 			mine.binderImageView(holder.myChatImage);
 			holder.myChat.setVisibility(View.VISIBLE);
 			holder.friendChat.setVisibility(View.GONE);

@@ -25,8 +25,7 @@ public class ImageBucketAdapter extends BaseAdapter {
 	BitmapCache cache;
 	ImageCallback callback = new ImageCallback() {
 		@Override
-		public void imageLoad(ImageView imageView, Bitmap bitmap,
-				Object... params) {
+		public void imageLoad(ImageView imageView, Bitmap bitmap, Object... params) {
 			if (imageView != null && bitmap != null) {
 				String url = (String) params[0];
 				if (url != null && url.equals((String) imageView.getTag())) {

@@ -36,7 +36,7 @@
                 android:orientation="horizontal" >
 
                 <!-- 头像 -->
-                <com.yuanchuang.yohey.MyImageView
+                <com.yuanchuang.yohey.view.MyImageView
                     android:id="@+id/personal_user_image_portrait"
                     android:layout_width="50dp"
                     android:layout_height="50dp"

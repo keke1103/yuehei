@@ -3,6 +3,7 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.PostSAdater;
 import com.yuanchuang.yohey.myData.AdapterData;
 
@@ -17,19 +18,22 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 /**
  * 帖子消息界面
+ * 
  * @author Administrator
  *
  */
 public class PostedMessagesActivity extends Activity {
 	List<AdapterData> list;
-	RelativeLayout includeTitle;//导入头文件
-	TextView title;//标题
-	ImageView toReturn;//返回按钮
+	RelativeLayout includeTitle;// 导入头文件
+	TextView title;// 标题
+	ImageView toReturn;// 返回按钮
 	ListView listView;
-	PostSAdater postAdapter;//自定义adapter
+	PostSAdater postAdapter;// 自定义adapter
 	AdapterData data;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -74,13 +78,14 @@ public class PostedMessagesActivity extends Activity {
 	};
 
 	private void getData() {
-		
+
 		for (int i = 0; i < 5; i++) {
-			data=new AdapterData();
+			data = new AdapterData();
 			data.setPost_name("多啦不爱梦");
 			data.setPost_head("");
 			data.setPost_browse(((int) (Math.random() * 10)));
-			data.setPost_message(((int) (Math.random() * 10)));;
+			data.setPost_message(((int) (Math.random() * 10)));
+			;
 			data.setPost_time("2015.8.12");
 			data.setPost_con("求大神带我飞");
 			list.add(data);

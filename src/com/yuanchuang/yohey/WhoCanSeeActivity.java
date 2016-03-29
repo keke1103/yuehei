@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.WhoExpandableAdpter;
 import com.yuanchuang.yohey.myData.AdapterData;
 

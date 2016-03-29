@@ -34,8 +34,7 @@ public class Main_FragmentAdapter extends FragmentPagerAdapter {
 
 	public void setCurrentItem(int i) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 }

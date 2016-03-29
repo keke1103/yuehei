@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.yuanchuang.yohey.AddFriendsActivity;
 import com.yuanchuang.yohey.FriendMaterialActivity;
-import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.FriendsBaseAdapter;
 import com.yuanchuang.yohey.adapter.MessageBaseAdapter;
@@ -143,8 +142,9 @@ public class Lu_Activity extends Fragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			//Intent intent = new Intent(getActivity(), FriendMessageActivity.class);
-			//startActivity(intent);
+			// Intent intent = new Intent(getActivity(),
+			// FriendMessageActivity.class);
+			// startActivity(intent);
 		}
 	};
 	/**

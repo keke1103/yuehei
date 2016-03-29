@@ -91,13 +91,11 @@ public class TestPicActivity extends Activity {
 				/**
 				 * 通知适配器，绑定的数据发生了改变，应当刷新视图
 				 */
-				 adapter.notifyDataSetChanged();
-				 Intent intent = new Intent(TestPicActivity.this,
-				 ImageGridActivity.class);
-				 intent.putExtra(TestPicActivity.EXTRA_IMAGE_LIST,
-				 (Serializable) dataList.get(position).imageList);
-				 startActivity(intent);
-				 finish();
+				adapter.notifyDataSetChanged();
+				Intent intent = new Intent(TestPicActivity.this, ImageGridActivity.class);
+				intent.putExtra(TestPicActivity.EXTRA_IMAGE_LIST, (Serializable) dataList.get(position).imageList);
+				startActivity(intent);
+				finish();
 			}
 
 		});

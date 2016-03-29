@@ -1,5 +1,7 @@
 package com.yuanchuang.yohey;
 
+import com.yuanchuang.yohey.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,7 +62,7 @@ public class InputMobilePhoneNumber extends Activity {
 		phongNumber = (EditText) findViewById(R.id.mobile_number_edit_phone_number);
 		next = (Button) findViewById(R.id.mobile_number_button_next);
 		read = (ImageView) findViewById(R.id.mobile_number_chack);
-		toReturn =(ImageView) include.findViewById(R.id.title_navigation_back_icon);
+		toReturn = (ImageView) include.findViewById(R.id.title_navigation_back_icon);
 		title = (TextView) include.findViewById(R.id.title_navigation_text_title);
 		include.setBackgroundColor(getResources().getColor(R.color.black));
 		toReturn.setVisibility(View.VISIBLE);

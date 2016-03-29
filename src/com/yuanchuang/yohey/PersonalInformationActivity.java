@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.FriendGroup;
 import com.yuanchuang.yohey.bmob.Friends;
@@ -72,7 +73,6 @@ public class PersonalInformationActivity extends Activity {
 	User user;
 	boolean isMine = true;
 	YoheyApplication app;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -150,10 +150,10 @@ public class PersonalInformationActivity extends Activity {
 		backimage.setVisibility(View.VISIBLE);
 		backimage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("个人资料");
-		
+
 		backimage.setOnClickListener(clickListener);
 		mSignature.setOnClickListener(clickListener);
-        
+
 		if (!isMine) {
 			mSignature.setVisibility(View.INVISIBLE);
 			first.setText("加为好友");
@@ -166,7 +166,8 @@ public class PersonalInformationActivity extends Activity {
 	}
 
 	OnClickListener clickListener = new OnClickListener() {
-        boolean msignature=true;
+		boolean msignature = true;
+
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
@@ -175,20 +176,20 @@ public class PersonalInformationActivity extends Activity {
 				finish();
 				break;
 			case R.id.personal_signature_modification:
-				if(msignature){
+				if (msignature) {
 					signature.setFocusable(true);
 					signature.setFocusableInTouchMode(true);
 					signature.requestFocus();
 					signature.findFocus();
 					signature.setEnabled(true);
 					mSignature.setText("确定");
-					msignature=false;
+					msignature = false;
 					saveMood();
-				}else{
+				} else {
 					signature.setFocusable(false);
 					signature.setEnabled(false);
 					mSignature.setText("修改");
-					msignature=true;
+					msignature = true;
 				}
 				break;
 			case R.id.personal_user_text_first:
@@ -200,23 +201,24 @@ public class PersonalInformationActivity extends Activity {
 		}
 	};
 
-	private void saveMood(){
-		User nu=new User();
+	private void saveMood() {
+		User nu = new User();
 		nu.setMood(signature.getText().toString());
 		nu.update(getApplicationContext(), user.getObjectId(), new UpdateListener() {
- 
+
 			public void onSuccess() {
 				user.setMood(signature.getText().toString());
 			}
-			
+
 			@Override
 			public void onFailure(int arg0, String arg1) {
-				Toast.makeText(getApplicationContext(),arg1, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
 				signature.setText(user.getMood());
 			}
 		});
-		
+
 	}
+
 	/**
 	 * 获取用户信息
 	 */

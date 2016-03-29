@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.edit.KanjiConversion;
 import com.yuanchuang.yohey.edit.MyEditText;
 import com.yuanchuang.yohey.edit.PinyinComparator;

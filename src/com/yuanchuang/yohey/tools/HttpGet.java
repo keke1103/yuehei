@@ -128,9 +128,11 @@ public class HttpGet {
 		new MyAyckTast().execute();
 
 	}
-	public String getUrl(){
+
+	public String getUrl() {
 		return mUrl + mBuilder.toString();
 	}
+
 	private OnSendListener mListener;
 
 	/**

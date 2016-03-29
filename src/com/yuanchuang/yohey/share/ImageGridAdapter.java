@@ -32,8 +32,7 @@ public class ImageGridAdapter extends BaseAdapter {
 	private int selectTotal = 0;
 	ImageCallback callback = new ImageCallback() {
 		@Override
-		public void imageLoad(ImageView imageView, Bitmap bitmap,
-				Object... params) {
+		public void imageLoad(ImageView imageView, Bitmap bitmap, Object... params) {
 			if (imageView != null && bitmap != null) {
 				String url = (String) params[0];
 				if (url != null && url.equals((String) imageView.getTag())) {
@@ -97,10 +96,8 @@ public class ImageGridAdapter extends BaseAdapter {
 			holder = new Holder();
 			convertView = View.inflate(act, R.layout.item_image_grid, null);
 			holder.iv = (ImageView) convertView.findViewById(R.id.image);
-			holder.selected = (ImageView) convertView
-					.findViewById(R.id.isselected);
-			holder.text = (TextView) convertView
-					.findViewById(R.id.item_image_grid_text);
+			holder.selected = (ImageView) convertView.findViewById(R.id.isselected);
+			holder.text = (TextView) convertView.findViewById(R.id.item_image_grid_text);
 			convertView.setTag(holder);
 		} else {
 			holder = (Holder) convertView.getTag();
@@ -108,10 +105,9 @@ public class ImageGridAdapter extends BaseAdapter {
 		final ImageItem item = dataList.get(position);
 
 		holder.iv.setTag(item.imagePath);
-		cache.displayBmp(holder.iv, item.thumbnailPath, item.imagePath,
-				callback);
+		cache.displayBmp(holder.iv, item.thumbnailPath, item.imagePath, callback);
 		if (item.isSelected) {
-			holder.selected.setImageResource(R.drawable.icon_data_select);  
+			holder.selected.setImageResource(R.drawable.icon_data_select);
 			holder.text.setBackgroundResource(R.drawable.bgd_relatly_line);
 		} else {
 			holder.selected.setImageResource(-1);
@@ -126,8 +122,7 @@ public class ImageGridAdapter extends BaseAdapter {
 				if ((Bimp.drr.size() + selectTotal) < 9) {
 					item.isSelected = !item.isSelected;
 					if (item.isSelected) {
-						holder.selected
-								.setImageResource(R.drawable.icon_data_select);
+						holder.selected.setImageResource(R.drawable.icon_data_select);
 						holder.text.setBackgroundResource(R.drawable.bgd_relatly_line);
 						selectTotal++;
 						if (textcallback != null)

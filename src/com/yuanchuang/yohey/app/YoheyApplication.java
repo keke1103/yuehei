@@ -9,6 +9,7 @@ import com.yuanchuang.yohey.LoginAndRegistered;
 import com.yuanchuang.yohey.bmob.Group;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.chat.ChatMessageHandler;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;

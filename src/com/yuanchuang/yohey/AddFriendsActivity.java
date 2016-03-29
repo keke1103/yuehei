@@ -1,5 +1,7 @@
 package com.yuanchuang.yohey;
 
+import com.yuanchuang.yohey.R;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

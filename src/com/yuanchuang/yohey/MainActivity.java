@@ -2,6 +2,7 @@ package com.yuanchuang.yohey;
 
 import java.util.ArrayList;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.fragment.DynamicFragment;
 import com.yuanchuang.yohey.fragment.MEFragment;
 import com.yuanchuang.yohey.fragment.MainFragment;
@@ -134,7 +135,6 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private OnPageChangeListener pageChange = new OnPageChangeListener() {
-
 
 		public void onPageSelected(int arg0) {
 			radioButton[arg0].setChecked(true);

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Post;

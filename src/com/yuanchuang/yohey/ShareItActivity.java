@@ -3,6 +3,7 @@ package com.yuanchuang.yohey;
 import java.io.File;
 import java.util.List;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.share.Bimp;
