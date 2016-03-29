@@ -17,7 +17,7 @@
             android:layout_width="62dp"
             android:layout_height="62dp" >
 
-            <com.yuanchuang.yohey.MyImageView
+            <com.yuanchuang.yohey.view.MyImageView
                 android:id="@+id/list_main_image_head_tu"
                 android:layout_width="43dp"
                 android:layout_height="43dp"

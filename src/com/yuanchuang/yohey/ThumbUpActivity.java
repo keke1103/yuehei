@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tencent.map.b.m;
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.tools.DensityUtil;
 

@@ -41,7 +41,7 @@
             android:value="032e79773577386c1ae147ff379fb465" />
 
         <activity
-            android:name=".Friends_Activity"
+            android:name="com.yuanchuang.yohey.Friends_Activity"
             android:label="@string/app_name" >
         </activity>
         <activity

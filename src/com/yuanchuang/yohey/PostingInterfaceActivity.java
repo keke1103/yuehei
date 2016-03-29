@@ -1,5 +1,6 @@
 package com.yuanchuang.yohey;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Game;
 import com.yuanchuang.yohey.bmob.Post;
@@ -45,7 +46,7 @@ public class PostingInterfaceActivity extends Activity {
 		application = (YoheyApplication) getApplication();
 		findView();
 		game = BmobUser.getCurrentUser(getApplicationContext(), User.class).getDefGame();
-		
+
 	}
 
 	@SuppressWarnings("deprecation")
@@ -61,13 +62,13 @@ public class PostingInterfaceActivity extends Activity {
 		right.setVisibility(View.VISIBLE);
 		areaSet.setOnClickListener(l);
 		right.setText(R.string.publication);
-		
+
 		Resources resources = getResources();
 		Drawable drawable = resources.getDrawable(R.drawable.shape_rounded_yellow);
 		right.setVisibility(View.VISIBLE);
 		right.setTextColor(getResources().getColor(R.color.black));
 		right.setBackgroundDrawable(drawable);
-		
+
 		toReturn.setOnClickListener(l);
 		right.setOnClickListener(l);
 	}

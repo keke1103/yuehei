@@ -135,148 +135,149 @@ public class Game extends BmobObject {
 		case 29:
 			return "砖石Ⅰ";
 		case 30:
-            return "大师";
+			return "大师";
 		case 31:
-            return "王者";
+			return "王者";
 		default:
 			break;
 		}
 		return "";
 	}
 
-	public void setGamedan(String dan){
-		if(dan==null){
+	public void setGamedan(String dan) {
+		if (dan == null) {
 			setGamedan(0);
 			return;
 		}
-		
-		if("青铜Ⅵ".equals(dan)){
+
+		if ("青铜Ⅵ".equals(dan)) {
 			setGamedan(1);
 			return;
 		}
-		if("青铜Ⅴ".equals(dan)){
+		if ("青铜Ⅴ".equals(dan)) {
 			setGamedan(2);
 			return;
 		}
-		if("青铜Ⅳ".equals(dan)){
+		if ("青铜Ⅳ".equals(dan)) {
 			setGamedan(3);
 			return;
 		}
-		if("青铜 Ⅲ".equals(dan)){
+		if ("青铜 Ⅲ".equals(dan)) {
 			setGamedan(4);
 			return;
 		}
-		if("青铜 Ⅱ".equals(dan)){
+		if ("青铜 Ⅱ".equals(dan)) {
 			setGamedan(5);
 			return;
 		}
-		if("青铜I".equals(dan)){
+		if ("青铜I".equals(dan)) {
 			setGamedan(6);
 			return;
 		}
-		
-		if("白银Ⅴ".equals(dan)){
+
+		if ("白银Ⅴ".equals(dan)) {
 			setGamedan(7);
 			return;
 		}
-		if("白银Ⅳ".equals(dan)){
+		if ("白银Ⅳ".equals(dan)) {
 			setGamedan(8);
 			return;
 		}
-		if("白银Ⅲ".equals(dan)){
+		if ("白银Ⅲ".equals(dan)) {
 			setGamedan(9);
 			return;
 		}
-		if("白银Ⅱ".equals(dan)){
+		if ("白银Ⅱ".equals(dan)) {
 			setGamedan(10);
 			return;
 		}
-		if("白银I".equals(dan)){
+		if ("白银I".equals(dan)) {
 			setGamedan(11);
 			return;
 		}
-		if("黄金Ⅴ".equals(dan)){
+		if ("黄金Ⅴ".equals(dan)) {
 			setGamedan(12);
 			return;
 		}
-		if("黄金Ⅳ".equals(dan)){
+		if ("黄金Ⅳ".equals(dan)) {
 			setGamedan(13);
 			return;
 		}
-		if("黄金Ⅲ".equals(dan)){
+		if ("黄金Ⅲ".equals(dan)) {
 			setGamedan(14);
 			return;
 		}
-		if("黄金Ⅱ".equals(dan)){
+		if ("黄金Ⅱ".equals(dan)) {
 			setGamedan(15);
 			return;
 		}
-		if("黄金I".equals(dan)){
+		if ("黄金I".equals(dan)) {
 			setGamedan(16);
 			return;
-		}	
-		if("白金Ⅵ".equals(dan)){
+		}
+		if ("白金Ⅵ".equals(dan)) {
 			setGamedan(17);
 			return;
 		}
-		if("白金Ⅴ".equals(dan)){
+		if ("白金Ⅴ".equals(dan)) {
 			setGamedan(18);
 			return;
 		}
-		
-		if("白金Ⅳ".equals(dan)){
+
+		if ("白金Ⅳ".equals(dan)) {
 			setGamedan(19);
 			return;
 		}
-		if("白金Ⅲ".equals(dan)){
+		if ("白金Ⅲ".equals(dan)) {
 			setGamedan(20);
 			return;
 		}
-		if("白金Ⅱ".equals(dan)){
+		if ("白金Ⅱ".equals(dan)) {
 			setGamedan(21);
 			return;
 		}
-		if("白金I".equals(dan)){
+		if ("白金I".equals(dan)) {
 			setGamedan(22);
 			return;
 		}
-		if("砖石Ⅶ".equals(dan)){
+		if ("砖石Ⅶ".equals(dan)) {
 			setGamedan(23);
 			return;
 		}
-		if("砖石Ⅵ".equals(dan)){
+		if ("砖石Ⅵ".equals(dan)) {
 			setGamedan(24);
 			return;
 		}
-		if("砖石Ⅴ".equals(dan)){
+		if ("砖石Ⅴ".equals(dan)) {
 			setGamedan(25);
 			return;
 		}
-		if("砖石Ⅳ".equals(dan)){
+		if ("砖石Ⅳ".equals(dan)) {
 			setGamedan(26);
 			return;
 		}
-		if("砖石Ⅲ".equals(dan)){
+		if ("砖石Ⅲ".equals(dan)) {
 			setGamedan(27);
 			return;
 		}
-		if("砖石Ⅱ".equals(dan)){
+		if ("砖石Ⅱ".equals(dan)) {
 			setGamedan(28);
 			return;
 		}
-		if("砖I".equals(dan)){
+		if ("砖I".equals(dan)) {
 			setGamedan(29);
 			return;
 		}
-		if("大师".equals(dan)){
+		if ("大师".equals(dan)) {
 			setGamedan(30);
 			return;
 		}
-		if("王者".equals(dan)){
+		if ("王者".equals(dan)) {
 			setGamedan(31);
 			return;
 		}
 	}
+
 	/**
 	 * 游戏段位
 	 * 
@@ -303,6 +304,7 @@ public class Game extends BmobObject {
 	public void setGamegrade(int gamegrade) {
 		this.gamegrade = gamegrade;
 	}
+
 	/**
 	 * 
 	 * @param jo

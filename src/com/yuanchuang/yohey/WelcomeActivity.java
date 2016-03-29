@@ -1,5 +1,7 @@
 package com.yuanchuang.yohey;
 
+import com.yuanchuang.yohey.R;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;

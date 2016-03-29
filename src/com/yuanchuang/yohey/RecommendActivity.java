@@ -3,6 +3,7 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.RecommendAdapter;
 import com.yuanchuang.yohey.myData.AdapterData;
 
@@ -77,7 +78,7 @@ public class RecommendActivity extends Activity {
 		toReturn.setVisibility(View.VISIBLE);
 		toReturn.setOnClickListener(clickListener);
 		title.setText("开黑推荐");
-	
+
 	}
 
 }

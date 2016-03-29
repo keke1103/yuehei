@@ -10,7 +10,7 @@ public class Post extends BmobObject {
 
 	private String content;// 帖子内容
 	private String title;
- 
+
 	private int likenumber;
 	private int comcount;
 
@@ -83,7 +83,7 @@ public class Post extends BmobObject {
 		Post p = null;
 		try {
 			p = new Post();
-			p.setObjectId(jo.getString("objectId"));  
+			p.setObjectId(jo.getString("objectId"));
 		} catch (JSONException e) {
 			return null;
 		}
@@ -93,7 +93,7 @@ public class Post extends BmobObject {
 
 		}
 		try {
-			p.setCreatedAt(jo.getString("createdAt")); 
+			p.setCreatedAt(jo.getString("createdAt"));
 		} catch (JSONException e6) {
 
 		}

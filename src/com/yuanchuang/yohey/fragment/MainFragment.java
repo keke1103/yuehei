@@ -96,7 +96,7 @@ public class MainFragment extends Fragment {
 		findInflate(view);// 找到导入的头文件的id
 
 		galleryAdapter = new GalleryAdapter(reList, getActivity());
-		
+
 		gallery.setAdapter(galleryAdapter);
 		gallery.setOnItemClickListener(clickListener);
 		getRemData(gameregion, -1, -1);

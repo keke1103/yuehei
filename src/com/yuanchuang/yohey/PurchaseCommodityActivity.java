@@ -1,5 +1,7 @@
 package com.yuanchuang.yohey;
 
+import com.yuanchuang.yohey.R;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -78,21 +80,21 @@ public class PurchaseCommodityActivity extends Activity {
 	public void addImage(int i) {
 		for (int j = 0; j < i / 3; j++) {
 			View view = inflater.inflate(R.layout.commodity_image_main, null);
-			commodity1=(LinearLayout)view.findViewById(R.id.commodity1);
-			commodity2=(LinearLayout)view.findViewById(R.id.commodity2);
-			commodity3=(LinearLayout)view.findViewById(R.id.commodity3);
+			commodity1 = (LinearLayout) view.findViewById(R.id.commodity1);
+			commodity2 = (LinearLayout) view.findViewById(R.id.commodity2);
+			commodity3 = (LinearLayout) view.findViewById(R.id.commodity3);
 			integralCommodity.addView(view);
 		}
 		if (i % 3 == 1) {
 			View view = inflater.inflate(R.layout.commodity_image_main, null);
-			commodity2=(LinearLayout)view.findViewById(R.id.commodity2);
-			commodity3=(LinearLayout)view.findViewById(R.id.commodity3);
+			commodity2 = (LinearLayout) view.findViewById(R.id.commodity2);
+			commodity3 = (LinearLayout) view.findViewById(R.id.commodity3);
 			commodity2.setVisibility(View.GONE);
 			commodity3.setVisibility(View.GONE);
 			integralCommodity.addView(view);
-		}else if(i%3==2){
+		} else if (i % 3 == 2) {
 			View view = inflater.inflate(R.layout.commodity_image_main, null);
-			commodity3=(LinearLayout)view.findViewById(R.id.commodity3);
+			commodity3 = (LinearLayout) view.findViewById(R.id.commodity3);
 			commodity3.setVisibility(View.GONE);
 			integralCommodity.addView(view);
 		}

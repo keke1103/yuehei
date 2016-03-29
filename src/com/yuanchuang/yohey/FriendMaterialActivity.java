@@ -1,5 +1,6 @@
 package com.yuanchuang.yohey;
 
+import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.User;
 

@@ -34,9 +34,9 @@ public class Comment extends BmobObject {
 	public void setContent(String content) {
 		this.content = content;
 	}
-    
-	public static Comment comJsonObject(JSONObject jo){
-		Comment comment=new Comment();
+
+	public static Comment comJsonObject(JSONObject jo) {
+		Comment comment = new Comment();
 		try {
 			comment.setObjectId(jo.getString("objectId"));
 		} catch (JSONException e) {
@@ -68,13 +68,13 @@ public class Comment extends BmobObject {
 			e1.printStackTrace();
 		}
 		try {
-			comment.post=Post.paresJSONObject(jo.getJSONObject("post"));
+			comment.post = Post.paresJSONObject(jo.getJSONObject("post"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			comment.user=User.parseJsonObject(jo.getJSONObject("user"));
+			comment.user = User.parseJsonObject(jo.getJSONObject("user"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

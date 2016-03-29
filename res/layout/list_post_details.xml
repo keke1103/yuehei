@@ -21,7 +21,7 @@
 
         <!-- 评论人头像 -->
 
-        <com.yuanchuang.yohey.MyImageView
+        <com.yuanchuang.yohey.view.MyImageView
             android:id="@+id/list_post_details_image_head"
             android:layout_width="48dp"
             android:layout_height="48dp"

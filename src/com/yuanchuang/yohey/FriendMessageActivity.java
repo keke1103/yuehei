@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.adapter.FriendMessageBaseAdapter;
+import com.yuanchuang.yohey.adapter.MediaManager;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.app.YoheyNotificationManager;
+import com.yuanchuang.yohey.tools.AudioRecordButton;
+import com.yuanchuang.yohey.tools.AudioRecordButton.AudioFinishRecorderListener;
+import com.yuanchuang.yohey.view.RecorderView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +20,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,8 +50,13 @@ public class FriendMessageActivity extends Activity {
 	View msgSend;
 	YoheyApplication app;
 
+	ImageView yuyinImage;
+	AudioRecordButton recordBtn;
+	View viewanim;
+	boolean yuying=true;
+	
 	private OnClickListener click = new OnClickListener() {
-
+        
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.friend_message_frame_back:
@@ -55,6 +64,19 @@ public class FriendMessageActivity extends Activity {
 				break;
 			case R.id.msg_send:
 				sendMsg();
+				break;
+			case R.id.message_yuyin:
+				if(yuying){
+					msgEdit.setVisibility(View.GONE);
+					recordBtn.setVisibility(View.VISIBLE);
+					yuyinImage.setImageResource(R.drawable.yo_hey_iconfont_jianpan);
+					yuying=false;
+				}else{
+					msgEdit.setVisibility(View.VISIBLE);
+					recordBtn.setVisibility(View.GONE);
+					yuyinImage.setImageResource(R.drawable.yo_hey_iconfont_huatong);
+					yuying=true;
+				}
 				break;
 			default:
 				break;
@@ -165,6 +187,20 @@ public class FriendMessageActivity extends Activity {
 		toReturn.setOnClickListener(click);
 		msgEdit = (EditText) findViewById(R.id.msg_edit);
 		msgSend = findViewById(R.id.msg_send);
+		yuyinImage = (ImageView) findViewById(R.id.message_yuyin);
+		recordBtn = (AudioRecordButton) findViewById(R.id.recordButton);
+      
+		
+		recordBtn.setAudioFinishRecorderListener(new AudioFinishRecorderListener() {
+			
+
+			public void onFinished(float seconds, String filePath) {
+
+				RecorderView recorder = RecorderView.createRecorder(getApplicationContext(), seconds, filePath);
+				
+			}
+		});
+		yuyinImage.setOnClickListener(click);
 		msgSend.setOnClickListener(click);
 		title.setText(app.getFriendById(c.getConversationId()).getNickName());
 
@@ -177,6 +213,22 @@ public class FriendMessageActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		YoheyNotificationManager.getInstance(getApplicationContext()).deleteObserver();
+		MediaManager.release();
 		super.onDestroy();
 	}
+ 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MediaManager.pause();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MediaManager.resume();
+	}
+	
 }

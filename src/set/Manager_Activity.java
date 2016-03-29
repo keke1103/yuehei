@@ -55,7 +55,7 @@ public class Manager_Activity extends Activity {
 				finish();
 				break;
 			case R.id.set_account_add_linear_account_number:
-				
+
 				break;
 			case R.id.set_account_exit_account_linear_account_number:
 				youhei.loginOutQq(Manager_Activity.this);
