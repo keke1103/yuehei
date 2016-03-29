@@ -77,11 +77,12 @@ public class DensityUtil {
 						y = 0;
 					if (x < 0)
 						x = 0;
-					params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), x, y);
+					params = new LayoutParams(-2, -2, x, y);
 					v = new ImageView(mContext);
-					v.setBackgroundColor(Color.LTGRAY);
+					v.setBackgroundColor(Color.LTGRAY);					 
 					v.setId(1000 + i);
 					v.setOnClickListener(l);
+					imageLayout.addView(v, params);
 					p.loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 					i++;
 				}
