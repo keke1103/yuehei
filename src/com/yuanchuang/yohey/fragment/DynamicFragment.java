@@ -71,7 +71,7 @@ public class DynamicFragment extends Fragment {
 		list = new ArrayList<Share>();
 		getData();
 		Log.i("DynamicFragment", "DynamicFragment");
-		mAdapter = new DynamicAdapter(getActivity(), list);
+		mAdapter = new DynamicAdapter(getActivity(), getActivity().getApplication(), list);
 		android.widget.AbsListView.LayoutParams params = new android.widget.AbsListView.LayoutParams(
 				LayoutParams.FILL_PARENT, DensityUtil.dip2px(getActivity(), 134));
 		View v = new View(getActivity());

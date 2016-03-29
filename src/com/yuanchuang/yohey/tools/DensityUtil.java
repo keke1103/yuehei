@@ -2,6 +2,7 @@ package com.yuanchuang.yohey.tools;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
 import android.widget.AbsoluteLayout.LayoutParams;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class DensityUtil {
 	 * @param imageLayout
 	 * @param imgs
 	 */
-	public static void sudoku(Context mContext, AbsoluteLayout imageLayout, BmobFile[] imgs) {
+	public static void sudoku(Context mContext, AbsoluteLayout imageLayout, BmobFile[] imgs, OnClickListener l) {
 		if (imgs != null) {
 			int w = imageLayout.getWidth();
 			LayoutParams params;
@@ -45,20 +46,25 @@ public class DensityUtil {
 				v = new ImageView(mContext);
 				imageLayout.addView(v, params);
 				v.setBackgroundColor(Color.LTGRAY);
+				v.setId(1000 + i);
+				v.setOnClickListener(l);
 				imgs[i].loadImageThumbnail(mContext, v, w / 2, w / 2);
 
 			} else if (imgs.length == 2) {
 				params = new LayoutParams(-2, -2, 0, 0);
 				v = new ImageView(mContext);
 				v.setBackgroundColor(Color.LTGRAY);
+				v.setId(1000 + i);
+				v.setOnClickListener(l);
 				imageLayout.addView(v, params);
-
 				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
-
+				i++;
 				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35),
 						(w / 2) - dip2px(mContext, 30), 0);
 				v = new ImageView(mContext);
 				v.setBackgroundColor(Color.LTGRAY);
+				v.setId(1000 + i);
+				v.setOnClickListener(l);
 				imageLayout.addView(v, params);
 				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 			} else if (imgs.length == 4) {
@@ -74,6 +80,8 @@ public class DensityUtil {
 					params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), x, y);
 					v = new ImageView(mContext);
 					v.setBackgroundColor(Color.LTGRAY);
+					v.setId(1000 + i);
+					v.setOnClickListener(l);
 					p.loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 					i++;
 				}
@@ -85,6 +93,8 @@ public class DensityUtil {
 					params = new LayoutParams(-2, -2, (i % 3) * w / 3, (i / 3) * w / 3);
 					v = new ImageView(mContext);
 					v.setBackgroundColor(Color.LTGRAY);
+					v.setId(1000 + i);
+					v.setOnClickListener(l);
 					imageLayout.addView(v, params);
 					p.loadImageThumbnail(mContext, v, w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5));
 					i++;

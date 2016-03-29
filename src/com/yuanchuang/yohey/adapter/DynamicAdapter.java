@@ -7,11 +7,13 @@ import com.yuanchuang.yohey.ForwardingActivity;
 import com.yuanchuang.yohey.GalleryActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ThumbUpActivity;
+import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -37,13 +39,15 @@ public class DynamicAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	ImageView image;
 	TextView tt;
+	YoheyApplication app;
 
 	public DynamicAdapter() {
 
 	}
 
-	public DynamicAdapter(Context context, List<Share> list) {
+	public DynamicAdapter(Context context, Application app, List<Share> list) {
 		this.context = context;
+		this.app = (YoheyApplication) app;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
@@ -96,18 +100,29 @@ public class DynamicAdapter extends BaseAdapter {
 		holder.time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
 		holder.line.setText(mShare.getContent());
 		holder.imageLayout.removeAllViews();
+		holder.imageLayout.setTag(mShare);
 		if (mShare.getImages() != null) {
-			DensityUtil.sudoku(context, holder.imageLayout, mShare.getImages());
+			DensityUtil.sudoku(context, holder.imageLayout, mShare.getImages(), new OnClickListener() {
+				public void onClick(View v) {
+					int index = v.getId() - 1000;
+					Share sh = (Share) ((View) v.getParent()).getTag();
+					intent = new Intent(context, GalleryActivity.class);
+					Log.i("DynamicAdapterImageClick", "id=" + v.getId() + " index=" + index);
+					intent.putExtra("index", index);
+					app.data = sh.getImages();
+					context.startActivity(intent);
+				}
+			});
 		}
 		holder.forwarding.setOnClickListener(clickListener);
 		holder.thumbUp.setOnClickListener(clickListener);
 		holder.leaveMessage.setOnClickListener(clickListener);
-		holder.imageLayout.setOnClickListener(clickListener);
+
 		return convertView;
 	}
 
+	Intent intent;
 	OnClickListener clickListener = new OnClickListener() {
-		Intent intent;
 
 		@Override
 		public void onClick(View v) {

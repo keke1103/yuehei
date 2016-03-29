@@ -1,40 +1,41 @@
 package com.yuanchuang.yohey.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import cn.bmob.v3.datatype.BmobFile;
 
 public class GalleryActivityAdapter extends BaseAdapter {
-	int[] pic;
+	BmobFile images[];
 	Context context;
 	LayoutInflater inflater;
-	LinearLayout line = null;
 
 	public GalleryActivityAdapter() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GalleryActivityAdapter(int[] pic, Context context) {
+	public GalleryActivityAdapter(BmobFile images[], Context context) {
 		this.context = context;
-		this.pic = pic;
+		this.images = images;
 		inflater = LayoutInflater.from(context);
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return pic.length;
+		return images.length;
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return pic[position];
+		return images[position];
 	}
 
 	@Override
@@ -43,26 +44,26 @@ public class GalleryActivityAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 
-		if (line == null) {
+		if (convertView == null) {
 			holder = new ViewHolder();
-			line = new LinearLayout(context);
-			LayoutParams params = new LayoutParams(
-					new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+			LinearLayout line = new LinearLayout(context);
+
 			ImageView image = new ImageView(context);
-			image.setLayoutParams(params);
-			line.addView(image);
+			line.addView(image, -1, -1);
+			image.setBackgroundColor(Color.LTGRAY);
 			holder.image = image;
 			line.setTag(holder);
+			convertView = line;
 		} else {
-			holder = (ViewHolder) line.getTag();
+			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.image.setImageResource(pic[position]);
-
-		return line;
+		images[position].loadImage(context, holder.image);
+		return convertView;
 	}
 
 	class ViewHolder {
