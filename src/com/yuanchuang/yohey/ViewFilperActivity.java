@@ -3,7 +3,6 @@ package com.yuanchuang.yohey;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.tools.DensityUtil;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ public class ViewFilperActivity extends Activity {
 	Intent intent;
 	ImageView back;
 	int index;
-	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -43,7 +41,8 @@ public class ViewFilperActivity extends Activity {
 		LinearLayout.LayoutParams layout=new LinearLayout.LayoutParams(-2,-2);
 		back=new ImageView(this);
 		back.setPadding(DensityUtil.dip2px(this, 15), DensityUtil.dip2px(this, 15), DensityUtil.dip2px(this, 15), DensityUtil.dip2px(this, 15));
-		back.setImageDrawable(getDrawable(R.drawable.yo_hey_back_image));
+		back.setImageResource(R.drawable.yo_hey_back_image);
+	 
 		back.setLayoutParams(layout);
 		ViewPager mView= new ViewPager(this);
 		android.view.ViewGroup.LayoutParams params=new LayoutParams(-1, -1);
