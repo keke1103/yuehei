@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.ForwardingActivity;
-import com.yuanchuang.yohey.GalleryActivity;
+import com.yuanchuang.yohey.ViewFilperActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ThumbUpActivity;
 import com.yuanchuang.yohey.app.YoheyApplication;
@@ -106,7 +106,7 @@ public class DynamicAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					int index = v.getId() - 1000;
 					Share sh = (Share) ((View) v.getParent()).getTag();
-					intent = new Intent(context, GalleryActivity.class);
+					intent = new Intent(context, ViewFilperActivity.class);
 					Log.i("DynamicAdapterImageClick", "id=" + v.getId() + " index=" + index);
 					intent.putExtra("index", index);
 					app.data = sh.getImages();
@@ -139,10 +139,7 @@ public class DynamicAdapter extends BaseAdapter {
 				intent = new Intent(context, ThumbUpActivity.class);
 				context.startActivity(intent);
 				break;
-			case R.id.list_dynamic_absolute_image:
-				intent = new Intent(context, GalleryActivity.class);
-				context.startActivity(intent);
-				break;
+	
 			default:
 				break;
 			}

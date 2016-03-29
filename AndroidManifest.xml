@@ -131,7 +131,9 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.LocateActivity" >
         </activity>
-        <activity android:name="com.yuanchuang.yohey.GalleryActivity" >
+        <activity android:name="com.yuanchuang.yohey.ViewFilperActivity" >
+        </activity>
+        <activity android:name="com.yuanchuang.yohey.adapter.ViewPagerMulTiFragmentDemo" >
         </activity>
         <!-- QQ第三方登陆所需注册页面 -->
         <activity
