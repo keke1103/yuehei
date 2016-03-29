@@ -131,6 +131,8 @@
         </activity>
         <activity android:name="com.yuanchuang.yohey.LocateActivity" >
         </activity>
+        <activity android:name="com.yuanchuang.yohey.GalleryActivity" >
+        </activity>
         <!-- QQ第三方登陆所需注册页面 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"

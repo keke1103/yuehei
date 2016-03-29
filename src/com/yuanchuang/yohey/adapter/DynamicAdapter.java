@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.ForwardingActivity;
+import com.yuanchuang.yohey.GalleryActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ThumbUpActivity;
 import com.yuanchuang.yohey.bmob.Share;
@@ -103,6 +104,7 @@ public class DynamicAdapter extends BaseAdapter {
 		holder.forwarding.setOnClickListener(clickListener);
 		holder.thumbUp.setOnClickListener(clickListener);
 		holder.leaveMessage.setOnClickListener(clickListener);
+		holder.imageLayout.setOnClickListener(clickListener);
 		return convertView;
 	}
 
@@ -122,6 +124,10 @@ public class DynamicAdapter extends BaseAdapter {
 				break;
 			case R.id.list_dynamic_image_like:
 				intent = new Intent(context, ThumbUpActivity.class);
+				context.startActivity(intent);
+				break;
+			case R.id.list_dynamic_absolute_image:
+				intent = new Intent(context, GalleryActivity.class);
 				context.startActivity(intent);
 				break;
 			default:
