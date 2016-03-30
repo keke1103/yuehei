@@ -53,7 +53,7 @@
             android:src="@drawable/title_right_ba" />
     </RelativeLayout>
 
-    <ListView
+    <com.yuanchuang.yohey.view.MyListView
         android:id="@+id/main_list_posts"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -62,6 +62,6 @@
         android:divider="@null"
         android:listSelector="@drawable/select_list_view_color"
         android:scrollingCache="false" >
-    </ListView>
+    </com.yuanchuang.yohey.view.MyListView>
 
 </LinearLayout>

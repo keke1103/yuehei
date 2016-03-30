@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.bmob.Post;
+import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
@@ -42,7 +43,9 @@ public class MainAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	@Override
+	public List<Post> getData(){
+		return list;
+	}
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list.size();
@@ -57,7 +60,7 @@ public class MainAdapter extends BaseAdapter {
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		return position;
+		return position%list.size();
 	}
 
 	@SuppressLint("InflateParams")
@@ -98,6 +101,10 @@ public class MainAdapter extends BaseAdapter {
 		p.getUser().binderImageView(holder.head);
 		holder.message.setText(p.getComcount() + "");
 		holder.up.setText(p.getLikenumber() + "");
+		
+		if(((list.size()-position)<2||position==0)&&mFlush!=null){
+			mFlush.flush(this, position);
+		}
 		return convertView;
 	}
 
@@ -112,5 +119,11 @@ public class MainAdapter extends BaseAdapter {
 		TextView add;
 		TextView message;
 		TextView up;
+	}
+	
+	OnFlushOldData mFlush;
+
+	public void setOnFlushOldData(OnFlushOldData mFlush) {
+		this.mFlush = mFlush;
 	}
 }

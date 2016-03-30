@@ -16,6 +16,8 @@ import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
+import com.yuanchuang.yohey.view.MyListView;
+import com.yuanchuang.yohey.view.MyListView.OnRefreshListener;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,7 +39,7 @@ import android.widget.TextView;
  *
  */
 public class DynamicFragment extends Fragment {
-	ListView listView;
+	MyListView listView;
 	RelativeLayout layoutTitle;// 标题布局
 	View mView;
 	List<Share> list;
@@ -60,7 +62,7 @@ public class DynamicFragment extends Fragment {
 
 	@SuppressWarnings("deprecation")
 	private void findView() {
-		listView = (ListView) mView.findViewById(R.id.dynamic_list_view);
+		listView = (MyListView) mView.findViewById(R.id.dynamic_list_view);
 		layoutTitle = (RelativeLayout) mView.findViewById(R.id.dynamic_title);
 		title = (TextView) layoutTitle.findViewById(R.id.title_navigation_text_title);
 		title.setText(R.string.dynamic);
@@ -77,9 +79,18 @@ public class DynamicFragment extends Fragment {
 		v.setBackgroundResource(R.drawable.main_guang_gao);
 		listView.addHeaderView(v);
 		listView.setAdapter(mAdapter);
+		listView.setonRefreshListener(refreshListener);
 	}
-
+    
+	private OnRefreshListener refreshListener=new OnRefreshListener() {
+		 
+		public void onRefresh() {
+			getData();
+		}
+	};
+	
 	private void getData() {
+		list.clear();
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
 		get.putString("uid", user.getObjectId());
 		OnSendListener mListener = new OnSendListener() {
@@ -97,6 +108,7 @@ public class DynamicFragment extends Fragment {
 						list.add(s);
 					}
 					mAdapter.setData(list);
+					listView.onRefreshComplete();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

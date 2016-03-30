@@ -20,7 +20,10 @@ import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.HttpGet;
+import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
+import com.yuanchuang.yohey.view.MyListView;
+import com.yuanchuang.yohey.view.MyListView.OnRefreshListener;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -36,6 +39,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +47,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 @SuppressWarnings("deprecation")
@@ -56,13 +61,14 @@ public class MainFragment extends Fragment {
 	TextView gameZone;// 游戏大区
 	ImageView gameDan;// 游戏段位
 	View myView;// 视图
-	ListView listView;
+	MyListView listView;
 	List<Post> reList;
 	List<Post> list;
 	MainAdapter adapter;
 	AdapterData data;
 	Gallery gallery;
 	GalleryAdapter galleryAdapter;
+	int dataPager;
 
 	Intent intent;
 	// 主页面内容
@@ -107,6 +113,14 @@ public class MainFragment extends Fragment {
 		listView.addHeaderView(view);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(clickListener);
+		listView.setonRefreshListener(refreshListener);
+		adapter.setOnFlushOldData(new OnFlushOldData() {
+	
+			public void flush(BaseAdapter adapter, int position) {
+				dataPager++;
+				flushData(gameregion, -1, -1);
+			}
+		});
 		intent = getActivity().getIntent();
 		// 测试数据
 
@@ -247,6 +261,16 @@ public class MainFragment extends Fragment {
 				break;
 			}
 
+		}
+	};
+	
+	private OnRefreshListener refreshListener=new OnRefreshListener() {
+	 
+		public void onRefresh() {
+			dataPager=0;
+			 getRemData(gameregion, -1, -1);
+			 getPostData(gameregion, -1, -1);
+			 
 		}
 	};
 	/**
@@ -402,7 +426,7 @@ public class MainFragment extends Fragment {
 
 			get.putString("gamedanmax", "" + gamedanmax);
 		}
-
+		get.putString("count",""+ dataPager);
 		get.setOnSendListener(new OnSendListener() {
 
 			public void start() {
@@ -413,12 +437,16 @@ public class MainFragment extends Fragment {
 				try {
 					JSONObject joo = new JSONObject(result);
 					JSONArray ja = joo.getJSONArray("results");
+					if(ja.length()<1){
+						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
+						return;}
 					list.clear();
 					for (int i = 0; i < ja.length(); i++) {
 						Post p = Post.paresJSONObject(ja.getJSONObject(i));
 						list.add(p);
 					}
 					adapter.setData(list);
+					listView.onRefreshComplete();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -426,14 +454,63 @@ public class MainFragment extends Fragment {
 		});
 		get.send();
 	}
+    /**
+     * 加载第后面的数据
+     * @param gameregion
+     * @param gamedanmin
+     * @param gamedanmax
+     */
+	private void flushData(String gameregion, int gamedanmin, int gamedanmax){
+		HttpGet get = new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getpost");
+		if (gameregion != null) {
+			try {
+				gameregion = URLEncoder.encode(gameregion, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			get.putString("gameregion", gameregion);
+		}
+		if (gamedanmin > -1) {
 
+			get.putString("gamedanmin", "" + gamedanmin);
+		}
+		if (gamedanmax > -1) {
+
+			get.putString("gamedanmax", "" + gamedanmax);
+		}
+		get.putString("count",""+ dataPager);
+		get.setOnSendListener(new OnSendListener() {
+
+			public void start() {
+
+			}
+
+			public void end(String result) {
+				try {
+					JSONObject joo = new JSONObject(result);
+					JSONArray ja = joo.getJSONArray("results");
+					if(ja.length()<1){
+						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
+						return;}
+					for (int i = 0; i < ja.length(); i++) {
+						Post p = Post.paresJSONObject(ja.getJSONObject(i));
+						adapter.getData().add(p);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		get.send();
+		
+	}
 	/**
 	 * 控件ID
 	 */
 	private void findView() {
 		gameDan = (ImageView) myView.findViewById(R.id.title_navigation_text_right_title);
 		gameZone = (TextView) myView.findViewById(R.id.title_navigation_game_zone);
-		listView = (ListView) myView.findViewById(R.id.main_list_posts);
+		listView = (MyListView) myView.findViewById(R.id.main_list_posts);
 		gameZone.setOnClickListener(onClickListener);
 		gameDan.setOnClickListener(onClickListener);
 	}
