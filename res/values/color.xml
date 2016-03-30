@@ -22,5 +22,6 @@
     <color name="title_yellow">#e9f83c</color>
     <color name="post_background">#F3F4F6</color>
     <color name="post_line">#DADBDD</color>
+    <color name="dan_black">#343434</color>
 
 </resources>

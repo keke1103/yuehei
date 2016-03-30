@@ -132,13 +132,13 @@ public class MainFragment extends Fragment {
 		for (int i = 0; i < str.length; i++) {
 			list.add(str[i]);
 		}
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.anim.region_layout,
 				list);
 		listView1.setAdapter(arrayAdapter);
 		popupWindow = new PopupWindow(contentView, 600, LayoutParams.WRAP_CONTENT, true);
 		popupWindow.setTouchable(true);
 		popupWindow.setFocusable(true);
-		popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.write));
+		popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.dan_black));
 		popupWindow.showAsDropDown(view);
 	}
 
@@ -232,7 +232,7 @@ public class MainFragment extends Fragment {
 				}
 				listView2.setVisibility(View.VISIBLE);
 				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
-						android.R.layout.simple_list_item_1, list);
+						R.anim.region_layout, list);
 				listView2.setAdapter(arrayAdapter);
 				listView2.setOnItemClickListener(clickListener);
 				break;
