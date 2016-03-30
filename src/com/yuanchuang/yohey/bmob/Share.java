@@ -71,7 +71,7 @@ public class Share extends BmobObject {
 			wholike[wholike.length - 1] = user;
 		} else {
 			wholike = new User[1];
-			wholike[0]=user;
+			wholike[0] = user;
 		}
 	}
 
