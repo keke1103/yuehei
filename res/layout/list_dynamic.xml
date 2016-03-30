@@ -106,6 +106,7 @@
         <!-- 留言 -->
 
         <LinearLayout
+            android:id="@+id/list_dynamic_image_leave_a_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -115,7 +116,6 @@
             android:padding="15dp" >
 
             <ImageView
-                android:id="@+id/list_dynamic_image_leave_a_message"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:contentDescription="@drawable/comments_grey"

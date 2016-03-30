@@ -153,6 +153,7 @@ public class MainActivity extends FragmentActivity {
 		Log.i("onActivityResult", "req=" + arg0 + " res=" + arg1);
 
 		mainFragment.onActivityResult(arg0, arg1, arg2);
+		dynamicFragment.onActivityResult(arg0, arg1, arg2);
 
 	};
 

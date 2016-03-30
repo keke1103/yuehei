@@ -42,7 +42,53 @@ public class Share extends BmobObject {
 			return 0;
 		return wholike.length;
 	}
+	
+	public void addLikeUser(User user){
+		User copy[]=wholike;
+		boolean bl=false;
+		if(copy!=null){
+			for(User u:copy){
+				if(u==null) continue;
+				if(u.getObjectId().equals(user.getObjectId())){
+					 bl=true;
+				}
+			}
+		}else{
+			bl=false;
+		}
+		
+		if(bl)return;
+		wholike=new User[getLikeNumber()+1];
+		System.arraycopy(copy, 0, wholike, 0, copy.length);
+		wholike[wholike.length-1]=user;
+	}
 
+	public boolean deleteLikeUser(User user){
+		if(user==null||wholike==null) return false;
+		User copy[]=wholike;
+		boolean bl=false;
+		for(User u:copy){
+			if(u==null) continue;
+			if(u.getObjectId().equals(user.getObjectId())){
+				 bl=true;
+			}
+		}
+		if(bl){
+			int i=0;
+			wholike=new User[copy.length-1];
+			for(User u:copy){
+				if(u==null) continue;
+				if(!u.getObjectId().equals(user.getObjectId())){
+					 wholike[i]=u;
+					 i++;
+				}
+			}	
+		}else{
+			return false;
+		}
+		
+		return true;
+	}
 	public User[] getLikeUser() {
 		return wholike;
 	}
@@ -51,6 +97,9 @@ public class Share extends BmobObject {
 		this.images = images.toArray(new BmobFile[images.size()]);
 	}
 
+	public void setComCount(int i){
+		comCount=i;
+	}
 	public int getComCount() {
 		return comCount;
 	}

@@ -3,22 +3,26 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.BmobFindById;
+import com.yuanchuang.yohey.bmob.Comment;
 import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.HttpGet;
-import com.yuanchuang.yohey.tools.TimeUtil;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
+import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +36,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * 发帖详情
@@ -59,7 +64,7 @@ public class CommentDynamicActivity extends Activity {
 	TextView comments;// 评论数量
 	CheckBox thumbNumber;// 赞
 	ListView listView;
-	List<Share> list;;
+	List<Comment> list=new ArrayList<Comment>();
 	ThumbUpAdapter adapter;
 	LayoutInflater inflater;
 	View headView;
@@ -76,6 +81,7 @@ public class CommentDynamicActivity extends Activity {
 	YoheyApplication app;
 
 	User user;
+	int resultCode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,26 +90,55 @@ public class CommentDynamicActivity extends Activity {
 		setContentView(R.layout.actvity_yue_lu_personal_post);
 		user = BmobUser.getCurrentUser(getApplicationContext(), User.class);
 		intent = getIntent();
-		list = new ArrayList<Share>();
+	 
 		app = (YoheyApplication) getApplication();
 		mShare = (Share) app.data;
 		app.data = null;
 		findView();
 		findHeadView();
+		adapter = new ThumbUpAdapter(list, getApplication());
 		getData();
 		listView.setDivider(getResources().getDrawable(R.color.post_line));
 		listView.setDividerHeight(1);
 		listView.addHeaderView(headView);
-
-		adapter = new ThumbUpAdapter(list, getApplication());
+		
 		listView.setAdapter(adapter);
-		// setData();
+
 	}
 
 	private void getData() {
-
+		HttpGet get=new HttpGet(YoheyApplication.ServiceIp+"getsharecom");
+		get.putString("sid", mShare.getObjectId());
+		get.setOnSendListener(mListener);
+		get.send();
 	}
 
+ 
+	private OnSendListener mListener = new OnSendListener() {
+
+		@Override
+		public void start() {
+		}
+
+		@Override
+		public void end(String result) {
+			try {
+				JSONObject mjo = new JSONObject(result);
+				JSONArray ja = mjo.getJSONArray("results");
+				list.clear();
+				Comment comment;
+				for (int i = 0; i < ja.length(); i++) {
+					comment = Comment.comJsonObject(ja.getJSONObject(i));
+					list.add(comment);
+				}
+				adapter.setData(list);
+			} catch (JSONException e) {
+				e.printStackTrace();
+				Toast.makeText(getApplication(), "" + result, Toast.LENGTH_SHORT).show();
+			}
+		}
+	};
+	
 	OnClickListener onClickListener = new OnClickListener() {
 
 		@Override
@@ -116,7 +151,7 @@ public class CommentDynamicActivity extends Activity {
 				finish();
 				break;
 			case R.id.personal_post_text_send:
-				Toast.makeText(getApplication(), "为什么要发呢", Toast.LENGTH_SHORT).show();
+				sendCom();
 				break;
 			case R.id.personal_post_image_ait:
 				Toast.makeText(getApplication(), "你在像谁", Toast.LENGTH_SHORT).show();
@@ -129,6 +164,7 @@ public class CommentDynamicActivity extends Activity {
 				break;
 			case R.id.list_head_thumb_up_linear_tuumb_up:
 				likeShare();
+				
 				break;
 			default:
 				break;
@@ -144,13 +180,13 @@ public class CommentDynamicActivity extends Activity {
 		ait = findViewById(R.id.personal_post_image_ait);
 		smile = findViewById(R.id.personal_post_image_smile);
 		photos = findViewById(R.id.personal_post_image_photos);
-
+		say = (EditText) findViewById(R.id.personal_post_edit_say);
 		ait.setOnClickListener(onClickListener);
 		smile.setOnClickListener(onClickListener);
 		photos.setOnClickListener(onClickListener);
 		send.setOnClickListener(onClickListener);
 		toReturn.setOnClickListener(onClickListener);
-		title.setText("详情");
+		title.setText("留言");
 		toReturn.setVisibility(View.VISIBLE);
 		listView = (ListView) findViewById(R.id.personal_post_list_message);
 	}
@@ -195,14 +231,14 @@ public class CommentDynamicActivity extends Activity {
 				}
 			});
 		}
-		// forwarding.setText("3");
-		comments.setText("3");
-		thumbNumber.setText("3");
+
+		comments.setText("" + mShare.getComCount());
+		thumbNumber.setText("" + mShare.getLikeNumber());
 		thumbNumber.setOnClickListener(onClickListener);
 
 	}
 
-	void likeShare() {
+	private void likeShare() {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "likeshare");
 		get.putString("uid", user.getObjectId());
 		get.putString("sid", mShare.getObjectId());
@@ -214,25 +250,63 @@ public class CommentDynamicActivity extends Activity {
 				try {
 					JSONObject jo = new JSONObject(result);
 					jo.get("updatedAt");
+					if (thumbNumber.isChecked()) {
+						mShare.addLikeUser(user);
+					} else {
+						mShare.deleteLikeUser(user);
+					}
+					resultCode = 1;
 				} catch (JSONException e) {
 					thumbNumber.setChecked(!thumbNumber.isChecked());
 				}
+				thumbNumber.setText("" + mShare.getLikeNumber());
 			}
+
 		});
 		get.send();
+
 	}
-	/**
-	 * 设置帖子内容的显示
-	 */
-	// private void setData() {
-	// name.setText(post.getUser().getNickName());
-	// post.getUser().binderImageView(head);
-	// time.setText(TimeUtil.formateTimeToNow(post.getCreatedAt()));
-	// joinCount.setText("" + post.getJoincount()); comCount.setText(""
-	// + post.getComcount()); likeCount.setText("" +
-	// post.getLikenumber()); if (!TextUtils.isEmpty(post.getTitle())) {
-	// getContext(post.getTitle()); } else {
-	//
-	// } }
+
+	private void sendCom() {
+		String content = say.getText().toString();
+		if (TextUtils.isEmpty(content)) {
+			Toast.makeText(getApplication(), "空的,为什么要发呢", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		Comment com = new Comment();
+		com.setContent(content);
+		com.setUser(user);
+		com.setShare(mShare);
+		com.save(this, new SaveListener() {
+
+			public void onSuccess() {
+				Share s=new Share();
+				s.increment("comCount");
+				s.update(getApplicationContext(), mShare.getObjectId(), null);
+				BmobFindById finder=new BmobFindById(mShare.getObjectId(), "Share");
+				finder.start(new OnSendListener() {	 
+					public void start() {			 
+					}
+					public void end(String result) {
+						try {
+							JSONObject jo= new JSONObject(result);
+							int i=jo.getInt("comCount");
+							comments.setText(""+i);
+							mShare.setComCount(i); 							
+						} catch (JSONException e) {
+						 
+						}
+					}
+				});
+				getData();
+				resultCode = 1;
+				say.setText("");
+			}
+
+			public void onFailure(int arg0, String arg1) {
+				Toast.makeText(getApplication(), "莫怪我，你评论失败", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 
 }

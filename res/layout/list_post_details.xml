@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+  
     android:background="@color/write" >
 
     <View
@@ -27,7 +27,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
+           
             android:src="@drawable/yp_hey_background_image" />
 
         <!-- 评论人昵称 -->
@@ -37,7 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/list_post_details_image_head"
-            android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/list_post_details_image_head"
             android:layout_toRightOf="@+id/list_post_details_image_head"
             android:text="@string/meng_mei"
@@ -66,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/list_post_details_text_time"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
             android:layout_toEndOf="@+id/list_post_details_image_head"
             android:layout_toRightOf="@+id/list_post_details_image_head"
             android:text="@string/carry_me_fly"

@@ -1,12 +1,10 @@
 package com.yuanchuang.yohey;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
-import com.yuanchuang.yohey.bmob.Share;
+import com.yuanchuang.yohey.bmob.Comment;
 import com.yuanchuang.yohey.tools.DensityUtil;
 
 import android.annotation.SuppressLint;
@@ -38,7 +36,7 @@ public class ThumbUpActivity extends Activity {
 	LinearLayout comment;// 评论
 	LinearLayout thumbUp;// 赞
 	ListView listView;
-	List<Share> list;
+	List<Comment> list=new ArrayList<Comment>();
 	ThumbUpAdapter adapter;
 	View headView;// listview头视图
 	ImageView head;// 发帖用户头像
@@ -57,7 +55,6 @@ public class ThumbUpActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_thumb_up_for_details);
-		list = new ArrayList<Share>();
 		mIntent = getIntent();
 		findView();
 		fingHeadView();
@@ -65,13 +62,7 @@ public class ThumbUpActivity extends Activity {
 	}
 
 	private void getData() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		for (int i = 0; i < 3; i++) {
-			map.put("head", R.drawable.meng_mei_head);
-			map.put("name", "叶良成");
-			// list.add(map);
-		}
-
+	 
 	}
 
 	@SuppressLint("InflateParams")

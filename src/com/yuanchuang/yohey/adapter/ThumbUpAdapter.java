@@ -1,11 +1,10 @@
 package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.bmob.Share;
-
+import com.yuanchuang.yohey.bmob.Comment;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ThumbUpAdapter extends BaseAdapter {
-	List<Share> list;
+	List<Comment> list;
 	Context context;
 	LayoutInflater inflater;
 
 	public ThumbUpAdapter() {
-		// TODO Auto-generated constructor stub
+		 
 	}
 
-	public ThumbUpAdapter(List<Share> list, Context context) {
+	public ThumbUpAdapter(List<Comment> list, Context context) {
 		this.list = list;
 		this.context = context;
 		inflater = LayoutInflater.from(context);
 	}
 
-	public void getData(List<Share> list) {
+	public void setData(List<Comment> list) {
 		this.list = list;
 		this.notifyDataSetChanged();
 	}
@@ -52,26 +51,35 @@ public class ThumbUpAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.list_thumb_up_view, null);
-			holder.head = (ImageView) convertView.findViewById(R.id.list_thumb_up_head);
-			holder.name = (TextView) convertView.findViewById(R.id.list_thumb_up_name);
+			convertView = inflater.inflate(R.layout.list_post_details, null);
+			holder.head = (ImageView) convertView.findViewById(R.id.list_post_details_image_head);
+			holder.name = (TextView) convertView.findViewById(R.id.list_post_details_text_name);
+			holder.cont=(TextView) convertView.findViewById(R.id.list_post_details_text_context);
+			holder.time=(TextView) convertView.findViewById(R.id.list_post_details_text_time);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		// holder.head.setImageResource((Integer)
-		// list.get(position).get("head"));
-		// holder.name.setText((CharSequence) list.get(position).get("name"));
+		holder.setData(list.get(position));		
 		return convertView;
 	}
 
 	class ViewHolder {
 		ImageView head;
 		TextView name;
+		TextView time;
+		TextView cont;
+		void setData(Comment com){
+			com.getUser().binderImageView(head);
+			name.setText(com.getUser().getNickName());
+			time.setText(com.getCreatedAt());
+			cont.setText(com.getContent());
+		}
 	}
 }

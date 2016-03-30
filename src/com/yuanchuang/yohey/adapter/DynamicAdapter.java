@@ -11,14 +11,15 @@ import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ViewFilperActivity;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Share;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ import cn.bmob.v3.BmobUser;
 @SuppressWarnings("deprecation")
 public class DynamicAdapter extends BaseAdapter {
 	List<Share> list;
-	Context context;
+	Activity context;
 	LayoutInflater inflater;
 	ImageView image;
 	TextView tt;
@@ -53,7 +54,7 @@ public class DynamicAdapter extends BaseAdapter {
 
 	}
 
-	public DynamicAdapter(Context context, Application app, List<Share> list) {
+	public DynamicAdapter(Activity context, Application app, List<Share> list) {
 		this.context = context;
 		this.app = (YoheyApplication) app;
 		this.list = list;
@@ -139,9 +140,10 @@ public class DynamicAdapter extends BaseAdapter {
 			mShare.getUser().binderImageView(headPortrait);
 			time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
 			line.setText(mShare.getContent());
+			commentCount.setText(""+mShare.getComCount());
 			imageLayout.removeAllViews();
 			imageLayout.setTag(mShare);
-			thumbUp.setText("2");
+			thumbUp.setText("" + mShare.getLikeNumber());
 			setThumbUp(mShare.getObjectId());
 			if (mShare.getImages() != null) {
 				DensityUtil.sudoku(context, imageLayout, mShare.getImages(), new OnClickListener() {
@@ -192,9 +194,16 @@ public class DynamicAdapter extends BaseAdapter {
 					try {
 						JSONObject jo = new JSONObject(result);
 						jo.get("updatedAt");
+						if (thumbUp.isChecked()) {
+							mShare.addLikeUser(User.getCurrentUser(context, User.class));
+						} else {
+							mShare.deleteLikeUser(User.getCurrentUser(context, User.class));
+
+						}
 					} catch (JSONException e) {
 						thumbUp.setChecked(!thumbUp.isChecked());
 					}
+					thumbUp.setText("" + mShare.getLikeNumber());
 				}
 			});
 			get.send();
@@ -213,7 +222,8 @@ public class DynamicAdapter extends BaseAdapter {
 					intent = new Intent(context, CommentDynamicActivity.class);
 					app.data = mShare;
 					intent.putExtra("isLike", thumbUp.isChecked());
-					context.startActivity(intent);
+					context.startActivityForResult(intent, 103);
+
 					break;
 
 				case R.id.list_dynamic_image_like:
