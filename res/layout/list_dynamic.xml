@@ -134,36 +134,26 @@
 
         <!-- 分享 -->
 
-        <LinearLayout
+        <CheckBox
             android:id="@+id/list_dynamic_image_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="38dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginRight="38dp"
-            android:layout_marginStart="75dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="23dp"
+            android:layout_marginStart="60dp"
+            android:button="@null"
+            android:drawableLeft="@drawable/like_number_selector"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/like_number_selector"
             android:orientation="horizontal"
-            android:padding="15dp" >
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:contentDescription="@drawable/like_point_grey"
-                android:src="@drawable/like_point_grey" />
-
-            <TextView
-                android:id="@+id/dynamic_like_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:text="1"
-                android:textColor="@color/main_text"
-                android:textSize="11sp" />
-        </LinearLayout>
+            android:padding="15dp"
+            android:textColor="@color/main_text"
+            android:textSize="11sp" >
+        </CheckBox>
     </RelativeLayout>
 
     <View

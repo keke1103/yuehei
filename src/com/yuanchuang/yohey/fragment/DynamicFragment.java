@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.DynamicAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
@@ -18,7 +17,6 @@ import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,8 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -80,19 +76,7 @@ public class DynamicFragment extends Fragment {
 		v.setBackgroundResource(R.drawable.main_guang_gao);
 		listView.addHeaderView(v);
 		listView.setAdapter(mAdapter);
-		listView.setOnItemClickListener(clickListener);
-
 	}
-
-	OnItemClickListener clickListener = new OnItemClickListener() {
-		Intent intent;
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			intent = new Intent(getActivity(), CommentDynamicActivity.class);
-			startActivity(intent);
-		}
-	};
 
 	private void getData() {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");

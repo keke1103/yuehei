@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.bmob.Share;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ThumbUpAdapter extends BaseAdapter {
-	List<Map<String, Object>> list;
+	List<Share> list;
 	Context context;
 	LayoutInflater inflater;
 
@@ -22,13 +23,13 @@ public class ThumbUpAdapter extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ThumbUpAdapter(List<Map<String, Object>> list, Context context) {
+	public ThumbUpAdapter(List<Share> list, Context context) {
 		this.list = list;
 		this.context = context;
 		inflater = LayoutInflater.from(context);
 	}
 
-	public void getData(List<Map<String, Object>> list) {
+	public void getData(List<Share> list) {
 		this.list = list;
 		this.notifyDataSetChanged();
 	}
@@ -63,8 +64,9 @@ public class ThumbUpAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.head.setImageResource((Integer) list.get(position).get("head"));
-		holder.name.setText((CharSequence) list.get(position).get("name"));
+		// holder.head.setImageResource((Integer)
+		// list.get(position).get("head"));
+		// holder.name.setText((CharSequence) list.get(position).get("name"));
 		return convertView;
 	}
 
