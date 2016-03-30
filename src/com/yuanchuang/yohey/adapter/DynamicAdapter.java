@@ -101,6 +101,7 @@ public class DynamicAdapter extends BaseAdapter {
 	Intent intent;
 
 	class ViewHolder {
+		View mView;
 		ImageView headPortrait;// 用户头像
 		TextView nickNmae;// 用户昵称
 		TextView time;// 发送时间
@@ -115,6 +116,7 @@ public class DynamicAdapter extends BaseAdapter {
 		Share mShare;
 
 		public ViewHolder(View convertView) {
+			mView=convertView;
 			headPortrait = (ImageView) convertView.findViewById(R.id.list_dynamic_image_head_portrait);
 			nickNmae = (TextView) convertView.findViewById(R.id.list_dynamic_text_nickname);
 			time = (TextView) convertView.findViewById(R.id.list_dynamic_text_time);
@@ -127,6 +129,7 @@ public class DynamicAdapter extends BaseAdapter {
 			forwarding.setOnClickListener(clickListener);
 			thumbUp.setOnClickListener(clickListener);
 			leaveMessage.setOnClickListener(clickListener);
+			mView.setOnClickListener(clickListener);
 		}
 
 		void setData(Share share) {
@@ -218,19 +221,21 @@ public class DynamicAdapter extends BaseAdapter {
 					intent = new Intent(context, ForwardingActivity.class);
 					context.startActivity(intent);
 					break;
+				case R.id.list_dynamic_image_like:
+					likeShare();
+					break;
+					
+				
 				case R.id.list_dynamic_image_leave_a_message:
+					
+				default:
 					intent = new Intent(context, CommentDynamicActivity.class);
 					app.data = mShare;
 					intent.putExtra("isLike", thumbUp.isChecked());
 					context.startActivityForResult(intent, 103);
-
 					break;
 
-				case R.id.list_dynamic_image_like:
-					likeShare();
-					break;
-				default:
-					break;
+			
 				}
 
 			}
