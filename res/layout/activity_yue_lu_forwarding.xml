@@ -55,7 +55,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="3dp"
-                android:text="@string/to_return"
+                android:text="@string/over"
                 android:textColor="@color/main_title_text"
                 android:textSize="12sp" />
         </RelativeLayout>

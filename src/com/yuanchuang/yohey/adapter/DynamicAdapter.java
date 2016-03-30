@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,7 +117,7 @@ public class DynamicAdapter extends BaseAdapter {
 		Share mShare;
 
 		public ViewHolder(View convertView) {
-			mView=convertView;
+			mView = convertView;
 			headPortrait = (ImageView) convertView.findViewById(R.id.list_dynamic_image_head_portrait);
 			nickNmae = (TextView) convertView.findViewById(R.id.list_dynamic_text_nickname);
 			time = (TextView) convertView.findViewById(R.id.list_dynamic_text_time);
@@ -138,12 +139,13 @@ public class DynamicAdapter extends BaseAdapter {
 			setThumbUp(mShare.getObjectId());
 		}
 
+		@SuppressLint("InflateParams")
 		void loadData() {
 			nickNmae.setText(mShare.getUser().getNickName());
 			mShare.getUser().binderImageView(headPortrait);
 			time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
 			line.setText(mShare.getContent());
-			commentCount.setText(""+mShare.getComCount());
+			commentCount.setText("" + mShare.getComCount());
 			imageLayout.removeAllViews();
 			imageLayout.setTag(mShare);
 			thumbUp.setText("" + mShare.getLikeNumber());
@@ -160,6 +162,17 @@ public class DynamicAdapter extends BaseAdapter {
 						context.startActivity(intent);
 					}
 				});
+			} else if (mShare.getForwarding() != null) {
+				View child = inflater.inflate(R.layout.list_dynamic, null);
+				child.findViewById(R.id.list_dynamic_relative_linear).setVisibility(View.GONE);
+				child.findViewById(R.id.dynamic_gray_line).setVisibility(View.GONE);
+				child.setBackgroundColor(Color.LTGRAY);
+				ViewHolder childHold = new ViewHolder(child);
+				childHold.setData(mShare.getForwarding());
+				childHold.headPortrait.setVisibility(View.GONE);
+				childHold.nickNmae.setText(childHold.nickNmae.getText() + ":");
+				childHold.time.setVisibility(View.GONE);
+				imageLayout.addView(child, -1, -1);
 			}
 
 		}
@@ -219,15 +232,15 @@ public class DynamicAdapter extends BaseAdapter {
 				switch (v.getId()) {
 				case R.id.list_dynamic_image_share_it:
 					intent = new Intent(context, ForwardingActivity.class);
+					app.data = mShare;
 					context.startActivity(intent);
 					break;
 				case R.id.list_dynamic_image_like:
 					likeShare();
 					break;
-					
-				
+
 				case R.id.list_dynamic_image_leave_a_message:
-					
+
 				default:
 					intent = new Intent(context, CommentDynamicActivity.class);
 					app.data = mShare;
@@ -235,7 +248,6 @@ public class DynamicAdapter extends BaseAdapter {
 					context.startActivityForResult(intent, 103);
 					break;
 
-			
 				}
 
 			}

@@ -14,8 +14,19 @@ public class Share extends BmobObject {
 	private String content;
 	private User user;
 	private BmobFile[] images;
-	private User[] wholike;
-	private int comCount;
+
+	private User[] wholike;//点赞
+	private Share forwarding;//转发
+	private int comCount;//评论
+	
+	public Share getForwarding() {
+		return forwarding;
+	}
+
+	public void setForwarding(Share forwarding) {
+		this.forwarding = forwarding;
+	}
+
 
 	public String getContent() {
 		return content;
@@ -162,7 +173,11 @@ public class Share extends BmobObject {
 		} catch (JSONException e) {
 
 		}
-
+		try {
+			s.forwarding=Share.parseJSONObject(jo.getJSONObject("forwarding"));
+		} catch (JSONException e) {
+			 
+		}
 		return s;
 	}
 
