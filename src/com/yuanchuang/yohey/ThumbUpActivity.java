@@ -5,9 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.tencent.map.b.m;
-import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
+import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.tools.DensityUtil;
 
 import android.annotation.SuppressLint;
@@ -17,6 +16,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsoluteLayout;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -24,23 +25,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 点赞页面
+ * 
+ * @author Administrator
+ *
+ */
+@SuppressWarnings("deprecation")
 public class ThumbUpActivity extends Activity {
 	LinearLayout toReturn;// 返回
 	LinearLayout forward;// 转发
 	LinearLayout comment;// 评论
 	LinearLayout thumbUp;// 赞
 	ListView listView;
-	List<Map<String, Object>> list;
+	List<Share> list;
 	ThumbUpAdapter adapter;
 	View headView;// listview头视图
 	ImageView head;// 发帖用户头像
 	TextView time;// 发帖时间
 	TextView name;// 发帖用户
 	TextView content;// 贴子文字内容
-	LinearLayout image;// 帖子图片
+
+	AbsoluteLayout image;// 帖子图片
 	TextView forwarding;// 转发数量
 	TextView comments;// 评论数量
-	TextView thumbNumber;// 赞
+	CheckBox thumbNumber;// 赞
 	Intent mIntent;
 
 	@Override
@@ -48,7 +57,7 @@ public class ThumbUpActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_thumb_up_for_details);
-		list = new ArrayList<Map<String, Object>>();
+		list = new ArrayList<Share>();
 		mIntent = getIntent();
 		findView();
 		fingHeadView();
@@ -60,7 +69,7 @@ public class ThumbUpActivity extends Activity {
 		for (int i = 0; i < 3; i++) {
 			map.put("head", R.drawable.meng_mei_head);
 			map.put("name", "叶良成");
-			list.add(map);
+			// list.add(map);
 		}
 
 	}
@@ -91,10 +100,10 @@ public class ThumbUpActivity extends Activity {
 		time = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_time);
 		name = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_name);
 		content = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_content);
-		image = (LinearLayout) headView.findViewById(R.id.list_head_thumb_up_linear_content);
+		image = (AbsoluteLayout) headView.findViewById(R.id.list_head_thumb_up_abso_content);
 		forwarding = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_forwarding);
 		comments = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_comments);
-		thumbNumber = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_tuumb_up);
+		thumbNumber = (CheckBox) headView.findViewById(R.id.list_head_thumb_up_linear_tuumb_up);
 		head.setImageResource(R.drawable.meng_mei_head);
 		time.setText("3分钟前");
 		name.setText(R.string.zhao);

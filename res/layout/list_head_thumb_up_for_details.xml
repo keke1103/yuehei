@@ -63,13 +63,16 @@
         android:textColor="@color/main_text"
         android:textSize="12sp" />
 
-    <LinearLayout
-        android:id="@+id/list_head_thumb_up_linear_content"
+    <AbsoluteLayout
+        android:id="@+id/list_head_thumb_up_abso_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:padding="10dp" >
-    </LinearLayout>
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+    </AbsoluteLayout>
 
     <View
         android:layout_width="fill_parent"
@@ -144,39 +147,26 @@
 
         <!-- 点赞图标 -->
 
-        <LinearLayout
+        <CheckBox
             android:id="@+id/list_head_thumb_up_linear_tuumb_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/fill_the_gray_background"
+            android:layout_centerVertical="true"
+            android:button="@null"
+            android:drawableLeft="@drawable/like_number_selector"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/like_number_selector"
             android:orientation="horizontal"
             android:paddingBottom="3dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="3dp" >
-
-            <TextView
-                android:id="@+id/list_head_thumb_up_text_view_tuumb_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:gravity="center"
-                android:text="@string/praise"
-                android:textColor="#E3F240"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/list_head_thumb_up_text_tuumb_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/num"
-                android:textColor="#E3F240"
-                android:textSize="12sp" />
-        </LinearLayout>
+            android:paddingEnd="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:text="@string/num"
+            android:textColor="@color/main_text"
+            android:textSize="12sp" />
     </RelativeLayout>
 
 </LinearLayout>

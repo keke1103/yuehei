@@ -1,27 +1,27 @@
 package com.yuanchuang.yohey;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
-import com.yuanchuang.yohey.bmob.Post;
+import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.tools.DensityUtil;
+import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsoluteLayout;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +32,7 @@ import android.widget.Toast;
  * @author Administrator
  *
  */
+@SuppressWarnings("deprecation")
 public class CommentDynamicActivity extends Activity {
 	EditText say;// 说一句
 	View send;// 发送
@@ -45,37 +46,37 @@ public class CommentDynamicActivity extends Activity {
 	TextView time;// 发帖时间
 	TextView name;// 发帖用户
 	TextView content;// 贴子文字内容
-	LinearLayout image;// 帖子图片
+
+	AbsoluteLayout image;// 帖子图片
 	TextView forwarding;// 转发数量
 	TextView comments;// 评论数量
-	TextView thumbNumber;// 赞
+	CheckBox thumbNumber;// 赞
 	ListView listView;
-	List<Map<String, Object>> list;
+	List<Share> list;;
 	ThumbUpAdapter adapter;
 	LayoutInflater inflater;
 	View headView;
-	Intent mIntent;
-	Post post;
+
+	Share mShare;
 
 	LinearLayout linearComment;// 需要设置背景的
-	LinearLayout linearUp;// 需要设置背景的
-	TextView zan;// 赞这个字
 	TextView pingLun;// 评论的字
 
 	TextView joinCount;
 	TextView comCount;
 	TextView likeCount;
+	Intent intent;
+	YoheyApplication app;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.actvity_yue_lu_personal_post);
-		mIntent = getIntent();
-		list = new ArrayList<Map<String, Object>>();
-		YoheyApplication app = (YoheyApplication) getApplication();
-		post = (Post) app.data;
+		intent = getIntent();
+		list = new ArrayList<Share>();
+		app = (YoheyApplication) getApplication();
+		mShare = (Share) app.data;
 		app.data = null;
 		findView();
 		findHeadView();
@@ -90,12 +91,7 @@ public class CommentDynamicActivity extends Activity {
 	}
 
 	private void getData() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		for (int i = 0; i < 3; i++) {
-			map.put("head", R.drawable.meng_mei_head);
-			map.put("name", "叶良成");
-			list.add(map);
-		}
+
 	}
 
 	OnClickListener onClickListener = new OnClickListener() {
@@ -146,7 +142,6 @@ public class CommentDynamicActivity extends Activity {
 		listView = (ListView) findViewById(R.id.personal_post_list_message);
 	}
 
-	@SuppressWarnings("deprecation")
 	@SuppressLint("InflateParams")
 	private void findHeadView() {
 		inflater = getLayoutInflater();
@@ -155,31 +150,37 @@ public class CommentDynamicActivity extends Activity {
 		time = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_time);
 		name = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_name);
 		content = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_content);
-		image = (LinearLayout) headView.findViewById(R.id.list_head_thumb_up_linear_content);
+		image = (AbsoluteLayout) headView.findViewById(R.id.list_head_thumb_up_abso_content);
 		forwarding = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_forwarding);
 		comments = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_comments);
-		thumbNumber = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_tuumb_up);
+		thumbNumber = (CheckBox) headView.findViewById(R.id.list_head_thumb_up_linear_tuumb_up);
 		linearComment = (LinearLayout) headView.findViewById(R.id.list_head_thumb_up_linear_comments);
-		linearUp = (LinearLayout) headView.findViewById(R.id.list_head_thumb_up_linear_tuumb_up);
-		zan = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_view_tuumb_up);
 		pingLun = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_view_comm);
 
 		comments.setTextColor(getResources().getColor(R.color.yellow_zan));
 		pingLun.setTextColor(getResources().getColor(R.color.yellow_zan));
-		zan.setTextColor(getResources().getColor(R.color.main_text));
 		thumbNumber.setTextColor(getResources().getColor(R.color.main_text));
 		linearComment.setBackgroundResource(R.drawable.fill_the_gray_background);
-		linearUp.setBackgroundResource(R.color.post_background);
-		head.setImageResource(R.drawable.meng_mei_head);
-		time.setText("3分钟前");
-		name.setText(R.string.zhao);
-		content.setText("哈哈哈哈哈哈哈哈哈哈哈");
-		ImageView view = new ImageView(this);
-		LayoutParams params = new LayoutParams(DensityUtil.dip2px(getApplication(), 50),
-				DensityUtil.dip2px(getApplication(), 50));
-		view.setLayoutParams(params);
-		view.setImageResource(R.drawable.big_picture_size);
-		image.addView(view);
+
+		name.setText(mShare.getUser().getNickName());
+		mShare.getUser().binderImageView(head);
+		time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
+		content.setText(mShare.getContent());
+		image.removeAllViews();
+
+		if (mShare.getImages() != null) {
+			DensityUtil.sudoku(this, image, mShare.getImages(), new OnClickListener() {
+				public void onClick(View v) {
+					int index = v.getId() - 1000;
+					Share sh = (Share) ((View) v.getParent()).getTag();
+					intent.setClass(CommentDynamicActivity.this, ViewFilperActivity.class);
+					Log.i("DynamicAdapterImageClick", "id=" + v.getId() + " index=" + index);
+					intent.putExtra("index", index);
+					app.data = sh.getImages();
+					startActivity(intent);
+				}
+			});
+		}
 		forwarding.setText("3");
 		comments.setText("3");
 		thumbNumber.setText("3");
