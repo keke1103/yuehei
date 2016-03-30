@@ -2,7 +2,6 @@ package com.yuanchuang.yohey;
 
 import java.util.ArrayList;
 
-import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.fragment.DynamicFragment;
 import com.yuanchuang.yohey.fragment.MEFragment;
 import com.yuanchuang.yohey.fragment.MainFragment;
@@ -25,7 +24,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -50,7 +48,7 @@ public class MainActivity extends FragmentActivity {
 	FragmentManager mfFragmentManager;// fragment管理器
 	DynamicFragment dynamicFragment;// 动态fragment
 	MEFragment meFragment;// 我的fragment
-	LinearLayout postShare;// 发帖与分享
+//	LinearLayout postShare;// 发帖与分享
 
 	ImageView postShareImage;
 	Lu_Activity LuFragment;

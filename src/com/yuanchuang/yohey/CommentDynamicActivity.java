@@ -21,6 +21,7 @@ import com.yuanchuang.yohey.tools.TimeUtil;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,7 +65,7 @@ public class CommentDynamicActivity extends Activity {
 	TextView comments;// 评论数量
 	CheckBox thumbNumber;// 赞
 	ListView listView;
-	List<Comment> list=new ArrayList<Comment>();
+	List<Comment> list = new ArrayList<Comment>();
 	ThumbUpAdapter adapter;
 	LayoutInflater inflater;
 	View headView;
@@ -83,6 +84,8 @@ public class CommentDynamicActivity extends Activity {
 	User user;
 	int resultCode;
 
+	ViewHolder holder;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -90,7 +93,7 @@ public class CommentDynamicActivity extends Activity {
 		setContentView(R.layout.actvity_yue_lu_personal_post);
 		user = BmobUser.getCurrentUser(getApplicationContext(), User.class);
 		intent = getIntent();
-	 
+
 		app = (YoheyApplication) getApplication();
 		mShare = (Share) app.data;
 		app.data = null;
@@ -101,19 +104,18 @@ public class CommentDynamicActivity extends Activity {
 		listView.setDivider(getResources().getDrawable(R.color.post_line));
 		listView.setDividerHeight(1);
 		listView.addHeaderView(headView);
-		
+
 		listView.setAdapter(adapter);
 
 	}
 
 	private void getData() {
-		HttpGet get=new HttpGet(YoheyApplication.ServiceIp+"getsharecom");
+		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getsharecom");
 		get.putString("sid", mShare.getObjectId());
 		get.setOnSendListener(mListener);
 		get.send();
 	}
 
- 
 	private OnSendListener mListener = new OnSendListener() {
 
 		@Override
@@ -138,7 +140,7 @@ public class CommentDynamicActivity extends Activity {
 			}
 		}
 	};
-	
+
 	OnClickListener onClickListener = new OnClickListener() {
 
 		@Override
@@ -164,7 +166,7 @@ public class CommentDynamicActivity extends Activity {
 				break;
 			case R.id.list_head_thumb_up_linear_tuumb_up:
 				likeShare();
-				
+
 				break;
 			default:
 				break;
@@ -210,32 +212,94 @@ public class CommentDynamicActivity extends Activity {
 		pingLun.setTextColor(getResources().getColor(R.color.yellow_zan));
 		thumbNumber.setTextColor(getResources().getColor(R.color.main_text));
 		linearComment.setBackgroundResource(R.drawable.fill_the_gray_background);
+		setData();
 
+	}
+
+	@SuppressLint("InflateParams")
+	private void setData() {
 		thumbNumber.setChecked(intent.getBooleanExtra("isLike", false));
 		name.setText(mShare.getUser().getNickName());
 		mShare.getUser().binderImageView(head);
 		time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
 		content.setText(mShare.getContent());
 		image.removeAllViews();
-
-		if (mShare.getImages() != null) {
-			DensityUtil.sudoku(this, image, mShare.getImages(), new OnClickListener() {
+		comments.setText("" + mShare.getComCount());
+		thumbNumber.setText("" + mShare.getLikeNumber());
+		thumbNumber.setOnClickListener(onClickListener);
+		if (mShare.getForwarding() != null) {
+			ViewHolder child = new ViewHolder(getLayoutInflater().inflate(R.layout.list_dynamic, null));
+			image.addView(child.mView);
+			child.setData(mShare.getForwarding());
+		} else if (mShare.getImages() != null && mShare.getImages().length > 0) {
+			DensityUtil.sudoku(CommentDynamicActivity.this, image, mShare.getImages(), new OnClickListener() {
 				public void onClick(View v) {
 					int index = v.getId() - 1000;
+					Log.i("view.getParent", v.getParent() + "");
 					Share sh = (Share) ((View) v.getParent()).getTag();
 					intent.setClass(CommentDynamicActivity.this, ViewFilperActivity.class);
-					Log.i("DynamicAdapterImageClick", "id=" + v.getId() + " index=" + index);
+
 					intent.putExtra("index", index);
 					app.data = sh.getImages();
 					startActivity(intent);
 				}
 			});
 		}
+	};
 
-		comments.setText("" + mShare.getComCount());
-		thumbNumber.setText("" + mShare.getLikeNumber());
-		thumbNumber.setOnClickListener(onClickListener);
+	class ViewHolder {
+		View mView;
+		ImageView headPortrait;// 用户头像
+		TextView nickNmae;// 用户昵称
+		TextView time;// 发送时间
+		TextView line;// 输入内容
+		View forwarding;// 转发
+		View leaveMessage;// 留言
+		CheckBox thumbUp;// 点赞RelativeLayout relative;// 整体布局
 
+		TextView commentCount;// 评论数量
+		AbsoluteLayout imageLayout;
+
+		Share mShare;
+
+		ViewHolder(View child) {
+			mView = child;
+			headPortrait = (ImageView) child.findViewById(R.id.list_dynamic_image_head_portrait);
+			nickNmae = (TextView) child.findViewById(R.id.list_dynamic_text_nickname);
+			time = (TextView) child.findViewById(R.id.list_dynamic_text_time);
+			line = (TextView) child.findViewById(R.id.list_dynamic_layout_context);
+			forwarding = child.findViewById(R.id.list_dynamic_image_share_it);
+			leaveMessage = child.findViewById(R.id.list_dynamic_image_leave_a_message);
+			thumbUp = (CheckBox) child.findViewById(R.id.list_dynamic_image_like);
+			commentCount = (TextView) child.findViewById(R.id.dynamic_comment_count);
+			imageLayout = (AbsoluteLayout) child.findViewById(R.id.list_dynamic_absolute_image);
+
+		};
+
+		@SuppressLint("InflateParams")
+		private void setData(Share share) {
+			mShare = share;
+			mView.findViewById(R.id.list_dynamic_relative_linear).setVisibility(View.GONE);
+			mView.findViewById(R.id.dynamic_gray_line).setVisibility(View.GONE);
+			mView.setBackgroundColor(Color.LTGRAY);
+			headPortrait.setVisibility(View.GONE);
+			nickNmae.setText(mShare.getUser().getNickName() + ":");
+			line.setText(mShare.getContent());
+			imageLayout.setTag(mShare);
+			time.setVisibility(View.GONE);
+			if (mShare.getImages() != null) {
+				DensityUtil.sudoku(CommentDynamicActivity.this, imageLayout, mShare.getImages(), new OnClickListener() {
+					public void onClick(View v) {
+						int index = v.getId() - 1000;
+						Share sh = (Share) ((View) v.getParent()).getTag();
+						intent.setClass(CommentDynamicActivity.this, ViewFilperActivity.class);
+						intent.putExtra("index", index);
+						app.data = sh.getImages();
+						startActivity(intent);
+					}
+				});
+			}
+		}
 	}
 
 	private void likeShare() {
@@ -280,21 +344,22 @@ public class CommentDynamicActivity extends Activity {
 		com.save(this, new SaveListener() {
 
 			public void onSuccess() {
-				Share s=new Share();
+				Share s = new Share();
 				s.increment("comCount");
 				s.update(getApplicationContext(), mShare.getObjectId(), null);
-				BmobFindById finder=new BmobFindById(mShare.getObjectId(), "Share");
-				finder.start(new OnSendListener() {	 
-					public void start() {			 
+				BmobFindById finder = new BmobFindById(mShare.getObjectId(), "Share");
+				finder.start(new OnSendListener() {
+					public void start() {
 					}
+
 					public void end(String result) {
 						try {
-							JSONObject jo= new JSONObject(result);
-							int i=jo.getInt("comCount");
-							comments.setText(""+i);
-							mShare.setComCount(i); 							
+							JSONObject jo = new JSONObject(result);
+							int i = jo.getInt("comCount");
+							comments.setText("" + i);
+							mShare.setComCount(i);
 						} catch (JSONException e) {
-						 
+
 						}
 					}
 				});

@@ -127,6 +127,7 @@
     <string name="only_yourself_visible">仅自己可见</string>
     <string name="select_visible">选中的朋友可见</string>
     <string name="selected_invisible">选中的朋友不可见</string>
+    <string name="over">完成</string>
 
     <!-- 阿里雲引用 -->
     <string name="iconfont">&#13804;</string>
