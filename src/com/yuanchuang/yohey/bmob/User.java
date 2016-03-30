@@ -1,24 +1,16 @@
 package com.yuanchuang.yohey.bmob;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.myData.Picture;
 import com.yuanchuang.yohey.tools.HttpGet;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 import cn.bmob.v3.BmobUser;
@@ -93,34 +85,13 @@ public class User extends BmobUser {
 		if (header == null && icon == null) {
 			v.setImageResource(R.drawable.default_icon);
 		} else if (header == null) {
-			final Handler handler = new Handler() {
-				public void handleMessage(Message msg) {
-					v.setImageBitmap((Bitmap) msg.obj);
-				}
-			};
-			new Thread() {
-				public void run() {
-					try {
-						URL url = new URL(icon);
-						InputStream in = url.openStream();
-						Bitmap bmp = BitmapFactory.decodeStream(in);
-						Message msg = Message.obtain();
-						msg.obj = bmp;
-						msg.what = 1;
-						handler.sendMessage(msg);
-						in.close();
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			new Picture(icon).binderImageView(v);
+		} else
 
-				};
-			}.start();
-
-		} else {
+		{
 			header.loadImage(v.getContext(), v);
 		}
+
 	}
 
 	/**
