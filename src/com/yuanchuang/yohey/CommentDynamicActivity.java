@@ -3,11 +3,17 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Share;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.DensityUtil;
+import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.TimeUtil;
+import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.bmob.v3.BmobUser;
 
 /**
  * 发帖详情
@@ -68,11 +75,14 @@ public class CommentDynamicActivity extends Activity {
 	Intent intent;
 	YoheyApplication app;
 
+	User user;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.actvity_yue_lu_personal_post);
+		user = BmobUser.getCurrentUser(getApplicationContext(), User.class);
 		intent = getIntent();
 		list = new ArrayList<Share>();
 		app = (YoheyApplication) getApplication();
@@ -116,6 +126,9 @@ public class CommentDynamicActivity extends Activity {
 				break;
 			case R.id.personal_post_image_photos:
 				Toast.makeText(getApplication(), "你没有图片", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.list_head_thumb_up_linear_tuumb_up:
+				likeShare();
 				break;
 			default:
 				break;
@@ -162,6 +175,7 @@ public class CommentDynamicActivity extends Activity {
 		thumbNumber.setTextColor(getResources().getColor(R.color.main_text));
 		linearComment.setBackgroundResource(R.drawable.fill_the_gray_background);
 
+		thumbNumber.setChecked(intent.getBooleanExtra("isLike", false));
 		name.setText(mShare.getUser().getNickName());
 		mShare.getUser().binderImageView(head);
 		time.setText(TimeUtil.formateTimeToNow(mShare.getCreatedAt()));
@@ -181,12 +195,32 @@ public class CommentDynamicActivity extends Activity {
 				}
 			});
 		}
-		forwarding.setText("3");
+		// forwarding.setText("3");
 		comments.setText("3");
 		thumbNumber.setText("3");
+		thumbNumber.setOnClickListener(onClickListener);
 
 	}
 
+	void likeShare() {
+		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "likeshare");
+		get.putString("uid", user.getObjectId());
+		get.putString("sid", mShare.getObjectId());
+		get.setOnSendListener(new OnSendListener() {
+			public void start() {
+			}
+
+			public void end(String result) {
+				try {
+					JSONObject jo = new JSONObject(result);
+					jo.get("updatedAt");
+				} catch (JSONException e) {
+					thumbNumber.setChecked(!thumbNumber.isChecked());
+				}
+			}
+		});
+		get.send();
+	}
 	/**
 	 * 设置帖子内容的显示
 	 */

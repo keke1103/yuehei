@@ -212,6 +212,7 @@ public class DynamicAdapter extends BaseAdapter {
 				case R.id.list_dynamic_image_leave_a_message:
 					intent = new Intent(context, CommentDynamicActivity.class);
 					app.data = mShare;
+					intent.putExtra("isLike", thumbUp.isChecked());
 					context.startActivity(intent);
 					break;
 
