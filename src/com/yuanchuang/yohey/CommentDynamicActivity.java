@@ -91,22 +91,26 @@ public class CommentDynamicActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.actvity_yue_lu_personal_post);
-		user = BmobUser.getCurrentUser(getApplicationContext(), User.class);
-		intent = getIntent();
+		try {
+			user = BmobUser.getCurrentUser(getApplicationContext(), User.class);
+			intent = getIntent();
 
-		app = (YoheyApplication) getApplication();
-		mShare = (Share) app.data;
-		app.data = null;
-		findView();
-		findHeadView();
-		adapter = new ThumbUpAdapter(list, getApplication());
-		getData();
-		listView.setDivider(getResources().getDrawable(R.color.post_line));
-		listView.setDividerHeight(1);
-		listView.addHeaderView(headView);
+			app = (YoheyApplication) getApplication();
+			mShare = (Share) app.data;
+			app.data = null;
+			findView();
+			findHeadView();
+			adapter = new ThumbUpAdapter(list, getApplication());
+			getData();
+			listView.setDivider(getResources().getDrawable(R.color.post_line));
+			listView.setDividerHeight(1);
+			listView.addHeaderView(headView);
 
-		listView.setAdapter(adapter);
-
+			listView.setAdapter(adapter);
+		} catch (Exception e) {
+			e.printStackTrace();
+			finish();
+		}
 	}
 
 	private void getData() {
@@ -235,12 +239,9 @@ public class CommentDynamicActivity extends Activity {
 			DensityUtil.sudoku(CommentDynamicActivity.this, image, mShare.getImages(), new OnClickListener() {
 				public void onClick(View v) {
 					int index = v.getId() - 1000;
-					Log.i("view.getParent", v.getParent() + "");
-					Share sh = (Share) ((View) v.getParent()).getTag();
 					intent.setClass(CommentDynamicActivity.this, ViewFilperActivity.class);
-
 					intent.putExtra("index", index);
-					app.data = sh.getImages();
+					app.data = mShare.getImages();
 					startActivity(intent);
 				}
 			});

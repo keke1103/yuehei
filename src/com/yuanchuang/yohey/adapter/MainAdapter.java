@@ -102,7 +102,7 @@ public class MainAdapter extends BaseAdapter {
 		holder.message.setText(p.getComcount() + "");
 		holder.up.setText(p.getLikenumber() + "");
 		
-		if(((list.size()-position)<2||position==0)&&mFlush!=null){
+		if(((list.size()-position)<2)&&mFlush!=null){
 			mFlush.flush(this, position);
 		}
 		return convertView;

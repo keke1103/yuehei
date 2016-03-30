@@ -305,6 +305,7 @@ public class User extends BmobUser {
 						if (g != null)
 							app.friendGroup[i] = g;
 					}
+					app.friendGroup[0].addUser(User.this, true);
 					Log.i("User", "friend group load end length=" + app.friendGroup.length);
 				} catch (JSONException e) {
 					e.printStackTrace();

@@ -150,7 +150,7 @@ public class PersonalInformationActivity extends Activity {
 		backimage.setVisibility(View.VISIBLE);
 		backimage.setImageResource(R.drawable.yo_hey_back_image);
 		title.setText("个人资料");
-
+		signature.setText(user.getMood());
 		backimage.setOnClickListener(clickListener);
 		mSignature.setOnClickListener(clickListener);
 
@@ -184,12 +184,13 @@ public class PersonalInformationActivity extends Activity {
 					signature.setEnabled(true);
 					mSignature.setText("确定");
 					msignature = false;
-					saveMood();
+
 				} else {
 					signature.setFocusable(false);
 					signature.setEnabled(false);
 					mSignature.setText("修改");
 					msignature = true;
+					saveMood();
 				}
 				break;
 			case R.id.personal_user_text_first:
@@ -208,6 +209,7 @@ public class PersonalInformationActivity extends Activity {
 
 			public void onSuccess() {
 				user.setMood(signature.getText().toString());
+				app.friendGroup[0].getFriends()[0].setMood(user.getMood());
 			}
 
 			@Override

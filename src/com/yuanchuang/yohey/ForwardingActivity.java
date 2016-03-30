@@ -44,8 +44,13 @@ public class ForwardingActivity extends Activity {
 		User user = BmobUser.getCurrentUser(this, User.class);
 		Share p = new Share();
 		p.setUser(user);
+
 		p.setContent(content.getText().toString());
-		p.setForwarding(mShare);
+		if (mShare.getForwarding() != null) {
+			p.setForwarding(mShare.getForwarding());
+		} else {
+			p.setForwarding(mShare);
+		}
 		p.save(getApplicationContext(), new SaveListener() {
 
 			public void onSuccess() {

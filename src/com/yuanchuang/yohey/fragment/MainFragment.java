@@ -115,7 +115,7 @@ public class MainFragment extends Fragment {
 		listView.setOnItemClickListener(clickListener);
 		listView.setonRefreshListener(refreshListener);
 		adapter.setOnFlushOldData(new OnFlushOldData() {
-	
+
 			public void flush(BaseAdapter adapter, int position) {
 				dataPager++;
 				flushData(gameregion, -1, -1);
@@ -146,8 +146,7 @@ public class MainFragment extends Fragment {
 		for (int i = 0; i < str.length; i++) {
 			list.add(str[i]);
 		}
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.anim.region_layout,
-				list);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.anim.region_layout, list);
 		listView1.setAdapter(arrayAdapter);
 		popupWindow = new PopupWindow(contentView, 600, LayoutParams.WRAP_CONTENT, true);
 		popupWindow.setTouchable(true);
@@ -245,8 +244,7 @@ public class MainFragment extends Fragment {
 					break;
 				}
 				listView2.setVisibility(View.VISIBLE);
-				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
-						R.anim.region_layout, list);
+				ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.anim.region_layout, list);
 				listView2.setAdapter(arrayAdapter);
 				listView2.setOnItemClickListener(clickListener);
 				break;
@@ -263,14 +261,14 @@ public class MainFragment extends Fragment {
 
 		}
 	};
-	
-	private OnRefreshListener refreshListener=new OnRefreshListener() {
-	 
+
+	private OnRefreshListener refreshListener = new OnRefreshListener() {
+
 		public void onRefresh() {
-			dataPager=0;
-			 getRemData(gameregion, -1, -1);
-			 getPostData(gameregion, -1, -1);
-			 
+			dataPager = 0;
+			getRemData(gameregion, -1, -1);
+			getPostData(gameregion, -1, -1);
+
 		}
 	};
 	/**
@@ -426,7 +424,7 @@ public class MainFragment extends Fragment {
 
 			get.putString("gamedanmax", "" + gamedanmax);
 		}
-		get.putString("count",""+ dataPager);
+		get.putString("count", "" + dataPager);
 		get.setOnSendListener(new OnSendListener() {
 
 			public void start() {
@@ -437,9 +435,10 @@ public class MainFragment extends Fragment {
 				try {
 					JSONObject joo = new JSONObject(result);
 					JSONArray ja = joo.getJSONArray("results");
-					if(ja.length()<1){
+					if (ja.length() < 1) {
 						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
-						return;}
+						return;
+					}
 					list.clear();
 					for (int i = 0; i < ja.length(); i++) {
 						Post p = Post.paresJSONObject(ja.getJSONObject(i));
@@ -454,13 +453,15 @@ public class MainFragment extends Fragment {
 		});
 		get.send();
 	}
-    /**
-     * 加载第后面的数据
-     * @param gameregion
-     * @param gamedanmin
-     * @param gamedanmax
-     */
-	private void flushData(String gameregion, int gamedanmin, int gamedanmax){
+
+	/**
+	 * 加载第后面的数据
+	 * 
+	 * @param gameregion
+	 * @param gamedanmin
+	 * @param gamedanmax
+	 */
+	private void flushData(String gameregion, int gamedanmin, int gamedanmax) {
 		HttpGet get = new HttpGet("http://cloud.bmob.cn/a52fec72f31cc7c8/getpost");
 		if (gameregion != null) {
 			try {
@@ -478,7 +479,7 @@ public class MainFragment extends Fragment {
 
 			get.putString("gamedanmax", "" + gamedanmax);
 		}
-		get.putString("count",""+ dataPager);
+		get.putString("count", "" + dataPager);
 		get.setOnSendListener(new OnSendListener() {
 
 			public void start() {
@@ -489,21 +490,24 @@ public class MainFragment extends Fragment {
 				try {
 					JSONObject joo = new JSONObject(result);
 					JSONArray ja = joo.getJSONArray("results");
-					if(ja.length()<1){
+					if (ja.length() < 1) {
 						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
-						return;}
+						return;
+					}
 					for (int i = 0; i < ja.length(); i++) {
 						Post p = Post.paresJSONObject(ja.getJSONObject(i));
 						adapter.getData().add(p);
 					}
+					adapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}
 		});
 		get.send();
-		
+
 	}
+
 	/**
 	 * 控件ID
 	 */

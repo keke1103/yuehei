@@ -85,7 +85,6 @@ public class DynamicAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		Log.i("position", position + "");
 		Share mShare = list.get(position);
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.list_dynamic, null);

@@ -27,9 +27,26 @@ public class Group {
 	}
 
 	public User[] getFriends() {
+		
 		return friends;
 	}
-
+	public void addUser(User user,boolean index){
+		User copy[] =friends;
+		if(copy!=null){
+			if(index){
+				friends=new User[copy.length+1];
+				friends[0]=user;
+				System.arraycopy(copy, 0, friends, 1, copy.length);
+			}else{
+				friends=new User[copy.length+1];
+				System.arraycopy(copy, 0, friends, 0, copy.length);
+				friends[copy.length]=user;
+			}
+		}else {
+			friends=new User[1];
+			friends[0]=user;
+		}
+	} 
 	/**
 	 * 必须在支线程里面初始化
 	 * 

@@ -15,10 +15,10 @@ public class Share extends BmobObject {
 	private User user;
 	private BmobFile[] images;
 
-	private User[] wholike;//点赞
-	private Share forwarding;//转发
-	private int comCount;//评论
-	
+	private User[] wholike;// 点赞
+	private Share forwarding;// 转发
+	private int comCount;// 评论
+
 	public Share getForwarding() {
 		return forwarding;
 	}
@@ -26,7 +26,6 @@ public class Share extends BmobObject {
 	public void setForwarding(Share forwarding) {
 		this.forwarding = forwarding;
 	}
-
 
 	public String getContent() {
 		return content;
@@ -53,53 +52,59 @@ public class Share extends BmobObject {
 			return 0;
 		return wholike.length;
 	}
-	
-	public void addLikeUser(User user){
-		User copy[]=wholike;
-		boolean bl=false;
-		if(copy!=null){
-			for(User u:copy){
-				if(u==null) continue;
-				if(u.getObjectId().equals(user.getObjectId())){
-					 bl=true;
+
+	public void addLikeUser(User user) {
+		User copy[] = wholike;
+		boolean bl = false;
+		if (copy != null) {
+			for (User u : copy) {
+				if (u == null)
+					continue;
+				if (u.getObjectId().equals(user.getObjectId())) {
+					bl = true;
 				}
 			}
-		}else{
-			bl=false;
+			if (bl)
+				return;
+			wholike = new User[(getLikeNumber() + 1)];
+			System.arraycopy(copy, 0, wholike, 0, copy.length);
+			wholike[wholike.length - 1] = user;
+		} else {
+			wholike = new User[1];
+			wholike[0]=user;
 		}
-		
-		if(bl)return;
-		wholike=new User[getLikeNumber()+1];
-		System.arraycopy(copy, 0, wholike, 0, copy.length);
-		wholike[wholike.length-1]=user;
 	}
 
-	public boolean deleteLikeUser(User user){
-		if(user==null||wholike==null) return false;
-		User copy[]=wholike;
-		boolean bl=false;
-		for(User u:copy){
-			if(u==null) continue;
-			if(u.getObjectId().equals(user.getObjectId())){
-				 bl=true;
+	public boolean deleteLikeUser(User user) {
+		if (user == null || wholike == null)
+			return false;
+		User copy[] = wholike;
+		boolean bl = false;
+		for (User u : copy) {
+			if (u == null)
+				continue;
+			if (u.getObjectId().equals(user.getObjectId())) {
+				bl = true;
 			}
 		}
-		if(bl){
-			int i=0;
-			wholike=new User[copy.length-1];
-			for(User u:copy){
-				if(u==null) continue;
-				if(!u.getObjectId().equals(user.getObjectId())){
-					 wholike[i]=u;
-					 i++;
+		if (bl) {
+			int i = 0;
+			wholike = new User[copy.length - 1];
+			for (User u : copy) {
+				if (u == null)
+					continue;
+				if (!u.getObjectId().equals(user.getObjectId())) {
+					wholike[i] = u;
+					i++;
 				}
-			}	
-		}else{
+			}
+		} else {
 			return false;
 		}
-		
+
 		return true;
 	}
+
 	public User[] getLikeUser() {
 		return wholike;
 	}
@@ -108,9 +113,10 @@ public class Share extends BmobObject {
 		this.images = images.toArray(new BmobFile[images.size()]);
 	}
 
-	public void setComCount(int i){
-		comCount=i;
+	public void setComCount(int i) {
+		comCount = i;
 	}
+
 	public int getComCount() {
 		return comCount;
 	}
@@ -174,9 +180,9 @@ public class Share extends BmobObject {
 
 		}
 		try {
-			s.forwarding=Share.parseJSONObject(jo.getJSONObject("forwarding"));
+			s.forwarding = Share.parseJSONObject(jo.getJSONObject("forwarding"));
 		} catch (JSONException e) {
-			 
+
 		}
 		return s;
 	}

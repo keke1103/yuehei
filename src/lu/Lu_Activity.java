@@ -10,7 +10,6 @@ import com.yuanchuang.yohey.adapter.MessageBaseAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.User;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,7 +42,6 @@ public class Lu_Activity extends Fragment {
 	MessageBaseAdapter msgadapter;
 	FriendsBaseAdapter friendsadapter;
 	ArrayList<User> msglist;
-	ArrayList<String> friendslist;
 	TextView add;
 	User user;
 	YoheyApplication app;
@@ -56,7 +54,7 @@ public class Lu_Activity extends Fragment {
 		user = User.getCurrentUser(getActivity(), User.class);
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		View view = inflater.inflate(R.layout.lu, lay);
-
+		msglist = new ArrayList<User>();
 		radiogroup = (RadioGroup) view.findViewById(R.id.radiogroup);
 		msg = (RadioButton) view.findViewById(R.id.rb_msg);
 		friends = (RadioButton) view.findViewById(R.id.rb_friends);
@@ -64,7 +62,7 @@ public class Lu_Activity extends Fragment {
 		friendList = (ExpandableListView) view.findViewById(R.id.expand);
 		add = (TextView) view.findViewById(R.id.rb_add);
 		this.radiogroup.setOnCheckedChangeListener(changelistener);
-		getData();
+
 		msgadapter = new MessageBaseAdapter(msglist, getActivity());
 		msgList.setAdapter(msgadapter);
 		msgList.setOnItemClickListener(clickListener);
@@ -114,26 +112,26 @@ public class Lu_Activity extends Fragment {
 		}
 	};
 
-	@SuppressLint("UseSparseArrays")
-	private void getData() {
-		// TODO Auto-generated method stub
-		msglist = new ArrayList<User>();
-		for (int i = 0; i < 15; i++) {
-			User user = new User();
-			msglist.add(user);
-		}
-		friendslist = new ArrayList<String>();
-		friendslist.add("约黑好友");
-		friendslist.add("游戏好友");
-		for (int i = 0; i < 2; i++) {
-			ArrayList<User> array = new ArrayList<User>();
-			for (int j = 0; j < 10; j++) {
-				User user = new User();
-				user.setUsername("开黑" + i);
-				array.add(user);
-			}
-		}
-	}
+	// @SuppressLint("UseSparseArrays")
+	// private void getData() {
+	// // TODO Auto-generated method stub
+	//
+	// for (int i = 0; i < 15; i++) {
+	// User user = new User();
+	// msglist.add(user);
+	// }
+	// friendslist = new ArrayList<String>();
+	// friendslist.add("约黑好友");
+	// friendslist.add("游戏好友");
+	// for (int i = 0; i < 2; i++) {
+	// ArrayList<User> array = new ArrayList<User>();
+	// for (int j = 0; j < 10; j++) {
+	// User user = new User();
+	// user.setUsername("开黑" + i);
+	// array.add(user);
+	// }
+	// }
+	// }
 
 	/**
 	 * listview的点击事件
