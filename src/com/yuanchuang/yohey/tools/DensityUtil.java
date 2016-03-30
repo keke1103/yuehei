@@ -48,7 +48,7 @@ public class DensityUtil {
 				v.setBackgroundColor(Color.LTGRAY);
 				v.setId(1000 + i);
 				v.setOnClickListener(l);
-				imgs[i].loadImageThumbnail(mContext, v, w / 2, w / 2);
+				imgs[i].loadImage(mContext, v, w / 2, w / 2);
 
 			} else if (imgs.length == 2) {
 				params = new LayoutParams(-2, -2, 0, 0);
@@ -83,7 +83,7 @@ public class DensityUtil {
 					v.setId(1000 + i);
 					v.setOnClickListener(l);
 					imageLayout.addView(v, params);
-					p.loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
+					p.loadImage(mContext, v,w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 					i++;
 				}
 			} else {
@@ -97,7 +97,7 @@ public class DensityUtil {
 					v.setId(1000 + i);
 					v.setOnClickListener(l);
 					imageLayout.addView(v, params);
-					p.loadImageThumbnail(mContext, v, w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5));
+					p.loadImage(mContext, v, w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5));
 					i++;
 				}
 			}
