@@ -10,60 +10,67 @@
         android:layout_width="fill_parent"
         android:layout_height="66dp" >
 
-        <!-- 头像 -->
-
         <RelativeLayout
-            android:id="@+id/list_main_linear_head_tu"
-            android:layout_width="62dp"
-            android:layout_height="62dp" >
+            android:id="@+id/list_main_linear_head_image_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
-            <com.yuanchuang.yohey.view.MyImageView
-                android:id="@+id/list_main_image_head_tu"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/yp_hey_background_image" />
+            <!-- 头像 -->
 
-            <ImageView
-                android:id="@+id/list_main_image_popular"
+            <RelativeLayout
+                android:id="@+id/list_main_linear_head_tu"
+                android:layout_width="62dp"
+                android:layout_height="62dp" >
+
+                <com.yuanchuang.yohey.view.MyImageView
+                    android:id="@+id/list_main_image_head_tu"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/yp_hey_background_image" />
+
+                <ImageView
+                    android:id="@+id/list_main_image_popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="@drawable/popular_icons"
+                    android:src="@drawable/popular_icons"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <!-- 昵称 -->
+
+            <TextView
+                android:id="@+id/list_main_text_nick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:contentDescription="@drawable/popular_icons"
-                android:src="@drawable/popular_icons"
-                android:visibility="gone" />
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/list_main_linear_head_tu"
+                android:layout_toRightOf="@id/list_main_linear_head_tu"
+                android:text="@string/meng_mei"
+                android:textColor="#5A5959"
+                android:textSize="14sp" />
+
+            <!-- 发表时间 -->
+
+            <TextView
+                android:id="@+id/list_main_text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/list_main_text_nick"
+                android:layout_alignStart="@+id/list_main_text_nick"
+                android:layout_below="@+id/list_main_text_nick"
+                android:paddingTop="3dp"
+                android:text="@string/list_time"
+                android:textColor="@color/light_gray"
+                android:textSize="11sp" />
         </RelativeLayout>
 
-        <!-- 昵称 -->
-
-        <TextView
-            android:id="@+id/list_main_text_nick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/list_main_linear_head_tu"
-            android:layout_toRightOf="@id/list_main_linear_head_tu"
-            android:text="@string/meng_mei"
-            android:textColor="#5A5959"
-            android:textSize="14sp" />
-
-        <!-- 发表时间 -->
-
-        <TextView
-            android:id="@+id/list_main_text_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/list_main_text_nick"
-            android:layout_alignStart="@+id/list_main_text_nick"
-            android:layout_below="@+id/list_main_text_nick"
-            android:paddingTop="3dp"
-            android:text="@string/list_time"
-            android:textColor="@color/light_gray"
-            android:textSize="11sp" />
         <!-- 加入图 -->
 
         <ImageView

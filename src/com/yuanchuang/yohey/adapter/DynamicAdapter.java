@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import com.yuanchuang.yohey.CommentDynamicActivity;
 import com.yuanchuang.yohey.ForwardingActivity;
+import com.yuanchuang.yohey.PersonalInformationActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ViewFilperActivity;
 import com.yuanchuang.yohey.app.YoheyApplication;
@@ -98,7 +99,7 @@ public class DynamicAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	Intent intent;
+	Intent intent = new Intent();
 
 	class ViewHolder {
 		View mView;
@@ -109,7 +110,7 @@ public class DynamicAdapter extends BaseAdapter {
 		View forwarding;// 转发
 		View leaveMessage;// 留言
 		CheckBox thumbUp;// 点赞RelativeLayout relative;// 整体布局
-
+		View headName;// 头像昵称的包裹
 		TextView commentCount;// 评论数量
 		AbsoluteLayout imageLayout;
 
@@ -119,6 +120,7 @@ public class DynamicAdapter extends BaseAdapter {
 			mView = convertView;
 			headPortrait = (ImageView) convertView.findViewById(R.id.list_dynamic_image_head_portrait);
 			nickNmae = (TextView) convertView.findViewById(R.id.list_dynamic_text_nickname);
+			headName = convertView.findViewById(R.id.list_dynamic_layout_head_portrait);
 			time = (TextView) convertView.findViewById(R.id.list_dynamic_text_time);
 			line = (TextView) convertView.findViewById(R.id.list_dynamic_layout_context);
 			forwarding = convertView.findViewById(R.id.list_dynamic_image_share_it);
@@ -126,6 +128,14 @@ public class DynamicAdapter extends BaseAdapter {
 			thumbUp = (CheckBox) convertView.findViewById(R.id.list_dynamic_image_like);
 			commentCount = (TextView) convertView.findViewById(R.id.dynamic_comment_count);
 			imageLayout = (AbsoluteLayout) convertView.findViewById(R.id.list_dynamic_absolute_image);
+
+			headName.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					intent.setClass(context, PersonalInformationActivity.class);
+					app.data = mShare.getUser();
+					context.startActivity(intent);
+				}
+			});
 			forwarding.setOnClickListener(clickListener);
 			thumbUp.setOnClickListener(clickListener);
 			leaveMessage.setOnClickListener(clickListener);
@@ -170,10 +180,21 @@ public class DynamicAdapter extends BaseAdapter {
 				childHold.setData(mShare.getForwarding());
 				childHold.headPortrait.setVisibility(View.GONE);
 				childHold.nickNmae.setText(childHold.nickNmae.getText() + ":");
+				childHold.nickNmae.setTextColor(R.drawable.select_text_color_change);
+				childHold.nickNmae.setPadding(DensityUtil.dip2px(context, 5), DensityUtil.dip2px(context, 5),
+						DensityUtil.dip2px(context, 5), DensityUtil.dip2px(context, 5));
 				childHold.time.setVisibility(View.GONE);
 				imageLayout.addView(child, -1, -1);
-			}
+				childHold.nickNmae.setOnClickListener(new OnClickListener() {
 
+					public void onClick(View v) {
+						intent.setClass(context, PersonalInformationActivity.class);
+						app.data = mShare.getForwarding().getUser();
+						context.startActivity(intent);
+					}
+				});
+
+			}
 		}
 
 		void setThumbUp(String sid) {
@@ -230,18 +251,17 @@ public class DynamicAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				switch (v.getId()) {
 				case R.id.list_dynamic_image_share_it:
-					intent = new Intent(context, ForwardingActivity.class);
+					intent.setClass(context, ForwardingActivity.class);
 					app.data = mShare;
 					context.startActivity(intent);
 					break;
 				case R.id.list_dynamic_image_like:
 					likeShare();
 					break;
-
 				case R.id.list_dynamic_image_leave_a_message:
 
 				default:
-					intent = new Intent(context, CommentDynamicActivity.class);
+					intent.setClass(context, CommentDynamicActivity.class);
 					app.data = mShare;
 					intent.putExtra("isLike", thumbUp.isChecked());
 					context.startActivityForResult(intent, 103);

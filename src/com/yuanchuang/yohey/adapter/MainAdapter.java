@@ -2,20 +2,26 @@ package com.yuanchuang.yohey.adapter;
 
 import java.util.List;
 
+import com.yuanchuang.yohey.PersonalInformationActivity;
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 主页面的adapter
@@ -27,6 +33,7 @@ public class MainAdapter extends BaseAdapter {
 	List<Post> list;
 	Context context;
 	LayoutInflater inflater;
+	Post p;
 
 	public MainAdapter() {
 		// TODO Auto-generated constructor stub
@@ -43,9 +50,10 @@ public class MainAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	public List<Post> getData(){
+	public List<Post> getData() {
 		return list;
 	}
+
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list.size();
@@ -60,14 +68,14 @@ public class MainAdapter extends BaseAdapter {
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		return position%list.size();
+		return position % list.size();
 	}
 
 	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		Post p = list.get(position);
+		p = list.get(position);
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.list_main_post, null);
@@ -81,6 +89,7 @@ public class MainAdapter extends BaseAdapter {
 			holder.time = (TextView) convertView.findViewById(R.id.list_main_text_time);
 			holder.up = (TextView) convertView.findViewById(R.id.list_main_text_up);
 			holder.line = convertView.findViewById(R.id.list_main_line_zhong);
+			holder.headName = convertView.findViewById(R.id.list_main_linear_head_image_nick);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -101,8 +110,18 @@ public class MainAdapter extends BaseAdapter {
 		p.getUser().binderImageView(holder.head);
 		holder.message.setText(p.getComcount() + "");
 		holder.up.setText(p.getLikenumber() + "");
-		
-		if(((list.size()-position)<2)&&mFlush!=null){
+		holder.headName.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(context, PersonalInformationActivity.class);
+				YoheyApplication app = new YoheyApplication();
+
+				app.data = p.getUser();
+				Toast.makeText(context, (CharSequence) p.getUser().getNickName(), Toast.LENGTH_SHORT).show();
+				Log.i("mainAdapter", app.data + "");
+				context.startActivity(intent);
+			}
+		});
+		if (((list.size() - position) < 2) && mFlush != null) {
 			mFlush.flush(this, position);
 		}
 		return convertView;
@@ -110,6 +129,7 @@ public class MainAdapter extends BaseAdapter {
 
 	class ViewHolder {
 		View line;
+		View headName;// 头像和昵称
 		ImageView head;
 		TextView name;
 		TextView time;
@@ -120,7 +140,7 @@ public class MainAdapter extends BaseAdapter {
 		TextView message;
 		TextView up;
 	}
-	
+
 	OnFlushOldData mFlush;
 
 	public void setOnFlushOldData(OnFlushOldData mFlush) {

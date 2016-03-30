@@ -29,6 +29,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -59,7 +61,7 @@ public class CommentDynamicActivity extends Activity {
 	TextView time;// 发帖时间
 	TextView name;// 发帖用户
 	TextView content;// 贴子文字内容
-
+	View headName;// 头像与昵称
 	AbsoluteLayout image;// 帖子图片
 	TextView forwarding;// 转发数量
 	TextView comments;// 评论数量
@@ -107,6 +109,13 @@ public class CommentDynamicActivity extends Activity {
 			listView.addHeaderView(headView);
 
 			listView.setAdapter(adapter);
+			listView.setOnItemClickListener(new OnItemClickListener() {
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					intent.setClass(getApplicationContext(), PersonalInformationActivity.class);
+					app.data = mShare.getComCount();
+					startActivity(intent);
+				}
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 			finish();
@@ -170,7 +179,11 @@ public class CommentDynamicActivity extends Activity {
 				break;
 			case R.id.list_head_thumb_up_linear_tuumb_up:
 				likeShare();
-
+				break;
+			case R.id.list_head_thumb_up_linear_head:
+				intent.setClass(CommentDynamicActivity.this, PersonalInformationActivity.class);
+				app.data = mShare.getUser();
+				startActivity(intent);
 				break;
 			default:
 				break;
@@ -187,6 +200,7 @@ public class CommentDynamicActivity extends Activity {
 		smile = findViewById(R.id.personal_post_image_smile);
 		photos = findViewById(R.id.personal_post_image_photos);
 		say = (EditText) findViewById(R.id.personal_post_edit_say);
+
 		ait.setOnClickListener(onClickListener);
 		smile.setOnClickListener(onClickListener);
 		photos.setOnClickListener(onClickListener);
@@ -211,7 +225,8 @@ public class CommentDynamicActivity extends Activity {
 		thumbNumber = (CheckBox) headView.findViewById(R.id.list_head_thumb_up_linear_tuumb_up);
 		linearComment = (LinearLayout) headView.findViewById(R.id.list_head_thumb_up_linear_comments);
 		pingLun = (TextView) headView.findViewById(R.id.list_head_thumb_up_text_view_comm);
-
+		headName = headView.findViewById(R.id.list_head_thumb_up_linear_head);
+		headName.setOnClickListener(onClickListener);
 		comments.setTextColor(getResources().getColor(R.color.yellow_zan));
 		pingLun.setTextColor(getResources().getColor(R.color.yellow_zan));
 		thumbNumber.setTextColor(getResources().getColor(R.color.main_text));
@@ -257,7 +272,7 @@ public class CommentDynamicActivity extends Activity {
 		View forwarding;// 转发
 		View leaveMessage;// 留言
 		CheckBox thumbUp;// 点赞RelativeLayout relative;// 整体布局
-
+		View headName;// 头像与昵称
 		TextView commentCount;// 评论数量
 		AbsoluteLayout imageLayout;
 
@@ -274,7 +289,12 @@ public class CommentDynamicActivity extends Activity {
 			thumbUp = (CheckBox) child.findViewById(R.id.list_dynamic_image_like);
 			commentCount = (TextView) child.findViewById(R.id.dynamic_comment_count);
 			imageLayout = (AbsoluteLayout) child.findViewById(R.id.list_dynamic_absolute_image);
+			headName = child.findViewById(R.id.list_dynamic_layout_head_portrait);
+			headName.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
 
+				}
+			});
 		};
 
 		@SuppressLint("InflateParams")
@@ -285,9 +305,22 @@ public class CommentDynamicActivity extends Activity {
 			mView.setBackgroundColor(Color.LTGRAY);
 			headPortrait.setVisibility(View.GONE);
 			nickNmae.setText(mShare.getUser().getNickName() + ":");
+			nickNmae.setText(nickNmae.getText() + ":");
+			nickNmae.setTextColor(R.drawable.select_text_color_change);
+			nickNmae.setPadding(DensityUtil.dip2px(getApplicationContext(), 5),
+					DensityUtil.dip2px(getApplicationContext(), 5), DensityUtil.dip2px(getApplicationContext(), 5),
+					DensityUtil.dip2px(getApplicationContext(), 5));
 			line.setText(mShare.getContent());
 			imageLayout.setTag(mShare);
 			time.setVisibility(View.GONE);
+			nickNmae.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View v) {
+					intent.setClass(getApplicationContext(), PersonalInformationActivity.class);
+					app.data = mShare.getUser();
+					startActivity(intent);
+				}
+			});
 			if (mShare.getImages() != null) {
 				DensityUtil.sudoku(CommentDynamicActivity.this, imageLayout, mShare.getImages(), new OnClickListener() {
 					public void onClick(View v) {
