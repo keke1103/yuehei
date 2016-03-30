@@ -14,6 +14,8 @@ public class Share extends BmobObject {
 	private String content;
 	private User user;
 	private BmobFile[] images;
+	private User[] wholike;
+	private int comCount;
 
 	public String getContent() {
 		return content;
@@ -35,8 +37,22 @@ public class Share extends BmobObject {
 		return images;
 	}
 
+	public int getLikeNumber() {
+		if (wholike == null)
+			return 0;
+		return wholike.length;
+	}
+
+	public User[] getLikeUser() {
+		return wholike;
+	}
+
 	public void setImages(List<BmobFile> images) {
 		this.images = images.toArray(new BmobFile[images.size()]);
+	}
+
+	public int getComCount() {
+		return comCount;
 	}
 
 	public static Share parseJSONObject(JSONObject jo) {
@@ -82,6 +98,20 @@ public class Share extends BmobObject {
 			}
 
 		} catch (JSONException e) {
+		}
+		try {
+			JSONArray ja = jo.getJSONObject("wholike").getJSONArray("objects");
+			s.wholike = new User[ja.length()];
+			for (int i = 0; i < ja.length(); i++) {
+				s.wholike[i] = User.parseJsonObject(ja.getJSONObject(i));
+			}
+		} catch (JSONException e) {
+
+		}
+		try {
+			s.comCount = jo.getInt("comCount");
+		} catch (JSONException e) {
+
 		}
 
 		return s;

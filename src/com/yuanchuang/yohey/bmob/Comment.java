@@ -9,6 +9,7 @@ import cn.bmob.v3.BmobObject;
 public class Comment extends BmobObject {
 	private Post post;
 	private User user;
+	private Share share;
 	private String content;
 
 	public Post getPost() {
@@ -40,45 +41,51 @@ public class Comment extends BmobObject {
 		try {
 			comment.setObjectId(jo.getString("objectId"));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		try {
 			comment.setContent(jo.getString("content"));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		try {
 			comment.setCreatedAt(jo.getString("createdAt"));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		try {
 			comment.setTableName(jo.getString("tablename"));
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+
 		}
 		try {
 			comment.setUpdatedAt(jo.getString("updatedAt"));
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+
 		}
 		try {
 			comment.post = Post.paresJSONObject(jo.getJSONObject("post"));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		}
+		try {
+			comment.share = Share.parseJSONObject(jo.getJSONObject("share"));
+		} catch (JSONException e1) {
+
 		}
 		try {
 			comment.user = User.parseJsonObject(jo.getJSONObject("user"));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		return comment;
+	}
+
+	public Share getShare() {
+		return share;
+	}
+
+	public void setShare(Share share) {
+		this.share = share;
 	}
 }
