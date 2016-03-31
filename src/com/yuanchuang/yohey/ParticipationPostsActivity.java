@@ -3,7 +3,6 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.PostSAdater;
 import com.yuanchuang.yohey.myData.AdapterData;
 
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -86,7 +84,6 @@ public class ParticipationPostsActivity extends Activity {
 			data.setPost_head("");
 			data.setPost_browse(((int) (Math.random() * 10)));
 			data.setPost_message(((int) (Math.random() * 10)));
-			;
 			data.setPost_time("2015.8.12");
 			data.setPost_con("求大神带我飞");
 			list.add(data);

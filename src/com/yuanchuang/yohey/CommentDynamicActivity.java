@@ -24,13 +24,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -102,20 +99,13 @@ public class CommentDynamicActivity extends Activity {
 			app.data = null;
 			findView();
 			findHeadView();
-			adapter = new ThumbUpAdapter(list, getApplication());
+			adapter = new ThumbUpAdapter(list, getApplication(), CommentDynamicActivity.this);
 			getData();
 			listView.setDivider(getResources().getDrawable(R.color.post_line));
 			listView.setDividerHeight(1);
 			listView.addHeaderView(headView);
 
 			listView.setAdapter(adapter);
-			listView.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					intent.setClass(getApplicationContext(), PersonalInformationActivity.class);
-					app.data = mShare.getComCount();
-					startActivity(intent);
-				}
-			});
 		} catch (Exception e) {
 			e.printStackTrace();
 			finish();

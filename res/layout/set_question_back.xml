@@ -31,6 +31,24 @@
             android:text="@string/question_back"
             android:textColor="@color/write"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/question_text_to_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="@drawable/shape_rounded_yellow"
+            android:paddingBottom="2dp"
+            android:paddingLeft="@dimen/activity_navigation_bar_paddingtop"
+            android:paddingRight="@dimen/activity_navigation_bar_paddingtop"
+            android:paddingTop="2dp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <View

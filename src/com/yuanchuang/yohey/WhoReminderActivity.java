@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.R.color;
 import com.yuanchuang.yohey.edit.KanjiConversion;
 import com.yuanchuang.yohey.edit.MyEditText;
 import com.yuanchuang.yohey.edit.PinyinComparator;
@@ -20,6 +21,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -64,13 +66,14 @@ public class WhoReminderActivity extends Activity {
 		righeTitle = (TextView) findViewById(R.id.title_navigation_text_right_title);
 
 		toReturn.setVisibility(View.VISIBLE);
+		toReturn.setOnClickListener(clickListener);
 		title.setText("提醒谁看");
 		righeTitle.setText("确定");
 		Resources resources = getResources();
 		Drawable drawable = resources.getDrawable(R.drawable.shape_rounded_yellow);
 		righeTitle.setVisibility(View.VISIBLE);
 		righeTitle.setBackgroundDrawable(drawable);
-
+		righeTitle.setTextColor(color.black);
 		sortListView = (ListView) findViewById(R.id.country_lvcountry);
 		sortListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -110,6 +113,21 @@ public class WhoReminderActivity extends Activity {
 			}
 		});
 	}
+
+	OnClickListener clickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.title_navigation_back_icon:
+				finish();
+				break;
+
+			default:
+				break;
+			}
+		}
+	};
 
 	/**
 	 * 为ListView填充数据

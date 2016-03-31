@@ -94,7 +94,7 @@ public class PersonalInformationActivity extends Activity {
 			}
 		}
 		findView();
-		findRecord();
+
 	}
 
 	private void findRecord() {
@@ -161,8 +161,12 @@ public class PersonalInformationActivity extends Activity {
 		}
 
 		inflater = getLayoutInflater();
-		mView = inflater.inflate(R.layout.view_personal_information, null);
-		record.addView(mView);
+		for (int i = 0; i < 5; i++) {
+			mView = inflater.inflate(R.layout.view_personal_information, null);
+			mView.setId(i);
+			record.addView(mView);
+			findRecord();
+		}
 	}
 
 	OnClickListener clickListener = new OnClickListener() {

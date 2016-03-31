@@ -12,7 +12,8 @@
         android:layout_height="50dp"
         android:background="@color/black" >
 
-<!-- 標題 -->
+        <!-- 標題 -->
+
         <ImageView
             android:id="@+id/set_account_to_return"
             android:layout_width="wrap_content"
@@ -37,8 +38,9 @@
         android:layout_height="206.6dp"
         android:background="@drawable/yo_hey_material_background" >
 
-<!-- 头像 -->
-        <ImageView
+        <!-- 头像 -->
+
+        <com.yuanchuang.yohey.view.MyImageView
             android:id="@+id/set_account_head"
             android:layout_width="69.3dp"
             android:layout_height="69.3dp"
@@ -47,7 +49,8 @@
             android:contentDescription="@drawable/meng_mei_head"
             android:src="@drawable/meng_mei_head" />
 
-<!-- 用户名 -->
+        <!-- 用户名 -->
+
         <TextView
             android:id="@+id/set_account_name"
             android:layout_width="wrap_content"
@@ -60,7 +63,8 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
-<!-- 添加账户 -->
+    <!-- 添加账户 -->
+
     <LinearLayout
         android:id="@+id/set_account_add_linear_account_number"
         android:layout_width="match_parent"
@@ -87,7 +91,8 @@
             android:textSize="13sp" />
     </LinearLayout>
 
-<!-- 退出当前账号 -->
+    <!-- 退出当前账号 -->
+
     <LinearLayout
         android:id="@+id/set_account_exit_account_linear_account_number"
         android:layout_width="match_parent"
