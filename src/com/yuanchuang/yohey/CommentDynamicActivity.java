@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import com.yuanchuang.yohey.adapter.ThumbUpAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
-import com.yuanchuang.yohey.bmob.BmobFindById;
+import com.yuanchuang.yohey.bmob.BmobFindObject;
 import com.yuanchuang.yohey.bmob.Comment;
 import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
@@ -388,7 +388,7 @@ public class CommentDynamicActivity extends Activity {
 				Share s = new Share();
 				s.increment("comCount");
 				s.update(getApplicationContext(), mShare.getObjectId(), null);
-				BmobFindById finder = new BmobFindById(mShare.getObjectId(), "Share");
+				BmobFindObject finder = new BmobFindObject(mShare.getObjectId(), "Share");
 				finder.start(new OnSendListener() {
 					@Override
 					public void start() {
