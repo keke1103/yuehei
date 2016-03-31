@@ -8,6 +8,7 @@ public class YoheySqlHelper extends SQLiteOpenHelper {
 	public static final String DB_NAME = "yohey_db";
 	public static int VERSION = 1;
 	public static final String IMAGE_TABLE = "image_ceche";
+	public static final String MSSAGE_TABLE = "mssage";
 	public String tableName = "image_ceche";
 
 	public YoheySqlHelper(Context context) {
@@ -24,6 +25,9 @@ public class YoheySqlHelper extends SQLiteOpenHelper {
 			String sql = "Create table `" + IMAGE_TABLE
 					+ "` (`url` VERCHAR(300) PRIMARY KEY,`path` VERCHAR(300) NOT NULL ); ";
 			db.execSQL(sql);
+			sql = "Create table `" + MSSAGE_TABLE
+					+ "` (`id` INTEGER PRIMARY KEY AUTOINCREMENT,`friendId` VARCHAR(30) NOT NULL ,`top` INTEGER(8),`newmsg` VARCHAR(60),`time` INTEGER(15));";
+			db.execSQL(sql);//autoincrement
 		}
 	}
 

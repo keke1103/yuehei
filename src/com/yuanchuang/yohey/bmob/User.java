@@ -277,9 +277,13 @@ public class User extends BmobUser {
 							app.friendGroup[i] = g;
 					}
 					app.friendGroup[0].addUser(User.this, true);
+					app.isLoadingEnd = true;
+					app.mHandler.sendEmptyMessage(100);
+
 					Log.i("User", "friend group load end length=" + app.friendGroup.length);
 				} catch (JSONException e) {
 					e.printStackTrace();
+
 				}
 			};
 		}.start();

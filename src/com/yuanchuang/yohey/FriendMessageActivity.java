@@ -9,13 +9,16 @@ import com.yuanchuang.yohey.adapter.FriendMessageBaseAdapter;
 import com.yuanchuang.yohey.adapter.MediaManager;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.app.YoheyNotificationManager;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.AudioRecordButton;
 import com.yuanchuang.yohey.tools.AudioRecordButton.AudioFinishRecorderListener;
 import com.yuanchuang.yohey.view.RecorderView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,6 +57,7 @@ public class FriendMessageActivity extends Activity {
 	AudioRecordButton recordBtn;
 	View viewanim;
 	boolean yuying = true;
+	User friend;
 
 	private OnClickListener click = new OnClickListener() {
 
@@ -90,7 +94,14 @@ public class FriendMessageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_message_frame_main);
+		/**
+		 * 初始化通知的消息;
+		 */
+		YoheyNotificationManager.getInstance(getApplicationContext()).initNotivication();
 		app = (YoheyApplication) getApplication();
+		/**
+		 * 给通知绑定一个监听者,若监听者存在,且对应,通知栏将不发送通知
+		 */
 		YoheyNotificationManager.getInstance(getApplicationContext()).addObserver(this);
 		intent = getIntent();
 		c = BmobIMConversation.obtain(BmobIMClient.getInstance(),
@@ -114,7 +125,6 @@ public class FriendMessageActivity extends Activity {
 		String content = msgEdit.getText().toString();
 
 		if (TextUtils.isEmpty(content)) {
-			Toast.makeText(getApplicationContext(), "消息不能为空", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		BmobIMTextMessage msg = new BmobIMTextMessage();
@@ -123,7 +133,6 @@ public class FriendMessageActivity extends Activity {
 		map.put("level", "1");
 		msg.setExtraMap(map);
 		c.sendMessage(msg, new MessageSendListener() {
-			@Override
 			public void done(BmobIMMessage arg0, BmobException e) {
 				addMessage(arg0);
 				msgEdit.setText("");
@@ -160,7 +169,7 @@ public class FriendMessageActivity extends Activity {
 	 */
 	private void setAdapter(List<BmobIMMessage> list) {
 		if (friendMessageBaseAdapter == null) {
-			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, app);
+			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, this);
 			messageListView.setAdapter(friendMessageBaseAdapter);
 		} else
 			friendMessageBaseAdapter.setMessageData(list);
@@ -175,7 +184,7 @@ public class FriendMessageActivity extends Activity {
 		if (friendMessageBaseAdapter == null) {
 			List<BmobIMMessage> list = new ArrayList<BmobIMMessage>();
 			list.add(msg);
-			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, app);
+			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, this);
 			messageListView.setAdapter(friendMessageBaseAdapter);
 		} else {
 			friendMessageBaseAdapter.addMessageData(msg);
@@ -200,18 +209,33 @@ public class FriendMessageActivity extends Activity {
 	private void initView() {
 		recordBtn.setAudioFinishRecorderListener(new AudioFinishRecorderListener() {
 			public void onFinished(float seconds, String filePath) {
-
 				RecorderView recorder = RecorderView.createRecorder(getApplicationContext(), seconds, filePath);
 			}
 		});
 		yuyinImage.setOnClickListener(click);
 		msgSend.setOnClickListener(click);
-		title.setText(app.getFriendById(c.getConversationId()).getNickName());
+		initTitle();
+	}
+
+	private void initTitle() {
+		title.setText("");
+		app.getFriendById(c.getConversationId(), mHandler);
 	}
 
 	public BmobIMConversation getConversation() {
 		return c;
 	}
+
+	@SuppressLint("HandlerLeak")
+	Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			friend = ((User) (msg.obj));
+			if (friend == null)
+				finish();
+			title.setText(friend.getNickName());
+			friendMessageBaseAdapter.setFriend(friend);
+		};
+	};
 
 	protected void onDestroy() {
 		YoheyNotificationManager.getInstance(getApplicationContext()).deleteObserver();

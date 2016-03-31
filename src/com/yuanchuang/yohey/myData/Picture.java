@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.cache.YoheyCache;
 import com.yuanchuang.yohey.cache.YoheySqlHelper;
 
@@ -34,7 +33,6 @@ public class Picture {
 	public ImageView mView;
 
 	public Picture() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -43,12 +41,7 @@ public class Picture {
 	 * @param url
 	 */
 	public Picture(String url) {
-
-		if (url != null && url.startsWith("http")) {
-			thumbnail_pic = url;
-		} else {
-			thumbnail_pic = YoheyApplication.ServiceIp + url;
-		}
+		thumbnail_pic = url;
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -95,7 +88,7 @@ public class Picture {
 						}
 						c.close();
 						if (f == null || !f.exists()) {
-							
+
 							url = new URL(thumbnail_pic);
 							InputStream in = url.openStream();
 							if (f == null) {
