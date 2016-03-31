@@ -1,16 +1,18 @@
 package lu;
 
-import java.util.ArrayList;
-
 import com.yuanchuang.yohey.AddFriendsActivity;
 import com.yuanchuang.yohey.FriendMaterialActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.FriendsBaseAdapter;
 import com.yuanchuang.yohey.adapter.MessageBaseAdapter;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.app.YoheyApplication.OnGroupLoadingEndLitener;
+import com.yuanchuang.yohey.app.YoheyNotificationManager;
 import com.yuanchuang.yohey.bmob.User;
+import com.yuanchuang.yohey.cache.YoheyCache;
 import com.yuanchuang.yohey.view.MyImageView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,9 +45,8 @@ public class Lu_Activity extends Fragment {
 	ExpandableListView friendList;
 	MessageBaseAdapter msgadapter;
 	FriendsBaseAdapter friendsadapter;
-	ArrayList<User> msglist;
 	TextView add;
-	MyImageView headImage;//头像
+	MyImageView headImage;// 头像
 	User user;
 	YoheyApplication app;
 
@@ -57,29 +58,40 @@ public class Lu_Activity extends Fragment {
 		user = BmobUser.getCurrentUser(getActivity(), User.class);
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		View view = inflater.inflate(R.layout.lu, lay);
-		msglist = new ArrayList<User>();
 		radiogroup = (RadioGroup) view.findViewById(R.id.radiogroup);
 		msg = (RadioButton) view.findViewById(R.id.rb_msg);
 		friends = (RadioButton) view.findViewById(R.id.rb_friends);
 		msgList = (ListView) view.findViewById(R.id.listview);
 		friendList = (ExpandableListView) view.findViewById(R.id.expand);
 		add = (TextView) view.findViewById(R.id.rb_add);
-		headImage=(MyImageView)view.findViewById(R.id.lu_head_image);
+		headImage = (MyImageView) view.findViewById(R.id.lu_head_image);
 		this.radiogroup.setOnCheckedChangeListener(changelistener);
 
 		user.binderImageView(headImage);
-		
-		msgadapter = new MessageBaseAdapter(msglist, getActivity());
+
+		msgadapter = new MessageBaseAdapter(app.msgList, app);
 		msgList.setAdapter(msgadapter);
 		msgList.setOnItemClickListener(clickListener);
 		add.setOnClickListener(click);
+		YoheyCache.getMssageList(app);
+		getMsgListData();
+		YoheyNotificationManager.getInstance(getActivity()).addMssageObserb(msgadapter);
 		return view;
 	};
+
+	@SuppressLint("HandlerLeak")
+	private void getMsgListData() {
+		app.addGroupLoadingEnd(new OnGroupLoadingEndLitener() {
+
+			public void onLoadingEnd(YoheyApplication app) {
+				msgadapter.setAppForShowData(app);
+			}
+		});
+	}
 
 	OnClickListener click = new OnClickListener() {
 		Intent intent;
 
-		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.rb_add:
@@ -102,7 +114,7 @@ public class Lu_Activity extends Fragment {
 			case R.id.rb_msg:
 				msgList.setVisibility(View.VISIBLE);
 				friendList.setVisibility(View.GONE);
-				msgadapter = new MessageBaseAdapter(msglist, getActivity());
+				msgadapter = new MessageBaseAdapter(app.msgList, app);
 				msgList.setAdapter(msgadapter);
 				msgList.setOnItemClickListener(clickListener);
 				break;

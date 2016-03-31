@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
@@ -19,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cn.bmob.newim.bean.BmobIMMessage;
-import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -33,14 +31,18 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 	Context context;
 	LayoutInflater inflater;
 	User mine;
-	YoheyApplication app;
+	User f;
 
-	public FriendMessageBaseAdapter(List<BmobIMMessage> list, YoheyApplication app) {
+	public FriendMessageBaseAdapter(List<BmobIMMessage> list, Context context) {
 		this.list = list;
-		this.context = app.getApplicationContext();
-		this.app = app;
+		this.context = context;
 		mine = BmobUser.getCurrentUser(context, User.class);
 		inflater = LayoutInflater.from(context);
+	}
+
+	public void setFriend(User f) {
+		this.f = f;
+		notifyDataSetChanged();
 	}
 
 	public void setMessageData(List<BmobIMMessage> list) {
@@ -57,7 +59,7 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-	
+
 		return list.size();
 	}
 
@@ -65,7 +67,6 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 
 		return list.get(position);
 	}
-
 
 	public long getItemId(int position) {
 
@@ -92,17 +93,16 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		BmobIMUserInfo info = msg.getBmobIMUserInfo();
 		holder.messageTime.setText(TimeUtil.formateTime(msg.getCreateTime()));
-		if (info != null && info.getUserId().equals(mine.getObjectId())) {
-			 
+		if (msg.getFromId().equals(mine.getObjectId())) {
+
 			holder.myChatContent.setText(msg.getContent());
-			
 			mine.binderImageView(holder.myChatImage);
 			holder.myChat.setVisibility(View.VISIBLE);
 			holder.friendChat.setVisibility(View.GONE);
 		} else {
-			app.getFriendById(msg.getFromId()).binderImageView(holder.friendChatImage);
+			if (f != null)
+				f.binderImageView(holder.friendChatImage);
 			holder.friendChatContent.setText(msg.getContent());
 			holder.myChat.setVisibility(View.GONE);
 			holder.friendChat.setVisibility(View.VISIBLE);

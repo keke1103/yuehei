@@ -2,17 +2,18 @@ package com.yuanchuang.yohey.chat;
 
 import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.app.YoheyNotificationManager;
+import com.yuanchuang.yohey.cache.YoheyCache;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 import cn.bmob.newim.event.MessageEvent;
 
 public class MessageReceiver extends BroadcastReceiver {
 
-	@Override
 	public void onReceive(Context context, Intent intent) {
 		if (null != intent) {
 			final MessageEvent event = (MessageEvent) intent.getSerializableExtra("event");
@@ -23,6 +24,7 @@ public class MessageReceiver extends BroadcastReceiver {
 			intent.putExtras(b);
 			Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
 			YoheyNotificationManager.getInstance(context).execMessage(event);
+			YoheyCache.saveMssageList(context, event.getMessage().getFromId(), event.getMessage().getContent());
 		}
 	}
 
