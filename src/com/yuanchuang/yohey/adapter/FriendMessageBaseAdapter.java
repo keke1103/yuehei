@@ -55,6 +55,7 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
+	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list.size();

@@ -64,6 +64,7 @@ public class BitmapCache extends Activity {
 		new Thread() {
 			Bitmap thumb;
 
+			@Override
 			public void run() {
 
 				try {

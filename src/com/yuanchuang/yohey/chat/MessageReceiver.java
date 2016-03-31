@@ -12,6 +12,7 @@ import cn.bmob.newim.event.MessageEvent;
 
 public class MessageReceiver extends BroadcastReceiver {
 
+	@Override
 	public void onReceive(Context context, Intent intent) {
 		if (null != intent) {
 			final MessageEvent event = (MessageEvent) intent.getSerializableExtra("event");

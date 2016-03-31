@@ -133,9 +133,11 @@ public class PersonalPostActivity extends Activity {
 		get.putString("uid", user.getObjectId());
 		get.setOnSendListener(new OnSendListener() {
 
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void end(String result) {
 				Log.i("+++++++++++++++", ">>>>>" + result);
 				likeCountImage.setChecked("like".equals(result));
@@ -281,6 +283,7 @@ public class PersonalPostActivity extends Activity {
 			comment.setUser(user);
 			comment.setContent(content);
 			comment.save(this, new SaveListener() {
+				@Override
 				public void onSuccess() {
 					say.setText("");
 					resultCode = 1;
@@ -292,6 +295,7 @@ public class PersonalPostActivity extends Activity {
 					getData();
 				}
 
+				@Override
 				public void onFailure(int arg0, String arg1) {
 
 				}

@@ -135,8 +135,8 @@ public class WhoExpandableAdpter extends BaseExpandableListAdapter {
 		Log.i("aaaaaa", list.get(groupPosition).size() + "");
 		holder.childBox.setChecked(list.get(groupPosition).get(childPosition).isWhoBox());
 		holder.childBox.setOnCheckedChangeListener(checkChange);
-		holder.childContent.setText((CharSequence) list.get(groupPosition).get(childPosition).getWhoContent());
-		holder.childName.setText((CharSequence) list.get(groupPosition).get(childPosition).getWhoName());
+		holder.childContent.setText(list.get(groupPosition).get(childPosition).getWhoContent());
+		holder.childName.setText(list.get(groupPosition).get(childPosition).getWhoName());
 		return convertView;
 
 	}

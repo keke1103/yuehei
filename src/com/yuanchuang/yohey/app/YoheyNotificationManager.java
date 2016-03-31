@@ -70,7 +70,7 @@ public class YoheyNotificationManager {
 		builder.setContentIntent(intent);
 		Notification notification = builder.build();
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		NotificationManager mger = (NotificationManager) context.getSystemService(Service.NOTIFICATION_SERVICE);
+		NotificationManager mger = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		mger.notify(1010, notification);
 	}
 }

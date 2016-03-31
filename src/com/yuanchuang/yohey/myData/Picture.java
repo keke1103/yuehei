@@ -95,7 +95,7 @@ public class Picture {
 						}
 						c.close();
 						if (f == null || !f.exists()) {
-							c.close();
+							
 							url = new URL(thumbnail_pic);
 							InputStream in = url.openStream();
 							if (f == null) {

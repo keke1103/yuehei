@@ -18,6 +18,7 @@ public class YoheySqlHelper extends SQLiteOpenHelper {
 		super(context, DB_NAME, null, version);
 	}
 
+	@Override
 	public void onCreate(SQLiteDatabase db) {
 		if (db != null) {
 			String sql = "Create table `" + IMAGE_TABLE
@@ -26,6 +27,7 @@ public class YoheySqlHelper extends SQLiteOpenHelper {
 		}
 	}
 
+	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if (db == null)
 			return;

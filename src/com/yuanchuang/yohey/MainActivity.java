@@ -134,19 +134,23 @@ public class MainActivity extends FragmentActivity {
 
 	private OnPageChangeListener pageChange = new OnPageChangeListener() {
 
+		@Override
 		public void onPageSelected(int arg0) {
 			radioButton[arg0].setChecked(true);
 		}
 
+		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 
 		}
 
+		@Override
 		public void onPageScrollStateChanged(int arg0) {
 
 		}
 	};
 
+	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		Log.i("onActivityResult", "req=" + arg0 + " res=" + arg1);
 

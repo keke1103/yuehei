@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,12 +117,14 @@ public class PostingInterfaceActivity extends Activity {
 		p.setTitle(context.getText().toString());
 		p.save(getApplicationContext(), new SaveListener() {
 
+			@Override
 			public void onSuccess() {
 				Toast.makeText(getApplicationContext(), "帖子发表成功", Toast.LENGTH_SHORT).show();
 				setResult(1);
 				finish();
 			}
 
+			@Override
 			public void onFailure(int arg0, String arg1) {
 				Toast.makeText(getApplicationContext(), "帖子发表失败:" + arg1, Toast.LENGTH_SHORT).show();
 			}

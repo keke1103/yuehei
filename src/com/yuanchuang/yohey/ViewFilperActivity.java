@@ -26,6 +26,7 @@ public class ViewFilperActivity extends Activity {
 	Intent intent;
 	ImageView back;
 	int index;
+	@Override
 	@SuppressWarnings("deprecation")
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -53,6 +54,7 @@ public class ViewFilperActivity extends Activity {
 		setContentView(line,params);
 		Log.i("ViewFilperActivity", "back"+back.isClickable());
 		back.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				Log.i("ViewFilperActivity", "finish");
 				finish();
@@ -73,12 +75,14 @@ public class ViewFilperActivity extends Activity {
 		  
 		}
 		
+		@Override
 		public int getCount() {
 		 
 			return  images.length;
 		}
  
 		
+		@Override
 		public boolean isViewFromObject(View arg0, Object arg1) {
 		 
 			return arg0==arg1;

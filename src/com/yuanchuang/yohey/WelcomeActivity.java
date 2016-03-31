@@ -15,6 +15,7 @@ import android.widget.ViewFlipper;
 public class WelcomeActivity extends Activity {
 	ViewFlipper mView;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class WelcomeActivity extends Activity {
 
 	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			mView.stopFlipping();
 			mView.setOnClickListener(new OnClickListener() {
@@ -58,6 +60,7 @@ public class WelcomeActivity extends Activity {
 
 	Runnable run = new Runnable() {
 
+		@Override
 		public void run() {
 			handler.sendEmptyMessage(1);
 		}

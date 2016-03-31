@@ -11,6 +11,7 @@ import com.yuanchuang.yohey.myData.AdapterData;
  */
 public class PinyinComparator implements Comparator<AdapterData> {
 
+	@Override
 	public int compare(AdapterData o1, AdapterData o2) {
 		if (o1.getEditSortLetters().equals("@") || o2.getEditSortLetters().equals("#")) {
 			return -1;

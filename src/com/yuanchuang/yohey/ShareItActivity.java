@@ -141,10 +141,12 @@ public class ShareItActivity extends Activity {
 		if (Bimp.drr.isEmpty()) {
 			share.save(getApplicationContext(), new SaveListener() {
 
+				@Override
 				public void onSuccess() {
 					finish();
 				}
 
+				@Override
 				public void onFailure(int arg0, String arg1) {
 					Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
 				}
@@ -162,10 +164,12 @@ public class ShareItActivity extends Activity {
 				}
 				share.setImages(arg0);
 				share.save(getApplicationContext(), new SaveListener() {
+					@Override
 					public void onSuccess() {
 						finish();
 					}
 
+					@Override
 					public void onFailure(int arg0, String arg1) {
 						Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
 					}
@@ -177,6 +181,7 @@ public class ShareItActivity extends Activity {
 				Log.i("ShareItActivity", "上传文件:" + arg0 + " 当前进度:" + arg1 + " 已上传:" + arg2 + " 总进度:" + arg3);
 			}
 
+			@Override
 			public void onError(int arg0, String arg1) {
 				Log.w("ShareItActivity", arg0 + " >" + arg1);
 				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
@@ -224,6 +229,7 @@ public class ShareItActivity extends Activity {
 		adapter.update();
 		noScrollgridview.setAdapter(adapter);
 		OnItemClickListener listener = new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (position == Bimp.bmp.size()) {
 					addImageView();
@@ -241,6 +247,7 @@ public class ShareItActivity extends Activity {
 	/**
 	 * 回到这个页面的时候刷新adapter数据
 	 */
+	@Override
 	protected void onRestart() {
 		adapter.update();
 
@@ -250,6 +257,7 @@ public class ShareItActivity extends Activity {
 	/**
 	 * 清空static的缓存数据
 	 */
+	@Override
 	protected void onDestroy() {
 		Bimp.max = 0;
 		Bimp.act_bool = true;
@@ -322,6 +330,7 @@ public class ShareItActivity extends Activity {
 		startActivityForResult(openCameraIntent, TAKE_PICTURE);
 	}
 
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case TAKE_PICTURE:

@@ -54,6 +54,7 @@ public class MainAdapter extends BaseAdapter {
 		return list;
 	}
 
+	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list.size();
@@ -111,12 +112,13 @@ public class MainAdapter extends BaseAdapter {
 		holder.message.setText(p.getComcount() + "");
 		holder.up.setText(p.getLikenumber() + "");
 		holder.headName.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(context, PersonalInformationActivity.class);
 				YoheyApplication app = new YoheyApplication();
 
 				app.data = p.getUser();
-				Toast.makeText(context, (CharSequence) p.getUser().getNickName(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, p.getUser().getNickName(), Toast.LENGTH_SHORT).show();
 				Log.i("mainAdapter", app.data + "");
 				context.startActivity(intent);
 			}

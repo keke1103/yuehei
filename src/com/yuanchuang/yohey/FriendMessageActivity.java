@@ -57,6 +57,7 @@ public class FriendMessageActivity extends Activity {
 	
 	private OnClickListener click = new OnClickListener() {
         
+		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.friend_message_frame_back:
@@ -85,6 +86,7 @@ public class FriendMessageActivity extends Activity {
 
 	};
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend_message_frame_main);
@@ -120,6 +122,7 @@ public class FriendMessageActivity extends Activity {
 		map.put("level", "1");
 		msg.setExtraMap(map);
 		c.sendMessage(msg, new MessageSendListener() {
+			@Override
 			public void done(BmobIMMessage arg0, BmobException e) {
 				addMessage(arg0);
 				msgEdit.setText("");
@@ -135,6 +138,7 @@ public class FriendMessageActivity extends Activity {
 	 */
 	MessagesQueryListener msgListener = new MessagesQueryListener() {
 
+		@Override
 		public void done(List<BmobIMMessage> list, BmobException e) {
 			if (e == null) {
 				if (list != null && !list.isEmpty()) {
@@ -194,6 +198,7 @@ public class FriendMessageActivity extends Activity {
 		recordBtn.setAudioFinishRecorderListener(new AudioFinishRecorderListener() {
 			
 
+			@Override
 			public void onFinished(float seconds, String filePath) {
 
 				RecorderView recorder = RecorderView.createRecorder(getApplicationContext(), seconds, filePath);

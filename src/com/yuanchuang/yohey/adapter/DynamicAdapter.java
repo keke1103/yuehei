@@ -15,6 +15,7 @@ import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.HttpGet;
+import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
@@ -68,6 +69,7 @@ public class DynamicAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
+	@Override
 	public int getCount() {
 		return list.size();
 	}
@@ -96,7 +98,17 @@ public class DynamicAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.setData(mShare);
+		if (((list.size() - position) < 2) && mFlush != null) {
+			mFlush.flush(this, position);
+		}
 		return convertView;
+	}
+	
+	
+	OnFlushOldData mFlush;
+
+	public void setOnFlushOldData(OnFlushOldData mFlush) {
+		this.mFlush = mFlush;
 	}
 
 	Intent intent = new Intent();
@@ -130,6 +142,7 @@ public class DynamicAdapter extends BaseAdapter {
 			imageLayout = (AbsoluteLayout) convertView.findViewById(R.id.list_dynamic_absolute_image);
 
 			headName.setOnClickListener(new OnClickListener() {
+				@Override
 				public void onClick(View v) {
 					intent.setClass(context, PersonalInformationActivity.class);
 					app.data = mShare.getUser();
@@ -161,6 +174,7 @@ public class DynamicAdapter extends BaseAdapter {
 			setThumbUp(mShare.getObjectId());
 			if (mShare.getImages() != null) {
 				DensityUtil.sudoku(context, imageLayout, mShare.getImages(), new OnClickListener() {
+					@Override
 					public void onClick(View v) {
 						int index = v.getId() - 1000;
 						Share sh = (Share) ((View) v.getParent()).getTag();
@@ -187,6 +201,7 @@ public class DynamicAdapter extends BaseAdapter {
 				imageLayout.addView(child, -1, -1);
 				childHold.nickNmae.setOnClickListener(new OnClickListener() {
 
+					@Override
 					public void onClick(View v) {
 						intent.setClass(context, PersonalInformationActivity.class);
 						app.data = mShare.getForwarding().getUser();
@@ -202,9 +217,11 @@ public class DynamicAdapter extends BaseAdapter {
 			get.putString("uid", BmobUser.getCurrentUser(context).getObjectId());
 			get.putString("sid", sid);
 			get.setOnSendListener(new OnSendListener() {
+				@Override
 				public void start() {
 				}
 
+				@Override
 				public void end(String result) {
 					thumbUp.setChecked("like".equals(result));
 				}
@@ -213,6 +230,7 @@ public class DynamicAdapter extends BaseAdapter {
 		}
 
 		OnCheckedChangeListener like = new OnCheckedChangeListener() {
+			@Override
 			public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
 
 			}
@@ -223,17 +241,19 @@ public class DynamicAdapter extends BaseAdapter {
 			get.putString("uid", BmobUser.getCurrentUser(context).getObjectId());
 			get.putString("sid", mShare.getObjectId());
 			get.setOnSendListener(new OnSendListener() {
+				@Override
 				public void start() {
 				}
 
+				@Override
 				public void end(String result) {
 					try {
 						JSONObject jo = new JSONObject(result);
 						jo.get("updatedAt");
 						if (thumbUp.isChecked()) {
-							mShare.addLikeUser(User.getCurrentUser(context, User.class));
+							mShare.addLikeUser(BmobUser.getCurrentUser(context, User.class));
 						} else {
-							mShare.deleteLikeUser(User.getCurrentUser(context, User.class));
+							mShare.deleteLikeUser(BmobUser.getCurrentUser(context, User.class));
 
 						}
 					} catch (JSONException e) {

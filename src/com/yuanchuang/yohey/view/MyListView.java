@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
@@ -95,14 +96,14 @@ public class MyListView extends ListView implements OnScrollListener {
 		setOnScrollListener(this);
 
 		// 设置旋转动画事件
-		animation = new RotateAnimation(0, -180, RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+		animation = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f,
+				Animation.RELATIVE_TO_SELF, 0.5f);
 		animation.setInterpolator(new LinearInterpolator());
 		animation.setDuration(250);
 		animation.setFillAfter(true);
 
-		reverseAnimation = new RotateAnimation(-180, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+		reverseAnimation = new RotateAnimation(-180, 0, Animation.RELATIVE_TO_SELF, 0.5f,
+				Animation.RELATIVE_TO_SELF, 0.5f);
 		reverseAnimation.setInterpolator(new LinearInterpolator());
 		reverseAnimation.setDuration(200);
 		reverseAnimation.setFillAfter(true);
@@ -315,6 +316,7 @@ public class MyListView extends ListView implements OnScrollListener {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setAdapter(ListAdapter adapter) {
 		lvHeaderLastUpdatedTv.setText("最近更新:" + new Date().toLocaleString());

@@ -207,6 +207,7 @@ public class PersonalInformationActivity extends Activity {
 		nu.setMood(signature.getText().toString());
 		nu.update(getApplicationContext(), user.getObjectId(), new UpdateListener() {
 
+			@Override
 			public void onSuccess() {
 				user.setMood(signature.getText().toString());
 				app.friendGroup[0].getFriends()[0].setMood(user.getMood());
@@ -231,6 +232,7 @@ public class PersonalInformationActivity extends Activity {
 		get.putString("gid", user.getDefGame().getObjectId());
 		get.setOnSendListener(new OnSendListener() {
 
+			@Override
 			public void start() {
 			}
 
@@ -256,10 +258,12 @@ public class PersonalInformationActivity extends Activity {
 		BmobUser newUser = new BmobUser();
 		BmobUser bmobUser = BmobUser.getCurrentUser(this);
 		newUser.update(this, bmobUser.getObjectId(), new UpdateListener() {
+			@Override
 			public void onSuccess() {
 				Toast.makeText(getApplication(), "更新用户信息成功", Toast.LENGTH_SHORT).show();
 			}
 
+			@Override
 			public void onFailure(int arg0, String arg1) {
 				Toast.makeText(getApplication(), "更新用户信息失败", Toast.LENGTH_SHORT).show();
 			}
@@ -274,9 +278,11 @@ public class PersonalInformationActivity extends Activity {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getgroup");
 		get.putString("uid", BmobUser.getCurrentUser(getApplicationContext()).getObjectId());
 		get.setOnSendListener(new OnSendListener() {
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void end(String result) {
 				try {
 
@@ -307,9 +313,11 @@ public class PersonalInformationActivity extends Activity {
 	private void addFriend(final FriendGroup group) {
 		final Friends f = new Friends();
 		f.addFriend(getApplicationContext(), user, group, new OnSendListener() {
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void end(String result) {
 				try {
 					JSONObject jo = new JSONObject(result);

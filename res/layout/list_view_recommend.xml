@@ -6,7 +6,7 @@
 
     <!-- 玩家头像 -->
 
-    <com.yuanchuang.yohey.MyImageView
+    <com.yuanchuang.yohey.view.MyImageView
         android:id="@+id/recommend_image_user_head"
         android:layout_width="60dp"
         android:layout_height="60dp"

@@ -24,6 +24,7 @@ import com.yuanchuang.yohey.tools.QQBaseUIListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -118,9 +120,11 @@ public class LoginAndRegistered extends Activity {
 
 					Log.i("insert", a + " -- " + n);
 					OnSendListener mListener = new OnSendListener() {
+						@Override
 						public void start() {
 						}
 
+						@Override
 						public void end(String result) {
 
 							Log.i("lol result", result);
@@ -266,10 +270,12 @@ public class LoginAndRegistered extends Activity {
 
 		}
 
+		@Override
 		public void onError(UiError e) {
 			Toast.makeText(getApplicationContext(), "onError: " + e.errorDetail, Toast.LENGTH_SHORT).show();
 		}
 
+		@Override
 		public void onCancel() {
 			Toast.makeText(getApplicationContext(), "onCancel:  ", Toast.LENGTH_SHORT).show();
 			if (application.isServerSideLogin) {
@@ -297,6 +303,7 @@ public class LoginAndRegistered extends Activity {
 				application.qqInfo = new UserInfo(LoginAndRegistered.this, application.mTencent.getQQToken());
 				application.qqInfo.getUserInfo(new QQBaseUIListener(LoginAndRegistered.this) {
 
+					@Override
 					protected void doComplete(JSONObject jo) {
 						final String username;
 						final String icon;
@@ -317,10 +324,12 @@ public class LoginAndRegistered extends Activity {
 							query.findObjects(getApplicationContext(),
 									new FindListener<com.yuanchuang.yohey.bmob.User>() {
 
+								@Override
 								public void onError(int arg0, String arg1) {
 
 								}
 
+								@Override
 								public void onSuccess(List<User> arg0) {
 									if (arg0.size() == 0) {
 
@@ -328,10 +337,12 @@ public class LoginAndRegistered extends Activity {
 										user.setNickName(username);
 										user.setSex(!"男".equals(sex));
 										user.signUp(LoginAndRegistered.this, new SaveListener() {
+											@Override
 											public void onSuccess() {
 												addGame(user);
 											}
 
+											@Override
 											public void onFailure(int arg0, String arg1) {
 
 												Toast.makeText(getApplicationContext(), "error" + arg1,
@@ -342,10 +353,12 @@ public class LoginAndRegistered extends Activity {
 
 										user.login(getApplicationContext(), new SaveListener() {
 
+											@Override
 											public void onSuccess() {
 												BmobQuery<Game> query = new BmobQuery<Game>();
 												query.addWhereEqualTo("user", user);
 												query.findObjects(getApplicationContext(), new FindListener<Game>() {
+													@Override
 													public void onSuccess(List<Game> arg0) {
 														if (arg0.size() == 0) {
 															addGame(user);
@@ -357,6 +370,7 @@ public class LoginAndRegistered extends Activity {
 														}
 													}
 
+													@Override
 													public void onError(int arg0, String arg1) {
 														Toast.makeText(getApplicationContext(), "error" + arg1,
 																Toast.LENGTH_SHORT).show();
@@ -364,6 +378,7 @@ public class LoginAndRegistered extends Activity {
 												});
 											}
 
+											@Override
 											public void onFailure(int arg0, String arg1) {
 												Toast.makeText(getApplicationContext(), "error" + arg1,
 														Toast.LENGTH_SHORT).show();
@@ -389,8 +404,9 @@ public class LoginAndRegistered extends Activity {
 	 */
 	@SuppressWarnings("static-access")
 	public void saveLoginData(JSONObject re) {
+		getApplicationContext();
 		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
-				getApplicationContext().MODE_PRIVATE);
+				Context.MODE_PRIVATE);
 		SharedPreferences.Editor edit = storage.edit();
 		edit.putString("qqData", re.toString());
 		edit.commit();
@@ -403,9 +419,10 @@ public class LoginAndRegistered extends Activity {
 	 * @throws JSONException
 	 */
 	public JSONObject getLoginData() throws JSONException {
+		getApplicationContext();
 		@SuppressWarnings("static-access")
 		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
-				getApplicationContext().MODE_PRIVATE);
+				Context.MODE_PRIVATE);
 		String js = storage.getString("qqData", "");
 		JSONObject jo = new JSONObject(js);
 		return jo;
@@ -449,6 +466,7 @@ public class LoginAndRegistered extends Activity {
 		game.setZhandouli(zhandouli);
 		game.save(getApplicationContext(), new SaveListener() {
 
+			@Override
 			public void onSuccess() {
 				Log.i("onSuccess", "onSuccess");
 				User u = new User();
@@ -459,15 +477,17 @@ public class LoginAndRegistered extends Activity {
 				finish();
 			}
 
+			@Override
 			public void onFailure(int arg0, String arg1) {
 				Toast.makeText(getApplicationContext(), "error" + arg1, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
+	@Override
 	protected void onDestroy() {
 		application.connectChatService();
-		User u = User.getCurrentUser(getApplicationContext(), User.class);
+		User u = BmobUser.getCurrentUser(getApplicationContext(), User.class);
 		if (u != null) {
 			u.getFriendGroup(application);
 		}
@@ -477,6 +497,7 @@ public class LoginAndRegistered extends Activity {
 	/**
 	 * Activity回调
 	 */
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.i("LoginActivity", "-->onActivityResult " + requestCode + " resultCode=" + resultCode);
 		Log.i("LoginActivity", data.toString());

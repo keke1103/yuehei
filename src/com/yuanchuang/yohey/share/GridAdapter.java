@@ -41,15 +41,18 @@ public class GridAdapter extends BaseAdapter {
 		loading();
 	}
 
+	@Override
 	public int getCount() {
 		return (Bimp.bmp.size() + 1);
 	}
 
+	@Override
 	public Object getItem(int arg0) {
 
 		return null;
 	}
 
+	@Override
 	public long getItemId(int arg0) {
 
 		return 0;
@@ -66,6 +69,7 @@ public class GridAdapter extends BaseAdapter {
 	/**
 	 * ListView Item设置
 	 */
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		ViewHolder holder = null;
@@ -97,6 +101,7 @@ public class GridAdapter extends BaseAdapter {
 	}
 
 	Handler handler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
@@ -108,6 +113,7 @@ public class GridAdapter extends BaseAdapter {
 
 	public void loading() {
 		new Thread(new Runnable() {
+			@Override
 			public void run() {
 				while (true) {
 					if (Bimp.max == Bimp.drr.size()) {

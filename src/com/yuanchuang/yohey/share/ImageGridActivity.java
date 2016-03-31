@@ -52,6 +52,7 @@ public class ImageGridActivity extends Activity {
 		}
 	};
 	private OnClickListener click = new OnClickListener() {
+		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.title_navigation_back_text:
@@ -80,6 +81,7 @@ public class ImageGridActivity extends Activity {
 		bt = (Button) findViewById(R.id.bt);
 		bt.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				ArrayList<String> list = new ArrayList<String>();
 				Collection<String> c = adapter.map.values();
@@ -118,12 +120,14 @@ public class ImageGridActivity extends Activity {
 		adapter = new ImageGridAdapter(ImageGridActivity.this, dataList, mHandler);
 		gridView.setAdapter(adapter);
 		adapter.setTextCallback(new TextCallback() {
+			@Override
 			public void onListen(int count) {
 				bt.setText("完成" + "(" + count + ")");
 			}
 		});
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				adapter.notifyDataSetChanged();
 			}

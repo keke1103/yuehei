@@ -116,6 +116,7 @@ public class MainFragment extends Fragment {
 		listView.setonRefreshListener(refreshListener);
 		adapter.setOnFlushOldData(new OnFlushOldData() {
 
+			@Override
 			public void flush(BaseAdapter adapter, int position) {
 				dataPager++;
 				flushData(gameregion, -1, -1);
@@ -264,6 +265,7 @@ public class MainFragment extends Fragment {
 
 	private OnRefreshListener refreshListener = new OnRefreshListener() {
 
+		@Override
 		public void onRefresh() {
 			dataPager = 0;
 			getRemData(gameregion, -1, -1);
@@ -371,10 +373,12 @@ public class MainFragment extends Fragment {
 
 		get.setOnSendListener(new OnSendListener() {
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void end(String result) {
 				Log.i("+++++++++++++++++", ">>>:" + result);
 				try {
@@ -427,10 +431,12 @@ public class MainFragment extends Fragment {
 		get.putString("count", "" + dataPager);
 		get.setOnSendListener(new OnSendListener() {
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void end(String result) {
 				try {
 					JSONObject joo = new JSONObject(result);
@@ -482,10 +488,12 @@ public class MainFragment extends Fragment {
 		get.putString("count", "" + dataPager);
 		get.setOnSendListener(new OnSendListener() {
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void end(String result) {
 				try {
 					JSONObject joo = new JSONObject(result);
@@ -573,6 +581,7 @@ public class MainFragment extends Fragment {
 		}
 	}
 
+	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == 1) {
 			getPostData(gameregion, -1, -1);

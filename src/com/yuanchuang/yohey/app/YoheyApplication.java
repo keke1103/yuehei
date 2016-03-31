@@ -12,6 +12,7 @@ import com.yuanchuang.yohey.chat.ChatMessageHandler;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import cn.bmob.v3.Bmob;
@@ -62,9 +63,10 @@ public class YoheyApplication extends Application {
 		Intent intent = new Intent(activity, LoginAndRegistered.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		activity.startActivity(intent);
+		getApplicationContext();
 		@SuppressWarnings("static-access")
 		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
-				getApplicationContext().MODE_PRIVATE);
+				Context.MODE_PRIVATE);
 		SharedPreferences.Editor edit = storage.edit();
 		edit.putString("qqData", "");
 		edit.commit();
@@ -103,6 +105,7 @@ public class YoheyApplication extends Application {
 			return;
 		}
 		BmobIM.connect(user.getObjectId(), new ConnectListener() {
+			@Override
 			public void done(String uid, BmobException e) {
 				if (e == null) {
 					Log.i("MainActivity", uid + "connect success");

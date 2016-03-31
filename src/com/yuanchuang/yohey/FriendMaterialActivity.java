@@ -95,6 +95,7 @@ public class FriendMaterialActivity extends Activity {
 		BmobIMUserInfo userinfo = new BmobIMUserInfo(user.getObjectId(), user.getNickName(), user.getIcon());
 		BmobIM.getInstance().startPrivateConversation(userinfo, new ConversationListener() {
 
+			@Override
 			public void done(BmobIMConversation arg0, BmobException e) {
 				if (e == null) {
 					Bundle b = new Bundle();

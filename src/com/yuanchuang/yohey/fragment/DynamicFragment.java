@@ -15,6 +15,7 @@ import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.HttpGet;
+import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 import com.yuanchuang.yohey.view.MyListView;
 import com.yuanchuang.yohey.view.MyListView.OnRefreshListener;
@@ -27,10 +28,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.bmob.v3.BmobUser;
 
 /**
  * 动态页面
@@ -47,12 +50,13 @@ public class DynamicFragment extends Fragment {
 	TextView title;
 	AdapterData data;// 数据类
 	User user;
+	int pager;//加载的数据的页数
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		LinearLayout lay = new LinearLayout(getActivity());
 		lay.setLayoutParams(new LayoutParams(-1, -1));
-		user = User.getCurrentUser(getActivity(), User.class);
+		user = BmobUser.getCurrentUser(getActivity(), User.class);
 		mView = inflater.inflate(R.layout.activity_yue_lu_dynamic, lay);
 
 		findView();
@@ -80,29 +84,46 @@ public class DynamicFragment extends Fragment {
 		listView.addHeaderView(v);
 		listView.setAdapter(mAdapter);
 		listView.setonRefreshListener(refreshListener);
+		pager=0;
+		mAdapter.setOnFlushOldData(new OnFlushOldData() {
+			
+			@Override
+			public void flush(BaseAdapter adapter, int position) {
+				pager++;
+				getData();
+			}
+		});
 	}
     
 	private OnRefreshListener refreshListener=new OnRefreshListener() {
 		 
+		@Override
 		public void onRefresh() {
 			getData();
 		}
 	};
 	
 	private void getData() {
-		list.clear();
+		//list.clear();
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
 		get.putString("uid", user.getObjectId());
+		get.putString("pager", ""+pager);
 		OnSendListener mListener = new OnSendListener() {
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void end(String result) {
 				Log.i("DynamicFragment", result);
 				try {
 					JSONObject jo = new JSONObject(result);
 					JSONArray ja = jo.getJSONArray("results");
+					if (ja.length() < 1) {
+						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
+						return;
+					}
 					for (int i = 0; i < ja.length(); i++) {
 						Share s = Share.parseJSONObject(ja.getJSONObject(i));
 						list.add(s);

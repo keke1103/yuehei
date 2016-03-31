@@ -53,12 +53,14 @@ public class ForwardingActivity extends Activity {
 		}
 		p.save(getApplicationContext(), new SaveListener() {
 
+			@Override
 			public void onSuccess() {
 				Toast.makeText(getApplicationContext(), "帖子发表成功", Toast.LENGTH_SHORT).show();
 				setResult(1);
 				finish();
 			}
 
+			@Override
 			public void onFailure(int arg0, String arg1) {
 				Toast.makeText(getApplicationContext(), "帖子发表失败:" + arg1, Toast.LENGTH_SHORT).show();
 			}

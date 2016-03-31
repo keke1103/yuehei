@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -110,6 +109,7 @@ public class CommentDynamicActivity extends Activity {
 
 			listView.setAdapter(adapter);
 			listView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					intent.setClass(getApplicationContext(), PersonalInformationActivity.class);
 					app.data = mShare.getComCount();
@@ -252,6 +252,7 @@ public class CommentDynamicActivity extends Activity {
 			child.setData(mShare.getForwarding());
 		} else if (mShare.getImages() != null && mShare.getImages().length > 0) {
 			DensityUtil.sudoku(CommentDynamicActivity.this, image, mShare.getImages(), new OnClickListener() {
+				@Override
 				public void onClick(View v) {
 					int index = v.getId() - 1000;
 					intent.setClass(CommentDynamicActivity.this, ViewFilperActivity.class);
@@ -291,6 +292,7 @@ public class CommentDynamicActivity extends Activity {
 			imageLayout = (AbsoluteLayout) child.findViewById(R.id.list_dynamic_absolute_image);
 			headName = child.findViewById(R.id.list_dynamic_layout_head_portrait);
 			headName.setOnClickListener(new OnClickListener() {
+				@Override
 				public void onClick(View v) {
 
 				}
@@ -315,6 +317,7 @@ public class CommentDynamicActivity extends Activity {
 			time.setVisibility(View.GONE);
 			nickNmae.setOnClickListener(new OnClickListener() {
 
+				@Override
 				public void onClick(View v) {
 					intent.setClass(getApplicationContext(), PersonalInformationActivity.class);
 					app.data = mShare.getUser();
@@ -323,6 +326,7 @@ public class CommentDynamicActivity extends Activity {
 			});
 			if (mShare.getImages() != null) {
 				DensityUtil.sudoku(CommentDynamicActivity.this, imageLayout, mShare.getImages(), new OnClickListener() {
+					@Override
 					public void onClick(View v) {
 						int index = v.getId() - 1000;
 						Share sh = (Share) ((View) v.getParent()).getTag();
@@ -341,9 +345,11 @@ public class CommentDynamicActivity extends Activity {
 		get.putString("uid", user.getObjectId());
 		get.putString("sid", mShare.getObjectId());
 		get.setOnSendListener(new OnSendListener() {
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void end(String result) {
 				try {
 					JSONObject jo = new JSONObject(result);
@@ -377,15 +383,18 @@ public class CommentDynamicActivity extends Activity {
 		com.setShare(mShare);
 		com.save(this, new SaveListener() {
 
+			@Override
 			public void onSuccess() {
 				Share s = new Share();
 				s.increment("comCount");
 				s.update(getApplicationContext(), mShare.getObjectId(), null);
 				BmobFindById finder = new BmobFindById(mShare.getObjectId(), "Share");
 				finder.start(new OnSendListener() {
+					@Override
 					public void start() {
 					}
 
+					@Override
 					public void end(String result) {
 						try {
 							JSONObject jo = new JSONObject(result);
@@ -402,6 +411,7 @@ public class CommentDynamicActivity extends Activity {
 				say.setText("");
 			}
 
+			@Override
 			public void onFailure(int arg0, String arg1) {
 				Toast.makeText(getApplication(), "莫怪我，你评论失败", Toast.LENGTH_SHORT).show();
 			}

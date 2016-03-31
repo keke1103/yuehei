@@ -12,15 +12,16 @@
         android:layout_height="50dp"
         android:background="#343434" >
 
-            <com.yuanchuang.yohey.view.MyImageView
-            	android:layout_width="40dp"
-            	android:layout_height="40dp"
-            	android:layout_marginEnd="10dp"
-                android:layout_marginLeft="20dp"
-            	android:layout_marginRight="10dp"
-            	android:layout_marginStart="20dp"	
-            	android:layout_centerVertical="true"
-            	android:src="@drawable/yp_hey_background_image"/>       
+        <com.yuanchuang.yohey.view.MyImageView
+            android:id="@+id/lu_head_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginStart="20dp"	
+            android:layout_centerVertical="true"
+            android:src="@drawable/yp_hey_background_image"/>       
 
         <RadioGroup
             android:id="@+id/radiogroup"

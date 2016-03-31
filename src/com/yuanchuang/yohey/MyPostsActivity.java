@@ -70,7 +70,7 @@ public class MyPostsActivity extends Activity {
 
 	private void fingVew() {
 
-		toRetrn = (View) findViewById(R.id.title_navigation_back_icon);
+		toRetrn = findViewById(R.id.title_navigation_back_icon);
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		added = (LinearLayout) findViewById(R.id.my_posts_linear_added);
 		postedMessages = (LinearLayout) findViewById(R.id.my_posts_linear_message);

@@ -104,6 +104,7 @@ public class AudioRecordButton extends Button implements AudioStageListener {
 	private static final int MSG_DIALOG_DIMISS = 0X112;
 
 	private Handler mhandler = new Handler() {
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case MSG_AUDIO_PREPARED:

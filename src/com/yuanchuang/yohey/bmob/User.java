@@ -263,6 +263,7 @@ public class User extends BmobUser {
 
 	public void getFriendGroup(final YoheyApplication app) {
 		new Thread() {
+			@Override
 			public void run() {
 				HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getgroup");
 				get.putString("uid", User.this.getObjectId());

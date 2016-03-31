@@ -28,8 +28,8 @@ public class ImageBucketAdapter extends BaseAdapter {
 		public void imageLoad(ImageView imageView, Bitmap bitmap, Object... params) {
 			if (imageView != null && bitmap != null) {
 				String url = (String) params[0];
-				if (url != null && url.equals((String) imageView.getTag())) {
-					((ImageView) imageView).setImageBitmap(bitmap);
+				if (url != null && url.equals(imageView.getTag())) {
+					imageView.setImageBitmap(bitmap);
 				} else {
 					Log.e(TAG, "callback, bmp not match");
 				}
