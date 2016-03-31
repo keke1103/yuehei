@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.bmob.Post;
-import com.yuanchuang.yohey.myData.AdapterData;
+import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -35,7 +35,12 @@ public class PostSAdater extends BaseAdapter {
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
-
+    
+	public void setData(List<Post> list){
+		this.list=list;
+		notifyDataSetChanged();
+	}
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -73,13 +78,13 @@ public class PostSAdater extends BaseAdapter {
 		{
 			holder = (ViewHolder) convertView.getTag();
 		}
-
-/*		holder.name.setText(list.get(position).getPost_name());
-		holder.time.setText(list.get(position).getPost_time());
-		holder.browse.setText(list.get(position).getPost_browse() + "");
-		holder.message.setText(list.get(position).getPost_message() + "");
-
-		holder.con.setText(list.get(position).getPost_con());*/
+        Post p=list.get(position);
+        p.getUser().binderImageView(holder.head);
+        holder.name.setText(p.getUser().getNickName());
+        holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatedAt()));
+        holder.con.setText(p.getTitle());
+        holder.browse.setText(p.getComcount()+"");
+        holder.message.setText(p.getComcount()+"");
 		return convertView;
 	}
 

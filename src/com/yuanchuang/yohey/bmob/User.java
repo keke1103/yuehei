@@ -43,7 +43,6 @@ public class User extends BmobUser {
 	public String getMood() {
 		return mood;
 	}
-
 	public void setMood(String mood) {
 		this.mood = mood;
 	}

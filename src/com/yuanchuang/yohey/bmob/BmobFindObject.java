@@ -4,6 +4,8 @@ import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost;
 
+import android.util.Log;
+
 public class BmobFindObject {
 	String id;
 	String table;
@@ -45,7 +47,7 @@ public class BmobFindObject {
 	public void findObjectByUserId(String include[], HttpPost.OnSendListener mListner) {
 		get = new HttpGet(YoheyApplication.ServiceIp + "getobjects");
 		get.putString("table", table);
-		get.putString("where", "user in(select * from _User where objectId='" + id + "'");
+		get.putString("where", "user in(select * from _User where objectId='" + id + "')");
 		if (include != null) {
 			StringBuilder sb = new StringBuilder();
 			for (String clu : include) {
@@ -53,6 +55,7 @@ public class BmobFindObject {
 			}
 			get.putString("include", sb.toString());
 		}
+		Log.i("FINMYDPOST", get.getUrl());
 		get.setOnSendListener(mListner);
 
 		get.send();
@@ -69,7 +72,10 @@ public class BmobFindObject {
 	 */
 	public void findPostByUserId(HttpPost.OnSendListener mListner) {
 		this.table = "Post";
-		findObjectByUserId(new String[] { "user", "game" }, mListner);
+		get=new HttpGet(YoheyApplication.ServiceIp + "getPostByUserId");
+		get.putString("uid", id);
+		get.setOnSendListener(mListner);
+		get.send();
 	}
 
 	/**

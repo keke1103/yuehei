@@ -13,10 +13,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="107dp"
-               android:src="@drawable/yo_hey_video_image"
-               android:contentDescription="@drawable/yo_hey_video_image"/>
+                android:id="@+id/myVideo1"
+                android:layout_width="wrap_content"
+                android:layout_height="107dp"
+                android:src="@drawable/yo_hey_video_image"
+                android:contentDescription="@drawable/yo_hey_video_image"/>
             <ImageView 
                android:layout_width="37dp"
                android:layout_height="37dp"
@@ -53,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView 
+                android:id="@+id/myVideo2"
                android:layout_width="wrap_content"
                android:layout_height="107dp"
                android:src="@drawable/yo_hey_video_image"

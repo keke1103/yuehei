@@ -3,10 +3,18 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.PostSAdater;
+import com.yuanchuang.yohey.bmob.BmobFindObject;
 import com.yuanchuang.yohey.bmob.Post;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.myData.AdapterData;
+import com.yuanchuang.yohey.tools.HttpGet;
+import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView.LayoutParams;
+import cn.bmob.v3.BmobUser;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -34,11 +43,14 @@ public class PostedMessagesActivity extends Activity {
 	PostSAdater postAdapter;// 自定义adapter
 	AdapterData data;
 
+	User user;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_post_details);
+		user=BmobUser.getCurrentUser(getApplicationContext(), User.class);
+		
 		list = new ArrayList<Post>();
 
 		findView();
@@ -76,12 +88,42 @@ public class PostedMessagesActivity extends Activity {
 
 		}
 	};
-
+    /**
+     * 获取数据
+     */
 	private void getData() {
-		Post post=new Post();
-		list.add(post);
+		BmobFindObject object=new BmobFindObject(user.getObjectId(), "Post");
+		object.findPostByUserId(mListner);
 	}
 
+	OnSendListener mListner=new OnSendListener() {
+		
+		@Override
+		public void start() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void end(String result) {
+			Log.i(">>>>>>>>>>>>>>>", result);
+			try {
+				JSONObject joo = new JSONObject(result);
+				JSONArray ja = joo.getJSONArray("results");
+				for (int i = 0; i < ja.length(); i++) {	
+					Post p = Post.paresJSONObject(ja.getJSONObject(i));
+					list.add(p);
+				}
+				postAdapter.setData(list);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	};
+	
+	
 	private void findView() {
 		includeTitle = (RelativeLayout) findViewById(R.id.post_details_include_title);
 		listView = (ListView) findViewById(R.id.post_details_list_view);
