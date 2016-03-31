@@ -98,7 +98,7 @@ public class PersonalPostActivity extends Activity {
 
 		getData();
 		list = new ArrayList<Comment>();
-		myAdapter = new PersonalPostAdapter(list, getApplication());
+		myAdapter = new PersonalPostAdapter(list, getApplication(), PersonalPostActivity.this);
 
 		listView.addHeaderView(headView);
 		listView.setAdapter(myAdapter);

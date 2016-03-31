@@ -1,6 +1,7 @@
 package set;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.bmob.User;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.bmob.v3.BmobUser;
 
 public class Safety_Actitity extends Activity {
 	View toReturn;// 返回
@@ -24,12 +26,14 @@ public class Safety_Actitity extends Activity {
 	TextView number;// 显示的手机号
 	TextView password;// 修改密码
 	TextView safetyCenter;// 安全中心
+	User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_account_safety);
+		user = BmobUser.getCurrentUser(getApplication(), User.class);
 		findView();
 	}
 
@@ -49,7 +53,7 @@ public class Safety_Actitity extends Activity {
 		emailAddr.setOnClickListener(clickListener);
 		phoneNamber.setOnClickListener(clickListener);
 
-		nickName.setText("SKT-1 Caker");
+		nickName.setText(user.getNickName());
 		email.setText("未绑定");
 		number.setText("189 8953 4464");
 	}

@@ -2,6 +2,7 @@ package set;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.User;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.bmob.v3.BmobUser;
 
 /**
  * 帐号管理界面
@@ -24,12 +26,14 @@ public class Manager_Activity extends Activity {
 	LinearLayout addNumber;// 添加账号
 	LinearLayout exitNumber;// 退出账号
 	YoheyApplication youhei;
+	User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_account_manager);
+		user = BmobUser.getCurrentUser(getApplication(), User.class);
 		findVIew();
 		youhei = (YoheyApplication) getApplication();
 	}
@@ -44,6 +48,8 @@ public class Manager_Activity extends Activity {
 		toReturn.setOnClickListener(clickListener);
 		addNumber.setOnClickListener(clickListener);
 		exitNumber.setOnClickListener(clickListener);
+		name.setText(user.getNickName());
+		user.binderImageView(head);
 	}
 
 	OnClickListener clickListener = new OnClickListener() {

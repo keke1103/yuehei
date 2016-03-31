@@ -10,9 +10,9 @@ import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.tools.TimeUtil;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,7 +21,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * 主页面的adapter
@@ -33,15 +32,17 @@ public class MainAdapter extends BaseAdapter {
 	List<Post> list;
 	Context context;
 	LayoutInflater inflater;
-	Post p;
+
+	YoheyApplication app;
 
 	public MainAdapter() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MainAdapter(List<Post> list, Context context) {
+	public MainAdapter(List<Post> list, Context context, Activity activity) {
 		this.context = context;
 		this.list = list;
+		app = (YoheyApplication) activity.getApplication();
 		inflater = LayoutInflater.from(context);
 	}
 
@@ -76,7 +77,7 @@ public class MainAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		p = list.get(position);
+		Post p = list.get(position);
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.list_main_post, null);
@@ -97,7 +98,6 @@ public class MainAdapter extends BaseAdapter {
 		}
 		holder.add.setText(p.getJoincount() + "");
 		holder.name.setText(p.getUser().getNickName());
-		// Log.i("MainAdapter", p.getCreatedAt());
 		holder.time.setText(TimeUtil.formateTimeToNow(p.getCreatedAt()));
 		holder.context.removeAllViews();
 		TextView text = new TextView(context);
@@ -111,18 +111,7 @@ public class MainAdapter extends BaseAdapter {
 		p.getUser().binderImageView(holder.head);
 		holder.message.setText(p.getComcount() + "");
 		holder.up.setText(p.getLikenumber() + "");
-		holder.headName.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, PersonalInformationActivity.class);
-				YoheyApplication app = new YoheyApplication();
 
-				app.data = p.getUser();
-				Toast.makeText(context, p.getUser().getNickName(), Toast.LENGTH_SHORT).show();
-				Log.i("mainAdapter", app.data + "");
-				context.startActivity(intent);
-			}
-		});
 		if (((list.size() - position) < 2) && mFlush != null) {
 			mFlush.flush(this, position);
 		}
@@ -130,6 +119,7 @@ public class MainAdapter extends BaseAdapter {
 	}
 
 	class ViewHolder {
+		Post p;
 		View line;
 		View headName;// 头像和昵称
 		ImageView head;
@@ -141,6 +131,19 @@ public class MainAdapter extends BaseAdapter {
 		TextView add;
 		TextView message;
 		TextView up;
+		OnClickListener click = new OnClickListener() {
+
+			public void onClick(View v) {
+				Intent intent = new Intent(MainAdapter.this.context, PersonalInformationActivity.class);
+				app.data = p.getUser();
+				MainAdapter.this.context.startActivity(intent);
+			}
+		};
+
+		void setUserClick(Post p) {
+			this.p = p;
+			headName.setOnClickListener(click);
+		}
 	}
 
 	OnFlushOldData mFlush;

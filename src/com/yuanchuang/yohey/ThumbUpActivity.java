@@ -36,7 +36,7 @@ public class ThumbUpActivity extends Activity {
 	LinearLayout comment;// 评论
 	LinearLayout thumbUp;// 赞
 	ListView listView;
-	List<Comment> list=new ArrayList<Comment>();
+	List<Comment> list = new ArrayList<Comment>();
 	ThumbUpAdapter adapter;
 	View headView;// listview头视图
 	ImageView head;// 发帖用户头像
@@ -62,7 +62,7 @@ public class ThumbUpActivity extends Activity {
 	}
 
 	private void getData() {
-	 
+
 	}
 
 	@SuppressLint("InflateParams")
@@ -81,7 +81,7 @@ public class ThumbUpActivity extends Activity {
 		headView = inflater.inflate(R.layout.list_head_thumb_up_for_details, null);
 
 		listView.addHeaderView(headView);
-		adapter = new ThumbUpAdapter(list, getApplication());
+		adapter = new ThumbUpAdapter(list, getApplication(), ThumbUpActivity.this);
 		listView.setAdapter(adapter);
 	}
 

@@ -107,7 +107,7 @@ public class MainFragment extends Fragment {
 		gallery.setOnItemClickListener(clickListener);
 		getRemData(gameregion, -1, -1);
 
-		adapter = new MainAdapter(list, getActivity());
+		adapter = new MainAdapter(list, getContext(), getActivity());
 		getPostData(gameregion, -1, -1);
 
 		listView.addHeaderView(view);

@@ -101,13 +101,14 @@ public class CommentDynamicActivity extends Activity {
 			app.data = null;
 			findView();
 			findHeadView();
-			adapter = new ThumbUpAdapter(list, getApplication());
+			adapter = new ThumbUpAdapter(list, getApplication(), CommentDynamicActivity.this);
 			getData();
 			listView.setDivider(getResources().getDrawable(R.color.post_line));
 			listView.setDividerHeight(1);
 			listView.addHeaderView(headView);
 
 			listView.setAdapter(adapter);
+
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,6 +117,7 @@ public class CommentDynamicActivity extends Activity {
 					startActivity(intent);
 				}
 			});
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			finish();

@@ -3,7 +3,6 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.PostSAdater;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.AdapterData;
@@ -79,8 +78,10 @@ public class ParticipationPostsActivity extends Activity {
 	};
 
 	private void getData() {
-		Post post=new Post();
+
+		Post post = new Post();
 		list.add(post);
+
 	}
 
 	private void findView() {
