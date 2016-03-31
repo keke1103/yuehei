@@ -15,12 +15,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobUser;
-
 import android.util.Log;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.listener.ConnectListener;
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 
 public class YoheyApplication extends Application {
@@ -35,7 +34,7 @@ public class YoheyApplication extends Application {
 	/**
 	 * 登陆用户的分组信息
 	 */
-	public Group[] friendGroup;
+	public Group[] friendGroup = new Group[0];
 
 	Map<String, User> mFriend = new HashMap<String, User>();
 
@@ -64,9 +63,7 @@ public class YoheyApplication extends Application {
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		activity.startActivity(intent);
 		getApplicationContext();
-		@SuppressWarnings("static-access")
-		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
-				Context.MODE_PRIVATE);
+		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey", Context.MODE_PRIVATE);
 		SharedPreferences.Editor edit = storage.edit();
 		edit.putString("qqData", "");
 		edit.commit();

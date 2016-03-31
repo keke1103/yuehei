@@ -53,10 +53,10 @@ public class FriendMessageActivity extends Activity {
 	ImageView yuyinImage;
 	AudioRecordButton recordBtn;
 	View viewanim;
-	boolean yuying=true;
-	
+	boolean yuying = true;
+
 	private OnClickListener click = new OnClickListener() {
-        
+
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -67,16 +67,16 @@ public class FriendMessageActivity extends Activity {
 				sendMsg();
 				break;
 			case R.id.message_yuyin:
-				if(yuying){
+				if (yuying) {
 					msgEdit.setVisibility(View.GONE);
 					recordBtn.setVisibility(View.VISIBLE);
 					yuyinImage.setImageResource(R.drawable.yo_hey_iconfont_jianpan);
-					yuying=false;
-				}else{
+					yuying = false;
+				} else {
 					msgEdit.setVisibility(View.VISIBLE);
 					recordBtn.setVisibility(View.GONE);
 					yuyinImage.setImageResource(R.drawable.yo_hey_iconfont_huatong);
-					yuying=true;
+					yuying = true;
 				}
 				break;
 			default:
@@ -96,6 +96,7 @@ public class FriendMessageActivity extends Activity {
 		c = BmobIMConversation.obtain(BmobIMClient.getInstance(),
 				(BmobIMConversation) intent.getSerializableExtra("c"));
 		findView();
+		initView();
 		getData();
 	}
 
@@ -193,47 +194,39 @@ public class FriendMessageActivity extends Activity {
 		msgSend = findViewById(R.id.msg_send);
 		yuyinImage = (ImageView) findViewById(R.id.message_yuyin);
 		recordBtn = (AudioRecordButton) findViewById(R.id.recordButton);
-      
-		
-		recordBtn.setAudioFinishRecorderListener(new AudioFinishRecorderListener() {
-			
 
-			@Override
+	}
+
+	private void initView() {
+		recordBtn.setAudioFinishRecorderListener(new AudioFinishRecorderListener() {
 			public void onFinished(float seconds, String filePath) {
 
 				RecorderView recorder = RecorderView.createRecorder(getApplicationContext(), seconds, filePath);
-				
 			}
 		});
 		yuyinImage.setOnClickListener(click);
 		msgSend.setOnClickListener(click);
 		title.setText(app.getFriendById(c.getConversationId()).getNickName());
-
 	}
 
 	public BmobIMConversation getConversation() {
 		return c;
 	}
 
-	@Override
 	protected void onDestroy() {
 		YoheyNotificationManager.getInstance(getApplicationContext()).deleteObserver();
 		MediaManager.release();
 		super.onDestroy();
 	}
- 
-	@Override
+
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		MediaManager.pause();
 	}
-	
-	@Override
+
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		MediaManager.resume();
 	}
-	
+
 }

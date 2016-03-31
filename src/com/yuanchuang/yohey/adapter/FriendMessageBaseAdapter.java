@@ -57,24 +57,22 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
+	
 		return list.size();
 	}
 
-	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
+
 		return list.get(position);
 	}
 
-	@Override
+
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+
 		return position;
 	}
 
 	@SuppressLint("InflateParams")
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		BmobIMMessage msg = list.get(position);
