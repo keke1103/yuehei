@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.PostSAdater;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.AdapterData;
 
 import android.app.Activity;
@@ -25,7 +26,7 @@ import android.widget.TextView;
  *
  */
 public class PostedMessagesActivity extends Activity {
-	List<AdapterData> list;
+	List<Post> list;
 	RelativeLayout includeTitle;// 导入头文件
 	TextView title;// 标题
 	ImageView toReturn;// 返回按钮
@@ -38,7 +39,7 @@ public class PostedMessagesActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yue_lu_post_details);
-		list = new ArrayList<AdapterData>();
+		list = new ArrayList<Post>();
 
 		findView();
 		getData();
@@ -77,19 +78,8 @@ public class PostedMessagesActivity extends Activity {
 	};
 
 	private void getData() {
-
-		for (int i = 0; i < 5; i++) {
-			data = new AdapterData();
-			data.setPost_name("多啦不爱梦");
-			data.setPost_head("");
-			data.setPost_browse(((int) (Math.random() * 10)));
-			data.setPost_message(((int) (Math.random() * 10)));
-			;
-			data.setPost_time("2015.8.12");
-			data.setPost_con("求大神带我飞");
-			list.add(data);
-			Log.i("getData", list.size() + "");
-		}
+		Post post=new Post();
+		list.add(post);
 	}
 
 	private void findView() {

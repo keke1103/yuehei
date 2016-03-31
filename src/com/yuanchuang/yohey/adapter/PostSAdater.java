@@ -3,6 +3,7 @@ package com.yuanchuang.yohey.adapter;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.myData.AdapterData;
 
 import android.annotation.SuppressLint;
@@ -21,7 +22,7 @@ import android.widget.TextView;
  *
  */
 public class PostSAdater extends BaseAdapter {
-	List<AdapterData> list;
+	List<Post> list;
 	Context context;
 	LayoutInflater inflater;
 
@@ -29,7 +30,7 @@ public class PostSAdater extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostSAdater(List<AdapterData> list, Context context) {
+	public PostSAdater(List<Post> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -73,12 +74,12 @@ public class PostSAdater extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.name.setText(list.get(position).getPost_name());
+/*		holder.name.setText(list.get(position).getPost_name());
 		holder.time.setText(list.get(position).getPost_time());
 		holder.browse.setText(list.get(position).getPost_browse() + "");
 		holder.message.setText(list.get(position).getPost_message() + "");
 
-		holder.con.setText(list.get(position).getPost_con());
+		holder.con.setText(list.get(position).getPost_con());*/
 		return convertView;
 	}
 

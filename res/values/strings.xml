@@ -110,8 +110,8 @@
     <string name="posted_messages">我发过的帖子</string>
     <string name="post_added">我加入的帖子</string>
     <string name="more_more">更多....</string>
-    <string name="my_posted_messages">发过帖子</string>
-    <string name="participation_posts">加入帖子</string>
+    <string name="my_posted_messages">我发过的帖子</string>
+    <string name="participation_posts">我加入的帖子</string>
     <string name="hide">隐藏</string>
     <string name="report">举报</string>
     <string name="forwarding">转发</string>
