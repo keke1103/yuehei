@@ -120,7 +120,9 @@ public class Picture {
 						}
 						db.close();
 						Log.i("Picture", f.getPath());
-						mBitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+						InputStream ips = new FileInputStream(f);
+						mBitmap = BitmapFactory.decodeStream(ips);
+						ips.close();
 					}
 					mHandler.sendEmptyMessage(0);
 				} catch (MalformedURLException e) {
