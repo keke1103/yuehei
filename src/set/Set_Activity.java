@@ -2,6 +2,7 @@ package set;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.cache.YoheyCache;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -51,8 +52,7 @@ public class Set_Activity extends Activity {
 		clear = (TextView) findViewById(R.id.system_settings_text_clear);
 		toReturn = findViewById(R.id.system_settings_image_to_return);
 
-		clear.setText("500M");
-
+		showCacheLength();
 		toReturn.setOnClickListener(listener);
 		account_manager.setOnClickListener(listener);
 		account_safety.setOnClickListener(listener);
@@ -63,6 +63,17 @@ public class Set_Activity extends Activity {
 		about_us.setOnClickListener(listener);
 		exit_account.setOnClickListener(listener);
 
+	}
+
+	private void showCacheLength() {
+		long len = YoheyCache.getCacheLength();
+		if (len > 1024 * 1024 * 10) {
+			clear.setText(len / 11288576 + "M");
+		} else if (len > 1024) {
+			clear.setText(len / 1024 + "kb");
+		} else {
+			clear.setText("小于1kb");
+		}
 	}
 
 	OnClickListener listener = new OnClickListener() {
@@ -82,7 +93,8 @@ public class Set_Activity extends Activity {
 				startActivity(intent_usual);
 				break;
 			case R.id.system_settings_linear_clear_cache:// 清理缓存
-
+				YoheyCache.deleteCache();
+				YoheyCache.deleteDbData(getApplicationContext());
 				break;
 			case R.id.system_settings_linear_private_set:// 跳到隐私设置界面
 				Intent intent_private = new Intent(Set_Activity.this, Private_set_Activity.class);

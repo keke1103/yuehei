@@ -12,7 +12,6 @@ import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
-import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.FriendGroup;
 import com.yuanchuang.yohey.bmob.Game;
@@ -24,6 +23,7 @@ import com.yuanchuang.yohey.tools.QQBaseUIListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,6 +66,10 @@ public class LoginAndRegistered extends Activity {
 
 	ImageView headicon;
 
+	/**
+	 * 
+	 */
+	ProgressDialog dialog;
 	int zhandouli;// 战斗力
 	int level;// 游戏等级
 
@@ -78,6 +82,8 @@ public class LoginAndRegistered extends Activity {
 		application.mTencent = Tencent.createInstance(application.APP_ID, this);
 		findView();
 		initView();
+		dialog = new ProgressDialog(this);
+		
 		try {
 			loginByQq(getLoginData());
 		} catch (JSONException e) {
@@ -99,6 +105,7 @@ public class LoginAndRegistered extends Activity {
 	 */
 	@SuppressLint({ "InflateParams", "NewApi" })
 	public void customDialog(final User user) {
+		dialog.dismiss();
 		LayoutInflater inflater = getLayoutInflater();
 		View view = inflater.inflate(R.layout.choose_game_region_main, null);
 		final Spinner area = (Spinner) view.findViewById(R.id.choose_game_spinner);
@@ -229,9 +236,6 @@ public class LoginAndRegistered extends Activity {
 	}
 
 	protected void onClickQQLogin() {
-		if (application.mTencent == null || application.mTencent.isSessionValid()) {
-			return;
-		}
 		application.mTencent.login(this, "all", loginListener);
 		application.isServerSideLogin = false;
 		Log.i("YoheyApplication", "do login");
@@ -290,7 +294,7 @@ public class LoginAndRegistered extends Activity {
 	 * @param values
 	 */
 	private void loginByQq(JSONObject values) {
-
+		dialog.show();
 		try {
 			String token = values.getString(Constants.PARAM_ACCESS_TOKEN);
 			String expires = values.getString(Constants.PARAM_EXPIRES_IN);
@@ -402,11 +406,9 @@ public class LoginAndRegistered extends Activity {
 	 * 
 	 * @param re
 	 */
-	@SuppressWarnings("static-access")
 	public void saveLoginData(JSONObject re) {
 		getApplicationContext();
-		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
-				Context.MODE_PRIVATE);
+		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey", Context.MODE_PRIVATE);
 		SharedPreferences.Editor edit = storage.edit();
 		edit.putString("qqData", re.toString());
 		edit.commit();
@@ -420,9 +422,7 @@ public class LoginAndRegistered extends Activity {
 	 */
 	public JSONObject getLoginData() throws JSONException {
 		getApplicationContext();
-		@SuppressWarnings("static-access")
-		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey",
-				Context.MODE_PRIVATE);
+		SharedPreferences storage = getApplicationContext().getSharedPreferences("yohey", Context.MODE_PRIVATE);
 		String js = storage.getString("qqData", "");
 		JSONObject jo = new JSONObject(js);
 		return jo;
@@ -453,6 +453,7 @@ public class LoginAndRegistered extends Activity {
 	 *            段位
 	 */
 	private void setGame(final User user, String name, String region, int grade, String dan, int zhandouli) {
+		dialog.show();
 		FriendGroup fg = new FriendGroup();
 		fg.setGroupName("我的撸友");
 		fg.setUser(user);

@@ -7,6 +7,7 @@ import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.share.Bimp;
+import com.yuanchuang.yohey.share.FileUtils;
 import com.yuanchuang.yohey.share.GridAdapter;
 import com.yuanchuang.yohey.share.PhotoActivity;
 import com.yuanchuang.yohey.share.TestPicActivity;
@@ -174,6 +175,7 @@ public class ShareItActivity extends Activity {
 						Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
 					}
 				});
+				FileUtils.deleteDir();
 			}
 
 			@Override

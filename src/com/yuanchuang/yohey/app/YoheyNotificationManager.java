@@ -1,9 +1,12 @@
 package com.yuanchuang.yohey.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
-import com.yuanchuang.yohey.adapter.MessageBaseAdapter;
-import com.yuanchuang.yohey.myData.MssageListData;
+import com.yuanchuang.yohey.cache.YoheyCache;
+import com.yuanchuang.yohey.tools.MssageReciverListener;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -13,7 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
-import android.widget.BaseAdapter;
 import cn.bmob.newim.event.MessageEvent;
 
 public class YoheyNotificationManager {
@@ -43,13 +45,17 @@ public class YoheyNotificationManager {
 		this.obseverActivity = null;
 	}
 
+	/**
+	 * 处理消息，里面执行消息列表的本地保存，以及，消息的分发
+	 * 
+	 * @param event
+	 */
 	public void execMessage(MessageEvent event) {
-		if (adapterObser != null) {
-			MssageListData data = new MssageListData();
-			data.setFriendId(event.getMessage().getFromId());
-			data.setMsg(event.getMessage().getContent());
-			data.setTime(System.currentTimeMillis() / 1000);
-			adapterObser.addMssage(data);
+		YoheyCache.saveMssageList(context, event.getMessage().getFromId(), event.getMessage().getContent());
+		for (MssageReciverListener r : recivers) {
+			if (r == null)
+				continue;
+			r.recive(event.getMessage());
 		}
 		if (obseverActivity != null && obseverActivity.getConversation().getConversationId()
 				.equals(event.getConversation().getConversationId())) {
@@ -60,18 +66,27 @@ public class YoheyNotificationManager {
 	}
 
 	private void notifiObsever(MessageEvent event) {
-
 		obseverActivity.getData();
 	}
 
-	MessageBaseAdapter adapterObser;
+	List<MssageReciverListener> recivers = new ArrayList<MssageReciverListener>();
 
-	public void addMssageObserb(MessageBaseAdapter adapterObser) {
-		this.adapterObser = adapterObser;
+	/**
+	 * 添加消息接受者
+	 * 
+	 * @param reciver
+	 */
+	public void addMssageReciver(MssageReciverListener reciver) {
+		this.recivers.add(reciver);
 	}
 
-	public void deleteMssageObserb() {
-		adapterObser = null;
+	/**
+	 * 删除指定消息接收者
+	 * 
+	 * @param reciver
+	 */
+	public void deleteMssageReciver(MssageReciverListener reciver) {
+		this.recivers.remove(reciver);
 	}
 
 	@SuppressLint("NewApi")

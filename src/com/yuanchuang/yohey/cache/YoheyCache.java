@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import cn.bmob.newim.BmobIM;
 
 public class YoheyCache {
 
@@ -47,6 +48,58 @@ public class YoheyCache {
 	}
 
 	/**
+	 * 获取缓存大小
+	 */
+	public static long getCacheLength() {
+		long len = 0;
+		File dir = getYoheyFile();
+		if (dir == null || !dir.exists() || !dir.isDirectory())
+			return 0;
+
+		for (File file : dir.listFiles()) {
+			if (file.isFile())
+				len += file.length(); //
+			else if (file.isDirectory())
+				len += getCacheLength();
+		}
+		return len;
+	}
+
+	/**
+	 * 删除图片缓存
+	 */
+	public static void deleteImageCache() {
+		File dir = getImageFile();
+		if (dir == null || !dir.exists() || !dir.isDirectory())
+			return;
+
+		for (File file : dir.listFiles()) {
+			if (file.isFile())
+				file.delete(); // 删除所有文件
+			else if (file.isDirectory())
+				deleteImageCache(); // 递规的方式删除文件夹
+		}
+		dir.delete();// 删除目录本身
+	}
+
+	/**
+	 * 删除所有缓存
+	 */
+	public static void deleteCache() {
+		File dir = getYoheyFile();
+		if (dir == null || !dir.exists() || !dir.isDirectory())
+			return;
+
+		for (File file : dir.listFiles()) {
+			if (file.isFile())
+				file.delete(); // 删除所有文件
+			else if (file.isDirectory())
+				deleteCache(); // 递规的方式删除文件夹
+		}
+		dir.delete();// 删除目录本身
+	}
+
+	/**
 	 * 保存聊天记录表
 	 * 
 	 * @param context
@@ -60,7 +113,7 @@ public class YoheyCache {
 		int id = 0;
 		if (c.moveToNext()) {
 			ContentValues cv = new ContentValues();
-			cv.put("time", System.currentTimeMillis()/1000);
+			cv.put("time", System.currentTimeMillis() / 1000);
 			cv.put("newmsg", msg);
 			id = c.getInt(c.getColumnIndex("id"));
 			db.update(YoheySqlHelper.MSSAGE_TABLE, cv, "id=" + id, null);
@@ -68,7 +121,7 @@ public class YoheyCache {
 		} else {
 			ContentValues cv = new ContentValues();
 			cv.put("friendId", friendId);
-			cv.put("time", System.currentTimeMillis()/1000);
+			cv.put("time", System.currentTimeMillis() / 1000);
 			cv.put("newmsg", msg);
 			db.insert(YoheySqlHelper.MSSAGE_TABLE, null, cv);
 		}
@@ -93,5 +146,16 @@ public class YoheyCache {
 		}
 		c.close();
 		db.close();
+	}
+
+	/**
+	 * 清空数据库缓存,包括聊天列表和聊天消息表
+	 * 
+	 * @param context
+	 */
+	public static void deleteDbData(Context context) {
+		SQLiteDatabase db = getSqlDB(context);
+		db.delete(YoheySqlHelper.MSSAGE_TABLE, null, null);
+		BmobIM.getInstance().clearAllConversation();
 	}
 }

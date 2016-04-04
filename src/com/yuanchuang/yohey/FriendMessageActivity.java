@@ -151,10 +151,10 @@ public class FriendMessageActivity extends Activity {
 		@Override
 		public void done(List<BmobIMMessage> list, BmobException e) {
 			if (e == null) {
-				if (list != null && !list.isEmpty()) {
-					setAdapter(list);
-				}
 
+				setAdapter(list);
+
+				initTitle();
 			} else {
 				Toast.makeText(getApplicationContext(), e.getMessage() + "(" + e.getErrorCode() + ")",
 						Toast.LENGTH_SHORT).show();
@@ -169,6 +169,8 @@ public class FriendMessageActivity extends Activity {
 	 */
 	private void setAdapter(List<BmobIMMessage> list) {
 		if (friendMessageBaseAdapter == null) {
+			if (list == null)
+				list = new ArrayList<BmobIMMessage>();
 			friendMessageBaseAdapter = new FriendMessageBaseAdapter(list, this);
 			messageListView.setAdapter(friendMessageBaseAdapter);
 		} else
@@ -214,9 +216,11 @@ public class FriendMessageActivity extends Activity {
 		});
 		yuyinImage.setOnClickListener(click);
 		msgSend.setOnClickListener(click);
-		initTitle();
 	}
 
+	/**
+	 * 工具聊天Id初始化聊天窗口的标题
+	 */
 	private void initTitle() {
 		title.setText("");
 		app.getFriendById(c.getConversationId(), mHandler);

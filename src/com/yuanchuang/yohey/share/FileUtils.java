@@ -5,14 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.yuanchuang.yohey.cache.YoheyCache;
+
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
 
 public class FileUtils {
 
-	public static String SDPATH = Environment.getExternalStorageDirectory() + File.separator + "yoheyformats"
-			+ File.separator;
+	public static String SDPATH = YoheyCache.getYoheyFile() + File.separator + "shareDir" + File.separator;
 
 	public static void saveBitmap(Bitmap bm, String picName) {
 		try {

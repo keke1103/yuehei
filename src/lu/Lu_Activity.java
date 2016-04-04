@@ -2,6 +2,7 @@ package lu;
 
 import com.yuanchuang.yohey.AddFriendsActivity;
 import com.yuanchuang.yohey.FriendMaterialActivity;
+import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.adapter.FriendsBaseAdapter;
 import com.yuanchuang.yohey.adapter.MessageBaseAdapter;
@@ -10,6 +11,8 @@ import com.yuanchuang.yohey.app.YoheyApplication.OnGroupLoadingEndLitener;
 import com.yuanchuang.yohey.app.YoheyNotificationManager;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.cache.YoheyCache;
+import com.yuanchuang.yohey.myData.MssageListData;
+import com.yuanchuang.yohey.tools.MssageReciverListener;
 import com.yuanchuang.yohey.view.MyImageView;
 
 import android.annotation.SuppressLint;
@@ -29,7 +32,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.bean.BmobIMConversation;
+import cn.bmob.newim.bean.BmobIMMessage;
+import cn.bmob.newim.bean.BmobIMUserInfo;
+import cn.bmob.newim.listener.ConversationListener;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
 
 /**
  * 好友消息界面
@@ -49,6 +59,21 @@ public class Lu_Activity extends Fragment {
 	MyImageView headImage;// 头像
 	User user;
 	YoheyApplication app;
+	/**
+	 * 消息监听者
+	 */
+	private MssageReciverListener reciver = new MssageReciverListener() {
+
+		@Override
+		public void recive(BmobIMMessage msg) {
+			MssageListData msgDt = new MssageListData();
+			msgDt.setMsg(msg.getContent());
+			msgDt.setFriendId(msg.getFromId());
+			msgDt.setTime(System.currentTimeMillis() / 1000);
+			msgDt.setCount(2);
+			msgadapter.addMssage(msgDt);
+		}
+	};
 
 	@Override
 	public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
@@ -56,6 +81,7 @@ public class Lu_Activity extends Fragment {
 		LinearLayout lay = new LinearLayout(getActivity());
 		app = (YoheyApplication) getActivity().getApplication();
 		user = BmobUser.getCurrentUser(getActivity(), User.class);
+		intent = getActivity().getIntent();
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		View view = inflater.inflate(R.layout.lu, lay);
 		radiogroup = (RadioGroup) view.findViewById(R.id.radiogroup);
@@ -75,7 +101,8 @@ public class Lu_Activity extends Fragment {
 		add.setOnClickListener(click);
 		YoheyCache.getMssageList(app);
 		getMsgListData();
-		YoheyNotificationManager.getInstance(getActivity()).addMssageObserb(msgadapter);
+		YoheyNotificationManager.getInstance(getActivity()).addMssageReciver(reciver);
+
 		return view;
 	};
 
@@ -90,12 +117,10 @@ public class Lu_Activity extends Fragment {
 	}
 
 	OnClickListener click = new OnClickListener() {
-		Intent intent;
 
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.rb_add:
-				intent = getActivity().getIntent();
 				intent.setClass(getActivity(), AddFriendsActivity.class);
 				getActivity().startActivity(intent);
 				break;
@@ -137,11 +162,33 @@ public class Lu_Activity extends Fragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			// Intent intent = new Intent(getActivity(),
-			// FriendMessageActivity.class);
-			// startActivity(intent);
+			MssageListData f = (MssageListData) parent.getAdapter().getItem(position);
+			conectChat(app.getFriendById(f.getFriendId()));
 		}
 	};
+
+	Intent intent;
+
+	private void conectChat(User user) {
+		BmobIMUserInfo userinfo = new BmobIMUserInfo(user.getObjectId(), user.getNickName(), user.getIcon());
+		BmobIM.getInstance().startPrivateConversation(userinfo, new ConversationListener() {
+
+			@Override
+			public void done(BmobIMConversation arg0, BmobException e) {
+				if (e == null) {
+					Bundle b = new Bundle();
+					b.putSerializable("c", arg0);
+					intent.setClass(getActivity(), FriendMessageActivity.class);
+					intent.putExtras(b);
+					startActivity(intent);
+				} else {
+					Toast.makeText(getActivity(), e.getMessage() + ":" + e.getErrorCode(), Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+
+	}
+
 	/**
 	 * ExpandableListView的点击事件
 	 */
@@ -155,5 +202,9 @@ public class Lu_Activity extends Fragment {
 			startActivity(intent);
 			return false;
 		}
+	};
+
+	public void onDestroy() {
+		YoheyNotificationManager.getInstance(getActivity()).deleteMssageReciver(reciver);
 	};
 }
