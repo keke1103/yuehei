@@ -1,11 +1,13 @@
 package com.yuanchuang.yohey.tools;
 
+import com.yuanchuang.yohey.myData.Picture;
+import com.yuanchuang.yohey.view.BmobImageView;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
 import android.widget.AbsoluteLayout.LayoutParams;
-import android.widget.ImageView;
 import cn.bmob.v3.datatype.BmobFile;
 
 @SuppressWarnings("deprecation")
@@ -40,33 +42,38 @@ public class DensityUtil {
 			LayoutParams params;
 
 			int i = 0;
-			ImageView v;
+			BmobImageView v;
 			if (imgs.length == 1) {
 				params = new LayoutParams(-2, -2, dip2px(mContext, 10), 0);
-				v = new ImageView(mContext);
+				v = new BmobImageView(mContext);
 				imageLayout.addView(v, params);
 				v.setBackgroundColor(Color.LTGRAY);
 				v.setId(1000 + i);
 				v.setOnClickListener(l);
-				imgs[i].loadImage(mContext, v, w / 2, w / 2);
+				Picture.showBmobImage(imgs[i], v, w / 2, w / 2);
+				// imgs[i].loadImage(mContext, v, w / 2, w / 2);
 
 			} else if (imgs.length == 2) {
 				params = new LayoutParams(-2, -2, 0, 0);
-				v = new ImageView(mContext);
+				v = new BmobImageView(mContext);
 				v.setBackgroundColor(Color.LTGRAY);
 				v.setId(1000 + i);
 				v.setOnClickListener(l);
 				imageLayout.addView(v, params);
-				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
+				Picture.showBmobImage(imgs[i], v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
+				// imgs[i].loadImageThumbnail(mContext, v, w / 2 -
+				// dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 				i++;
 				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35),
 						(w / 2) - dip2px(mContext, 30), 0);
-				v = new ImageView(mContext);
+				v = new BmobImageView(mContext);
 				v.setBackgroundColor(Color.LTGRAY);
 				v.setId(1000 + i);
 				v.setOnClickListener(l);
 				imageLayout.addView(v, params);
-				imgs[i].loadImageThumbnail(mContext, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
+				Picture.showBmobImage(imgs[i], v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
+				// imgs[i].loadImageThumbnail(mContext, v, w / 2 -
+				// dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
 			} else if (imgs.length == 4) {
 
 				for (BmobFile p : imgs) {
@@ -78,12 +85,14 @@ public class DensityUtil {
 					if (x < 0)
 						x = 0;
 					params = new LayoutParams(-2, -2, x, y);
-					v = new ImageView(mContext);
-					v.setBackgroundColor(Color.LTGRAY);					 
+					v = new BmobImageView(mContext);
+					v.setBackgroundColor(Color.LTGRAY);
 					v.setId(1000 + i);
 					v.setOnClickListener(l);
 					imageLayout.addView(v, params);
-					p.loadImage(mContext, v,w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
+					Picture.showBmobImage(p, v, w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35));
+					// p.loadImage(mContext, v, w / 2 - dip2px(mContext, 35), w
+					// / 2 - dip2px(mContext, 35));
 					i++;
 				}
 			} else {
@@ -92,12 +101,14 @@ public class DensityUtil {
 						break;// 只显示9张图片！
 					}
 					params = new LayoutParams(-2, -2, (i % 3) * w / 3, (i / 3) * w / 3);
-					v = new ImageView(mContext);
+					v = new BmobImageView(mContext);
 					v.setBackgroundColor(Color.LTGRAY);
 					v.setId(1000 + i);
 					v.setOnClickListener(l);
 					imageLayout.addView(v, params);
-					p.loadImage(mContext, v, w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5));
+					Picture.showBmobImage(p, v, w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5));
+					// p.loadImage(mContext, v, w / 3 - dip2px(mContext, 5), w /
+					// 3 - dip2px(mContext, 5));
 					i++;
 				}
 			}

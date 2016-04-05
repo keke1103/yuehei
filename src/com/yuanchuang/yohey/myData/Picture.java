@@ -2,6 +2,7 @@ package com.yuanchuang.yohey.myData;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +11,7 @@ import java.net.URL;
 
 import com.yuanchuang.yohey.cache.YoheyCache;
 import com.yuanchuang.yohey.cache.YoheySqlHelper;
+import com.yuanchuang.yohey.view.BmobImageView;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -20,6 +22,7 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 图片类！
@@ -64,6 +67,80 @@ public class Picture {
 			};
 		};
 		setBitmap();
+	}
+
+	/**
+	 * 展示BmobFile图片
+	 * 
+	 * @param bf
+	 * @param v
+	 * @param w
+	 *            缩略图宽
+	 * @param h
+	 *            缩略图高
+	 */
+	public static void showBmobImage(final BmobFile bf, final BmobImageView v, int w, int h) {
+		SQLiteDatabase db = YoheyCache.getSqlDB(v.getContext());
+		Cursor c = db.query(YoheySqlHelper.IMAGE_TABLE, new String[] { "path" }, "url=?",
+				new String[] { bf.getUrl() + "_" + w + "*" + h }, null, null, null);
+		String path;
+		File f;
+		if (c.moveToNext()) {
+			path = c.getString(c.getColumnIndex("path"));
+			f = new File(YoheyCache.getImageFile().getPath() + File.separator + path);
+			InputStream is;
+			try {
+				is = new FileInputStream(f);
+				Bitmap bm = BitmapFactory.decodeStream(is);
+				v.setImageBitmap(bm);
+				is.close();
+				Log.i("Picture", "缓存加载成功");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			v.setUrl(bf.getUrl() + "_" + w + "*" + h);
+			Log.i("Picture", "正在执行缓存");
+			bf.loadImage(v.getContext(), v, w, h);
+
+		}
+	}
+
+	/**
+	 * 展示原图
+	 * 
+	 * @param bf
+	 * @param v
+	 */
+	public static void showBmobImage(BmobFile bf, final BmobImageView v) {
+		SQLiteDatabase db = YoheyCache.getSqlDB(v.getContext());
+		Cursor c = db.query(YoheySqlHelper.IMAGE_TABLE, new String[] { "path" }, "url=?", new String[] { bf.getUrl() },
+				null, null, null);
+		String path;
+		File f;
+		if (c.moveToNext()) {
+			path = c.getString(c.getColumnIndex("path"));
+			f = new File(YoheyCache.getImageFile().getPath() + File.separator + path);
+			InputStream is;
+			try {
+				is = new FileInputStream(f);
+				Bitmap bm = BitmapFactory.decodeStream(is);
+				v.setImageBitmap(bm);
+				is.close();
+				Log.i("Picture", "缓存加载成功");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			v.setUrl(bf.getUrl());
+			Log.i("Picture", "正在执行缓存");
+			bf.loadImage(v.getContext(), v);
+
+		}
 	}
 
 	public void setBitmap() {

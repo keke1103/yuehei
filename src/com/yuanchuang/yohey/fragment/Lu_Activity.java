@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Bundle;
-import android.provider.MediaStore.Audio.Media;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.View.OnClickListener;

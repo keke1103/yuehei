@@ -164,6 +164,7 @@ public class YoheyCache {
 	public static void deleteDbData(Context context) {
 		SQLiteDatabase db = getSqlDB(context);
 		db.delete(YoheySqlHelper.MSSAGE_TABLE, null, null);
+		db.delete(YoheySqlHelper.IMAGE_TABLE, null, null);
 		BmobIM.getInstance().clearAllConversation();
 	}
 }
