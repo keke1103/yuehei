@@ -206,5 +206,6 @@ public class Lu_Activity extends Fragment {
 
 	public void onDestroy() {
 		YoheyNotificationManager.getInstance(getActivity()).deleteMssageReciver(reciver);
+		super.onDestroy();
 	};
 }
