@@ -2,6 +2,7 @@ package com.yuanchuang.yohey.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -11,10 +12,14 @@ import com.tencent.connect.UserInfo;
 import com.tencent.tauth.Tencent;
 import com.yuanchuang.yohey.LoginAndRegistered;
 import com.yuanchuang.yohey.bmob.Group;
+import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.chat.ChatMessageHandler;
 import com.yuanchuang.yohey.myData.MssageListData;
+import com.yuanchuang.yohey.share.Bimp;
+import com.yuanchuang.yohey.tools.FileUtils;
 import com.yuanchuang.yohey.tools.HttpGet;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
@@ -24,11 +29,15 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.listener.ConnectListener;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UploadBatchListener;
 
 public class YoheyApplication extends Application {
 	public static final String ServiceIp = "http://cloud.bmob.cn/a52fec72f31cc7c8/";
@@ -186,7 +195,69 @@ public class YoheyApplication extends Application {
 	};
 
 	public interface OnGroupLoadingEndLitener {
-
 		void onLoadingEnd(YoheyApplication app);
 	}
+
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>分享页面发送
+
+	public void sendShare(String content,final Activity context) {
+		final Share share = new Share();
+		share.setContent(content);
+		share.setUser(BmobUser.getCurrentUser(getApplicationContext(), User.class));
+
+		if (Bimp.drr.isEmpty()) {
+			share.save(context, new SaveListener() {
+				public void onSuccess() {
+
+				}
+
+				@Override
+				public void onFailure(int arg0, String arg1) {
+					Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
+				}
+			});
+			return;
+		}
+		Bmob.uploadBatch(context, Bimp.drr.toArray(new String[Bimp.drr.size()]), new UploadBatchListener() {
+
+			@Override
+			public void onSuccess(List<BmobFile> arg0, List<String> arg1) {
+				if (Bimp.drr.size() != arg0.size()) {
+					// 有且只有在最后一张图上传成功过后发起说说
+					return;
+				}
+				share.setImages(arg0);
+				share.save(context, new SaveListener() {
+					@Override
+					public void onSuccess() {
+
+					}
+
+					@Override
+					public void onFailure(int arg0, String arg1) {
+						Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
+					}
+				});
+
+				Bimp.max = 0;
+				Bimp.act_bool = true;
+				Bimp.bmp.clear();
+				Bimp.drr.clear();
+				FileUtils.deleteDir();
+			}
+
+			@Override
+			public void onProgress(int arg0, int arg1, int arg2, int arg3) {
+				Log.i("ShareItActivity", "上传文件:" + arg0 + " 当前进度:" + arg1 + " 已上传:" + arg2 + " 总进度:" + arg3);
+			}
+
+			@Override
+			public void onError(int arg0, String arg1) {
+				Log.w("ShareItActivity", arg0 + " >" + arg1);
+				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
+			}
+		});
+
+	}
+
 }

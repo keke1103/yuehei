@@ -7,6 +7,7 @@ import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.bmob.User;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -110,6 +111,13 @@ public class PostingInterfaceActivity extends Activity {
 	}
 
 	private void submit() {
+		if (context.getText().toString().isEmpty()) {
+			Toast.makeText(getApplicationContext(), "说点什么吧", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		final ProgressDialog dialog = new ProgressDialog(this);
+
+		dialog.show();
 		User user = BmobUser.getCurrentUser(this, User.class);
 		Post p = new Post();
 		p.setUser(user);
@@ -121,12 +129,14 @@ public class PostingInterfaceActivity extends Activity {
 			public void onSuccess() {
 				Toast.makeText(getApplicationContext(), "帖子发表成功", Toast.LENGTH_SHORT).show();
 				setResult(1);
+				dialog.dismiss();
 				finish();
 			}
 
 			@Override
 			public void onFailure(int arg0, String arg1) {
 				Toast.makeText(getApplicationContext(), "帖子发表失败:" + arg1, Toast.LENGTH_SHORT).show();
+				dialog.dismiss();
 			}
 		});
 

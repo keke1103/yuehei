@@ -4,6 +4,7 @@ import com.yuanchuang.yohey.myData.Picture;
 import com.yuanchuang.yohey.view.BmobImageView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
@@ -114,4 +115,83 @@ public class DensityUtil {
 			}
 		}
 	}
+
+	/**
+	 * 绘制九宫格图片
+	 * 
+	 * @param mContext
+	 * @param imageLayout
+	 * @param imgs
+	 */
+	public static void sudoku(Context mContext, AbsoluteLayout imageLayout, Bitmap[] imgs, OnClickListener l) {
+		if (imgs != null) {
+			int w = imageLayout.getWidth();
+			LayoutParams params;
+
+			int i = 0;
+			BmobImageView v;
+			if (imgs.length == 1) {
+				params = new LayoutParams(w / 2, w / 2, dip2px(mContext, 10), 0);
+				v = new BmobImageView(mContext);
+				imageLayout.addView(v, params);
+				v.setBackgroundColor(Color.LTGRAY);
+				v.setId(1000 + i);
+				v.setOnClickListener(l);
+				v.setImageBitmap(imgs[i]);
+
+			} else if (imgs.length == 2) {
+				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), 0, 0);
+				v = new BmobImageView(mContext);
+				v.setBackgroundColor(Color.LTGRAY);
+				v.setId(1000 + i);
+				v.setOnClickListener(l);
+				imageLayout.addView(v, params);
+				v.setImageBitmap(imgs[i]);
+				i++;
+				params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35),
+						(w / 2) - dip2px(mContext, 30), 0);
+				v = new BmobImageView(mContext);
+				v.setBackgroundColor(Color.LTGRAY);
+				v.setId(1000 + i);
+				v.setOnClickListener(l);
+				imageLayout.addView(v, params);
+				v.setImageBitmap(imgs[i]);
+			} else if (imgs.length == 4) {
+
+				for (Bitmap p : imgs) {
+
+					int x = ((i % 2) * w / 2) - dip2px(mContext, 30);
+					int y = ((i / 2) * w / 2) - dip2px(mContext, 30);
+					if (y < 0)
+						y = 0;
+					if (x < 0)
+						x = 0;
+					params = new LayoutParams(w / 2 - dip2px(mContext, 35), w / 2 - dip2px(mContext, 35), x, y);
+					v = new BmobImageView(mContext);
+					v.setBackgroundColor(Color.LTGRAY);
+					v.setId(1000 + i);
+					v.setOnClickListener(l);
+					imageLayout.addView(v, params);
+					v.setImageBitmap(p);
+					i++;
+				}
+			} else {
+				for (Bitmap p : imgs) {
+					if (i == 9) {
+						break;// 只显示9张图片！
+					}
+					params = new LayoutParams(w / 3 - dip2px(mContext, 5), w / 3 - dip2px(mContext, 5), (i % 3) * w / 3,
+							(i / 3) * w / 3);
+					v = new BmobImageView(mContext);
+					v.setBackgroundColor(Color.LTGRAY);
+					v.setId(1000 + i);
+					v.setOnClickListener(l);
+					imageLayout.addView(v, params);
+					v.setImageBitmap(p);
+					i++;
+				}
+			}
+		}
+	}
+
 }

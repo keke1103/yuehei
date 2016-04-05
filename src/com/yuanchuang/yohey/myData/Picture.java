@@ -91,8 +91,12 @@ public class Picture {
 			InputStream is;
 			try {
 				is = new FileInputStream(f);
-				Bitmap bm = BitmapFactory.decodeStream(is);
-				v.setImageBitmap(bm);
+				try {
+					Bitmap bm = BitmapFactory.decodeStream(is);
+					v.setImageBitmap(bm);
+				} catch (OutOfMemoryError e) {
+					e.printStackTrace();
+				}
 				is.close();
 				Log.i("Picture", "缓存加载成功");
 			} catch (FileNotFoundException e) {
@@ -106,6 +110,7 @@ public class Picture {
 			bf.loadImage(v.getContext(), v, w, h);
 
 		}
+		db.close();
 	}
 
 	/**
@@ -196,10 +201,10 @@ public class Picture {
 					}
 					mHandler.sendEmptyMessage(0);
 				} catch (MalformedURLException e) {
-					Log.i("Picture", "图片地址格式不正确");
+					Log.w("Picture", "图片地址格式不正确");
 				} catch (IOException e) {
 					e.printStackTrace();
-					Log.i("Picture", "图片获取失败");
+					Log.w("Picture", "图片获取失败");
 				}
 
 			};

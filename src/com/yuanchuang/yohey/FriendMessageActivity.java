@@ -12,7 +12,6 @@ import com.yuanchuang.yohey.app.YoheyNotificationManager;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.AudioRecordButton;
 import com.yuanchuang.yohey.tools.AudioRecordButton.AudioFinishRecorderListener;
-import com.yuanchuang.yohey.view.RecorderView;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.bmob.newim.bean.BmobIMAudioMessage;
 import cn.bmob.newim.bean.BmobIMConversation;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMTextMessage;
@@ -211,7 +212,25 @@ public class FriendMessageActivity extends Activity {
 	private void initView() {
 		recordBtn.setAudioFinishRecorderListener(new AudioFinishRecorderListener() {
 			public void onFinished(float seconds, String filePath) {
-				RecorderView recorder = RecorderView.createRecorder(getApplicationContext(), seconds, filePath);
+				BmobIMAudioMessage audio = new BmobIMAudioMessage(filePath);
+				MessageSendListener arg1 = new MessageSendListener() {
+
+					public void done(BmobIMMessage arg0, BmobException arg1) {
+
+					}
+
+					@Override
+					public void onProgress(int arg0) {
+						super.onProgress(arg0);
+					}
+
+					@Override
+					public void onStart(BmobIMMessage msg) {
+						friendMessageBaseAdapter.addMessageData(msg);
+						Log.i("FriendMessageActivity", msg.getMsgType());
+					}
+				};
+				c.sendMessage(audio, arg1);
 			}
 		});
 		yuyinImage.setOnClickListener(click);

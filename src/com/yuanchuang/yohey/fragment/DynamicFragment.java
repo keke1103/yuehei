@@ -15,11 +15,12 @@ import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.myData.AdapterData;
 import com.yuanchuang.yohey.tools.DensityUtil;
 import com.yuanchuang.yohey.tools.HttpGet;
-import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
+import com.yuanchuang.yohey.tools.OnFlushOldData;
 import com.yuanchuang.yohey.view.MyListView;
 import com.yuanchuang.yohey.view.MyListView.OnRefreshListener;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,7 +46,7 @@ public class DynamicFragment extends Fragment {
 	MyListView listView;
 	RelativeLayout layoutTitle;// 标题布局
 	View mView;
-	View moreView;//listview加载更多的数据
+	View moreView;// listview加载更多的数据
 	List<Share> list;
 	DynamicAdapter mAdapter;
 	TextView title;
@@ -53,13 +54,14 @@ public class DynamicFragment extends Fragment {
 	User user;
 	int pager;// 加载的数据的页数
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		LinearLayout lay = new LinearLayout(getActivity());
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		user = BmobUser.getCurrentUser(getActivity(), User.class);
 		mView = inflater.inflate(R.layout.activity_yue_lu_dynamic, lay);
-		moreView=inflater.inflate(R.layout.more_view_main, null);
+		moreView = inflater.inflate(R.layout.more_view_main, null);
 
 		findView();
 
@@ -83,12 +85,12 @@ public class DynamicFragment extends Fragment {
 		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.dynamic_banner));
 		v.setLayoutParams(params);
 		v.setBackgroundResource(R.drawable.main_guang_gao);
-		
+
 		listView.addHeaderView(v);
 		listView.addFooterView(moreView);
-		
+
 		listView.setAdapter(mAdapter);
-		listView.setonRefreshListener(refreshListener);	
+		listView.setonRefreshListener(refreshListener);
 		mAdapter.setOnFlushOldData(new OnFlushOldData() {
 
 			@Override
@@ -143,8 +145,8 @@ public class DynamicFragment extends Fragment {
 		get.setOnSendListener(mListener);
 		get.send();
 	}
-    
-	private void frushOldShare(){
+
+	private void frushOldShare() {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
 		get.putString("uid", user.getObjectId());
 		get.putString("pager", "" + pager);
@@ -177,11 +179,27 @@ public class DynamicFragment extends Fragment {
 		get.setOnSendListener(mListener);
 		get.send();
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 1)
+		switch (resultCode) {
+		case 1:
 			mAdapter.notifyDataSetChanged();
+			break;
+		case 2:
+			YoheyApplication app = (YoheyApplication) (getActivity().getApplication());
+			// mAdapter.addData((Share) app.data);
+			app.data = null;
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	public void onDestroy() {
+
+		super.onDestroy();
 	}
 
 }

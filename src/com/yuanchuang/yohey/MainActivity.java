@@ -182,7 +182,7 @@ public class MainActivity extends FragmentActivity {
 					break;
 				case R.id.share_popupwindoe:
 					intent = new Intent(MainActivity.this, ShareItActivity.class);
-					startActivity(intent);
+					startActivityForResult(intent, 103);
 					dismiss();
 					break;
 				default:

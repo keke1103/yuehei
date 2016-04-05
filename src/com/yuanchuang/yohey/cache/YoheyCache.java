@@ -1,6 +1,10 @@
 package com.yuanchuang.yohey.cache;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.myData.MssageListData;
@@ -10,6 +14,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Environment;
 import cn.bmob.newim.BmobIM;
 
@@ -166,5 +171,83 @@ public class YoheyCache {
 		db.delete(YoheySqlHelper.MSSAGE_TABLE, null, null);
 		db.delete(YoheySqlHelper.IMAGE_TABLE, null, null);
 		BmobIM.getInstance().clearAllConversation();
+	}
+
+	/**
+	 * 缓存图片资源
+	 * 
+	 * @param url
+	 * @param bm
+	 * @param context
+	 */
+	public static void saveBitmap(String url, Bitmap bm, Context context) {
+		if (url == null)
+			return;
+		SQLiteDatabase db = YoheyCache.getSqlDB(context);
+		try {
+			int ran = (int) (Math.random() * 20);
+			String name = System.currentTimeMillis() + "" + ran + ".png";
+			File f = new File(YoheyCache.getImageFile().getPath() + File.separator + name);
+			try {
+				FileOutputStream fos = new FileOutputStream(f);
+				bm.compress(Bitmap.CompressFormat.PNG, 100, fos);
+				fos.flush();
+				fos.close();
+			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			ContentValues values = new ContentValues();
+			values.put("url", url);
+			values.put("path", name);
+			db.insert(YoheySqlHelper.IMAGE_TABLE, null, values);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (OutOfMemoryError e) {
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
+	}
+	/**
+	 * 缓存图片资源
+	 * 
+	 * @param url
+	 * @param bm
+	 * @param context
+	 */
+	public static void saveBitmap(String url, InputStream in, Context context) {
+		if (url == null)
+			return;
+		SQLiteDatabase db = YoheyCache.getSqlDB(context);
+		try {
+			int ran = (int) (Math.random() * 20);
+			String name = System.currentTimeMillis() + "" + ran + ".png";
+			File f = new File(YoheyCache.getImageFile().getPath() + File.separator + name);
+			try {
+				FileOutputStream fos = new FileOutputStream(f);
+				int len;
+				byte[] buf = new byte[1024];
+				while ((len = in.read(buf)) != -1) {
+					fos.write(buf, 0, len);
+				}
+				fos.flush();
+				fos.close();
+				in.close();
+			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			ContentValues values = new ContentValues();
+			values.put("url", url);
+			values.put("path", name);
+			db.insert(YoheySqlHelper.IMAGE_TABLE, null, values);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (OutOfMemoryError e) {
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
 	}
 }
