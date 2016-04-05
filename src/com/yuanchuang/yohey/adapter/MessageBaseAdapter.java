@@ -40,12 +40,15 @@ public class MessageBaseAdapter extends BaseAdapter {
 	public void addMssage(MssageListData data) {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getFriendId().equals(data.getFriendId())) {
+				int count = list.get(i).getCount();
 				list.remove(i);
+				data.setCount(count + 1);
 				list.add(0, data);
 				notifyDataSetChanged();
 				return;
 			}
 		}
+		data.setCount(1);
 		list.add(0, data);
 		notifyDataSetChanged();
 	}
@@ -106,6 +109,11 @@ public class MessageBaseAdapter extends BaseAdapter {
 		void setData(MssageListData d) {
 			content.setText(d.getMsg());
 			time.setText(TimeUtil.formateTimeToNow(d.getTime() * 1000L));
+			if (d.getCount() != 0) {
+				count.setText("" + d.getCount());
+				count.setVisibility(View.VISIBLE);
+			} else
+				count.setVisibility(View.GONE);
 			if (app != null && app.getFriendById(d.getFriendId()) != null) {
 				f = app.getFriendById(d.getFriendId());
 				f.binderImageView(head);

@@ -6,7 +6,8 @@ import java.util.List;
 import com.yuanchuang.yohey.FriendMessageActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.cache.YoheyCache;
-import com.yuanchuang.yohey.tools.MssageReciverListener;
+import com.yuanchuang.yohey.tools.MessageObserver;
+import com.yuanchuang.yohey.tools.MessageReciverListener;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -25,6 +26,20 @@ public class YoheyNotificationManager {
 	private Context context;
 
 	FriendMessageActivity obseverActivity;
+	MessageObserver observer;
+
+	/**
+	 * 设置消息事件的观察者,记得在页面退出后执行deleteMessageObserver()
+	 * 
+	 * @param observer
+	 */
+	public void setMessageObserver(MessageObserver observer) {
+		this.observer = observer;
+	}
+
+	public void deleteMessageObserver() {
+		observer = null;
+	}
 
 	private YoheyNotificationManager(Context co) {
 		this.context = co;
@@ -52,7 +67,7 @@ public class YoheyNotificationManager {
 	 */
 	public void execMessage(MessageEvent event) {
 		YoheyCache.saveMssageList(context, event.getMessage().getFromId(), event.getMessage().getContent());
-		for (MssageReciverListener r : recivers) {
+		for (MessageReciverListener r : recivers) {
 			if (r == null)
 				continue;
 			r.recive(event.getMessage());
@@ -60,23 +75,28 @@ public class YoheyNotificationManager {
 		if (obseverActivity != null && obseverActivity.getConversation().getConversationId()
 				.equals(event.getConversation().getConversationId())) {
 			notifiObsever(event);
+		} else if (observer != null) {
+			if (observer.execMessage(event)) {
+				notifi(event);
+			}
 		} else {
 			notifi(event);
 		}
+
 	}
 
 	private void notifiObsever(MessageEvent event) {
 		obseverActivity.getData();
 	}
 
-	List<MssageReciverListener> recivers = new ArrayList<MssageReciverListener>();
+	List<MessageReciverListener> recivers = new ArrayList<MessageReciverListener>();
 
 	/**
 	 * 添加消息接受者
 	 * 
 	 * @param reciver
 	 */
-	public void addMssageReciver(MssageReciverListener reciver) {
+	public void addMssageReciver(MessageReciverListener reciver) {
 		this.recivers.add(reciver);
 	}
 
@@ -85,7 +105,7 @@ public class YoheyNotificationManager {
 	 * 
 	 * @param reciver
 	 */
-	public void deleteMssageReciver(MssageReciverListener reciver) {
+	public void deleteMssageReciver(MessageReciverListener reciver) {
 		this.recivers.remove(reciver);
 	}
 

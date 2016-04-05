@@ -3,6 +3,7 @@ package com.yuanchuang.yohey;
 import java.util.ArrayList;
 
 import com.yuanchuang.yohey.fragment.DynamicFragment;
+import com.yuanchuang.yohey.fragment.Lu_Activity;
 import com.yuanchuang.yohey.fragment.MEFragment;
 import com.yuanchuang.yohey.fragment.MainFragment;
 import com.yuanchuang.yohey.fragment.Main_FragmentAdapter;
@@ -29,7 +30,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
-import lu.Lu_Activity;
 
 /**
  * 主页面
@@ -48,7 +48,7 @@ public class MainActivity extends FragmentActivity {
 	FragmentManager mfFragmentManager;// fragment管理器
 	DynamicFragment dynamicFragment;// 动态fragment
 	MEFragment meFragment;// 我的fragment
-//	LinearLayout postShare;// 发帖与分享
+	// LinearLayout postShare;// 发帖与分享
 
 	ImageView postShareImage;
 	Lu_Activity LuFragment;
@@ -213,6 +213,17 @@ public class MainActivity extends FragmentActivity {
 			setContentView(view);
 			showAtLocation(parent, Gravity.BOTTOM, 0, 0);
 		}
+	}
 
+	boolean isRealFinish;
+
+	public void finish() {
+		if (isRealFinish) {
+			super.finish();
+			this.moveTaskToBack(true);
+		} else {
+			this.moveTaskToBack(false);
+		}
+		isRealFinish = false;
 	}
 }

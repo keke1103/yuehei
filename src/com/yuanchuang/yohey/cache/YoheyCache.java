@@ -96,13 +96,14 @@ public class YoheyCache {
 	 */
 	public static void saveMssageList(Context context, String friendId, String msg) {
 		SQLiteDatabase db = getSqlDB(context);
-		Cursor c = db.query(YoheySqlHelper.MSSAGE_TABLE, new String[] { "id" }, "friendId=?", new String[] { friendId },
-				null, null, null);
+		Cursor c = db.query(YoheySqlHelper.MSSAGE_TABLE, new String[] { "id", "top" }, "friendId=?",
+				new String[] { friendId }, null, null, null);
 		int id = 0;
 		if (c.moveToNext()) {
 			ContentValues cv = new ContentValues();
 			cv.put("time", System.currentTimeMillis() / 1000);
 			cv.put("newmsg", msg);
+			cv.put("top", c.getInt(c.getColumnIndex("top")) + 1);
 			id = c.getInt(c.getColumnIndex("id"));
 			db.update(YoheySqlHelper.MSSAGE_TABLE, cv, "id=" + id, null);
 
@@ -111,6 +112,7 @@ public class YoheyCache {
 			cv.put("friendId", friendId);
 			cv.put("time", System.currentTimeMillis() / 1000);
 			cv.put("newmsg", msg);
+			cv.put("top", 1);
 			db.insert(YoheySqlHelper.MSSAGE_TABLE, null, cv);
 		}
 		c.close();
@@ -130,10 +132,28 @@ public class YoheyCache {
 			MssageListData data = new MssageListData();
 			data.setFriendId(c.getString(c.getColumnIndex("friendId")));
 			data.setMsg(c.getString(c.getColumnIndex("newmsg")));
+			data.setCount(c.getInt(c.getColumnIndex("top")));
 			app.msgList.add(data);
 		}
 		c.close();
 		db.close();
+	}
+
+	/**
+	 * 读消息时,执行此方法
+	 * 
+	 * @param context
+	 * @param friendId
+	 */
+	public static void readMessage(Context context, String friendId) {
+		SQLiteDatabase db = getSqlDB(context);
+		Cursor c = db.query(YoheySqlHelper.MSSAGE_TABLE, new String[] { "id" }, "friendId=?", new String[] { friendId },
+				null, null, null);
+		if (c.moveToNext()) {
+			ContentValues cv = new ContentValues();
+			cv.put("top", 0);
+			db.update(YoheySqlHelper.MSSAGE_TABLE, cv, "id=" + c.getInt(c.getColumnIndex("id")), null);
+		}
 	}
 
 	/**

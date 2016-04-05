@@ -1,4 +1,4 @@
-package lu;
+package com.yuanchuang.yohey.fragment;
 
 import com.yuanchuang.yohey.AddFriendsActivity;
 import com.yuanchuang.yohey.FriendMaterialActivity;
@@ -12,12 +12,15 @@ import com.yuanchuang.yohey.app.YoheyNotificationManager;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.cache.YoheyCache;
 import com.yuanchuang.yohey.myData.MssageListData;
-import com.yuanchuang.yohey.tools.MssageReciverListener;
+import com.yuanchuang.yohey.tools.MessageObserver;
 import com.yuanchuang.yohey.view.MyImageView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.provider.MediaStore.Audio.Media;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,6 +40,7 @@ import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMConversation;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMUserInfo;
+import cn.bmob.newim.event.MessageEvent;
 import cn.bmob.newim.listener.ConversationListener;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -47,7 +51,7 @@ import cn.bmob.v3.exception.BmobException;
  * @author Administrator
  *
  */
-public class Lu_Activity extends Fragment {
+public class Lu_Activity extends Fragment implements MessageObserver {
 	RadioGroup radiogroup;
 	RadioButton msg;// 消息
 	RadioButton friends;// 朋友
@@ -59,21 +63,6 @@ public class Lu_Activity extends Fragment {
 	MyImageView headImage;// 头像
 	User user;
 	YoheyApplication app;
-	/**
-	 * 消息监听者
-	 */
-	private MssageReciverListener reciver = new MssageReciverListener() {
-
-		@Override
-		public void recive(BmobIMMessage msg) {
-			MssageListData msgDt = new MssageListData();
-			msgDt.setMsg(msg.getContent());
-			msgDt.setFriendId(msg.getFromId());
-			msgDt.setTime(System.currentTimeMillis() / 1000);
-			msgDt.setCount(2);
-			msgadapter.addMssage(msgDt);
-		}
-	};
 
 	@Override
 	public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
@@ -101,7 +90,7 @@ public class Lu_Activity extends Fragment {
 		add.setOnClickListener(click);
 		YoheyCache.getMssageList(app);
 		getMsgListData();
-		YoheyNotificationManager.getInstance(getActivity()).addMssageReciver(reciver);
+		YoheyNotificationManager.getInstance(getActivity()).setMessageObserver(this);
 
 		return view;
 	};
@@ -163,13 +152,15 @@ public class Lu_Activity extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			MssageListData f = (MssageListData) parent.getAdapter().getItem(position);
+			f.setCount(0);
+			msgadapter.notifyDataSetChanged();
 			conectChat(app.getFriendById(f.getFriendId()));
 		}
 	};
 
 	Intent intent;
 
-	private void conectChat(User user) {
+	private void conectChat(final User user) {
 		BmobIMUserInfo userinfo = new BmobIMUserInfo(user.getObjectId(), user.getNickName(), user.getIcon());
 		BmobIM.getInstance().startPrivateConversation(userinfo, new ConversationListener() {
 
@@ -181,6 +172,7 @@ public class Lu_Activity extends Fragment {
 					intent.setClass(getActivity(), FriendMessageActivity.class);
 					intent.putExtras(b);
 					startActivity(intent);
+					YoheyCache.readMessage(getActivity(), user.getObjectId());
 				} else {
 					Toast.makeText(getActivity(), e.getMessage() + ":" + e.getErrorCode(), Toast.LENGTH_SHORT).show();
 				}
@@ -193,10 +185,7 @@ public class Lu_Activity extends Fragment {
 	 * ExpandableListView的点击事件
 	 */
 	OnChildClickListener childClickListener = new OnChildClickListener() {
-
-		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-			// TODO Auto-generated method stub
 			Intent intent = new Intent(getActivity(), FriendMaterialActivity.class);
 			app.data = parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
 			startActivity(intent);
@@ -205,7 +194,21 @@ public class Lu_Activity extends Fragment {
 	};
 
 	public void onDestroy() {
-		YoheyNotificationManager.getInstance(getActivity()).deleteMssageReciver(reciver);
+		YoheyNotificationManager.getInstance(getActivity()).deleteMessageObserver();
 		super.onDestroy();
+	}
+
+	public boolean execMessage(MessageEvent event) {
+		BmobIMMessage msg = event.getMessage();
+		MssageListData msgDt = new MssageListData();
+		msgDt.setMsg(msg.getContent());
+		msgDt.setFriendId(msg.getFromId());
+		msgDt.setTime(System.currentTimeMillis() / 1000);
+		msgadapter.addMssage(msgDt);
+		media = MediaPlayer.create(getActivity(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+		media.start();
+		return false;
 	};
+
+	MediaPlayer media;
 }
