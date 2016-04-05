@@ -50,7 +50,7 @@ public class DynamicFragment extends Fragment {
 	TextView title;
 	AdapterData data;// 数据类
 	User user;
-	int pager;//加载的数据的页数
+	int pager;// 加载的数据的页数
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,30 +84,64 @@ public class DynamicFragment extends Fragment {
 		listView.addHeaderView(v);
 		listView.setAdapter(mAdapter);
 		listView.setonRefreshListener(refreshListener);
-		pager=0;
+		pager = 0;
 		mAdapter.setOnFlushOldData(new OnFlushOldData() {
-			
+
 			@Override
 			public void flush(BaseAdapter adapter, int position) {
 				pager++;
-				getData();
+				frushOldShare();
 			}
 		});
 	}
-    
-	private OnRefreshListener refreshListener=new OnRefreshListener() {
-		 
+
+	private OnRefreshListener refreshListener = new OnRefreshListener() {
+
 		@Override
 		public void onRefresh() {
 			getData();
 		}
 	};
-	
+
 	private void getData() {
-		//list.clear();
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
 		get.putString("uid", user.getObjectId());
-		get.putString("pager", ""+pager);
+		OnSendListener mListener = new OnSendListener() {
+			@Override
+			public void start() {
+
+			}
+
+			@Override
+			public void end(String result) {
+				Log.i("DynamicFragment", result);
+				try {
+					JSONObject jo = new JSONObject(result);
+					JSONArray ja = jo.getJSONArray("results");
+					if (ja.length() < 1) {
+						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					list.clear();
+					for (int i = 0; i < ja.length(); i++) {
+						Share s = Share.parseJSONObject(ja.getJSONObject(i));
+						list.add(s);
+					}
+					mAdapter.setData(list);
+					listView.onRefreshComplete();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		get.setOnSendListener(mListener);
+		get.send();
+	}
+    
+	private void frushOldShare(){
+		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
+		get.putString("uid", user.getObjectId());
+		get.putString("pager", "" + pager);
 		OnSendListener mListener = new OnSendListener() {
 			@Override
 			public void start() {
@@ -128,8 +162,6 @@ public class DynamicFragment extends Fragment {
 						Share s = Share.parseJSONObject(ja.getJSONObject(i));
 						list.add(s);
 					}
-					mAdapter.setData(list);
-					listView.onRefreshComplete();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -138,7 +170,7 @@ public class DynamicFragment extends Fragment {
 		get.setOnSendListener(mListener);
 		get.send();
 	}
-
+	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1)
