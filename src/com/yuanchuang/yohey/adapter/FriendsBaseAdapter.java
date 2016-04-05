@@ -1,5 +1,7 @@
 package com.yuanchuang.yohey.adapter;
 
+import java.util.List;
+
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.bmob.Group;
 import com.yuanchuang.yohey.bmob.User;
@@ -16,44 +18,41 @@ import android.widget.TextView;
 public class FriendsBaseAdapter extends BaseExpandableListAdapter {
 	LayoutInflater inflater;
 	Context context;
-	Group group[];
+	List<Group> group;
 
 	public FriendsBaseAdapter() {
 	}
 
-	public FriendsBaseAdapter(Group group[], Context context) {
+	public FriendsBaseAdapter(List<Group> group, Context context) {
 		this.group = group;
 		this.context = context;
 		inflater = LayoutInflater.from(context);
 	}
 
-	public void setData(Group group[]) {
+	public void setData(List<Group> group) {
 		this.group = group;
 		notifyDataSetChanged();
 	}
 
 	@Override
 	public int getGroupCount() {
-		// TODO Auto-generated method stub
-		return group.length;
+		
+		return group.size();
 	}
 
-	@Override
 	public int getChildrenCount(int groupPosition) {
-		// TODO Auto-generated method stub
-		return group[groupPosition].getFriends().length;
+		return group.get(groupPosition).getFriends().length;
 	}
 
 	@Override
 	public Object getGroup(int groupPosition) {
-		// TODO Auto-generated method stub
-		return group[groupPosition];
+		return group.get(groupPosition);
 	}
 
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
-		return group[groupPosition].getFriends()[childPosition];
+		return group.get(groupPosition).getFriends()[childPosition];
 	}
 
 	@Override
@@ -88,9 +87,9 @@ public class FriendsBaseAdapter extends BaseExpandableListAdapter {
 		} else {
 			holder = (ClassifyHolder) convertView.getTag();
 		}
-		holder.classifyName.setText(group[groupPosition].getGroupName());
-		holder.onlinenum.setText("" + group[groupPosition].getFriends().length);
-		holder.onlinetotal.setText("" + group[groupPosition].getFriends().length);
+		holder.classifyName.setText(group.get(groupPosition).getGroupName());
+		holder.onlinenum.setText("" + group.get(groupPosition).getFriends().length);
+		holder.onlinetotal.setText("" + group.get(groupPosition).getFriends().length);
 		if (isExpanded) {
 			holder.icon.setBackgroundResource(R.drawable.yo_hey_up_triangle);
 		} else {
@@ -104,7 +103,7 @@ public class FriendsBaseAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
 			ViewGroup parent) {
 		FriendHolder holder;
-		User f = group[groupPosition].getFriends()[childPosition];
+		User f = group.get(groupPosition).getFriends()[childPosition];
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.child, null);
 			holder = new FriendHolder();

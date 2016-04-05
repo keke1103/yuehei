@@ -39,7 +39,7 @@ public class YoheyApplication extends Application {
 	/**
 	 * 登陆用户的分组信息
 	 */
-	public Group[] friendGroup = new Group[0];
+	public ArrayList<Group> friendGroup = new ArrayList<Group>();
 
 	Map<String, User> mFriend = new HashMap<String, User>();
 	/**

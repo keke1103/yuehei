@@ -9,6 +9,7 @@ import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.FriendGroup;
 import com.yuanchuang.yohey.bmob.Friends;
 import com.yuanchuang.yohey.bmob.Game;
+import com.yuanchuang.yohey.bmob.Group;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
@@ -72,6 +73,7 @@ public class PersonalInformationActivity extends Activity {
 
 	User user;
 	boolean isMine = true;
+	boolean isFriend = false;
 	YoheyApplication app;
 
 	@Override
@@ -88,6 +90,7 @@ public class PersonalInformationActivity extends Activity {
 				app.data = null;
 				User u = BmobUser.getCurrentUser(getApplicationContext(), User.class);
 				isMine = user.getObjectId().equals(u.getObjectId());
+				checkIsFriend();
 				Log.i("PersonalUser", isMine + " A:" + user.getObjectId() + " B:" + u.getObjectId());
 			} catch (ClassCastException e) {
 				user = BmobUser.getCurrentUser(this, User.class);
@@ -95,6 +98,19 @@ public class PersonalInformationActivity extends Activity {
 		}
 		findView();
 
+	}
+
+	private void checkIsFriend() {
+		if (app.isLoadingEnd) {
+			for (Group g : app.friendGroup) {
+				for (User f : g.getFriends()) {
+					if (f.getObjectId().equals(user.getObjectId())) {
+						isFriend = true;
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	private void findRecord() {
@@ -156,8 +172,12 @@ public class PersonalInformationActivity extends Activity {
 
 		if (!isMine) {
 			mSignature.setVisibility(View.INVISIBLE);
-			first.setText("加为好友");
-			first.setOnClickListener(clickListener);
+			if (isFriend) {
+				first.setText("已为好友");
+			} else {
+				first.setText("加为好友");
+				first.setOnClickListener(clickListener);
+			}
 		}
 
 		inflater = getLayoutInflater();
@@ -198,7 +218,9 @@ public class PersonalInformationActivity extends Activity {
 				}
 				break;
 			case R.id.personal_user_text_first:
+				first.setOnClickListener(null);
 				addFriend();
+				first.setText("已为好友");
 				break;
 			default:
 				break;
@@ -211,13 +233,11 @@ public class PersonalInformationActivity extends Activity {
 		nu.setMood(signature.getText().toString());
 		nu.update(getApplicationContext(), user.getObjectId(), new UpdateListener() {
 
-			@Override
 			public void onSuccess() {
 				user.setMood(signature.getText().toString());
-				app.friendGroup[0].getFriends()[0].setMood(user.getMood());
+				app.friendGroup.get(0).getFriends()[0].setMood(user.getMood());
 			}
 
-			@Override
 			public void onFailure(int arg0, String arg1) {
 				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
 				signature.setText(user.getMood());
@@ -297,6 +317,7 @@ public class PersonalInformationActivity extends Activity {
 						if (fg != null && fg.getGroupName().equals("我的撸友")) {
 							Log.i("PersonalInform", "add friends to " + fg.getObjectId());
 							addFriend(fg);
+
 							break;
 						}
 					}
@@ -321,13 +342,14 @@ public class PersonalInformationActivity extends Activity {
 			public void start() {
 			}
 
-			@Override
 			public void end(String result) {
 				try {
 					JSONObject jo = new JSONObject(result);
 					String time = jo.getString("updatedAt");
 					Log.i("AddFriends", time);
 					Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
+					app.isLoadingEnd = false;
+					BmobUser.getCurrentUser(getApplicationContext(), User.class).getFriendGroup(app);
 				} catch (JSONException e) {
 					Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 				}

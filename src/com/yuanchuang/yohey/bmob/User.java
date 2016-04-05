@@ -43,6 +43,7 @@ public class User extends BmobUser {
 	public String getMood() {
 		return mood;
 	}
+
 	public void setMood(String mood) {
 		this.mood = mood;
 	}
@@ -262,7 +263,6 @@ public class User extends BmobUser {
 
 	public void getFriendGroup(final YoheyApplication app) {
 		new Thread() {
-			@Override
 			public void run() {
 				HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getgroup");
 				get.putString("uid", User.this.getObjectId());
@@ -270,17 +270,17 @@ public class User extends BmobUser {
 				try {
 					JSONObject jo = new JSONObject(data);
 					JSONArray ja = jo.getJSONArray("results");
-					app.friendGroup = new Group[ja.length()];
+					app.friendGroup.clear();
 					for (int i = 0; i < ja.length(); i++) {
 						Group g = Group.parseJSONObject(ja.getJSONObject(i), User.this);
 						if (g != null)
-							app.friendGroup[i] = g;
+							app.friendGroup.add(g);
 					}
-					app.friendGroup[0].addUser(User.this, true);
+					app.friendGroup.get(0).addUser(User.this, true);
 					app.isLoadingEnd = true;
 					app.mHandler.sendEmptyMessage(100);
 
-					Log.i("User", "friend group load end length=" + app.friendGroup.length);
+					Log.i("User", "friend group load end length=" + app.friendGroup.size());
 				} catch (JSONException e) {
 					e.printStackTrace();
 
