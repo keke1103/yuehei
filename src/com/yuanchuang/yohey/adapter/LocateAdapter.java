@@ -58,8 +58,7 @@ public class LocateAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.content.setText(list.get(position).getLocatContent());
-		holder.name.setText(list.get(position).getLocatLocation());
+	
 		return convertView;
 	}
 

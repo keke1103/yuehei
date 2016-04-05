@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.myData.AdapterData;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +56,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 	@SuppressLint("InflateParams")
 	public View getView(final int position, View view, ViewGroup arg2) {
 		ViewHolder viewHolder = null;
-		final AdapterData mContent = list.get(position);
+		 AdapterData mContent = list.get(position);
 		if (view == null) {
 			viewHolder = new ViewHolder();
 			view = LayoutInflater.from(mContext).inflate(R.layout.item_who_reminder, null);
@@ -64,6 +64,12 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 			viewHolder.letter = (TextView) view.findViewById(R.id.catalog);
 			viewHolder.name = (TextView) view.findViewById(R.id.item_reminder_text_view_name);
 			viewHolder.myBox = (CheckBox) view.findViewById(R.id.item_reminder_chack_box);
+			viewHolder.myBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					AdapterData mDa= (AdapterData) buttonView.getTag();
+					mDa.setEditbox(isChecked);
+				}
+			});
 			view.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
@@ -80,17 +86,11 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 			viewHolder.letter.setVisibility(View.GONE);
 		}
 
-		viewHolder.head.setImageResource(R.drawable.zhuang_zhuan_ying_ji_feng);
-		viewHolder.name.setText(this.list.get(position).getEditName());
-		viewHolder.myBox.setChecked(this.list.get(position).isEditbox());
-		viewHolder.myBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
-				Log.i("aaaaaa", list.get(position).getEditName());
-			}
-		});
+		mContent.getUser().binderImageView(viewHolder.head);
+		viewHolder.name.setText(mContent.getUser().getNickName());
+		viewHolder.myBox.setChecked(mContent.isEditbox());
+		viewHolder.myBox.setTag(mContent);
+		viewHolder.myBox.setChecked(mContent.isEditbox());
 
 		return view;
 

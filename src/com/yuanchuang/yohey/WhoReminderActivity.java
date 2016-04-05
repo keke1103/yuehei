@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.R.color;
+import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.Group;
+import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.edit.KanjiConversion;
 import com.yuanchuang.yohey.edit.MyEditText;
 import com.yuanchuang.yohey.edit.PinyinComparator;
@@ -26,8 +28,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+/**
+ * 谁可以看页面
+ * 
+ * @author Administrator
+ *
+ */
 @SuppressLint("DefaultLocale")
 public class WhoReminderActivity extends Activity {
 	private ListView sortListView;
@@ -47,10 +54,13 @@ public class WhoReminderActivity extends Activity {
 	 */
 	private PinyinComparator pinyinComparator;
 
+	YoheyApplication app;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_who_reminder);
+		app = (YoheyApplication) getApplication();
 		initViews();
 	}
 
@@ -64,7 +74,7 @@ public class WhoReminderActivity extends Activity {
 		toReturn = findViewById(R.id.title_navigation_back_icon);
 		title = (TextView) findViewById(R.id.title_navigation_text_title);
 		righeTitle = (TextView) findViewById(R.id.title_navigation_text_right_title);
-
+		getData();
 		toReturn.setVisibility(View.VISIBLE);
 		toReturn.setOnClickListener(clickListener);
 		title.setText("提醒谁看");
@@ -80,12 +90,9 @@ public class WhoReminderActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-				Toast.makeText(getApplication(), ((AdapterData) adapter.getItem(position)).getEditName(),
-						Toast.LENGTH_SHORT).show();
+			 
 			}
 		});
-
-		SourceDateList = filledData(getResources().getStringArray(R.array.date));
 
 		// 根据a-z进行排序源数据
 		Collections.sort(SourceDateList, pinyinComparator);
@@ -114,6 +121,17 @@ public class WhoReminderActivity extends Activity {
 		});
 	}
 
+	public void getData() {
+		ArrayList<User> array = new ArrayList<User>();
+		for (Group g : app.friendGroup) {
+			for (User f : g.getFriends()) {
+				array.add(f);
+			}
+		}
+
+		SourceDateList = filledData(array.toArray(new User[array.size()]));
+	}
+
 	OnClickListener clickListener = new OnClickListener() {
 
 		@Override
@@ -136,14 +154,14 @@ public class WhoReminderActivity extends Activity {
 	 * @return
 	 */
 	@SuppressLint("DefaultLocale")
-	private List<AdapterData> filledData(String[] date) {
+	private List<AdapterData> filledData(User[] date) {
 		List<AdapterData> myList = new ArrayList<AdapterData>();
 
 		for (int i = 0; i < date.length; i++) {
 			AdapterData adapter = new AdapterData();
-			adapter.setEditName(date[i]);
+			adapter.setUser(date[i]);
 			// 汉字转换成拼音
-			String pinyin = kanjiConversion.getSelling(date[i]);
+			String pinyin = kanjiConversion.getSelling(adapter.getUser().getNickName());
 			String sortString = pinyin.substring(0, 1).toUpperCase();
 
 			// 正则表达式，判断首字母是否是英文字母
@@ -172,7 +190,7 @@ public class WhoReminderActivity extends Activity {
 		} else {
 			filterDateList.clear();
 			for (AdapterData sortModel : SourceDateList) {
-				String name = sortModel.getEditName();
+				String name = sortModel.getUser().getNickName();
 				if (name.indexOf(filterStr.toString()) != -1
 						|| kanjiConversion.getSelling(name).startsWith(filterStr.toString())) {
 					filterDateList.add(sortModel);

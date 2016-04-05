@@ -46,17 +46,11 @@ public class OfficialinformationActivity extends Activity {
 		listView.setOnItemClickListener(itemClickListener);
 	}
 
+	/**
+	 * 官方資訊
+	 */
 	private void getData() {
-		for (int i = 0; i < 5; i++) {
-			data = new AdapterData();
-			data.setOfficial_image_brief(R.drawable.guan_fang_zi_xun_1);
-			data.setOfficial_announcement("3.11免费英雄更换公告");
-			data.setOfficial_time("一天前");
-			data.setOfficial_context("");
-			list.add(data);
-			Log.i("getData", list.size() + "");
-		}
-
+ 
 	}
 
 	private void findView() {

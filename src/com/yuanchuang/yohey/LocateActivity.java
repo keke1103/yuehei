@@ -58,14 +58,11 @@ public class LocateActivity extends Activity {
 
 	}
 
+	/**
+	 * 定位数据获取
+	 */
 	private void getData() {
-		for (int i = 0; i < 10; i++) {
-			data = new AdapterData();
-			data.setLocatLocation("太平洋广场");
-			data.setLocatContent("重庆渝中区上清寺路2号");
-			list.add(data);
-		}
-
+	
 	}
 
 	private void findView() {

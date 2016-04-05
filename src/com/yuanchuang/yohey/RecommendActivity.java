@@ -41,16 +41,11 @@ public class RecommendActivity extends Activity {
 		listView.setAdapter(recommendAdapter);
 	}
 
+	/**
+	 * 推荐开黑
+	 */
 	private void getData() {
-		for (int i = 0; i < 5; i++) {
-			data = new AdapterData();
-			data.setReco_area("艾欧尼亚");
-			data.setReco_dan("砖石");
-			data.setReco_head("");
-			data.setReco_message("黑色玫瑰--求大腿带我飞");
-			data.setReco_name("赵日天不服");
-			list.add(data);
-		}
+		 
 
 	}
 

@@ -71,10 +71,6 @@ public class RecommendAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.name.setText(list.get(position).getReco_name());
-		holder.dan.setText(list.get(position).getReco_dan());
-		holder.area.setText(list.get(position).getReco_area());
-		holder.message.setText(list.get(position).getReco_message());
 
 		return convertView;
 	}

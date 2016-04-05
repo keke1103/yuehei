@@ -122,8 +122,7 @@ public class WhoCanSeeActivity extends Activity {
 			} else {
 				for (int j = 0; j < 4; j++) {
 					data = new AdapterData();
-					data.setWhoName("小岚");
-					data.setWhoContent("泡泡");
+
 					array.add(data);
 				}
 			}
