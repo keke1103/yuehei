@@ -61,6 +61,7 @@ public class MainFragment extends Fragment {
 	TextView gameZone;// 游戏大区
 	ImageView gameDan;// 游戏段位
 	View myView;// 视图
+	View moreView;//listview加载更多的数据
 	MyListView listView;
 	List<Post> reList;
 	List<Post> list;
@@ -96,6 +97,7 @@ public class MainFragment extends Fragment {
 		list = new ArrayList<Post>();
 		reList = new ArrayList<Post>();
 		myView = inflater.inflate(R.layout.activity_yue_lu_main, lay);
+		moreView=inflater.inflate(R.layout.more_view_main, null);
 		findView();// 找到本页面的id
 
 		View view = inflater.inflate(R.layout.list_head_view, null);
@@ -111,11 +113,13 @@ public class MainFragment extends Fragment {
 		getPostData(gameregion, -1, -1);
 
 		listView.addHeaderView(view);
+		listView.addFooterView(moreView);
+		
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(clickListener);
 		listView.setonRefreshListener(refreshListener);
 		adapter.setOnFlushOldData(new OnFlushOldData() {
-
+			
 			@Override
 			public void flush(BaseAdapter adapter, int position) {
 				dataPager++;
@@ -490,7 +494,7 @@ public class MainFragment extends Fragment {
 
 			@Override
 			public void start() {
-
+				
 			}
 
 			@Override
@@ -499,6 +503,7 @@ public class MainFragment extends Fragment {
 					JSONObject joo = new JSONObject(result);
 					JSONArray ja = joo.getJSONArray("results");
 					if (ja.length() < 1) {
+						listView.removeFooterView(moreView);
 						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
 						return;
 					}
@@ -519,6 +524,7 @@ public class MainFragment extends Fragment {
 	/**
 	 * 控件ID
 	 */
+	@SuppressLint("InflateParams")
 	private void findView() {
 		gameDan = (ImageView) myView.findViewById(R.id.title_navigation_text_right_title);
 		gameZone = (TextView) myView.findViewById(R.id.title_navigation_game_zone);

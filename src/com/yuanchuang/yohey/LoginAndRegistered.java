@@ -501,7 +501,6 @@ public class LoginAndRegistered extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.i("LoginActivity", "-->onActivityResult " + requestCode + " resultCode=" + resultCode);
-		Log.i("LoginActivity", data.toString());
 
 		if (requestCode == Constants.REQUEST_LOGIN || requestCode == Constants.REQUEST_APPBAR) {
 			Log.i("LoginActivity", "is doing qq");

@@ -45,6 +45,7 @@ public class DynamicFragment extends Fragment {
 	MyListView listView;
 	RelativeLayout layoutTitle;// 标题布局
 	View mView;
+	View moreView;//listview加载更多的数据
 	List<Share> list;
 	DynamicAdapter mAdapter;
 	TextView title;
@@ -58,6 +59,7 @@ public class DynamicFragment extends Fragment {
 		lay.setLayoutParams(new LayoutParams(-1, -1));
 		user = BmobUser.getCurrentUser(getActivity(), User.class);
 		mView = inflater.inflate(R.layout.activity_yue_lu_dynamic, lay);
+		moreView=inflater.inflate(R.layout.more_view_main, null);
 
 		findView();
 
@@ -81,10 +83,12 @@ public class DynamicFragment extends Fragment {
 		v.setBackgroundDrawable(getResources().getDrawable(R.drawable.dynamic_banner));
 		v.setLayoutParams(params);
 		v.setBackgroundResource(R.drawable.main_guang_gao);
+		
 		listView.addHeaderView(v);
+		listView.addFooterView(moreView);
+		
 		listView.setAdapter(mAdapter);
-		listView.setonRefreshListener(refreshListener);
-		pager = 0;
+		listView.setonRefreshListener(refreshListener);	
 		mAdapter.setOnFlushOldData(new OnFlushOldData() {
 
 			@Override
@@ -99,6 +103,7 @@ public class DynamicFragment extends Fragment {
 
 		@Override
 		public void onRefresh() {
+			pager = 0;
 			getData();
 		}
 	};
@@ -106,6 +111,7 @@ public class DynamicFragment extends Fragment {
 	private void getData() {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
 		get.putString("uid", user.getObjectId());
+		get.putString("pager", "" + pager);
 		OnSendListener mListener = new OnSendListener() {
 			@Override
 			public void start() {
@@ -119,10 +125,10 @@ public class DynamicFragment extends Fragment {
 					JSONObject jo = new JSONObject(result);
 					JSONArray ja = jo.getJSONArray("results");
 					if (ja.length() < 1) {
+						listView.removeFooterView(moreView);
 						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
 						return;
 					}
-					list.clear();
 					for (int i = 0; i < ja.length(); i++) {
 						Share s = Share.parseJSONObject(ja.getJSONObject(i));
 						list.add(s);
@@ -155,12 +161,13 @@ public class DynamicFragment extends Fragment {
 					JSONObject jo = new JSONObject(result);
 					JSONArray ja = jo.getJSONArray("results");
 					if (ja.length() < 1) {
+						listView.removeFooterView(moreView);
 						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
 						return;
 					}
 					for (int i = 0; i < ja.length(); i++) {
 						Share s = Share.parseJSONObject(ja.getJSONObject(i));
-						list.add(s);
+						mAdapter.getData().add(s);
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

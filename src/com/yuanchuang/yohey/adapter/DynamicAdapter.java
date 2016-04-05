@@ -11,6 +11,7 @@ import com.yuanchuang.yohey.PersonalInformationActivity;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.ViewFilperActivity;
 import com.yuanchuang.yohey.app.YoheyApplication;
+import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.DensityUtil;
@@ -68,7 +69,9 @@ public class DynamicAdapter extends BaseAdapter {
 		this.list = list;
 		notifyDataSetChanged();
 	}
-
+	public List<Share> getData() {
+		return list;
+	}
 	@Override
 	public int getCount() {
 		return list.size();
