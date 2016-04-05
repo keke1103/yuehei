@@ -177,7 +177,7 @@
                 android:id="@+id/system_settings_text_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="300M"
+                android:text=""
                 android:textColor="@color/main_text"
                 android:textSize="12sp" />
 

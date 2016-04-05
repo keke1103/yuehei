@@ -7,10 +7,10 @@ import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.bmob.Share;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.share.Bimp;
-import com.yuanchuang.yohey.share.FileUtils;
 import com.yuanchuang.yohey.share.GridAdapter;
 import com.yuanchuang.yohey.share.PhotoActivity;
 import com.yuanchuang.yohey.share.TestPicActivity;
+import com.yuanchuang.yohey.tools.FileUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

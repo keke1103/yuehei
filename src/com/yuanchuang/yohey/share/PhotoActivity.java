@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.tools.FileUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;

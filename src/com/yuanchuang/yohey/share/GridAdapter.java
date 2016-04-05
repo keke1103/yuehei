@@ -3,6 +3,7 @@ package com.yuanchuang.yohey.share;
 import java.io.IOException;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.tools.FileUtils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.yuanchuang.yohey.share;
+package com.yuanchuang.yohey.tools;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,4 +87,20 @@ public class FileUtils {
 		return true;
 	}
 
+	/**
+	 * 删除文件或文件夹
+	 * 
+	 * @param file
+	 */
+	public static void deleteDir(File dir) {
+		if (dir == null || !dir.exists() || !dir.isDirectory())
+			return;
+		for (File file : dir.listFiles()) {
+			if (file.isFile())
+				file.delete(); // 删除所有文件
+			else if (file.isDirectory())
+				deleteDir(file); // 递规的方式删除文件夹
+		}
+		dir.delete();// 删除目录本身
+	}
 }

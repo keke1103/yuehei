@@ -3,14 +3,19 @@ package set;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.cache.YoheyCache;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 系统设置界面
@@ -65,15 +70,61 @@ public class Set_Activity extends Activity {
 
 	}
 
+	@SuppressLint("HandlerLeak")
+	Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case 1:
+				long len = (Long) msg.obj;
+				if (len > 1024 * 1024 * 10) {
+					clear.setText(len / 11288576 + "M");
+				} else if (len > 1024) {
+					clear.setText(len / 1024 + "kb");
+				} else {
+					clear.setText("小于1kb");
+				}
+				break;
+			case 2:
+				Toast.makeText(getApplicationContext(), "清理成功", Toast.LENGTH_SHORT).show();
+				dialog.dismiss();
+
+			default:
+				break;
+			}
+		};
+	};
+
 	private void showCacheLength() {
-		long len = YoheyCache.getCacheLength();
-		if (len > 1024 * 1024 * 10) {
-			clear.setText(len / 11288576 + "M");
-		} else if (len > 1024) {
-			clear.setText(len / 1024 + "kb");
-		} else {
-			clear.setText("小于1kb");
-		}
+
+		new Thread() {
+			public void run() {
+				long len = YoheyCache.getCacheLength();
+				Log.i("SetActivity", "CacheLength:" + len);
+				Message msg = Message.obtain();
+				msg.obj = len;
+				msg.what = 1;
+				mHandler.sendMessage(msg);
+			}
+		}.start();
+
+	}
+
+	ProgressDialog dialog;
+
+	/**
+	 * 删除缓存数据
+	 */
+	private void deleteCache() {
+		dialog = new ProgressDialog(this);
+		dialog.show();
+		new Thread() {
+			public void run() {
+				YoheyCache.deleteCache();
+				YoheyCache.deleteDbData(getApplicationContext());
+				mHandler.sendEmptyMessage(2);
+			};
+		}.start();
+
 	}
 
 	OnClickListener listener = new OnClickListener() {
@@ -93,8 +144,7 @@ public class Set_Activity extends Activity {
 				startActivity(intent_usual);
 				break;
 			case R.id.system_settings_linear_clear_cache:// 清理缓存
-				YoheyCache.deleteCache();
-				YoheyCache.deleteDbData(getApplicationContext());
+				deleteCache();
 				break;
 			case R.id.system_settings_linear_private_set:// 跳到隐私设置界面
 				Intent intent_private = new Intent(Set_Activity.this, Private_set_Activity.class);

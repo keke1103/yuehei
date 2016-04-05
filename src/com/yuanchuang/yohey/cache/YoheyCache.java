@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.myData.MssageListData;
+import com.yuanchuang.yohey.tools.FileUtils;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -59,8 +60,13 @@ public class YoheyCache {
 		for (File file : dir.listFiles()) {
 			if (file.isFile())
 				len += file.length(); //
-			else if (file.isDirectory())
-				len += getCacheLength();
+			else if (file.isDirectory()) {
+				for (File f : file.listFiles()) {
+					if (file.isFile()) {
+						len += f.length();
+					}
+				}
+			}
 		}
 		return len;
 	}
@@ -70,16 +76,7 @@ public class YoheyCache {
 	 */
 	public static void deleteImageCache() {
 		File dir = getImageFile();
-		if (dir == null || !dir.exists() || !dir.isDirectory())
-			return;
-
-		for (File file : dir.listFiles()) {
-			if (file.isFile())
-				file.delete(); // 删除所有文件
-			else if (file.isDirectory())
-				deleteImageCache(); // 递规的方式删除文件夹
-		}
-		dir.delete();// 删除目录本身
+		FileUtils.deleteDir(dir);
 	}
 
 	/**
@@ -87,16 +84,7 @@ public class YoheyCache {
 	 */
 	public static void deleteCache() {
 		File dir = getYoheyFile();
-		if (dir == null || !dir.exists() || !dir.isDirectory())
-			return;
-
-		for (File file : dir.listFiles()) {
-			if (file.isFile())
-				file.delete(); // 删除所有文件
-			else if (file.isDirectory())
-				deleteCache(); // 递规的方式删除文件夹
-		}
-		dir.delete();// 删除目录本身
+		FileUtils.deleteDir(dir);
 	}
 
 	/**
