@@ -83,7 +83,7 @@ public class LoginAndRegistered extends Activity {
 		findView();
 		initView();
 		dialog = new ProgressDialog(this);
-		
+
 		try {
 			loginByQq(getLoginData());
 		} catch (JSONException e) {
@@ -235,10 +235,16 @@ public class LoginAndRegistered extends Activity {
 
 	}
 
+	boolean isClickQQ;
+
 	protected void onClickQQLogin() {
+		if (isClickQQ)
+			return;
+		dialog.show();
+		isClickQQ = true;
 		application.mTencent.login(this, "all", loginListener);
 		application.isServerSideLogin = false;
-		Log.i("YoheyApplication", "do login");
+
 		Log.d("SDKQQAgentPref", "FirstLaunch_SDK:" + SystemClock.elapsedRealtime());
 	}
 
@@ -261,10 +267,6 @@ public class LoginAndRegistered extends Activity {
 			// 显示登陆成功后log日志登陆信息
 			String rmsg = response.toString().replace(",", "\n");
 			Log.d("Yohey", rmsg);
-
-			// 有奖分享处理
-			// handlePrizeShare();
-
 			doComplete((JSONObject) response);
 		}
 
@@ -276,11 +278,15 @@ public class LoginAndRegistered extends Activity {
 
 		@Override
 		public void onError(UiError e) {
+			dialog.dismiss();
+			isClickQQ = false;
 			Toast.makeText(getApplicationContext(), "onError: " + e.errorDetail, Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
 		public void onCancel() {
+			dialog.dismiss();
+			isClickQQ = false;
 			Toast.makeText(getApplicationContext(), "onCancel:  ", Toast.LENGTH_SHORT).show();
 			if (application.isServerSideLogin) {
 				application.isServerSideLogin = false;
@@ -500,8 +506,6 @@ public class LoginAndRegistered extends Activity {
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.i("LoginActivity", "-->onActivityResult " + requestCode + " resultCode=" + resultCode);
-
 		if (requestCode == Constants.REQUEST_LOGIN || requestCode == Constants.REQUEST_APPBAR) {
 			Log.i("LoginActivity", "is doing qq");
 			Tencent.onActivityResultData(requestCode, resultCode, data, loginListener);

@@ -73,9 +73,9 @@ public class OfficialAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.head.setImageResource(R.drawable.guan_fang_zi_xun_1);
-		holder.title.setText(list.get(position).getOfficial_announcement());
+		// holder.title.setText(list.get(position).getOfficial_announcement());
 		holder.context.setText(R.string.nuokesashi);
-		holder.time.setText(list.get(position).getOfficial_time());
+		// holder.time.setText(list.get(position).getOfficial_time());
 
 		return convertView;
 	}

@@ -16,11 +16,11 @@ import com.yuanchuang.yohey.tools.MessageObserver;
 import com.yuanchuang.yohey.view.MyImageView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Bundle;
-import android.provider.MediaStore.Audio.Media;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -136,8 +136,27 @@ public class Lu_Activity extends Fragment implements MessageObserver {
 			case R.id.rb_friends:
 				msgList.setVisibility(View.GONE);
 				friendList.setVisibility(View.VISIBLE);
-				friendsadapter = new FriendsBaseAdapter(app.friendGroup, getActivity());
-				friendList.setAdapter(friendsadapter);
+				if (!app.isLoadingEnd) {
+					final ProgressDialog dialog = new ProgressDialog(getActivity());
+					dialog.show();
+					app.addGroupLoadingEnd(new OnGroupLoadingEndLitener() {
+
+						public void onLoadingEnd(YoheyApplication app) {
+							if (friendsadapter == null) {
+								friendsadapter = new FriendsBaseAdapter(app.friendGroup, getActivity());
+								friendList.setAdapter(friendsadapter);
+							} else
+								friendsadapter.setData(app.friendGroup);
+							dialog.dismiss();
+						}
+					});
+				} else {
+					if (friendsadapter == null) {
+						friendsadapter = new FriendsBaseAdapter(app.friendGroup, getActivity());
+						friendList.setAdapter(friendsadapter);
+					} else
+						friendsadapter.setData(app.friendGroup);
+				}
 				friendList.setOnChildClickListener(childClickListener);
 				break;
 			}
