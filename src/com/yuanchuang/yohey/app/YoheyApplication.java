@@ -31,9 +31,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 
 public class YoheyApplication extends Application {
-
-	// public static final String ServiceIp = "http://192.168.11.240";
-
 	public static final String ServiceIp = "http://cloud.bmob.cn/a52fec72f31cc7c8/";
 
 	public Tencent mTencent;
