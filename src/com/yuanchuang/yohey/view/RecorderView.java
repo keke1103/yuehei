@@ -1,41 +1,79 @@
 package com.yuanchuang.yohey.view;
 
- 
+import java.io.File;
+import java.io.IOException;
+
 import com.yuanchuang.yohey.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public class RecorderView {
-	 float time;
-	 String filePathString;
-	 View mView;
+	int time;
+	String filePathString;
+	View mView;
 
-	private RecorderView(float time, String filePathString) {
-	 
-		this.time = time;
+	MediaPlayer player;
+
+	@SuppressLint("InflateParams")
+	private RecorderView(String filePathString, Context context) {
+
 		this.filePathString = filePathString;
-		
-		
+		File file = new File(filePathString);
+		player = new MediaPlayer();
+		if (file.exists()) {
+			Uri uri = Uri.fromFile(file);
+			try {
+				player.setDataSource(context, uri);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		time = player.getCurrentPosition() / 1000;
+		mView = LayoutInflater.from(context).inflate(R.layout.recorder_layout, null);
+		mView.setOnClickListener(mClickListener);
+		TextView t = (TextView) mView.findViewById(R.id.yuyin_time);
+		t.setText(time + "\"");
+
 	}
-	public static RecorderView createRecorder(Context context,float time, String filePathString){
-		RecorderView v=new RecorderView(time, filePathString);
-		v.mView=LayoutInflater.from(context).inflate(R.layout.recorder_layout , null);
-		TextView t=(TextView) v.mView.findViewById(R.id.yuyin_time);
-		t.setText(time+"\"");	
-		return v;	
+
+	OnClickListener mClickListener = new OnClickListener() {
+
+		public void onClick(View v) {
+			player.start();
+		}
+	};
+
+	public static RecorderView createRecorder(Context context, String filePathString) {
+		RecorderView v = new RecorderView(filePathString, context);
+		return v;
 	}
-	
+
 	public View getmView() {
 		return mView;
 	}
-	public float getTime() {
+
+	public int getTime() {
 		return time;
 	}
 
-	public void setTime(float time) {
+	public void setTime(int time) {
 		this.time = time;
 	}
 
@@ -46,5 +84,5 @@ public class RecorderView {
 	public void setFilePathString(String filePathString) {
 		this.filePathString = filePathString;
 	}
-	
+
 }

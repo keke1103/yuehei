@@ -6,6 +6,7 @@ import java.util.List;
 import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.tools.TimeUtil;
+import com.yuanchuang.yohey.view.RecorderView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -88,6 +89,8 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 			holder.friendChat = (LinearLayout) convertView.findViewById(R.id.friend_chat_linear);
 			holder.friendChatImage = (ImageView) convertView.findViewById(R.id.friend_chat_head_portrait);
 			holder.friendChatContent = (TextView) convertView.findViewById(R.id.friend_chat_content);
+			holder.myChatLayout = (LinearLayout) convertView.findViewById(R.id.my_chat_layout);
+			holder.friendChatLayout = (LinearLayout) convertView.findViewById(R.id.friend_chat_layout);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -95,12 +98,22 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 
 		holder.messageTime.setText(TimeUtil.formateTime(msg.getCreateTime()));
 		if (msg.getFromId().equals(mine.getObjectId())) {
+			holder.myChatLayout.removeAllViews();
+			if (msg.getMsgType().equals("sound")) {
+				String path = msg.getContent();
+				String ps[] = path.split("&");
+				RecorderView rec = RecorderView.createRecorder(context, ps[0]);
+				holder.myChatLayout.addView(rec.getmView());
+			} else {
+				holder.myChatContent.setText(msg.getContent());
+			}
 
-			holder.myChatContent.setText(msg.getContent());
 			mine.binderImageView(holder.myChatImage);
 			holder.myChat.setVisibility(View.VISIBLE);
 			holder.friendChat.setVisibility(View.GONE);
+
 		} else {
+			holder.friendChatLayout.removeAllViews();
 			if (f != null)
 				f.binderImageView(holder.friendChatImage);
 			holder.friendChatContent.setText(msg.getContent());
@@ -119,6 +132,8 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 		LinearLayout friendChat;// 朋友的聊天
 		ImageView friendChatImage;// 朋友的聊天头像
 		TextView friendChatContent;// 朋友的聊天内容
+		LinearLayout myChatLayout;
+		LinearLayout friendChatLayout;
 	}
 
 }

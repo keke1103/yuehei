@@ -1,11 +1,9 @@
 package com.yuanchuang.yohey;
 
 import java.io.File;
-import java.util.List;
 
-import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.bmob.Share;
-import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.share.Bimp;
 import com.yuanchuang.yohey.share.GridAdapter;
 import com.yuanchuang.yohey.share.PhotoActivity;
@@ -26,7 +24,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,11 +39,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UploadBatchListener;
 
 /**
  * 分享页面
@@ -74,6 +66,11 @@ public class ShareItActivity extends Activity {
 	GridView noScrollgridview;//
 	Intent intent;
 	Share share;
+	YoheyApplication app;
+	/**
+	 * 是否清理压缩文件
+	 */
+	boolean isClearDir = true;
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -82,6 +79,7 @@ public class ShareItActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		parant = getLayoutInflater().inflate(R.layout.activity_yue_lu_share_it, null);
 		setContentView(parant);
+		app = (YoheyApplication) getApplication();
 		findView();
 		initView();
 		toReturn.setOnClickListener(onClickListener);
@@ -132,63 +130,17 @@ public class ShareItActivity extends Activity {
 	}
 
 	private void send() {
+
 		String content = editider.getText().toString();
 		if (Bimp.drr.isEmpty() && TextUtils.isEmpty(content)) {
 			Toast.makeText(getApplicationContext(), "你想表达什么？", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		share.setContent(content);
-		share.setUser(BmobUser.getCurrentUser(getApplicationContext(), User.class));
-		if (Bimp.drr.isEmpty()) {
-			share.save(getApplicationContext(), new SaveListener() {
-
-				@Override
-				public void onSuccess() {
-					finish();
-				}
-
-				@Override
-				public void onFailure(int arg0, String arg1) {
-					Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
-				}
-			});
-			return;
-		}
-
-		Bmob.uploadBatch(this, Bimp.drr.toArray(new String[Bimp.drr.size()]), new UploadBatchListener() {
-
-			@Override
-			public void onSuccess(List<BmobFile> arg0, List<String> arg1) {
-				if (Bimp.drr.size() != arg0.size()) {
-					// 有且只有在最后一张图上传成功过后发起说说
-					return;
-				}
-				share.setImages(arg0);
-				share.save(getApplicationContext(), new SaveListener() {
-					@Override
-					public void onSuccess() {
-						finish();
-					}
-
-					@Override
-					public void onFailure(int arg0, String arg1) {
-						Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
-					}
-				});
-				FileUtils.deleteDir();
-			}
-
-			@Override
-			public void onProgress(int arg0, int arg1, int arg2, int arg3) {
-				Log.i("ShareItActivity", "上传文件:" + arg0 + " 当前进度:" + arg1 + " 已上传:" + arg2 + " 总进度:" + arg3);
-			}
-
-			@Override
-			public void onError(int arg0, String arg1) {
-				Log.w("ShareItActivity", arg0 + " >" + arg1);
-				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
-			}
-		});
+		isClearDir = false;
+		app.sendShare(content, this);
+		app.data = share;
+		setResult(2);
+		finish();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -261,10 +213,14 @@ public class ShareItActivity extends Activity {
 	 */
 	@Override
 	protected void onDestroy() {
-		Bimp.max = 0;
-		Bimp.act_bool = true;
-		Bimp.bmp.clear();
-		Bimp.drr.clear();
+
+		if (isClearDir) {
+			Bimp.max = 0;
+			Bimp.act_bool = true;
+			Bimp.bmp.clear();
+			Bimp.drr.clear();
+			FileUtils.deleteDir();
+		}
 		super.onDestroy();
 	}
 
@@ -341,6 +297,10 @@ public class ShareItActivity extends Activity {
 			}
 			break;
 		}
+	}
+
+	public void finish() {
+		super.finish();
 	}
 
 }

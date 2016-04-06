@@ -34,7 +34,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
 import android.widget.Toast;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMConversation;
@@ -59,7 +58,6 @@ public class Lu_Activity extends Fragment implements MessageObserver {
 	ExpandableListView friendList;
 	MessageBaseAdapter msgadapter;
 	FriendsBaseAdapter friendsadapter;
-	TextView add;
 	MyImageView headImage;// 头像
 	User user;
 	YoheyApplication app;
@@ -78,7 +76,7 @@ public class Lu_Activity extends Fragment implements MessageObserver {
 		friends = (RadioButton) view.findViewById(R.id.rb_friends);
 		msgList = (ListView) view.findViewById(R.id.listview);
 		friendList = (ExpandableListView) view.findViewById(R.id.expand);
-		add = (TextView) view.findViewById(R.id.rb_add);
+		// add = (TextView) view.findViewById(R.id.rb_add);
 		headImage = (MyImageView) view.findViewById(R.id.lu_head_image);
 		this.radiogroup.setOnCheckedChangeListener(changelistener);
 
@@ -87,7 +85,7 @@ public class Lu_Activity extends Fragment implements MessageObserver {
 		msgadapter = new MessageBaseAdapter(app.msgList, app);
 		msgList.setAdapter(msgadapter);
 		msgList.setOnItemClickListener(clickListener);
-		add.setOnClickListener(click);
+		// add.setOnClickListener(click);
 		YoheyCache.getMssageList(app);
 		getMsgListData();
 		YoheyNotificationManager.getInstance(getActivity()).setMessageObserver(this);

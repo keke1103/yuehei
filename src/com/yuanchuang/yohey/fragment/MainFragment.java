@@ -61,7 +61,7 @@ public class MainFragment extends Fragment {
 	TextView gameZone;// 游戏大区
 	ImageView gameDan;// 游戏段位
 	View myView;// 视图
-	View moreView;//listview加载更多的数据
+	View moreView;// listview加载更多的数据
 	MyListView listView;
 	List<Post> reList;
 	List<Post> list;
@@ -97,7 +97,7 @@ public class MainFragment extends Fragment {
 		list = new ArrayList<Post>();
 		reList = new ArrayList<Post>();
 		myView = inflater.inflate(R.layout.activity_yue_lu_main, lay);
-		moreView=inflater.inflate(R.layout.more_view_main, null);
+		moreView = inflater.inflate(R.layout.more_view_main, null);
 		findView();// 找到本页面的id
 
 		View view = inflater.inflate(R.layout.list_head_view, null);
@@ -113,13 +113,13 @@ public class MainFragment extends Fragment {
 		getPostData(gameregion, -1, -1);
 
 		listView.addHeaderView(view);
-		listView.addFooterView(moreView);
-		
+		listView.addFooterView(moreView, null, false);
+
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(clickListener);
 		listView.setonRefreshListener(refreshListener);
 		adapter.setOnFlushOldData(new OnFlushOldData() {
-			
+
 			@Override
 			public void flush(BaseAdapter adapter, int position) {
 				dataPager++;
@@ -361,7 +361,6 @@ public class MainFragment extends Fragment {
 			try {
 				gameregion = URLEncoder.encode(gameregion, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			get.putString("gameregion", gameregion);
@@ -494,7 +493,7 @@ public class MainFragment extends Fragment {
 
 			@Override
 			public void start() {
-				
+
 			}
 
 			@Override
@@ -554,14 +553,6 @@ public class MainFragment extends Fragment {
 		main_guang_gao.startFlipping();
 
 	}
-
-	/**
-	 * 发送帖子
-	 */
-	public void sendPost() {
-
-	}
-
 	/**
 	 * 首页广告的封装类,多张图片对应一个监听。 </br>
 	 * 监听里面用switch case v.getid();id为1代表是第0张图片,2代表第1张图片;
@@ -593,5 +584,10 @@ public class MainFragment extends Fragment {
 			getPostData(gameregion, -1, -1);
 			getRemData(gameregion, -1, -1);
 		}
+	}
+	@Override
+	public void onDestroyView() {
+		dataPager = 0;
+		super.onDestroyView();
 	}
 }

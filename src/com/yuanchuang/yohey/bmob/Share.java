@@ -14,7 +14,6 @@ public class Share extends BmobObject {
 	private String content;
 	private User user;
 	private BmobFile[] images;
-
 	private User[] wholike;// 点赞
 	private Share forwarding;// 转发
 	private int comCount;// 评论
