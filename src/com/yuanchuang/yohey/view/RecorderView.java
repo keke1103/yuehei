@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 
 import com.yuanchuang.yohey.R;
+import com.yuanchuang.yohey.cache.YoheyCache;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,37 +25,81 @@ public class RecorderView {
 
 	MediaPlayer player;
 
-	@SuppressLint("InflateParams")
-	private RecorderView(String filePathString, Context context) {
-
-		this.filePathString = filePathString;
-		File file = new File(filePathString);
-		player = new MediaPlayer();
-		if (file.exists()) {
-			Uri uri = Uri.fromFile(file);
-			try {
-				player.setDataSource(context, uri);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	@SuppressLint({ "InflateParams", "HandlerLeak" })
+	private RecorderView(String filePathString, final Context context) {
+		Log.i(">>>>>>>>>>>++++++", filePathString);
+		String ps[] = filePathString.split("&");
+		if (ps.length > 1) {
+			this.filePathString = ps[0];
+			File file = new File(this.filePathString);
+			player = new MediaPlayer();
+			if (file.exists()) {
+				Uri uri = Uri.fromFile(file);
+				try {
+					player.setDataSource(context, uri);
+					player.prepare();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			time = player.getDuration() / 1000;
+			mView = LayoutInflater.from(context).inflate(R.layout.recorder_layout, null);
+			mView.setOnClickListener(mClickListener);
+			TextView t = (TextView) mView.findViewById(R.id.yuyin_time);
+			t.setText(time + "\"");
+		}else{
+			Handler handler=new Handler(){
+				@Override
+				public void handleMessage(Message msg) {
+					String path= (String) msg.obj;
+					Log.i("RecorderView", "path:"+path);
+					RecorderView.this.filePathString=path;
+					File file = new File(path);
+					player = new MediaPlayer();
+					if (file.exists()) {
+						Uri uri = Uri.fromFile(file);
+						try {
+							player.setDataSource(context, uri);
+							player.prepare();
+						} catch (IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (SecurityException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					time = player.getDuration() / 1000;
+					TextView t = (TextView) mView.findViewById(R.id.yuyin_time);
+					t.setText(time + "\"");
+					mView.setOnClickListener(mClickListener);
+				}
+			};
+			YoheyCache.getAudio(filePathString, context, handler);
+			mView = LayoutInflater.from(context).inflate(R.layout.recorder_layout, null);
+		
 		}
-		time = player.getCurrentPosition() / 1000;
-		mView = LayoutInflater.from(context).inflate(R.layout.recorder_layout, null);
-		mView.setOnClickListener(mClickListener);
-		TextView t = (TextView) mView.findViewById(R.id.yuyin_time);
-		t.setText(time + "\"");
 
 	}
+	
+	
+	
 
 	OnClickListener mClickListener = new OnClickListener() {
 

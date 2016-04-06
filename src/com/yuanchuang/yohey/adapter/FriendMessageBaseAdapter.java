@@ -101,8 +101,7 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 			holder.myChatLayout.removeAllViews();
 			if (msg.getMsgType().equals("sound")) {
 				String path = msg.getContent();
-				String ps[] = path.split("&");
-				RecorderView rec = RecorderView.createRecorder(context, ps[0]);
+				RecorderView rec = RecorderView.createRecorder(context, path);
 				holder.myChatLayout.addView(rec.getmView());
 			} else {
 				holder.myChatContent.setText(msg.getContent());
@@ -114,9 +113,16 @@ public class FriendMessageBaseAdapter extends BaseAdapter {
 
 		} else {
 			holder.friendChatLayout.removeAllViews();
+			if (msg.getMsgType().equals("sound")) {
+				String path = msg.getContent();
+				RecorderView rec = RecorderView.createRecorder(context, path);
+				holder.friendChatLayout.addView(rec.getmView());
+			} else {
+				holder.friendChatContent.setText(msg.getContent());
+			}
+			
 			if (f != null)
 				f.binderImageView(holder.friendChatImage);
-			holder.friendChatContent.setText(msg.getContent());
 			holder.myChat.setVisibility(View.GONE);
 			holder.friendChat.setVisibility(View.VISIBLE);
 		}
