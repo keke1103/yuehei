@@ -98,6 +98,7 @@ public class MainFragment extends Fragment {
 		reList = new ArrayList<Post>();
 		myView = inflater.inflate(R.layout.activity_yue_lu_main, lay);
 		moreView = inflater.inflate(R.layout.more_view_main, null);
+		
 		findView();// 找到本页面的id
 
 		View view = inflater.inflate(R.layout.list_head_view, null);
@@ -503,7 +504,7 @@ public class MainFragment extends Fragment {
 					JSONArray ja = joo.getJSONArray("results");
 					if (ja.length() < 1) {
 						listView.removeFooterView(moreView);
-						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
+						//Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
 						return;
 					}
 					for (int i = 0; i < ja.length(); i++) {

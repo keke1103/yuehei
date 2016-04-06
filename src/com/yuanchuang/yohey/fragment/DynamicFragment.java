@@ -87,7 +87,9 @@ public class DynamicFragment extends Fragment {
 		v.setBackgroundResource(R.drawable.main_guang_gao);
 
 		listView.addHeaderView(v);
-		listView.addFooterView(moreView);
+		//listView.addFooterView(moreView);
+		
+		listView.addFooterView(moreView, null, false);
 
 		listView.setAdapter(mAdapter);
 		listView.setonRefreshListener(refreshListener);
@@ -164,12 +166,13 @@ public class DynamicFragment extends Fragment {
 					JSONArray ja = jo.getJSONArray("results");
 					if (ja.length() < 1) {
 						listView.removeFooterView(moreView);
-						Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
+						//Toast.makeText(getActivity(), "没有数据了", Toast.LENGTH_SHORT).show();
 						return;
 					}
 					for (int i = 0; i < ja.length(); i++) {
 						Share s = Share.parseJSONObject(ja.getJSONObject(i));
 						mAdapter.getData().add(s);
+						mAdapter.notifyDataSetChanged();
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
