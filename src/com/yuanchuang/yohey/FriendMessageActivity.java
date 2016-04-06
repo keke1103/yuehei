@@ -10,6 +10,7 @@ import com.yuanchuang.yohey.adapter.MediaManager;
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.app.YoheyNotificationManager;
 import com.yuanchuang.yohey.bmob.User;
+import com.yuanchuang.yohey.cache.YoheyCache;
 import com.yuanchuang.yohey.tools.AudioRecordButton;
 import com.yuanchuang.yohey.tools.AudioRecordButton.AudioFinishRecorderListener;
 
@@ -139,6 +140,7 @@ public class FriendMessageActivity extends Activity {
 	MessageSendListener sendListener = new MessageSendListener() {
 		public void done(BmobIMMessage arg0, BmobException e) {
 			addMessage(arg0);
+			YoheyCache.saveMssageList(getApplicationContext(), friend.getObjectId(), arg0, true);
 			msgEdit.setText("");
 			if (e != null) {
 				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -149,7 +151,7 @@ public class FriendMessageActivity extends Activity {
 	MessageSendListener fileSendListener = new MessageSendListener() {
 		public void done(BmobIMMessage arg0, BmobException e) {
 			msgEdit.setText("");
-			
+			YoheyCache.saveMssageList(getApplicationContext(), friend.getObjectId(), arg0, true);
 			if (e != null) {
 				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -162,7 +164,7 @@ public class FriendMessageActivity extends Activity {
 
 		public void onStart(BmobIMMessage msg) {
 			addMessage(msg);
-			Log.i("FriendMessageActivity", msg.getMsgType()+":"+msg.getContent());
+			Log.i("FriendMessageActivity", msg.getMsgType() + ":" + msg.getContent());
 		}
 	};
 	/**

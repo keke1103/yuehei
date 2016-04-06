@@ -20,6 +20,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.bean.BmobIMMessage;
 
 public class YoheyCache {
 
@@ -49,8 +50,8 @@ public class YoheyCache {
 		f.mkdir();
 		return f;
 	}
-	
-	public static File getAudioFile(){
+
+	public static File getAudioFile() {
 		File f = new File(getYoheyFile().getPath() + File.separator + "recorder_audios");
 		f.mkdir();
 		return f;
@@ -108,7 +109,13 @@ public class YoheyCache {
 	 * @param friendId
 	 * @param msg
 	 */
-	public static void saveMssageList(Context context, String friendId, String msg) {
+	public static void saveMssageList(Context context, String friendId, BmobIMMessage message, boolean isRead) {
+		String msg;
+		if (message.getMsgType().equals("sound")) {
+			msg = "语言消息";
+		} else {
+			msg = message.getContent();
+		}
 		SQLiteDatabase db = getSqlDB(context);
 		Cursor c = db.query(YoheySqlHelper.MSSAGE_TABLE, new String[] { "id", "top" }, "friendId=?",
 				new String[] { friendId }, null, null, null);
@@ -117,7 +124,8 @@ public class YoheyCache {
 			ContentValues cv = new ContentValues();
 			cv.put("time", System.currentTimeMillis() / 1000);
 			cv.put("newmsg", msg);
-			cv.put("top", c.getInt(c.getColumnIndex("top")) + 1);
+			if (!isRead)
+				cv.put("top", c.getInt(c.getColumnIndex("top")) + 1);
 			id = c.getInt(c.getColumnIndex("id"));
 			db.update(YoheySqlHelper.MSSAGE_TABLE, cv, "id=" + id, null);
 
@@ -126,7 +134,8 @@ public class YoheyCache {
 			cv.put("friendId", friendId);
 			cv.put("time", System.currentTimeMillis() / 1000);
 			cv.put("newmsg", msg);
-			cv.put("top", 1);
+			if (!isRead)
+				cv.put("top", 1);
 			db.insert(YoheySqlHelper.MSSAGE_TABLE, null, cv);
 		}
 		c.close();
@@ -260,12 +269,14 @@ public class YoheyCache {
 			db.close();
 		}
 	}
-/**
- * 请在子线程执行
- * @param url
- * @param context
- * @return
- */
+
+	/**
+	 * 请在子线程执行
+	 * 
+	 * @param url
+	 * @param context
+	 * @return
+	 */
 	public static String saveAudio(String url, Context context) {
 		if (url == null)
 			return "";
@@ -309,11 +320,12 @@ public class YoheyCache {
 
 	/**
 	 * 获取Audio路径,自动判断本地是否存在
+	 * 
 	 * @param url
 	 * @param context
 	 * @param handler
 	 */
-	public static void getAudio(final String url, final Context context,final Handler handler) {
+	public static void getAudio(final String url, final Context context, final Handler handler) {
 		if (url == null)
 			return;
 		SQLiteDatabase db = YoheyCache.getSqlDB(context);
@@ -321,22 +333,22 @@ public class YoheyCache {
 				null, null);
 		if (c.moveToNext()) {
 			String name = c.getString(c.getColumnIndex("path"));
-			String path=YoheyCache.getAudioFile().getPath()+File.separator+name;
+			String path = YoheyCache.getAudioFile().getPath() + File.separator + name;
 			Message msg = Message.obtain();
-			msg.obj=path;
-			if(handler!=null)
+			msg.obj = path;
+			if (handler != null)
 				handler.sendMessage(msg);
 		} else {
-			new Thread(){
+			new Thread() {
 				public void run() {
-					String path=saveAudio(url, context);
+					String path = saveAudio(url, context);
 					Message msg = Message.obtain();
-					msg.obj=path;
-					if(handler!=null)
+					msg.obj = path;
+					if (handler != null)
 						handler.sendMessage(msg);
 				};
 			}.start();
-			
+
 		}
 	}
 }

@@ -66,15 +66,17 @@ public class YoheyNotificationManager {
 	 * @param event
 	 */
 	public void execMessage(MessageEvent event) {
-		YoheyCache.saveMssageList(context, event.getMessage().getFromId(), event.getMessage().getContent());
+
 		for (MessageReciverListener r : recivers) {
 			if (r == null)
 				continue;
 			r.recive(event.getMessage());
 		}
+		boolean isRead = false;
 		if (obseverActivity != null && obseverActivity.getConversation().getConversationId()
 				.equals(event.getConversation().getConversationId())) {
 			notifiObsever(event);
+			isRead = true;
 		} else if (observer != null) {
 			if (observer.execMessage(event)) {
 				notifi(event);
@@ -82,7 +84,7 @@ public class YoheyNotificationManager {
 		} else {
 			notifi(event);
 		}
-
+		YoheyCache.saveMssageList(context, event.getMessage().getFromId(), event.getMessage(), isRead);
 	}
 
 	private void notifiObsever(MessageEvent event) {

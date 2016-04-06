@@ -96,7 +96,6 @@ public class Lu_Activity extends Fragment implements MessageObserver {
 	@SuppressLint("HandlerLeak")
 	private void getMsgListData() {
 		app.addGroupLoadingEnd(new OnGroupLoadingEndLitener() {
-
 			public void onLoadingEnd(YoheyApplication app) {
 				msgadapter.setAppForShowData(app);
 			}
@@ -228,4 +227,13 @@ public class Lu_Activity extends Fragment implements MessageObserver {
 	};
 
 	MediaPlayer media;
+
+	@Override
+	public void onResume() {
+
+		friendList.setAdapter(friendsadapter);
+		YoheyCache.getMssageList(app);
+		msgadapter.notifyDataSetChanged();
+		super.onResume();
+	}
 }
