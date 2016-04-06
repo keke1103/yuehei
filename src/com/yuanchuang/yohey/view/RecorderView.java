@@ -29,7 +29,7 @@ public class RecorderView {
 	private RecorderView(String filePathString, final Context context) {
 		Log.i(">>>>>>>>>>>++++++", filePathString);
 		String ps[] = filePathString.split("&");
-		if (ps.length > 1) {
+		if (ps.length > 1||!ps[0].startsWith("http")) {
 			this.filePathString = ps[0];
 			File file = new File(this.filePathString);
 			player = new MediaPlayer();

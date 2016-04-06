@@ -133,9 +133,10 @@ public class FriendMessageActivity extends Activity {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("level", "1");
 		msg.setExtraMap(map);
-		c.sendMessage(msg,sendListener );
+		c.sendMessage(msg, sendListener);
 	}
-	MessageSendListener sendListener=new MessageSendListener() {
+
+	MessageSendListener sendListener = new MessageSendListener() {
 		public void done(BmobIMMessage arg0, BmobException e) {
 			addMessage(arg0);
 			msgEdit.setText("");
@@ -143,13 +144,25 @@ public class FriendMessageActivity extends Activity {
 				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 		}
+	};
+
+	MessageSendListener fileSendListener = new MessageSendListener() {
+		public void done(BmobIMMessage arg0, BmobException e) {
+			msgEdit.setText("");
+			
+			if (e != null) {
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+			}
+		}
+
 		public void onProgress(int arg0) {
 			super.onProgress(arg0);
 		}
 
-	 
 		public void onStart(BmobIMMessage msg) {
-			Log.i("FriendMessageActivity", msg.getMsgType());
+			addMessage(msg);
+			Log.i("FriendMessageActivity", msg.getMsgType()+":"+msg.getContent());
 		}
 	};
 	/**
@@ -224,7 +237,7 @@ public class FriendMessageActivity extends Activity {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("level", "1");
 				audio.setExtraMap(map);
-				c.sendMessage(audio, sendListener);
+				c.sendMessage(audio, fileSendListener);
 			}
 		});
 		yuyinImage.setOnClickListener(click);
