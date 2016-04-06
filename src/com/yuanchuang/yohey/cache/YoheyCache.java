@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import com.yuanchuang.yohey.app.YoheyApplication;
 import com.yuanchuang.yohey.myData.MssageListData;
@@ -16,6 +17,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import cn.bmob.newim.BmobIM;
 
 public class YoheyCache {
@@ -43,6 +46,12 @@ public class YoheyCache {
 	 */
 	public static File getImageFile() {
 		File f = new File(getYoheyFile().getPath() + File.separator + "images");
+		f.mkdir();
+		return f;
+	}
+	
+	public static File getAudioFile(){
+		File f = new File(getYoheyFile().getPath() + File.separator + "recorder_audios");
 		f.mkdir();
 		return f;
 	}
@@ -209,6 +218,7 @@ public class YoheyCache {
 			db.close();
 		}
 	}
+
 	/**
 	 * 缓存图片资源
 	 * 
@@ -248,6 +258,85 @@ public class YoheyCache {
 			e.printStackTrace();
 		} finally {
 			db.close();
+		}
+	}
+/**
+ * 请在子线程执行
+ * @param url
+ * @param context
+ * @return
+ */
+	public static String saveAudio(String url, Context context) {
+		if (url == null)
+			return "";
+		SQLiteDatabase db = YoheyCache.getSqlDB(context);
+		String path = "";
+		try {
+			int ran = (int) (Math.random() * 20);
+			String name = System.currentTimeMillis() + "" + ran + ".amr";
+			File f = new File(YoheyCache.getAudioFile().getPath() + File.separator + name);
+
+			try {
+				URL mU = new URL(url);
+				InputStream in = mU.openStream();
+				FileOutputStream fos = new FileOutputStream(f);
+				int len;
+				byte[] buf = new byte[1024];
+				while ((len = in.read(buf)) != -1) {
+					fos.write(buf, 0, len);
+				}
+				fos.flush();
+				fos.close();
+				in.close();
+				path = f.getPath();
+			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			ContentValues values = new ContentValues();
+			values.put("url", url);
+			values.put("path", name);
+			db.insert(YoheySqlHelper.IMAGE_TABLE, null, values);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (OutOfMemoryError e) {
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
+		return path;
+	}
+
+	/**
+	 * 获取Audio路径,自动判断本地是否存在
+	 * @param url
+	 * @param context
+	 * @param handler
+	 */
+	public static void getAudio(final String url, final Context context,final Handler handler) {
+		if (url == null)
+			return;
+		SQLiteDatabase db = YoheyCache.getSqlDB(context);
+		Cursor c = db.query(YoheySqlHelper.IMAGE_TABLE, new String[] { "path" }, "url=?", new String[] { url }, null,
+				null, null);
+		if (c.moveToNext()) {
+			String name = c.getString(c.getColumnIndex("path"));
+			String path=YoheyCache.getAudioFile().getPath()+File.separator+name;
+			Message msg = Message.obtain();
+			msg.obj=path;
+			if(handler!=null)
+				handler.sendMessage(msg);
+		} else {
+			new Thread(){
+				public void run() {
+					String path=saveAudio(url, context);
+					Message msg = Message.obtain();
+					msg.obj=path;
+					if(handler!=null)
+						handler.sendMessage(msg);
+				};
+			}.start();
+			
 		}
 	}
 }
