@@ -133,17 +133,25 @@ public class FriendMessageActivity extends Activity {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("level", "1");
 		msg.setExtraMap(map);
-		c.sendMessage(msg, new MessageSendListener() {
-			public void done(BmobIMMessage arg0, BmobException e) {
-				addMessage(arg0);
-				msgEdit.setText("");
-				if (e != null) {
-					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
+		c.sendMessage(msg,sendListener );
 	}
+	MessageSendListener sendListener=new MessageSendListener() {
+		public void done(BmobIMMessage arg0, BmobException e) {
+			addMessage(arg0);
+			msgEdit.setText("");
+			if (e != null) {
+				Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+			}
+		}
+		public void onProgress(int arg0) {
+			super.onProgress(arg0);
+		}
 
+	 
+		public void onStart(BmobIMMessage msg) {
+			Log.i("FriendMessageActivity", msg.getMsgType());
+		}
+	};
 	/**
 	 * 获取聊天记录的监听
 	 */
@@ -213,24 +221,10 @@ public class FriendMessageActivity extends Activity {
 		recordBtn.setAudioFinishRecorderListener(new AudioFinishRecorderListener() {
 			public void onFinished(float seconds, String filePath) {
 				BmobIMAudioMessage audio = new BmobIMAudioMessage(filePath);
-				MessageSendListener arg1 = new MessageSendListener() {
-
-					public void done(BmobIMMessage arg0, BmobException arg1) {
-
-					}
-
-					@Override
-					public void onProgress(int arg0) {
-						super.onProgress(arg0);
-					}
-
-					@Override
-					public void onStart(BmobIMMessage msg) {
-						friendMessageBaseAdapter.addMessageData(msg);
-						Log.i("FriendMessageActivity", msg.getMsgType());
-					}
-				};
-				c.sendMessage(audio, arg1);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("level", "1");
+				audio.setExtraMap(map);
+				c.sendMessage(audio, sendListener);
 			}
 		});
 		yuyinImage.setOnClickListener(click);
