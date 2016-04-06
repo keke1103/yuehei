@@ -29,7 +29,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
+
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.listener.ConnectListener;
 import cn.bmob.v3.Bmob;
@@ -213,7 +213,7 @@ public class YoheyApplication extends Application {
 
 				@Override
 				public void onFailure(int arg0, String arg1) {
-					Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
+					 
 				}
 			});
 			return;
@@ -235,7 +235,7 @@ public class YoheyApplication extends Application {
 
 					@Override
 					public void onFailure(int arg0, String arg1) {
-						Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
+					 
 					}
 				});
 
@@ -254,7 +254,6 @@ public class YoheyApplication extends Application {
 			@Override
 			public void onError(int arg0, String arg1) {
 				Log.w("ShareItActivity", arg0 + " >" + arg1);
-				Toast.makeText(getApplicationContext(), arg1, Toast.LENGTH_SHORT).show();
 			}
 		});
 

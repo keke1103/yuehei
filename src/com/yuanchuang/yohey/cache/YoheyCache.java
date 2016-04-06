@@ -122,7 +122,7 @@ public class YoheyCache {
 		int id = 0;
 		if (c.moveToNext()) {
 			ContentValues cv = new ContentValues();
-			cv.put("time", System.currentTimeMillis() / 1000);
+			cv.put("time", (int)(System.currentTimeMillis() / 1000));
 			cv.put("newmsg", msg);
 			if (!isRead)
 				cv.put("top", c.getInt(c.getColumnIndex("top")) + 1);
@@ -132,7 +132,7 @@ public class YoheyCache {
 		} else {
 			ContentValues cv = new ContentValues();
 			cv.put("friendId", friendId);
-			cv.put("time", System.currentTimeMillis() / 1000);
+			cv.put("time", (int)(System.currentTimeMillis() / 1000));
 			cv.put("newmsg", msg);
 			if (!isRead)
 				cv.put("top", 1);
@@ -155,6 +155,7 @@ public class YoheyCache {
 			MssageListData data = new MssageListData();
 			data.setFriendId(c.getString(c.getColumnIndex("friendId")));
 			data.setMsg(c.getString(c.getColumnIndex("newmsg")));
+			data.setTime(c.getInt(c.getColumnIndex("time")));
 			data.setCount(c.getInt(c.getColumnIndex("top")));
 			app.msgList.add(data);
 		}

@@ -217,7 +217,11 @@ public class Lu_Activity extends Fragment implements MessageObserver {
 	public boolean execMessage(MessageEvent event) {
 		BmobIMMessage msg = event.getMessage();
 		MssageListData msgDt = new MssageListData();
-		msgDt.setMsg(msg.getContent());
+		if (msg.getMsgType().equals("sound")) {
+			msgDt.setMsg("语言消息");
+		} else {
+			msgDt.setMsg(msg.getContent());
+		}
 		msgDt.setFriendId(msg.getFromId());
 		msgDt.setTime(System.currentTimeMillis() / 1000);
 		msgadapter.addMssage(msgDt);
