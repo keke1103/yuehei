@@ -102,7 +102,9 @@ public class DynamicFragment extends Fragment {
 			}
 		});
 	}
-
+	/**
+	 * 下拉刷新的监听事件
+	 */
 	private OnRefreshListener refreshListener = new OnRefreshListener() {
 
 		@Override
@@ -111,7 +113,9 @@ public class DynamicFragment extends Fragment {
 			getData();
 		}
 	};
-
+	/**
+	 * 获得数据
+	 */
 	private void getData() {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
 		get.putString("uid", user.getObjectId());
@@ -147,7 +151,9 @@ public class DynamicFragment extends Fragment {
 		get.setOnSendListener(mListener);
 		get.send();
 	}
-
+	/**
+	 * 获得数据
+	 */
 	private void frushOldShare() {
 		HttpGet get = new HttpGet(YoheyApplication.ServiceIp + "getshare");
 		get.putString("uid", user.getObjectId());

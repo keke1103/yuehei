@@ -4,8 +4,6 @@ import com.yuanchuang.yohey.R;
 import com.yuanchuang.yohey.R.color;
 
 import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;

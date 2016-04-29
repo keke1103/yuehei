@@ -58,6 +58,7 @@ public class AudioManager {
 	}
 
 	// 准备方法
+	@SuppressWarnings("deprecation")
 	public void prepareAudio() {
 		try {
 			// 一开始应该是false的

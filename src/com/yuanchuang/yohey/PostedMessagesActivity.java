@@ -13,7 +13,6 @@ import com.yuanchuang.yohey.bmob.BmobFindObject;
 import com.yuanchuang.yohey.bmob.Post;
 import com.yuanchuang.yohey.bmob.User;
 import com.yuanchuang.yohey.myData.AdapterData;
-import com.yuanchuang.yohey.tools.HttpGet;
 import com.yuanchuang.yohey.tools.HttpPost.OnSendListener;
 
 import android.app.Activity;

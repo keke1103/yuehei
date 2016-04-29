@@ -131,7 +131,7 @@ public class MainFragment extends Fragment {
 		// 测试数据
 
 		MainGuangGao guang = new MainGuangGao(new Drawable[] { getResources().getDrawable(R.drawable.main_guang_gao),
-				getResources().getDrawable(R.drawable.ic_launcher) }, null);
+				getResources().getDrawable(R.drawable.yo_hey_qq_register_image) }, null);
 		addGuangGao(guang);
 
 		return myView;
